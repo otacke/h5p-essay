@@ -11,6 +11,7 @@ The content type could possibly evolve into a solution for [automated essay scor
 ## Ideas
 You're welcome to contribute your ideas as an issue on github. For now there are (in no particular order or guarantee):
 
+### User Stories
 - As a student, I can enter an essay text and file it in for "grading".
 - As a teacher, I can add an introductory text describing the task and hints.
 - As a teacher, I can add keywords that the text will be scanned for.
@@ -20,11 +21,15 @@ You're welcome to contribute your ideas as an issue on github. For now there are
 - As a teacher, I can decide that some keywords are mandatory while others are not.
 - As a teacher, I can define optional feedback phrases for a keyword; one for "if found in text" and one for "if not found in text". The content type might glue those phrases together, thus creating a feedback text.
 
-- xAPI statements
+### xAPI statements
   - experienced (when opened)
   - completed (when sent)
   - failed
   - passed
   - mastered
   - scored
+
+### GUI (for students)
+- textarea
+- send button
 - feedback bar/star
