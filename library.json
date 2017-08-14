@@ -1,0 +1,22 @@
+{
+  "title": "H5P Essay",
+  "description": "Score a student's essay",
+  "majorVersion": 0,
+  "minorVersion": 1,
+  "patchVersion": 0,
+  "runnable": 1,
+  "embedTypes": ["iframe"],
+  "author": "Oliver Tacke",
+  "license": "MIT",
+  "machineName": "H5P.Essay",
+  "coreApi": {
+    "majorVersion": 1,
+    "minorVersion": 0
+  },
+  "preloadedJs": [
+    { "path": "scripts/essay.js" }
+  ],
+  "preloadedCss": [
+    {"path": "styles/essay.css"}
+  ]
+}

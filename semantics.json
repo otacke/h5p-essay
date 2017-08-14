@@ -1,0 +1,58 @@
+[
+  {
+    "name": "title",
+    "label": "Title",
+    "importance": "high",
+    "type": "text",
+    "optional": true,
+    "placeholder": "Here you can add an optional title.",
+    "description": "The title you'd like to show above the task"
+  },
+  {
+    "name": "task",
+    "type": "text",
+    "importance": "low",
+    "widget": "html",
+    "label": "Task",
+    "optional": true,
+    "placeholder": "Please write an essay about ...",
+    "description": "Optional task description",
+    "enterMode": "p",
+    "tags": [
+      "strong",
+      "em",
+      "sub",
+      "sup",
+      "h3",
+      "h4",
+      "ul",
+      "ol",
+      "a"
+    ]
+  },
+  {
+    "name": "keywords",
+    "type": "list",
+    "label": "Items",
+    "entity": "item",
+    "importance": "medium",
+    "min": 1,
+    "field": {
+      "name": "keyword",
+      "type": "group",
+      "label": "Keyword",
+      "importance": "low",
+      "expanded": true,
+      "fields": [
+        {
+          "name": "keyword",
+          "label": "Keyword",
+          "importance": "low",
+          "type": "text",
+          "optional": false,
+          "description": "Keyword to look for"
+        }
+      ]
+    }
+  }
+]
