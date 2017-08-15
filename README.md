@@ -20,6 +20,7 @@ You're welcome to contribute your ideas as an issue on github. For now there are
 - As a teacher, I can define multiple ranges that will allow more diverse feedback.
 - As a teacher, I can decide that some keywords are mandatory while others are not.
 - As a teacher, I can define optional feedback phrases for a keyword; one for "if found in text" and one for "if not found in text". The content type might glue those phrases together, thus creating a feedback text.
+- As a teacher, I can define a maximum number of characters for the essay.
 
 ### xAPI statements
 - experienced (when opened)
