@@ -18,5 +18,12 @@
   ],
   "preloadedCss": [
     {"path": "styles/essay.css"}
-  ]
+  ],
+  "preloadedDependencies": [
+      {
+        "machineName": "H5P.TextInputField",
+        "majorVersion": 1,
+        "minorVersion": 0
+      }
+    ]
 }

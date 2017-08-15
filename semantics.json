@@ -9,25 +9,13 @@
     "description": "The title you'd like to show above the task"
   },
   {
-    "name": "task",
-    "type": "text",
-    "importance": "low",
-    "widget": "html",
-    "label": "Task",
-    "optional": true,
-    "placeholder": "Please write an essay about ...",
-    "description": "Optional task description",
-    "enterMode": "p",
-    "tags": [
-      "strong",
-      "em",
-      "sub",
-      "sup",
-      "h3",
-      "h4",
-      "ul",
-      "ol",
-      "a"
+    "name": "inputfield",
+    "label": "Input field",
+    "type": "library",
+    "importance": "high",
+    "description": "Input field for the students",
+    "options": [
+      "H5P.TextInputField 1.0"
     ]
   },
   {
