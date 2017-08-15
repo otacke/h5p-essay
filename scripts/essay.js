@@ -28,8 +28,16 @@ H5P.Essay = function ($) {
      * @param {jQuery} $wrapper - Container to attach to.
      */
     this.attach = function($wrapper) {
+      var that = this;
       $wrapper.get(0).classList.add('h5p-essay');
-      $wrapper.get(0).appendChild(this.element);
+
+      // Title
+      if (that.config.title) {
+        var title = document.createElement('div');
+        title.classList.add('h5p-essay-title');
+        title.innerHTML = '<h2>' + that.config.title + '</h2>';
+        $wrapper.get(0).appendChild(title);
+      }
     };
 
     // Initialize event inheritance

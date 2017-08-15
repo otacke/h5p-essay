@@ -1,3 +1,6 @@
 .h5p-essay {
-
+}
+.h5p-essay .h5p-essay-title {
+  width: auto;
+  overflow-y: auto;
 }
