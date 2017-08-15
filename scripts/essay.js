@@ -49,10 +49,12 @@ H5P.Essay = function ($) {
     }
 
     // Text Area
+    // TODO: Check if we can easily use h5p-text-input-field
     this.text = document.createElement('textarea');
     this.text.classList.add('h5p-essay-text');
     this.text.setAttribute('tabindex', 0);
     this.text.setAttribute('required', '');
+    this.text.setAttribute('rows', 10);
     this.text.innerHTML = 'textarea';
     $wrapper.get(0).appendChild(this.text);
 
