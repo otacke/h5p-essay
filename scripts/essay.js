@@ -31,14 +31,25 @@ H5P.Essay = function ($) {
       var that = this;
       $wrapper.get(0).classList.add('h5p-essay');
 
-      // Title
-      if (that.config.title) {
-        var title = document.createElement('div');
-        title.classList.add('h5p-essay-title');
-        title.innerHTML = '<h2>' + that.config.title + '</h2>';
-        $wrapper.get(0).appendChild(title);
-      }
-    };
+    // Title
+    if (that.config.title) {
+      var title = document.createElement('div');
+      title.classList.add('h5p-essay-title');
+      title.innerHTML = '<h2>' + that.config.title + '</h2>';
+      $wrapper.get(0).appendChild(title);
+    }
+
+    // Task
+    if (that.config.task) {
+      var task = document.createElement('div');
+      task.classList.add('h5p-essay-task');
+      task.setAttribute('tabindex', 0);
+      task.innerHTML = that.config.task;
+      $wrapper.get(0).appendChild(task);
+    }
+
+    that.trigger('resize');
+  };
 
     // Initialize event inheritance
     H5P.EventDispatcher.call(this);

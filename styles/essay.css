@@ -4,3 +4,7 @@
   width: auto;
   overflow-y: auto;
 }
+.h5p-essay .h5p-essay-task {
+  width: 100%;
+  overflow-y: auto;
+}
