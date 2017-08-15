@@ -8,3 +8,8 @@
   width: 100%;
   overflow-y: auto;
 }
+.h5p-essay .h5p-essay-text {
+  width: 100%;
+  height: 10em;
+  overflow-y: auto;
+}
