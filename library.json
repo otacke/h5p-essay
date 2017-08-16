@@ -7,7 +7,7 @@
   "runnable": 1,
   "embedTypes": ["iframe"],
   "author": "Oliver Tacke",
-  "license": "MIT",
+  "license": "pd",
   "machineName": "H5P.Essay",
   "coreApi": {
     "majorVersion": 1,
