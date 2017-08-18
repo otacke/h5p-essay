@@ -12,7 +12,8 @@ The content type could possibly evolve into a solution for [automated essay scor
 You're welcome to contribute your ideas as an issue on github. For now there are (in no particular order or guarantee):
 
 ### User Stories
-- As a student, I can enter an essay text and file it in for "grading".
+- As a student, I can enter an essay text and submit it for "grading".
+- As a student, I can (automatically) save a draft and continue writing later.
 - As a teacher, I can add an introductory text describing the task and hints.
 - As a teacher, I can add keywords that the text will be scanned for.
 - As a teacher, I can toggle fuzzy comparison for each keyword that will grant some grammatical flexibility, e.g. also accept the plural form of a word.
