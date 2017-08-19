@@ -1,14 +1,5 @@
 [
   {
-    "name": "title",
-    "label": "Title",
-    "importance": "high",
-    "type": "text",
-    "optional": true,
-    "placeholder": "Here you can add an optional title.",
-    "description": "The title you'd like to show above the task"
-  },
-  {
     "name": "inputfield",
     "label": "Input field",
     "type": "library",
@@ -49,5 +40,13 @@
         }
       ]
     }
+  },
+  {
+    "label": "Text for \"Check\" button",
+    "importance": "low",
+    "name": "checkAnswer",
+    "type": "text",
+    "default": "Check",
+    "common": true
   }
 ]
