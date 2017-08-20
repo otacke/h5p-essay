@@ -36,3 +36,6 @@ You're welcome to contribute your ideas as an issue on github. For now there are
 - textarea
 - send button
 - feedback bar/star
+
+### Misc
+- text statistics and metrics, e.g. readability metrics
