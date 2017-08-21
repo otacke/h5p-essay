@@ -38,9 +38,14 @@ H5P.Essay = function ($, Question) {
         .replace(/(\r\n|\r|\n)/g, ' ')
         .replace(/[^A-Za-z0-9-\s]/g,'')
         .split(' ');
-      for (var i = 0; i < this.config.keywords.length; i++) {
-        if (words.indexOf(this.config.keywords[i]) !== -1) {
-          result++;
+      // Check keywords in groups for matches
+      for (var i = 0; i < this.config.keywordGroups.length; i++) {
+        var keywords = this.config.keywordGroups[i];
+        for (var j = 0; j < keywords.length; j++) {
+          if (words.indexOf(keywords[j]) !== -1) {
+            result++;
+            break;
+          }
         }
       }
       return result;
@@ -84,7 +89,7 @@ H5P.Essay = function ($, Question) {
       this.setFeedback(
         'Let us see how many of my keywords you used ...',
         that.computeScore(),
-        that.config.keywords.length);
+        that.config.keywordGroups.length);
     }
   };
 

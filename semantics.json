@@ -17,26 +17,43 @@
     }
   },
   {
-    "name": "keywords",
+    "name": "keywordGroups",
     "type": "list",
     "label": "Items",
     "entity": "item",
     "importance": "medium",
     "min": 1,
     "field": {
-      "name": "keyword",
+      "name": "keywordGroup",
       "type": "group",
-      "label": "Keyword",
+      "label": "Keyword group",
       "importance": "low",
       "expanded": true,
       "fields": [
         {
-          "name": "keyword",
-          "label": "Keyword",
+          "name": "keywords",
+          "type": "list",
+          "label": "Keywords",
+          "entity": "item",
           "importance": "low",
-          "type": "text",
-          "optional": false,
-          "description": "Keyword to look for"
+          "min": 1,
+          "field": {
+            "name": "keywordParams",
+            "type": "group",
+            "label": "Keyword parameters",
+            "importance": "low",
+            "expanded": true,
+            "fields": [
+              {
+                "name": "keyword",
+                "label": "Keyword",
+                "importance": "low",
+                "type": "text",
+                "optional": false,
+                "description": "Keyword to look for"
+              }
+            ]
+          }
         }
       ]
     }
