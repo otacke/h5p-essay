@@ -59,6 +59,24 @@
     }
   },
   {
+    "name": "behaviour",
+    "type": "group",
+    "label": "Behavioural settings",
+    "importance": "low",
+    "description": "These options will let you control how the task behaves.",
+    "optional": true,
+    "fields": [
+      {
+        "name": "caseSensitive",
+        "importance": "low",
+        "type": "boolean",
+        "default": true,
+        "label": "Case sensitive",
+        "description": "Makes sure the user input has to be exactly the same as the answer."
+      }
+    ]
+  },
+  {
     "label": "Text for \"Check\" button",
     "importance": "low",
     "name": "checkAnswer",

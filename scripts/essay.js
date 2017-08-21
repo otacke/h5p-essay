@@ -33,16 +33,34 @@ H5P.Essay = function ($, Question) {
   Essay.prototype = {
     computeScore: function() {
       var result = 0;
+      var input = this.inputfield.getInput().value;
+
+      // Check for case sensitivity
+      // TODO: Where does the warning for this parameter come from?
+      // Warning: First parameter must either be an object or the name of an existing class in H5PContentValidator->validateGroup()
+      // Also: default isn't working. Problem in semantics.json?
+      if (this.config.behaviour !== true) {
+        input = input.toLowerCase();
+      }
+
       // Remove everything but characters, numbers, - and spaces
-      var words = this.inputfield.getInput().value
+      var words = input
         .replace(/(\r\n|\r|\n)/g, ' ')
         .replace(/[^A-Za-z0-9-\s]/g,'')
         .split(' ');
+
       // Check keywords in groups for matches
       for (var i = 0; i < this.config.keywordGroups.length; i++) {
         var keywords = this.config.keywordGroups[i];
         for (var j = 0; j < keywords.length; j++) {
-          if (words.indexOf(keywords[j]) !== -1) {
+          var keyword = keywords[j];
+
+          // Check for case sensitivity
+          if (this.config.behaviour !== true) {
+            keyword = keyword.toLowerCase();
+          }
+
+          if (words.indexOf(keyword) !== -1) {
             result++;
             break;
           }
