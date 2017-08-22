@@ -1,5 +1,9 @@
 var H5P = H5P || {};
 
+// TODO: Where does the Drupal warning come from?
+// Warning: First parameter must either be an object or the name of an existing class in H5PContentValidator->validateGroup()
+// Also: default isn't working. Problem in semantics.json?
+
 H5P.Essay = function ($, Question) {
   'use strict';
   /**
@@ -32,13 +36,12 @@ H5P.Essay = function ($, Question) {
 
   Essay.prototype = {
     computeScore: function() {
+      var that = this;
+
       var result = 0;
       var input = this.inputfield.getInput().value;
 
       // Check for case sensitivity
-      // TODO: Where does the warning for this parameter come from?
-      // Warning: First parameter must either be an object or the name of an existing class in H5PContentValidator->validateGroup()
-      // Also: default isn't working. Problem in semantics.json?
       if (this.config.behaviour !== true) {
         input = input.toLowerCase();
       }
@@ -50,22 +53,22 @@ H5P.Essay = function ($, Question) {
         .split(' ');
 
       // Check keywords in groups for matches
-      for (var i = 0; i < this.config.keywordGroups.length; i++) {
-        var keywords = this.config.keywordGroups[i];
-        for (var j = 0; j < keywords.length; j++) {
-          var keyword = keywords[j];
+      this.config.keywordGroups.forEach(function (alternatives) {
+        alternatives.every(function (alternative) {
 
           // Check for case sensitivity
-          if (this.config.behaviour !== true) {
+          if (that.config.behaviour !== true) {
             keyword = keyword.toLowerCase();
           }
-
-          if (words.indexOf(keyword) !== -1) {
+          // Compare words with alternative
+          if (words.indexOf(alternative) !== -1) {
             result++;
-            break;
+            return false;
           }
-        }
-      }
+          return true;
+        });
+      });
+
       return result;
     },
     registerDomElements: function() {

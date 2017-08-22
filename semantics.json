@@ -19,9 +19,10 @@
   {
     "name": "keywordGroups",
     "type": "list",
-    "label": "Items",
-    "entity": "item",
+    "label": "Keywords",
+    "entity": "keyword",
     "importance": "medium",
+    "optional": false,
     "min": 1,
     "field": {
       "name": "keywordGroup",
@@ -31,28 +32,19 @@
       "expanded": true,
       "fields": [
         {
-          "name": "keywords",
+          "name": "alternatives",
           "type": "list",
-          "label": "Keywords",
-          "entity": "item",
+          "label": "Keyword alternatives",
+          "entity": "alternative",
           "importance": "low",
           "min": 1,
           "field": {
-            "name": "keywordParams",
-            "type": "group",
-            "label": "Keyword parameters",
+            "name": "alternative",
+            "label": "Keyword",
             "importance": "low",
-            "expanded": true,
-            "fields": [
-              {
-                "name": "keyword",
-                "label": "Keyword",
-                "importance": "low",
-                "type": "text",
-                "optional": false,
-                "description": "Keyword to look for"
-              }
-            ]
+            "type": "text",
+            "optional": false,
+            "description": "Keyword to look for"
           }
         }
       ]
@@ -64,12 +56,13 @@
     "label": "Behavioural settings",
     "importance": "low",
     "description": "These options will let you control how the task behaves.",
-    "optional": true,
+    "optional": false,
     "fields": [
       {
         "name": "caseSensitive",
         "importance": "low",
         "type": "boolean",
+        "optional": false,
         "default": true,
         "label": "Case sensitive",
         "description": "Makes sure the user input has to be exactly the same as the answer."
@@ -77,9 +70,9 @@
     ]
   },
   {
+    "name": "checkAnswer",
     "label": "Text for \"Check\" button",
     "importance": "low",
-    "name": "checkAnswer",
     "type": "text",
     "default": "Check",
     "common": true
