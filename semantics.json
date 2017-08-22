@@ -22,7 +22,6 @@
     "label": "Keywords",
     "entity": "keyword",
     "importance": "medium",
-    "optional": false,
     "min": 1,
     "field": {
       "name": "keywordGroup",
@@ -37,13 +36,14 @@
           "label": "Keyword alternatives",
           "entity": "alternative",
           "importance": "low",
+          "optional": true,
           "min": 1,
           "field": {
             "name": "alternative",
             "label": "Keyword",
             "importance": "low",
             "type": "text",
-            "optional": false,
+            "optional": true,
             "description": "Keyword to look for"
           }
         }
@@ -56,13 +56,12 @@
     "label": "Behavioural settings",
     "importance": "low",
     "description": "These options will let you control how the task behaves.",
-    "optional": false,
     "fields": [
       {
         "name": "caseSensitive",
         "importance": "low",
         "type": "boolean",
-        "optional": false,
+        "optional": true,
         "default": true,
         "label": "Case sensitive",
         "description": "Makes sure the user input has to be exactly the same as the answer."

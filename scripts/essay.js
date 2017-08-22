@@ -1,9 +1,5 @@
 var H5P = H5P || {};
 
-// TODO: Where does the Drupal warning come from?
-// Warning: First parameter must either be an object or the name of an existing class in H5PContentValidator->validateGroup()
-// Also: default isn't working. Problem in semantics.json?
-
 H5P.Essay = function ($, Question) {
   'use strict';
   /**
