@@ -54,7 +54,7 @@ H5P.Essay = function ($, Question) {
 
           // Check for case sensitivity
           if (that.config.behaviour !== true) {
-            keyword = keyword.toLowerCase();
+            alternative = alternative.toLowerCase();
           }
           // Compare words with alternative
           if (words.indexOf(alternative) !== -1) {
