@@ -48,20 +48,16 @@ H5P.Essay = function ($, Question) {
         .replace(/[^A-Za-z0-9-\s]/g,'')
         .split(' ');
 
-      // Check keywords in groups for matches
+      // Within each keyword group check if one of the alternatioves is a keyword
       this.config.keywordGroups.forEach(function (alternatives) {
-        alternatives.every(function (alternative) {
-
+        alternatives.some(function (alternative) {
           // Check for case sensitivity
-          if (that.config.behaviour !== true) {
+          if  (that.config.behaviour !== true) {
             alternative = alternative.toLowerCase();
           }
-          // Compare words with alternative
           if (words.indexOf(alternative) !== -1) {
             result++;
-            return false;
           }
-          return true;
         });
       });
 
