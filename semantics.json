@@ -1,6 +1,6 @@
 [
   {
-    "name": "inputfield",
+    "name": "inputField",
     "label": "Input field",
     "type": "library",
     "importance": "high",
