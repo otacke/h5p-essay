@@ -39,3 +39,4 @@ You're welcome to contribute your ideas as an issue on github. For now there are
 
 ### Misc
 - text statistics and metrics, e.g. readability metrics
+- different levels of difficulty, choosable by teacher and/or student
