@@ -122,6 +122,7 @@ H5P.Essay = function ($, Question) {
         }
         if (words.indexOf(alternative) !== -1) {
           result++;
+          return true;
         }
       });
     });
