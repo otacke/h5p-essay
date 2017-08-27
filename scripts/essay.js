@@ -83,7 +83,7 @@ H5P.Essay = function ($, Question) {
    */
   Essay.prototype.showEvaluation = function () {
     var that = this;
-    that.hideButton('check-answer');
+    //that.hideButton('check-answer');
     this.setFeedback(
       'Let us see how many of my keywords you used ...',
       that.computeScore(),
@@ -98,20 +98,56 @@ H5P.Essay = function ($, Question) {
     var that = this;
 
     var result = 0;
-    var input = this.inputField.getInput().value;
+
+    // We don't want EOLs to mess up the string.
+    var input = this.inputField.getInput().value
+      .replace(/(\r\n|\r|\n)/g, ' ')
+      .replace(/\s\s/g, ' ');
 
     // Check for case sensitivity
     if (this.config.behaviour !== true) {
       input = input.toLowerCase();
     }
+
     // Should not happen, but just to be sure ...
     this.config.keywordGroups = this.config.keywordGroups || [];
 
-    // Remove everything but characters, numbers, - and spaces
-    var words = input
-      .replace(/(\r\n|\r|\n)/g, ' ')
-      .replace(/[^A-Za-z0-9-\s]/g,'')
-      .split(' ');
+    /*
+     * If you don't want to only find exact matches of keywords, but also
+     * close resemblences or phrases, things get more complicated then you
+     * might expect. This could probably be improved.
+     */
+
+    /*
+     * TODO: This function could go into text utilities, might be useful in
+     *       other content types as well that handle text input.
+     */
+
+    /**
+     * Check if a candidate string is considered isolated in a (larger) string by
+     * checking the symbol before and after the candidate
+     * @param {string} candidate - String to be looked for
+     * @param {string} text - (Larger) string that should contain candidate
+     * @param {object} delimiter - Regular expression containing symbols used to isolate the candidate
+     * @return {boolean} True if string is isolated
+     */
+    var isIsolated = function (candidate, text, delimiter) {
+      // usual word delimiters
+      delimiter = delimiter || /[\s.?!,\';]/g;
+
+      var pos = text.indexOf(candidate);
+      if (pos === -1) {
+        return false;
+      }
+
+      var pred = (pos === 0 ? '' : input[pos - 1].replace(delimiter, ''));
+      var succ = (candidate.length === input.length ? '' : input[pos + candidate.length].replace(delimiter, ''));
+
+      if (pred !== '' || succ !== '') {
+        return false;
+      }
+      return true;
+    };
 
     // Within each keyword group check if one of the alternatioves is a keyword
     this.config.keywordGroups.forEach(function (alternatives) {
@@ -120,7 +156,15 @@ H5P.Essay = function ($, Question) {
         if  (that.config.behaviour !== true) {
           alternative = alternative.toLowerCase();
         }
-        if (words.indexOf(alternative) !== -1) {
+
+        /*
+         * TODO: Fuzzy search would be cool, but might be tricky to do smart
+         *       because we don't compare a word with a word but need to look
+         *       if a word or a similar (!) word is within a text.
+         *       Naive approach: move a window of word's length over the text
+         *       and compare with a fuzzy string metric - might be very slow.
+         */
+        if (input.indexOf(alternative) !== -1 && isIsolated(alternative, input)) {
           result++;
           return true;
         }

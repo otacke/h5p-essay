@@ -19,32 +19,32 @@
   {
     "name": "keywordGroups",
     "type": "list",
-    "label": "Keywords",
-    "entity": "keyword",
+    "label": "Keywords or phrases",
+    "entity": "keyword/phrase",
     "importance": "medium",
     "min": 1,
     "field": {
       "name": "keywordGroup",
       "type": "group",
-      "label": "Keyword group",
+      "label": "Group of keywords/phrases",
       "importance": "low",
       "expanded": true,
       "fields": [
         {
           "name": "alternatives",
           "type": "list",
-          "label": "Keyword alternatives",
+          "label": "Keyword/phrase alternatives",
           "entity": "alternative",
           "importance": "low",
           "optional": true,
           "min": 1,
           "field": {
             "name": "alternative",
-            "label": "Keyword",
+            "label": "Keyword/phrase",
             "importance": "low",
             "type": "text",
             "optional": true,
-            "description": "Keyword to look for"
+            "description": "Keyword or phrase to look for"
           }
         }
       ]
