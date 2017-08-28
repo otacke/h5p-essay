@@ -141,7 +141,7 @@ H5P.Essay = function ($, Question) {
       }
 
       var pred = (pos === 0 ? '' : input[pos - 1].replace(delimiter, ''));
-      var succ = (candidate.length === input.length ? '' : input[pos + candidate.length].replace(delimiter, ''));
+      var succ = (pos + candidate.length === input.length ? '' : input[pos + candidate.length].replace(delimiter, ''));
 
       if (pred !== '' || succ !== '') {
         return false;
