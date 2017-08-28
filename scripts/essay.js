@@ -85,7 +85,7 @@ H5P.Essay = function ($, Question) {
     var that = this;
     //that.hideButton('check-answer');
     this.setFeedback(
-      'Let us see how many of my keywords you used ...',
+      that.config.feedbackDefault,
       that.computeScore(),
       that.config.keywordGroups.length);
   };
