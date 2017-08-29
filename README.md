@@ -40,3 +40,4 @@ You're welcome to contribute your ideas as an issue on github. For now there are
 ### Misc
 - text statistics and metrics, e.g. readability metrics
 - different levels of difficulty, choosable by teacher and/or student
+- later on: possible build a model that allows to relate texts with scores from a human, so you can train the content type and then use this model to compute the/a score, too.
