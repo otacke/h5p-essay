@@ -34,10 +34,10 @@ H5P.Essay = function ($, Question) {
     var that = this;
 
     // Get previous state
-    if (this.contentData !== undefined && this.contentData.previousState !== undefined) {
+    if (!!this.contentData && !!this.contentData.previousState) {
       that.previousState = this.contentData.previousState;
     }
-    var oldText = (that.previousState !== undefined) ? that.previousState.text || '' : '';
+    var oldText = (!!that.previousState) ? that.previousState.text || '' : '';
 
     /*
      * This is a little ugly for several reasons. First of all, it would be
