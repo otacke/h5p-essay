@@ -34,6 +34,11 @@
         "machineName": "H5P.JoubelUI",
         "majorVersion": 1,
         "minorVersion": 3
+      },
+      {
+        "machineName": "H5P.TextUtilities",
+        "majorVersion": 1,
+        "minorVersion": 0
       }
     ]
 }

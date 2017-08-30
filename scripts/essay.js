@@ -118,37 +118,6 @@ H5P.Essay = function ($, Question) {
      * might expect. This could probably be improved.
      */
 
-    /*
-     * TODO: This function could go into text utilities, might be useful in
-     *       other content types as well that handle text input.
-     */
-
-    /**
-     * Check if a candidate string is considered isolated in a (larger) string by
-     * checking the symbol before and after the candidate
-     * @param {string} candidate - String to be looked for
-     * @param {string} text - (Larger) string that should contain candidate
-     * @param {object} delimiter - Regular expression containing symbols used to isolate the candidate
-     * @return {boolean} True if string is isolated
-     */
-    var isIsolated = function (candidate, text, delimiter) {
-      // usual word delimiters
-      delimiter = delimiter || /[\s.?!,\';]/g;
-
-      var pos = text.indexOf(candidate);
-      if (pos === -1) {
-        return false;
-      }
-
-      var pred = (pos === 0 ? '' : input[pos - 1].replace(delimiter, ''));
-      var succ = (pos + candidate.length === input.length ? '' : input[pos + candidate.length].replace(delimiter, ''));
-
-      if (pred !== '' || succ !== '') {
-        return false;
-      }
-      return true;
-    };
-
     // Within each keyword group check if one of the alternatioves is a keyword
     this.config.keywordGroups.forEach(function (alternatives) {
       alternatives.some(function (alternative) {
@@ -164,7 +133,7 @@ H5P.Essay = function ($, Question) {
          *       Naive approach: move a window of word's length over the text
          *       and compare with a fuzzy string metric - might be very slow.
          */
-        if (input.indexOf(alternative) !== -1 && isIsolated(alternative, input)) {
+        if (input.indexOf(alternative) !== -1 && H5P.TextUtilities.isIsolated(alternative, input)) {
           result++;
           return true;
         }
