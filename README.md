@@ -41,3 +41,11 @@ You're welcome to contribute your ideas as an issue on github. For now there are
 - text statistics and metrics, e.g. readability metrics
 - different levels of difficulty, choosable by teacher and/or student
 - later on: possible build a model that allows to relate texts with scores from a human, so you can train the content type and then use this model to compute the/a score, too.
+
+About this repository
+---------------------
+If you want to download the sourcecode, you can choose from three main branches:
+
+- __release:__ Will contain the latest official release.
+- __stable:__ Will contain features that have not yet been released, but that should work. Use at your own risk in a production environment.
+- __master:__ Will contain the latest progress, but may not have been fully tested. Should definitely not be used in a production environment!
