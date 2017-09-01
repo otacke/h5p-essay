@@ -38,7 +38,7 @@ You're welcome to contribute your ideas as an issue on github. For now there are
 - scored
 
 ### Misc
-- text statistics and metrics, e.g. readability metrics
+- text statistics and metrics, e.g. readability metrics or maybe something related to the AFINN file
 - different levels of difficulty, choosable by teacher and/or student
 - later on: possible build a model that allows to relate texts with scores from a human, so you can train the content type and then use this model to compute the/a score, too.
 
