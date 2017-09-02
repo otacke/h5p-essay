@@ -8,6 +8,9 @@ Initially (and maybe finally), this feedback will simply be based on a list of k
 
 The content type could possibly evolve into a solution for [automated essay scoring](https://en.wikipedia.org/wiki/Automated_essay_scoring) using machine learning techniques. However, that's merely wishful thinking right now.
 
+## Support me at patreon!
+If you like what I do, please consider to become my supporter at patreon: https://www.patreon.com/otacke
+
 ## Done
 - As a student, I can enter an essay text and submit it for "grading".
 - As a student, I can (automatically) save a draft and continue writing later.
@@ -42,8 +45,7 @@ You're welcome to contribute your ideas as an issue on github. For now there are
 - different levels of difficulty, choosable by teacher and/or student
 - later on: possible build a model that allows to relate texts with scores from a human, so you can train the content type and then use this model to compute the/a score, too.
 
-About this repository
----------------------
+## About this repository
 If you want to download the sourcecode, you can choose from three main branches:
 
 - __release:__ Will contain the latest official release.
