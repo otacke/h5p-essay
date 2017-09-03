@@ -17,12 +17,12 @@ If you like what I do, please consider to become my supporter at patreon: https:
 - As a teacher, I can add an introductory text describing the task and hints.
 - As a teacher, I can add keywords that the text will be scanned for.
 - As a teacher, I can define a maximum number of characters for the essay.
+- As a teacher, I can toggle fuzzy comparison that will grant some grammatical flexibility, e.g. also accept the plural form of a word.
 
 ## Further Ideas
 You're welcome to contribute your ideas as an issue on github. For now there are (in no particular order or guarantee):
 
 ### User Stories
-- As a teacher, I can toggle fuzzy comparison for each keyword that will grant some grammatical flexibility, e.g. also accept the plural form of a word.
 - As a teacher, I can define how many keywords should be found in order to award a full score.
 - As a teacher, I can define multiple ranges that will allow more diverse feedback.
 - As a teacher, I can decide that some keywords are mandatory while others are not.
