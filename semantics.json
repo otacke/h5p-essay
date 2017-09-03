@@ -65,6 +65,15 @@
         "default": true,
         "label": "Case sensitive",
         "description": "Makes sure the user input has to be exactly the same as the answer."
+      },
+      {
+        "name": "forgiveMistakes",
+        "importance": "low",
+        "type": "boolean",
+        "optional": true,
+        "default": false,
+        "label": "Forgive minor mistakes",
+        "description": "Will allow to find keywords with minor spelling mistakes (and to some degree plural forms, etc.)."
       }
     ]
   },

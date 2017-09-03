@@ -105,7 +105,7 @@ H5P.Essay = function ($, Question) {
       .replace(/\s\s/g, ' ');
 
     // Check for case sensitivity
-    if (this.config.behaviour !== true) {
+    if (this.config.behaviour.caseSensitive === false) {
       input = input.toLowerCase();
     }
 
@@ -122,18 +122,18 @@ H5P.Essay = function ($, Question) {
     this.config.keywordGroups.forEach(function (alternatives) {
       alternatives.some(function (alternative) {
         // Check for case sensitivity
-        if  (that.config.behaviour !== true) {
+        if  (that.config.behaviour.caseSensitive === false) {
           alternative = alternative.toLowerCase();
         }
 
-        /*
-         * TODO: Fuzzy search would be cool, but might be tricky to do smart
-         *       because we don't compare a word with a word but need to look
-         *       if a word or a similar (!) word is within a text.
-         *       Naive approach: move a window of word's length over the text
-         *       and compare with a fuzzy string metric - might be very slow.
-         */
+        // Exact matching
         if (input.indexOf(alternative) !== -1 && H5P.TextUtilities.isIsolated(alternative, input)) {
+          result++;
+          return true;
+        }
+
+        // Fuzzy matching
+        if (that.config.behaviour.forgiveMistakes === true && H5P.TextUtilities.fuzzyContains(alternative, input)) {
           result++;
           return true;
         }
