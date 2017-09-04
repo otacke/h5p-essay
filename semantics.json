@@ -61,17 +61,27 @@
                     "name": "caseSensitive",
                     "type": "boolean",
                     "label": "Case sensitive",
-                    "default": true
+                    "default": true,
+                    "description": "Makes sure the user input has to be exactly the same as the answer."
                   },
                   {
                     "name": "forgiveMistakes",
                     "type": "boolean",
-                    "label": "Forgive minor mistakes"
+                    "label": "Forgive minor mistakes",
+                    "description": "Will also accept solutions with minor spelling mistakes. Can also be handy for plural forms, etc."
                   }
                 ]
               }
             ]
           }
+        },
+        {
+          "name": "points",
+          "type": "number",
+          "label": "Points",
+          "default": 1,
+          "description": "Points awarded if one of this group's keywords is used in the text",
+          "min": 1
         }
       ]
     }

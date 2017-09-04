@@ -21,6 +21,10 @@ H5P.Essay = function ($, Question) {
     this.config = config;
     this.contentId = contentId;
     this.contentData = contentData || {};
+
+    this.scoreMax = this.config.keywordGroups.reduce(function (a, b) {
+      return a.points + b.points;
+    });
   }
 
   // Extends Question
@@ -87,7 +91,7 @@ H5P.Essay = function ($, Question) {
     this.setFeedback(
       that.config.feedbackDefault,
       that.computeScore(),
-      that.config.keywordGroups.length);
+      that.scoreMax);
   };
 
   /**
@@ -95,8 +99,6 @@ H5P.Essay = function ($, Question) {
    * @return {number} Score.
    */
   Essay.prototype.computeScore = function() {
-    var that = this;
-
     var result = 0;
 
     // We don't want EOLs to mess up the string.
@@ -115,9 +117,10 @@ H5P.Essay = function ($, Question) {
      * might expect. This could probably be improved.
      */
 
-    // Within each keyword group check if one of the alternatioves is a keyword
-    this.config.keywordGroups.forEach(function (alternatives) {
-      alternatives.some(function (candidate) {
+    // Within each keyword group check if one of the alternatives is a keyword
+
+    this.config.keywordGroups.forEach(function (alternativeGroup) {
+      alternativeGroup.alternatives.some(function (candidate) {
         var alternative = candidate.alternative;
         var options = candidate.options;
 
@@ -130,13 +133,13 @@ H5P.Essay = function ($, Question) {
 
         // Exact matching
         if (inputTest.indexOf(alternative) !== -1 && H5P.TextUtilities.isIsolated(alternative, inputTest)) {
-          result++;
+          result += alternativeGroup.points;
           return true;
         }
 
         // Fuzzy matching
         if (options.forgiveMistakes && H5P.TextUtilities.fuzzyContains(alternative, inputTest)) {
-          result++;
+          result += alternativeGroup.points;
           return true;
         }
       });
