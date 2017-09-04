@@ -104,10 +104,7 @@ H5P.Essay = function ($, Question) {
       .replace(/(\r\n|\r|\n)/g, ' ')
       .replace(/\s\s/g, ' ');
 
-    // Check for case sensitivity
-    if (this.config.behaviour.caseSensitive === false) {
-      input = input.toLowerCase();
-    }
+    var inputLowerCase = input.toLowerCase();
 
     // Should not happen, but just to be sure ...
     this.config.keywordGroups = this.config.keywordGroups || [];
@@ -120,20 +117,25 @@ H5P.Essay = function ($, Question) {
 
     // Within each keyword group check if one of the alternatioves is a keyword
     this.config.keywordGroups.forEach(function (alternatives) {
-      alternatives.some(function (alternative) {
+      alternatives.some(function (candidate) {
+        var alternative = candidate.alternative;
+        var options = candidate.options;
+
+        var inputTest = input;
         // Check for case sensitivity
-        if  (that.config.behaviour.caseSensitive === false) {
+        if  (!options.caseSensitive) {
           alternative = alternative.toLowerCase();
+          inputTest = inputLowerCase;
         }
 
         // Exact matching
-        if (input.indexOf(alternative) !== -1 && H5P.TextUtilities.isIsolated(alternative, input)) {
+        if (inputTest.indexOf(alternative) !== -1 && H5P.TextUtilities.isIsolated(alternative, inputTest)) {
           result++;
           return true;
         }
 
         // Fuzzy matching
-        if (that.config.behaviour.forgiveMistakes === true && H5P.TextUtilities.fuzzyContains(alternative, input)) {
+        if (options.forgiveMistakes && H5P.TextUtilities.fuzzyContains(alternative, inputTest)) {
           result++;
           return true;
         }

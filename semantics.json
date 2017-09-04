@@ -39,12 +39,38 @@
           "optional": true,
           "min": 1,
           "field": {
-            "name": "alternative",
-            "label": "Keyword/phrase",
-            "importance": "low",
-            "type": "text",
-            "optional": true,
-            "description": "Keyword or phrase to look for"
+            "name": "alternativeGroup",
+            "label": "Alternatives",
+            "type": "group",
+            "fields": [
+              {
+                "name": "alternative",
+                "label": "Keyword/phrase",
+                "importance": "low",
+                "type": "text",
+                "optional": true,
+                "description": "Keyword or phrase to look for"
+              },
+              {
+                "name": "options",
+                "type": "group",
+                "label": "Advanced options",
+                "importance": "low",
+                "fields": [
+                  {
+                    "name": "caseSensitive",
+                    "type": "boolean",
+                    "label": "Case sensitive",
+                    "default": true
+                  },
+                  {
+                    "name": "forgiveMistakes",
+                    "type": "boolean",
+                    "label": "Forgive minor mistakes"
+                  }
+                ]
+              }
+            ]
           }
         }
       ]
@@ -57,24 +83,6 @@
     "importance": "low",
     "description": "These options will let you control how the task behaves.",
     "fields": [
-      {
-        "name": "caseSensitive",
-        "importance": "low",
-        "type": "boolean",
-        "optional": true,
-        "default": true,
-        "label": "Case sensitive",
-        "description": "Makes sure the user input has to be exactly the same as the answer."
-      },
-      {
-        "name": "forgiveMistakes",
-        "importance": "low",
-        "type": "boolean",
-        "optional": true,
-        "default": false,
-        "label": "Forgive minor mistakes",
-        "description": "Will allow to find keywords with minor spelling mistakes (and to some degree plural forms, etc.)."
-      }
     ]
   },
   {
