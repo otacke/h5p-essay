@@ -34,12 +34,14 @@ You're welcome to contribute your ideas as an issue on github. For now there are
 - As a student, I can receive instand feedback beyond a simple score.
 
 ### xAPI statements
+Compare https://web.archive.org/web/20170628002610/http://xapi.vocab.pub/datasets/adl/
+
 - experienced (when opened)
-- completed (when sent)
-- failed
-- passed
-- mastered
-- scored
+- completed (when submitted)
+- failed (if completed, but score is not sufficient)
+- passed (if completed and score is sufficient)
+- mastered (if completed and full score)
+- scored (if completed, submit numerical score)
 
 ### Misc
 - text statistics and metrics, e.g. readability metrics or maybe something related to the AFINN file
