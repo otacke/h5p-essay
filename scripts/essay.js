@@ -133,13 +133,13 @@ H5P.Essay = function ($, Question) {
 
         // Exact matching
         if (inputTest.indexOf(alternative) !== -1 && H5P.TextUtilities.isIsolated(alternative, inputTest)) {
-          result += alternativeGroup.points;
+          result += alternativeGroup.options.points;
           return true;
         }
 
         // Fuzzy matching
         if (options.forgiveMistakes && H5P.TextUtilities.fuzzyContains(alternative, inputTest)) {
-          result += alternativeGroup.points;
+          result += alternativeGroup.options.points;
           return true;
         }
       });

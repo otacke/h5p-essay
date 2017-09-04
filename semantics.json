@@ -76,12 +76,27 @@
           }
         },
         {
-          "name": "points",
-          "type": "number",
-          "label": "Points",
-          "default": 1,
-          "description": "Points awarded if one of this group's keywords is used in the text",
-          "min": 1
+          "name": "options",
+          "type": "group",
+          "label": "Advanced options",
+          "importance": "low",
+          "fields": [
+            {
+              "name": "points",
+              "type": "number",
+              "label": "Points",
+              "default": 1,
+              "description": "Points awarded if one of this group's keywords is used in the text.",
+              "min": 1
+            },
+            {
+              "name": "mandatory",
+              "type": "boolean",
+              "label": "Mandatory",
+              "description": "Will flag the keyword group as mandatory for passing.",
+              "default": true
+            }
+          ]
         }
       ]
     }
