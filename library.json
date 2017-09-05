@@ -11,7 +11,7 @@
   "machineName": "H5P.Essay",
   "coreApi": {
     "majorVersion": 1,
-    "minorVersion": 0
+    "minorVersion": 6
   },
   "preloadedJs": [
     { "path": "scripts/essay.js" }
@@ -20,25 +20,32 @@
     {"path": "styles/essay.css"}
   ],
   "preloadedDependencies": [
-      {
-        "machineName": "H5P.TextInputField",
-        "majorVersion": 1,
-        "minorVersion": 0
-      },
-      {
-        "machineName": "H5P.Question",
-        "majorVersion": 1,
-        "minorVersion": 3
-      },
-      {
-        "machineName": "H5P.JoubelUI",
-        "majorVersion": 1,
-        "minorVersion": 3
-      },
-      {
-        "machineName": "H5P.TextUtilities",
-        "majorVersion": 1,
-        "minorVersion": 0
-      }
-    ]
+    {
+      "machineName": "H5P.TextInputField",
+      "majorVersion": 1,
+      "minorVersion": 0
+    },
+    {
+      "machineName": "H5P.Question",
+      "majorVersion": 1,
+      "minorVersion": 3
+    },
+    {
+      "machineName": "H5P.JoubelUI",
+      "majorVersion": 1,
+      "minorVersion": 3
+    },
+    {
+      "machineName": "H5P.TextUtilities",
+      "majorVersion": 1,
+      "minorVersion": 0
+    }
+  ],
+  "editorDependencies": [
+    {
+      "machineName": "H5PEditor.RangeList",
+      "majorVersion": 1,
+      "minorVersion": 0
+    }
+  ]
 }

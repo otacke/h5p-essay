@@ -112,10 +112,16 @@ H5P.Essay = function ($, Question) {
    */
   Essay.prototype.showEvaluation = function () {
     var that = this;
+
     //that.hideButton('check-answer');
+    var score = that.computeScore();
+    var textScore = H5P.Question.determineOverallFeedback(that.config.overallFeedback, score / that.scoreMastering)
+      .replace('@score', score)
+      .replace('@total', that.scoreMastering);
+
     this.setFeedback(
-      that.config.feedbackDefault,
-      that.computeScore(),
+      textScore,
+      score,
       that.scoreMastering);
   };
 
