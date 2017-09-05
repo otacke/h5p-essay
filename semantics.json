@@ -191,13 +191,5 @@
     "type": "text",
     "default": "Check",
     "common": true
-  },
-  {
-    "name": "feedbackDefault",
-    "label": "Text for default feedback",
-    "importance": "low",
-    "type": "text",
-    "default": "Let's see how many points I can award you with ...",
-    "common": true
   }
 ]
