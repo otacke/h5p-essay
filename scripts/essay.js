@@ -22,40 +22,34 @@ H5P.Essay = function ($, Question) {
     this.contentId = contentId;
     this.contentData = contentData || {};
 
-    // TODO: Can we do this with reduce?
-    var sumArray = function (input) {
-      if (input.length === 0) {
-        return 0;
-      }
-      var result = 0;
-      input.forEach(function (element) {
-        result += element.options.points;
-      });
-      return result;
+    // filter function
+    var isMandatory = function(keywordGroup) {
+      return keywordGroup.options && keywordGroup.options.mandatory;
     };
 
+    // map function
+    var toPoints = function (keywordGroup) {
+      return keywordGroup.options && keywordGroup.options.points || 0;
+    };
+
+    // reduce function
+    var sum = function (a, b) {
+      return a + b;
+    };
+
+    var scoreMax = this.config.keywordGroups
+      .map(toPoints)
+      .reduce(sum, 0);
+
+    var scoreMandatory = this.config.keywordGroups
+      .filter(isMandatory)
+      .map(toPoints)
+      .reduce(sum, 0);
+
     // Set scores
-    this.scoreMax = sumArray(this.config.keywordGroups);
-
-    // TODO: clean up
-    var mandatory = this.config.keywordGroups.filter(function (a) {
-      return a.options.mandatory === true;
-    });
-    this.scoreMandatory = sumArray(mandatory);
-
-    if (typeof this.config.behaviour.scoreMastering === 'undefined') {
-      this.scoreMastering = this.scoreMax;
-    }
-    else {
-      this.scoreMastering = Math.min(this.config.behaviour.scoreMastering, this.scoreMax);
-    }
-
-    if (typeof this.config.behaviour.scorePassing === 'undefined') {
-      this.scorePassing = this.scoreMandatory;
-    }
-    else {
-      this.scorePassing = Math.min(Math.max(this.config.behaviour.scorePassing, this.scoreMandatory), this.scoreMastering);
-    }
+    this.scoreMastering = (typeof this.config.behaviour.scoreMastering === 'undefined') ? Infinity : this.config.behaviour.scoreMastering;
+    this.scoreMastering = Math.max(scoreMandatory, Math.min(scoreMax, this.scoreMastering));
+    this.scorePassing = Math.min(this.scoreMastering, Math.max(scoreMandatory, this.config.behaviour.scorePassing || 0));
   }
 
   // Extends Question
