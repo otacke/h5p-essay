@@ -108,6 +108,22 @@
     "importance": "low",
     "description": "These options will let you control how the task behaves.",
     "fields": [
+      {
+        "name": "scorePassing",
+        "type": "number",
+        "label": "Passing score",
+        "description": "Score that's necessary for passing",
+        "optional": true,
+        "min": 0
+      },
+      {
+        "name": "scoreMastering",
+        "type": "number",
+        "label": "Mastering score",
+        "description": "Score that's necessary for mastering",
+        "optional": true,
+        "min": 0
+      }
     ]
   },
   {

@@ -22,9 +22,40 @@ H5P.Essay = function ($, Question) {
     this.contentId = contentId;
     this.contentData = contentData || {};
 
-    this.scoreMax = this.config.keywordGroups.reduce(function (a, b) {
-      return a.points + b.points;
+    // TODO: Can we do this with reduce?
+    var sumArray = function (input) {
+      if (input.length === 0) {
+        return 0;
+      }
+      var result = 0;
+      input.forEach(function (element) {
+        result += element.options.points;
+      });
+      return result;
+    };
+
+    // Set scores
+    this.scoreMax = sumArray(this.config.keywordGroups);
+
+    // TODO: clean up
+    var mandatory = this.config.keywordGroups.filter(function (a) {
+      return a.options.mandatory === true;
     });
+    this.scoreMandatory = sumArray(mandatory);
+
+    if (typeof this.config.behaviour.scoreMastering === 'undefined') {
+      this.scoreMastering = this.scoreMax;
+    }
+    else {
+      this.scoreMastering = Math.min(this.config.behaviour.scoreMastering, this.scoreMax);
+    }
+
+    if (typeof this.config.behaviour.scorePassing === 'undefined') {
+      this.scorePassing = this.scoreMandatory;
+    }
+    else {
+      this.scorePassing = Math.min(Math.max(this.config.behaviour.scorePassing, this.scoreMandatory), this.scoreMastering);
+    }
   }
 
   // Extends Question
@@ -91,7 +122,7 @@ H5P.Essay = function ($, Question) {
     this.setFeedback(
       that.config.feedbackDefault,
       that.computeScore(),
-      that.scoreMax);
+      that.scoreMastering);
   };
 
   /**
