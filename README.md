@@ -21,16 +21,16 @@ If you like what I do, please consider to become my supporter at patreon: https:
 - As a teacher, I can set individuals points for a keyword and thus weigh them for scoring.
 - As a teacher, I can decide that some keywords are mandatory while others are not.
 - As a teacher, I can define multiple ranges that will allow more diverse feedback.
+- As a teacher, I can define optional feedback phrases for a keyword; one for "if found in text" and one for "if not found in text". The content type might glue those phrases together, thus creating a feedback text.
+- As a student, I can receive instant feedback beyond a simple score.
 
 ## Further Ideas
 You're welcome to contribute your ideas as an issue on github. For now there are (in no particular order or guarantee):
 
 ### User Stories
-- As a teacher, I can define optional feedback phrases for a keyword; one for "if found in text" and one for "if not found in text". The content type might glue those phrases together, thus creating a feedback text.
 - As a teacher, I can receive the texts and the results of students.
 - As a teacher, I can set different levels of difficulty that the students can choose from.
 - As a student, I can select different levels of difficulty in order to gradually test myself.
-- As a student, I can receive instant feedback beyond a simple score.
 
 ### xAPI statements
 Compare https://web.archive.org/web/20170628002610/http://xapi.vocab.pub/datasets/adl/
