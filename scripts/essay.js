@@ -114,23 +114,42 @@ H5P.Essay = function ($, Question) {
     var that = this;
 
     //that.hideButton('check-answer');
-    var score = that.computeScore();
+    var feedback = that.computeFeedback();
+
+    // map function
+    var toMessages = function (text) {
+      return text.message;
+    };
+
+    // reduce function
+    var combine = function (a, b) {
+      return a.trim() + ' ' + b.trim();
+    };
+
+    // TODO: This could be made nicer visually if we use the info about found/missing using a filter
+    var feedbackMessage = feedback.text
+      .map(toMessages)
+      .reduce(combine, '');
+    feedbackMessage = (feedbackMessage !== '') ? feedbackMessage = feedbackMessage + '<br />' : feedbackMessage;
+    var score = Math.min(feedback.score, that.scoreMastering);
+
     var textScore = H5P.Question.determineOverallFeedback(that.config.overallFeedback, score / that.scoreMastering)
       .replace('@score', score)
       .replace('@total', that.scoreMastering);
 
     this.setFeedback(
-      textScore,
-      score,
+      feedbackMessage + textScore,
+      feedback.score,
       that.scoreMastering);
   };
 
   /**
-   * Compute the score.
-   * @return {number} Score.
+   * Compute the feedback.
+   * @return {object} Feedback of {score: number, text: [{message: String, found: boolean}]}.
    */
-  Essay.prototype.computeScore = function() {
-    var result = 0;
+  Essay.prototype.computeFeedback = function() {
+    var score = 0;
+    var text = [];
 
     // We don't want EOLs to mess up the string.
     var input = this.inputField.getInput().value
@@ -151,7 +170,7 @@ H5P.Essay = function ($, Question) {
     // Within each keyword group check if one of the alternatives is a keyword
 
     this.config.keywordGroups.forEach(function (alternativeGroup) {
-      alternativeGroup.alternatives.some(function (candidate) {
+      var found = alternativeGroup.alternatives.some(function (candidate) {
         var alternative = candidate.alternative;
         var options = candidate.options;
 
@@ -164,19 +183,30 @@ H5P.Essay = function ($, Question) {
 
         // Exact matching
         if (inputTest.indexOf(alternative) !== -1 && H5P.TextUtilities.isIsolated(alternative, inputTest)) {
-          result += alternativeGroup.options.points;
+          score += alternativeGroup.options.points;
+          if (alternativeGroup.options.feedbackFound) {
+            text.push({"message": alternativeGroup.options.feedbackFound, "found": true});
+          }
           return true;
         }
 
         // Fuzzy matching
         if (options.forgiveMistakes && H5P.TextUtilities.fuzzyContains(alternative, inputTest)) {
-          result += alternativeGroup.options.points;
+          score += alternativeGroup.options.points;
+          if (alternativeGroup.options.feedbackFound) {
+            text.push({"message": alternativeGroup.options.feedbackFound, "found": true});
+          }
           return true;
         }
       });
+      if (!found) {
+        if (alternativeGroup.options.feedbackMissed) {
+          text.push({"message": alternativeGroup.options.feedbackMissed, "found": false});
+        }
+      }
     });
 
-    return result;
+    return {"score": score, "text": text};
   };
 
   /**

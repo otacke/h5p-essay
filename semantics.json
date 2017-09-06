@@ -95,6 +95,20 @@
               "label": "Mandatory",
               "description": "Will flag the keyword group as mandatory for passing.",
               "default": true
+            },
+            {
+              "name": "feedbackFound",
+              "type": "text",
+              "label": "Feedback if found",
+              "description": "Will be displayed to the user if this keyword group was found in the text.",
+              "optional": true
+            },
+            {
+              "name": "feedbackMissed",
+              "type": "text",
+              "label": "Feedback if missing",
+              "description": "Will be displayed to the user if this keyword group is missing in the text.",
+              "optional": true
             }
           ]
         }
