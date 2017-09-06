@@ -138,6 +138,7 @@ H5P.Essay = function ($, Question) {
    * @return {object} Feedback of {score: number, text: [{message: String, found: boolean}]}.
    */
   Essay.prototype.computeFeedback = function() {
+    var that = this;
     var score = 0;
     var text = [];
 
@@ -165,8 +166,9 @@ H5P.Essay = function ($, Question) {
         var options = candidate.options;
 
         var inputTest = input;
+
         // Check for case sensitivity
-        if  (!options.caseSensitive) {
+        if  (!options.caseSensitive || that.config.behaviour.overrideCaseSensitive === 'off') {
           alternative = alternative.toLowerCase();
           inputTest = inputLowerCase;
         }
@@ -181,7 +183,7 @@ H5P.Essay = function ($, Question) {
         }
 
         // Fuzzy matching
-        if (options.forgiveMistakes && H5P.TextUtilities.fuzzyContains(alternative, inputTest)) {
+        if ((options.forgiveMistakes || that.config.behaviour.overrideForgiveMistakes === 'on') && H5P.TextUtilities.fuzzyContains(alternative, inputTest)) {
           score += alternativeGroup.options.points;
           if (alternativeGroup.options.feedbackFound) {
             text.push({"message": alternativeGroup.options.feedbackFound, "found": true});

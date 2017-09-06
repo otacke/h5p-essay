@@ -188,6 +188,42 @@
         "description": "Score that's necessary for mastering",
         "optional": true,
         "min": 0
+      },
+      {
+        "name": "overrideCaseSensitive",
+        "type": "select",
+        "label": "Override case sensitive",
+        "importance": "low",
+        "description": "This option determines if the \"Case sensitive\" option will be activated for all keywords.",
+        "optional": true,
+        "options": [
+          {
+            "value": "on",
+            "label": "Enabled"
+          },
+          {
+            "value": "off",
+            "label": "Disabled"
+          }
+        ]
+      },
+      {
+        "name": "overrideForgiveMistakes",
+        "type": "select",
+        "label": "Override forgive mistakes",
+        "importance": "low",
+        "description": "This option determines if the \"Forgive mistakes\" option will be activated for all keywords.",
+        "optional": true,
+        "options": [
+          {
+            "value": "on",
+            "label": "Enabled"
+          },
+          {
+            "value": "off",
+            "label": "Disabled"
+          }
+        ]
       }
     ]
   },
