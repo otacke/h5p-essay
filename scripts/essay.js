@@ -22,11 +22,6 @@ H5P.Essay = function ($, Question) {
     this.contentId = contentId;
     this.contentData = contentData || {};
 
-    // filter function
-    var isMandatory = function(keywordGroup) {
-      return keywordGroup.options && keywordGroup.options.mandatory;
-    };
-
     // map function
     var toPoints = function (keywordGroup) {
       return keywordGroup.options && keywordGroup.options.points || 0;
@@ -41,15 +36,10 @@ H5P.Essay = function ($, Question) {
       .map(toPoints)
       .reduce(sum, 0);
 
-    var scoreMandatory = this.config.keywordGroups
-      .filter(isMandatory)
-      .map(toPoints)
-      .reduce(sum, 0);
-
     // Set scores
     this.scoreMastering = (typeof this.config.behaviour.scoreMastering === 'undefined') ? Infinity : this.config.behaviour.scoreMastering;
-    this.scoreMastering = Math.max(scoreMandatory, Math.min(scoreMax, this.scoreMastering));
-    this.scorePassing = Math.min(this.scoreMastering, Math.max(scoreMandatory, this.config.behaviour.scorePassing || 0));
+    this.scoreMastering = Math.min(scoreMax, this.scoreMastering);
+    this.scorePassing = Math.min(this.scoreMastering, this.config.behaviour.scorePassing || 0);
   }
 
   // Extends Question

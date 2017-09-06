@@ -90,13 +90,6 @@
               "min": 1
             },
             {
-              "name": "mandatory",
-              "type": "boolean",
-              "label": "Mandatory",
-              "description": "Will flag the keyword group as mandatory for passing.",
-              "default": true
-            },
-            {
               "name": "feedbackFound",
               "type": "text",
               "label": "Feedback if found",
