@@ -18,6 +18,7 @@ If you like what I do, please consider to become my supporter at patreon: https:
 - As a teacher, I can add keywords that the text will be scanned for.
 - As a teacher, I can define a maximum number of characters for the essay.
 - As a teacher, I can toggle fuzzy comparison that will grant some grammatical flexibility, e.g. also accept the plural form of a word.
+- As a teacher, I can override individual settings for caseSensitive and forgiveMistakes.
 - As a teacher, I can set individuals points for a keyword and thus weigh them for scoring.
 - ~~As a teacher, I can decide that some keywords are mandatory while others are not.~~ (more transparent via score only)
 - As a teacher, I can define multiple ranges that will allow more diverse feedback.
