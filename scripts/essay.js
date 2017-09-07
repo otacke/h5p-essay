@@ -83,6 +83,8 @@ H5P.Essay = function ($, Question) {
 
     // Register Buttons
     this.addButtons();
+
+    // TODO: xAPI experienced
   };
 
   /**
@@ -95,6 +97,11 @@ H5P.Essay = function ($, Question) {
     that.addButton('check-answer', that.config.checkAnswer, function () {
       that.showEvaluation();
     }, true, {}, {});
+
+    // Retry button
+    that.addButton('try-again', that.config.tryAgain, function () {
+      that.showEvaluation();
+    }, false, {}, {});
   };
 
   /**
@@ -103,7 +110,6 @@ H5P.Essay = function ($, Question) {
   Essay.prototype.showEvaluation = function () {
     var that = this;
 
-    //that.hideButton('check-answer');
     var feedback = that.computeFeedback();
 
     // map function
@@ -121,6 +127,7 @@ H5P.Essay = function ($, Question) {
       .map(toMessages)
       .reduce(combine, '');
     feedbackMessage = (feedbackMessage !== '') ? feedbackMessage = feedbackMessage + '<br />' : feedbackMessage;
+
     var score = Math.min(feedback.score, that.scoreMastering);
 
     var textScore = H5P.Question.determineOverallFeedback(that.config.overallFeedback, score / that.scoreMastering)
@@ -129,12 +136,35 @@ H5P.Essay = function ($, Question) {
 
     this.setFeedback(
       feedbackMessage + textScore,
-      feedback.score,
+      score,
       that.scoreMastering);
+
+    that.hideButton('check-answer');
+
+    // TODO: xAPI completed
+    // TODO: xAPI scored ...
+
+    if (feedback.score < that.scorePassing) {
+      // TODO: xAPI failed
+    }
+    else {
+      // TODO: xAPI passed
+    }
+
+    if (score < that.scoreMastering) {
+      if (that.config.behaviour.enableRetry) {
+        that.showButton('try-again');
+      }
+    }
+    else {
+      // TODO: xAPI mastered
+      that.hideButton('try-again');
+    }
   };
 
   /**
    * Compute the feedback.
+   * TODO: Could also return the position and the (fuzzy) word found
    * @return {object} Feedback of {score: number, text: [{message: String, found: boolean}]}.
    */
   Essay.prototype.computeFeedback = function() {
