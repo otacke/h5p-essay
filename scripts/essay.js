@@ -84,7 +84,9 @@ H5P.Essay = function ($, Question) {
     // Register Buttons
     this.addButtons();
 
-    // TODO: xAPI experienced
+    // TODO: Check what we should add (how) to the xAPI definition for the object
+
+    this.triggerXAPI('experienced');
   };
 
   /**
@@ -140,15 +142,16 @@ H5P.Essay = function ($, Question) {
       that.scoreMastering);
 
     that.hideButton('check-answer');
-
-    // TODO: xAPI completed
-    // TODO: xAPI scored ...
+    this.triggerXAPI('completed');
+    // TODO: check whether the two boolean paramaters are used correctly (completed, success)
+    this.triggerXAPIScored(score, that.scoreMastering, 'scored', true, feedback.score >= that.scorePassing);
 
     if (feedback.score < that.scorePassing) {
-      // TODO: xAPI failed
+      this.triggerXAPI('failed');
+
     }
     else {
-      // TODO: xAPI passed
+      this.triggerXAPI('passed');
     }
 
     if (score < that.scoreMastering) {
@@ -157,7 +160,7 @@ H5P.Essay = function ($, Question) {
       }
     }
     else {
-      // TODO: xAPI mastered
+      this.triggerXAPI('mastered');
       that.hideButton('try-again');
     }
   };
