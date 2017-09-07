@@ -36,12 +36,12 @@ You're welcome to contribute your ideas as an issue on github. For now there are
 ### xAPI statements
 Compare https://web.archive.org/web/20170628002610/http://xapi.vocab.pub/datasets/adl/
 
-- experienced (when opened)
-- completed (when submitted)
-- failed (if completed, but score is not sufficient)
-- passed (if completed and score is sufficient)
-- mastered (if completed and full score)
-- scored (if completed, submit numerical score)
+- experienced (when opened): DONE
+- completed (when submitted): DONE (but might be redundant) 
+- failed (if completed, but score is not sufficient): DONE
+- passed (if completed and score is sufficient): DONE
+- mastered (if completed and full score): DONE
+- scored (if completed, submit numerical score): DONE
 
 ### Misc
 - text statistics and metrics, e.g. readability metrics or maybe something related to the AFINN file
