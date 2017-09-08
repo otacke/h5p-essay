@@ -1,13 +1,13 @@
 var H5P = H5P || {};
 
-H5P.Essay = function ($, Question) {
+H5P.Essay = function($, Question) {
   'use strict';
   /**
    * @constructor
    *
-   * @param {object} config - Config from semantics.json.
+   * @param {Object} config - Config from semantics.json.
    * @param {string} contentId - ContentId.
-   * @param {object} contentData - contentData.
+   * @param {Object} contentData - contentData.
    */
   function Essay(config, contentId, contentData) {
     // Initialize
@@ -23,12 +23,12 @@ H5P.Essay = function ($, Question) {
     this.contentData = contentData || {};
 
     // map function
-    var toPoints = function (keywordGroup) {
+    var toPoints = function(keywordGroup) {
       return keywordGroup.options && keywordGroup.options.points || 0;
     };
 
     // reduce function
-    var sum = function (a, b) {
+    var sum = function(a, b) {
       return a + b;
     };
 
@@ -36,8 +36,10 @@ H5P.Essay = function ($, Question) {
       .map(toPoints)
       .reduce(sum, 0);
 
-    // Set scores
-    this.scoreMastering = (typeof this.config.behaviour.scoreMastering === 'undefined') ? Infinity : this.config.behaviour.scoreMastering;
+    // Set score milestones
+    this.scoreMastering = (typeof this.config.behaviour.scoreMastering === 'undefined') ?
+        Infinity :
+        this.config.behaviour.scoreMastering;
     // We want scoreMastering to be the maximim score shown on the feedback progress bar
     this.scoreMastering = Math.min(scoreMax, this.scoreMastering);
     this.scorePassing = Math.min(this.scoreMastering, this.config.behaviour.scorePassing || 0);
@@ -51,13 +53,11 @@ H5P.Essay = function ($, Question) {
    * Register the DOM elements with H5P.Question.
    */
   Essay.prototype.registerDomElements = function() {
-    var that = this;
-
     // Get previous state
     if (!!this.contentData && !!this.contentData.previousState) {
-      that.previousState = this.contentData.previousState;
+      this.previousState = this.contentData.previousState;
     }
-    var oldText = (!!that.previousState) ? that.previousState.text || '' : '';
+    var oldText = (!!this.previousState) ? this.previousState.text || '' : '';
 
     /*
      * This is a little ugly for several reasons. First of all, it would be
@@ -69,49 +69,36 @@ H5P.Essay = function ($, Question) {
      *       H5P core runs without jQuery.
      */
     var $wrapperInputfield = $('<div>');
-    that.inputField = new H5P.TextInputField(this.config.inputField.params,
+    this.inputField = new H5P.TextInputField(this.config.inputField.params,
       this.contentId, {
         'standalone': true,
         'previousState': oldText
       });
-    that.inputField.attach($wrapperInputfield);
+    this.inputField.attach($wrapperInputfield);
 
     // Register task introduction text
-    that.setIntroduction($wrapperInputfield.children().get(0));
+    this.setIntroduction($wrapperInputfield.children().get(0));
 
     // Register content
-    that.setContent($wrapperInputfield.get(0));
+    this.setContent($wrapperInputfield.get(0));
 
     // Register Buttons
     this.addButtons();
-
-    this.trigger(this.createEssayXAPIEvent('experienced'));
-  };
-
-  /**
-   * Create an xAPI event for Essay.
-   * @param {string} verb - Short id of the verb we want to trigger.
-   * @return {H5P.XAPIEvent} Event template.
-   */
-  Essay.prototype.createEssayXAPIEvent = function (verb) {
-    var xAPIEvent = this.createXAPIEventTemplate(verb);
-    this.extend(xAPIEvent.getVerifiedStatementValue(['object', 'definition']), this.getxAPIDefinition());
-    return xAPIEvent;
   };
 
   /**
    * Add all the buttons that shall be passed to H5P.Question
    */
-  Essay.prototype.addButtons = function () {
+  Essay.prototype.addButtons = function() {
     var that = this;
 
     // Check answer button
-    that.addButton('check-answer', that.config.checkAnswer, function () {
+    that.addButton('check-answer', that.config.checkAnswer, function() {
       that.showEvaluation();
     }, true, {}, {});
 
     // Retry button
-    that.addButton('try-again', that.config.tryAgain, function () {
+    that.addButton('try-again', that.config.tryAgain, function() {
       that.showEvaluation();
     }, false, {}, {});
   };
@@ -119,18 +106,16 @@ H5P.Essay = function ($, Question) {
   /**
    * Show results.
    */
-  Essay.prototype.showEvaluation = function () {
-    var that = this;
-
-    var feedback = that.computeFeedback();
+  Essay.prototype.showEvaluation = function() {
+    var feedback = this.computeResults();
 
     // map function
-    var toMessages = function (text) {
+    var toMessages = function(text) {
       return text.message;
     };
 
     // reduce function
-    var combine = function (a, b) {
+    var combine = function(a, b) {
       return a.trim() + ' ' + b.trim();
     };
 
@@ -138,61 +123,54 @@ H5P.Essay = function ($, Question) {
     var feedbackMessage = feedback.text
       .map(toMessages)
       .reduce(combine, '');
-    feedbackMessage = (feedbackMessage !== '') ? feedbackMessage = feedbackMessage + '<br />' : feedbackMessage;
+    feedbackMessage = (feedbackMessage !== '') ?
+      feedbackMessage = feedbackMessage + '<br />' :
+      feedbackMessage;
 
-    var score = Math.min(feedback.score, that.scoreMastering);
+    var score = Math.min(feedback.score, this.scoreMastering);
 
-    var textScore = H5P.Question.determineOverallFeedback(that.config.overallFeedback, score / that.scoreMastering)
-      .replace('@score', score)
-      .replace('@total', that.scoreMastering);
+    var textScore = H5P.Question.determineOverallFeedback(
+        this.config.overallFeedback, score / this.scoreMastering)
+          .replace('@score', score)
+          .replace('@total', this.scoreMastering);
 
     this.setFeedback(
-      feedbackMessage + textScore,
-      score,
-      that.scoreMastering);
+        feedbackMessage + textScore,
+        score,
+        this.scoreMastering);
 
-    that.hideButton('check-answer');
+    this.hideButton('check-answer');
     this.trigger(this.createEssayXAPIEvent('completed'));
 
     var xAPIEvent = this.createEssayXAPIEvent('scored');
-    xAPIEvent.setScoredResult(score, that.scoreMastering, this, true, feedback.score >= that.scorePassing);
+    xAPIEvent.setScoredResult(score, this.scoreMastering, this, true,
+        feedback.score >= this.scorePassing);
     xAPIEvent.data.statement.result.response = this.getInput();
     this.trigger(xAPIEvent);
 
-    if (feedback.score < that.scorePassing) {
+    if (feedback.score < this.scorePassing) {
       this.trigger(this.createEssayXAPIEvent('failed'));
     }
     else {
       this.trigger(this.createEssayXAPIEvent('passed'));
     }
 
-    if (score < that.scoreMastering) {
-      if (that.config.behaviour.enableRetry) {
-        that.showButton('try-again');
+    if (score < this.scoreMastering) {
+      if (this.config.behaviour.enableRetry) {
+        this.showButton('try-again');
       }
     }
     else {
       this.trigger(this.createEssayXAPIEvent('mastered'));
-      that.hideButton('try-again');
+      this.hideButton('try-again');
     }
   };
 
   /**
-   * Get the user input from DOM.
-   * @return {String} Cleaned input.
-   */
-  Essay.prototype.getInput = function () {
-    return this.inputField.getInput().value
-      .replace(/(\r\n|\r|\n)/g, ' ')
-      .replace(/\s\s/g, ' ');
-  };
-
-  /**
    * Compute the feedback.
-   * TODO: Could also return the position and the (fuzzy) word found
-   * @return {object} Feedback of {score: number, text: [{message: String, found: boolean}]}.
+   * @return {Object} Feedback of {score: number, text: [{message: String, found: boolean}]}.
    */
-  Essay.prototype.computeFeedback = function() {
+  Essay.prototype.computeResults = function() {
     var that = this;
     var score = 0;
     var text = [];
@@ -211,18 +189,18 @@ H5P.Essay = function ($, Question) {
      */
 
     // Within each keyword group check if one of the alternatives is a keyword
-
-    this.config.keywordGroups.forEach(function (alternativeGroup) {
-      var found = alternativeGroup.alternatives.some(function (candidate) {
+    this.config.keywordGroups.forEach(function(alternativeGroup) {
+      var found = alternativeGroup.alternatives.some(function(candidate) {
         var alternative = candidate.alternative;
         var options = candidate.options;
 
         var inputTest = input;
 
         // Check for case sensitivity
-        if  (!options.caseSensitive || that.config.behaviour.overrideCaseSensitive === 'off') {
-          alternative = alternative.toLowerCase();
-          inputTest = inputLowerCase;
+        if  (!options.caseSensitive ||
+            that.config.behaviour.overrideCaseSensitive === 'off') {
+              alternative = alternative.toLowerCase();
+              inputTest = inputLowerCase;
         }
 
         // Exact matching
@@ -235,7 +213,8 @@ H5P.Essay = function ($, Question) {
         }
 
         // Fuzzy matching
-        if ((options.forgiveMistakes || that.config.behaviour.overrideForgiveMistakes === 'on') && H5P.TextUtilities.fuzzyContains(alternative, inputTest)) {
+        if ((options.forgiveMistakes || that.config.behaviour.overrideForgiveMistakes === 'on') &&
+            H5P.TextUtilities.fuzzyContains(alternative, inputTest)) {
           score += alternativeGroup.options.points;
           if (alternativeGroup.options.feedbackFound) {
             text.push({"message": alternativeGroup.options.feedbackFound, "found": true});
@@ -243,6 +222,7 @@ H5P.Essay = function ($, Question) {
           return true;
         }
       });
+
       if (!found) {
         if (alternativeGroup.options.feedbackMissed) {
           text.push({"message": alternativeGroup.options.feedbackMissed, "found": false});
@@ -255,12 +235,13 @@ H5P.Essay = function ($, Question) {
 
   /**
    * Store the current content content state
-   * @return {object} current content state
+   * @return {Object} current content state
    */
-  Essay.prototype.getCurrentState = function () {
+  Essay.prototype.getCurrentState = function() {
     // Collect data from TextInputField (we might need more later)
     var textInputField = '';
-    if (this.inputField.getCurrentState instanceof Function || typeof this.inputField.getCurrentState === 'function') {
+    if (this.inputField.getCurrentState instanceof Function ||
+        typeof this.inputField.getCurrentState === 'function') {
       textInputField = this.inputField.getCurrentState();
     }
     return {
@@ -269,11 +250,21 @@ H5P.Essay = function ($, Question) {
   };
 
   /**
-   * Extend an array just like JQuery's extend.
-   * @param {object} arguments - Objects to be merged.
-   * @return {object} Merged objects.
+   * Get the user input from DOM.
+   * @return {string} Cleaned input.
    */
-  Essay.prototype.extend = function () {
+  Essay.prototype.getInput = function() {
+    return this.inputField.getInput().value
+        .replace(/(\r\n|\r|\n)/g, ' ')
+        .replace(/\s\s/g, ' ');
+  };
+
+  /**
+   * Extend an array just like JQuery's extend.
+   * @param {Object} arguments - Objects to be merged.
+   * @return {Object} Merged objects.
+   */
+  Essay.prototype.extend = function() {
     for(var i = 1; i < arguments.length; i++) {
       for(var key in arguments[i]) {
         if (arguments[i].hasOwnProperty(key)) {
@@ -290,10 +281,23 @@ H5P.Essay = function ($, Question) {
   };
 
   /**
-   * Get the xAPI definition for the xAPI object.
-   * return {object} XAPI definition.
+   * Create an xAPI event for Essay.
+   * @param {string} verb - Short id of the verb we want to trigger.
+   * @return {H5P.XAPIEvent} Event template.
    */
-  Essay.prototype.getxAPIDefinition = function () {
+  Essay.prototype.createEssayXAPIEvent = function(verb) {
+    var xAPIEvent = this.createXAPIEventTemplate(verb);
+    this.extend(
+        xAPIEvent.getVerifiedStatementValue(['object', 'definition']),
+        this.getxAPIDefinition());
+    return xAPIEvent;
+  };
+
+  /**
+   * Get the xAPI definition for the xAPI object.
+   * return {Object} XAPI definition.
+   */
+  Essay.prototype.getxAPIDefinition = function() {
     var definition = {};
     definition.name = {'en-US': 'Essay'};
     definition.description = {'en-US': this.config.inputField.params.taskDescription};
