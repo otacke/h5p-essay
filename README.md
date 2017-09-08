@@ -36,8 +36,8 @@ You're welcome to contribute your ideas as an issue on github. For now there are
 ### xAPI statements
 Compare https://web.archive.org/web/20170628002610/http://xapi.vocab.pub/datasets/adl/
 
-- experienced (when opened): DONE
-- completed (when submitted): DONE (but might be redundant) 
+- ~~experienced (when opened): DONE~~ (rather for activities without a "goal")
+- completed (when submitted): DONE (but might be redundant)
 - failed (if completed, but score is not sufficient): DONE
 - passed (if completed and score is sufficient): DONE
 - mastered (if completed and full score): DONE
@@ -46,8 +46,8 @@ Compare https://web.archive.org/web/20170628002610/http://xapi.vocab.pub/dataset
 ### Misc
 - text statistics and metrics, e.g. readability metrics or maybe something related to the AFINN file
 - different levels of difficulty, choosable by teacher and/or student
-- add css styling to feedback text.
-- later on: possible build a model that allows to relate texts with scores from a human, so you can train the content type and then use this model to compute the/a score, too.
+- add css styling to feedback text (?)
+- later on: possibly build a model that allows to relate texts with scores from a human, so you can train the content type and then use this model to compute the/a score, too.
 
 ## About this repository
 If you want to download the sourcecode, you can choose from three main branches:
