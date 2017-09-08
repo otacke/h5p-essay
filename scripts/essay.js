@@ -38,6 +38,7 @@ H5P.Essay = function ($, Question) {
 
     // Set scores
     this.scoreMastering = (typeof this.config.behaviour.scoreMastering === 'undefined') ? Infinity : this.config.behaviour.scoreMastering;
+    // We want scoreMastering to be the maximim score shown on the feedback progress bar
     this.scoreMastering = Math.min(scoreMax, this.scoreMastering);
     this.scorePassing = Math.min(this.scoreMastering, this.config.behaviour.scorePassing || 0);
   }
@@ -84,9 +85,18 @@ H5P.Essay = function ($, Question) {
     // Register Buttons
     this.addButtons();
 
-    // TODO: Check what we should add (how) to the xAPI definition for the object
+    this.trigger(this.createEssayXAPIEvent('experienced'));
+  };
 
-    this.triggerXAPI('experienced');
+  /**
+   * Create an xAPI event for Essay.
+   * @param {string} verb - Short id of the verb we want to trigger.
+   * @return {H5P.XAPIEvent} Event template.
+   */
+  Essay.prototype.createEssayXAPIEvent = function (verb) {
+    var xAPIEvent = this.createXAPIEventTemplate(verb);
+    this.extend(xAPIEvent.getVerifiedStatementValue(['object', 'definition']), this.getxAPIDefinition());
+    return xAPIEvent;
   };
 
   /**
@@ -124,7 +134,7 @@ H5P.Essay = function ($, Question) {
       return a.trim() + ' ' + b.trim();
     };
 
-    // TODO: This could be made nicer visually if we use the info about found/missing using a filter
+    // TODO: This could possibly be made nicer visually if we use the info about found/missing using a filter
     var feedbackMessage = feedback.text
       .map(toMessages)
       .reduce(combine, '');
@@ -142,16 +152,18 @@ H5P.Essay = function ($, Question) {
       that.scoreMastering);
 
     that.hideButton('check-answer');
-    this.triggerXAPI('completed');
-    // TODO: check whether the two boolean paramaters are used correctly (completed, success)
-    this.triggerXAPIScored(score, that.scoreMastering, 'scored', true, feedback.score >= that.scorePassing);
+    this.trigger(this.createEssayXAPIEvent('completed'));
+
+    var xAPIEvent = this.createEssayXAPIEvent('scored');
+    xAPIEvent.setScoredResult(score, that.scoreMastering, this, true, feedback.score >= that.scorePassing);
+    xAPIEvent.data.statement.result.response = this.getInput();
+    this.trigger(xAPIEvent);
 
     if (feedback.score < that.scorePassing) {
-      this.triggerXAPI('failed');
-
+      this.trigger(this.createEssayXAPIEvent('failed'));
     }
     else {
-      this.triggerXAPI('passed');
+      this.trigger(this.createEssayXAPIEvent('passed'));
     }
 
     if (score < that.scoreMastering) {
@@ -160,9 +172,19 @@ H5P.Essay = function ($, Question) {
       }
     }
     else {
-      this.triggerXAPI('mastered');
+      this.trigger(this.createEssayXAPIEvent('mastered'));
       that.hideButton('try-again');
     }
+  };
+
+  /**
+   * Get the user input from DOM.
+   * @return {String} Cleaned input.
+   */
+  Essay.prototype.getInput = function () {
+    return this.inputField.getInput().value
+      .replace(/(\r\n|\r|\n)/g, ' ')
+      .replace(/\s\s/g, ' ');
   };
 
   /**
@@ -176,10 +198,7 @@ H5P.Essay = function ($, Question) {
     var text = [];
 
     // We don't want EOLs to mess up the string.
-    var input = this.inputField.getInput().value
-      .replace(/(\r\n|\r|\n)/g, ' ')
-      .replace(/\s\s/g, ' ');
-
+    var input = this.getInput();
     var inputLowerCase = input.toLowerCase();
 
     // Should not happen, but just to be sure ...
@@ -247,6 +266,40 @@ H5P.Essay = function ($, Question) {
     return {
       'text': textInputField
     };
+  };
+
+  /**
+   * Extend an array just like JQuery's extend.
+   * @param {object} arguments - Objects to be merged.
+   * @return {object} Merged objects.
+   */
+  Essay.prototype.extend = function () {
+    for(var i = 1; i < arguments.length; i++) {
+      for(var key in arguments[i]) {
+        if (arguments[i].hasOwnProperty(key)) {
+          if (typeof arguments[0][key] === 'object' && typeof arguments[i][key] === 'object') {
+            this.extend(arguments[0][key], arguments[i][key]);
+          }
+          else {
+            arguments[0][key] = arguments[i][key];
+          }
+        }
+      }
+    }
+    return arguments[0];
+  };
+
+  /**
+   * Get the xAPI definition for the xAPI object.
+   * return {object} XAPI definition.
+   */
+  Essay.prototype.getxAPIDefinition = function () {
+    var definition = {};
+    definition.name = {'en-US': 'Essay'};
+    definition.description = {'en-US': this.config.inputField.params.taskDescription};
+    definition.type = 'http://id.tincanapi.com/activitytype/essay';
+    definition.interactionType = 'long-fill-in';
+    return definition;
   };
 
   return Essay;
