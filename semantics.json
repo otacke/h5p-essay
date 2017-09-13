@@ -182,20 +182,22 @@
         "optional": true
       },
       {
-        "name": "scorePassing",
+        "name": "percentagePassing",
         "type": "number",
-        "label": "Passing score",
-        "description": "Score that's necessary for passing",
+        "label": "Passing percentage",
+        "description": "Percentage that's necessary for passing",
         "optional": true,
-        "min": 0
+        "min": 0,
+        "max": 100
       },
       {
-        "name": "scoreMastering",
+        "name": "percentageMastering",
         "type": "number",
-        "label": "Mastering score",
-        "description": "Score that's necessary for mastering",
+        "label": "Mastering percentage",
+        "description": "Percentage that's necessary for mastering",
         "optional": true,
-        "min": 0
+        "min": 0,
+        "max": 100
       },
       {
         "name": "overrideCaseSensitive",

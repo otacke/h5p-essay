@@ -37,12 +37,14 @@ H5P.Essay = function($, Question) {
       .reduce(sum, 0);
 
     // Set score milestones
-    this.scoreMastering = (typeof this.config.behaviour.scoreMastering === 'undefined') ?
+    this.scoreMastering = (typeof this.config.behaviour.percentageMastering === 'undefined') ?
         Infinity :
-        this.config.behaviour.scoreMastering;
+        this.config.behaviour.percentageMastering * scoreMax / 100;
     // We want scoreMastering to be the maximim score shown on the feedback progress bar
     this.scoreMastering = Math.min(scoreMax, this.scoreMastering);
-    this.scorePassing = Math.min(this.scoreMastering, this.config.behaviour.scorePassing || 0);
+    this.scorePassing = Math.min(this.scoreMastering, this.config.behaviour.percentagePassing * scoreMax / 100 || 0);
+
+    console.log(this.scorePassing, this.scoreMastering);
   }
 
   // Extends Question
@@ -146,6 +148,12 @@ H5P.Essay = function($, Question) {
     xAPIEvent.setScoredResult(score, this.scoreMastering, this, true,
         feedback.score >= this.scorePassing);
     xAPIEvent.data.statement.result.response = this.getInput();
+    /*
+     * We could think about adding support for the "correct response pattern",
+     * but the official xAPI documentation discourages to use it if the
+     * criteria for a question are complex and correct responses cannot be
+     * exhaustively listed. They kind of can and can't.
+     */
     this.trigger(xAPIEvent);
 
     if (feedback.score < this.scorePassing) {
