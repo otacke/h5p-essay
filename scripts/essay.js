@@ -43,8 +43,6 @@ H5P.Essay = function($, Question) {
     // We want scoreMastering to be the maximim score shown on the feedback progress bar
     this.scoreMastering = Math.min(scoreMax, this.scoreMastering);
     this.scorePassing = Math.min(this.scoreMastering, this.config.behaviour.percentagePassing * scoreMax / 100 || 0);
-
-    console.log(this.scorePassing, this.scoreMastering);
   }
 
   // Extends Question
