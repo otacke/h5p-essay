@@ -260,6 +260,21 @@ H5P.Essay = function($, Question) {
           return true;
         }
 
+        // Wildcard matching
+        var regex = new RegExp(alternative.replace(/\*/g, '[A-z]*'), 'g');
+        var found = (inputTest.match(regex) || []).some(function(match) {
+          if (regex.test(inputTest) && H5P.TextUtilities.isIsolated(match, inputTest)) {
+            return true;
+          }
+        });
+        if (found) {
+          score += alternativeGroup.options.points;
+          if (alternativeGroup.options.feedbackFound) {
+            text.push({"message": alternativeGroup.options.feedbackFound, "found": true});
+          }
+          return true;
+        }
+
         // Fuzzy matching
         if ((options.forgiveMistakes || that.config.behaviour.overrideForgiveMistakes === 'on') &&
             H5P.TextUtilities.fuzzyContains(alternative, inputTest)) {

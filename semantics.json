@@ -49,7 +49,7 @@
                 "importance": "low",
                 "type": "text",
                 "optional": true,
-                "description": "Keyword or phrase to look for"
+                "description": "Keyword or phrase to look for. You can use asterisks '*' as wildcards for characters."
               },
               {
                 "name": "options",
