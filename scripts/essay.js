@@ -80,7 +80,11 @@ H5P.Essay = function($, Question) {
     this.setIntroduction($wrapperInputfield.children().get(0));
 
     // Register content
-    this.setContent($wrapperInputfield.get(0));
+    this.$solution = this.getSolution(false);
+    var $content = $('<div>')
+        .append($wrapperInputfield.get(0))
+        .append(this.$solution);
+    this.setContent($content);
 
     // Register Buttons
     this.addButtons();
@@ -101,6 +105,41 @@ H5P.Essay = function($, Question) {
     that.addButton('try-again', that.config.tryAgain, function() {
       that.showEvaluation();
     }, false, {}, {});
+
+    // Show solution button
+    that.addButton('show-solution', that.config.showSolution, function() {
+      that.showSolution();
+    }, false, {}, {});
+  };
+
+  /**
+   * Get the solution block.
+   * @return {jQuery} Solution block.
+   */
+  Essay.prototype.getSolution = function (visible) {
+    var $solution = $('<div>').addClass('h5p-essay-solution');
+    $solution.append($('<div>')
+        .addClass('h5p-essay-solution-title')
+        .html(this.config.solutionTitle));
+    $solution.append($('<div>')
+        .addClass('h5p-essay-solution-introduction'));
+    $solution.append($('<div>')
+        .addClass('h5p-essay-solution-sample'));
+    if (!visible) {
+      $solution.addClass('h5p-essay-hidden');
+    }
+    return $solution;
+  };
+
+  /**
+   * Show solution.
+   */
+  Essay.prototype.showSolution = function() {
+    this.$solution.removeClass('h5p-essay-hidden');
+    // We'll insert the text here to make cheating at least a little harder ...
+    this.$solution.find('.h5p-essay-solution-introduction').html(this.config.solution.introduction);
+    this.$solution.find('.h5p-essay-solution-sample').html(this.config.solution.sample);
+    this.trigger('resize');
   };
 
   /**
@@ -169,6 +208,9 @@ H5P.Essay = function($, Question) {
     else {
       this.trigger(this.createEssayXAPIEvent('mastered'));
       this.hideButton('try-again');
+    }
+    if (this.config.solution.sample) {
+      this.showButton('show-solution');
     }
   };
 

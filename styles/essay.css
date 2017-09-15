@@ -5,3 +5,34 @@
   width: auto;
   overflow-y: auto;
 }
+
+.h5p-essay .h5p-essay-solution {
+  position: relative;
+  padding: 1.5em 2.2em 2em 2.2em;
+  font-size: 0.9em;
+  margin: 20px 0 20px 0;
+  border: 1px solid #ffde78;
+  background-color: #f9f9d8;
+  color: #000;
+}
+
+.h5p-essay .h5p-essay-solution-title {
+  font-weight: bold;
+  font-size: 1.2em;
+  vertical-align: bottom;
+}
+
+.h5p-essay .h5p-essay-solution-introduction {
+}
+
+.h5p-essay .h5p-essay-solution-sample {
+  border: 1px solid #bbde98;
+  display: flex;
+  margin-top: 20px;
+  padding: 15px;
+  background-color: #f6fef1;
+}
+
+.h5p-essay-hidden {
+  display: none;
+}
