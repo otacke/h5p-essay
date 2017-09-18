@@ -3,8 +3,6 @@
     "name": "inputField",
     "type": "library",
     "importance": "high",
-    "label": "Task description",
-    "description": "You can describe the students' task here.",
     "options": [
       "H5P.TextInputField 1.0"
     ],
