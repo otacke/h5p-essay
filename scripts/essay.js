@@ -96,6 +96,11 @@ H5P.Essay = function($, Question) {
   Essay.prototype.addButtons = function() {
     var that = this;
 
+    // Show solution button
+    that.addButton('show-solution', that.config.showSolution, function() {
+      that.showSolution();
+    }, false, {}, {});
+
     // Check answer button
     that.addButton('check-answer', that.config.checkAnswer, function() {
       that.showEvaluation();
@@ -104,11 +109,6 @@ H5P.Essay = function($, Question) {
     // Retry button
     that.addButton('try-again', that.config.tryAgain, function() {
       that.showEvaluation();
-    }, false, {}, {});
-
-    // Show solution button
-    that.addButton('show-solution', that.config.showSolution, function() {
-      that.showSolution();
     }, false, {}, {});
   };
 
@@ -136,7 +136,7 @@ H5P.Essay = function($, Question) {
    */
   Essay.prototype.showSolution = function() {
     this.$solution.removeClass('h5p-essay-hidden');
-    // We'll insert the text here to make cheating at least a little harder ...
+    // We'll insert the text here to make cheating a little harder at least ...
     this.$solution.find('.h5p-essay-solution-introduction').html(this.config.solution.introduction);
     this.$solution.find('.h5p-essay-solution-sample').html(this.config.solution.sample);
     this.trigger('resize');
@@ -200,6 +200,10 @@ H5P.Essay = function($, Question) {
       this.trigger(this.createEssayXAPIEvent('passed'));
     }
 
+    if (this.config.solution.sample) {
+      this.showButton('show-solution');
+    }
+
     if (score < this.scoreMastering) {
       if (this.config.behaviour.enableRetry) {
         this.showButton('try-again');
@@ -208,9 +212,6 @@ H5P.Essay = function($, Question) {
     else {
       this.trigger(this.createEssayXAPIEvent('mastered'));
       this.hideButton('try-again');
-    }
-    if (this.config.solution.sample) {
-      this.showButton('show-solution');
     }
   };
 
