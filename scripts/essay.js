@@ -213,6 +213,8 @@ H5P.Essay = function($, Question) {
       this.trigger(this.createEssayXAPIEvent('mastered'));
       this.hideButton('try-again');
     }
+
+    this.trigger('resize');
   };
 
   /**
