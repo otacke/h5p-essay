@@ -47,7 +47,7 @@
                 "importance": "low",
                 "type": "text",
                 "optional": true,
-                "description": "Keyword or phrase to look for. You can use asterisks '*' as wildcards for characters."
+                "description": "Keyword or phrase to look for. You can use asterisks '*' as wildcards for (multiple) characters."
               },
               {
                 "name": "options",
@@ -248,7 +248,7 @@
         "label": "Introduction",
         "importance": "low",
         "description": "You can optionally leave the students some explanations about your sample.",
-        "placeholder": "Please remember that you were not expected to come up with the exactly same solution.",
+        "placeholder": "Please remember that you were not expected to come up with the exact same solution.",
         "optional": true,
         "widget": "html",
         "enterMode": "div",
