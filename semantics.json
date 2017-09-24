@@ -9,7 +9,7 @@
     "default": {
       "library": "H5P.EssayInputField 0.1",
       "params": {
-        "inputFieldSize": "3"
+        "inputFieldSize": "10"
       }
     }
   },
