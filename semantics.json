@@ -4,13 +4,12 @@
     "type": "library",
     "importance": "high",
     "options": [
-      "H5P.TextInputField 1.0"
+      "H5P.EssayInputField 0.1"
     ],
     "default": {
-      "library": "H5P.TextInputField 1.0",
+      "library": "H5P.EssayInputField 0.1",
       "params": {
-        "inputFieldSize": "3",
-        "requiredField": true
+        "inputFieldSize": "3"
       }
     }
   },

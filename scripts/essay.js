@@ -61,16 +61,11 @@ H5P.Essay = function ($, Question) {
     var oldText = (!!this.previousState) ? this.previousState.text || '' : '';
 
     /*
-     * This is a little ugly for several reasons. First of all, it would be
-     * nicer if H5P.TextInputField had a function to return the HTML for
-     * introduction and content. However, this way we don't have to touch that
-     * code right now. Secondly, we use jQuery. H5P is going to ditch it, but
-     * we can use the existing attach method.
-     * TODO: Get rid of jQuery and change H5P.TextInputField as soon as the
+     * TODO: Get rid of jQuery and change H5P.EssayInputField as soon as the
      *       H5P core runs without jQuery.
      */
     var $wrapperInputfield = $('<div>');
-    this.inputField = new H5P.TextInputField(this.config.inputField.params,
+    this.inputField = new H5P.EssayInputField(this.config.inputField.params,
       this.contentId, {
         'standalone': true,
         'previousState': oldText
@@ -78,12 +73,12 @@ H5P.Essay = function ($, Question) {
     this.inputField.attach($wrapperInputfield);
 
     // Register task introduction text
-    this.setIntroduction($wrapperInputfield.children().get(0));
+    this.setIntroduction(this.inputField.getIntroduction());
 
     // Register content
     this.$solution = this.getSolution(false);
     var $content = $('<div>')
-        .append($wrapperInputfield.get(0))
+        .append(this.inputField.getContent())
         .append(this.$solution);
     this.setContent($content);
 
@@ -305,13 +300,13 @@ H5P.Essay = function ($, Question) {
    */
   Essay.prototype.getCurrentState = function () {
     // Collect data from TextInputField (we might need more later)
-    var textInputField = '';
+    var essayInputField = '';
     if (this.inputField.getCurrentState instanceof Function ||
         typeof this.inputField.getCurrentState === 'function') {
-      textInputField = this.inputField.getCurrentState();
+      essayInputField = this.inputField.getCurrentState();
     }
     return {
-      'text': textInputField
+      'text': essayInputField
     };
   };
 
