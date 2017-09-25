@@ -1,168 +1,70 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg
-   xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://creativecommons.org/ns#"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   viewBox="0 0 400 225"
-   version="1.1"
-   id="svg5206"
-   sodipodi:docname="icon.svg"
-   inkscape:version="0.92.0 r15299">
-  <title
-     id="title6396">Essay</title>
-  <metadata
-     id="metadata5210">
-    <rdf:RDF>
-      <cc:Work
-         rdf:about="">
-        <dc:format>image/svg+xml</dc:format>
-        <dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title>Essay</dc:title>
-        <cc:license
-           rdf:resource="http://creativecommons.org/publicdomain/zero/1.0/" />
-      </cc:Work>
-      <cc:License
-         rdf:about="http://creativecommons.org/publicdomain/zero/1.0/">
-        <cc:permits
-           rdf:resource="http://creativecommons.org/ns#Reproduction" />
-        <cc:permits
-           rdf:resource="http://creativecommons.org/ns#Distribution" />
-        <cc:permits
-           rdf:resource="http://creativecommons.org/ns#DerivativeWorks" />
-      </cc:License>
-    </rdf:RDF>
-  </metadata>
-  <sodipodi:namedview
-     pagecolor="#ffffff"
-     bordercolor="#666666"
-     borderopacity="1"
-     objecttolerance="10"
-     gridtolerance="10"
-     guidetolerance="10"
-     inkscape:pageopacity="0"
-     inkscape:pageshadow="2"
-     inkscape:window-width="1846"
-     inkscape:window-height="1178"
-     id="namedview5208"
-     showgrid="false"
-     inkscape:zoom="1.2374369"
-     inkscape:cx="313.03664"
-     inkscape:cy="-25.786167"
-     inkscape:window-x="66"
-     inkscape:window-y="-8"
-     inkscape:window-maximized="1"
-     inkscape:current-layer="svg5206" />
-  <defs
-     id="defs5146">
-    <style
-       id="style5144">
-      .cls-1 {
-        fill: #f06060;
-      }
-
-      .cls-2 {
-        opacity: 0.15;
-      }
-
-      .cls-3 {
-        fill: #231f20;
-      }
-
-      .cls-4 {
-        fill: #fff;
-      }
-
-      .cls-5 {
-        fill: #79aad3;
-      }
-
-      .cls-6 {
-        fill: #b0afad;
-      }
-
-      .cls-7 {
-        fill: none;
-      }
-    </style>
-  </defs>
-  <g
-     id="g6394">
-    <rect
-       style="fill:none"
-       y="0"
-       x="0"
-       id="rect5202"
-       height="225"
-       width="400"
-       class="cls-7" />
-    <g
-       id="g6221-0"
-       transform="matrix(0.04169006,0.03537066,-0.03537066,0.04169006,308.44002,129.95862)">
-      <path
-         inkscape:connector-curvature="0"
-         style="fill:#d2d2d2;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:16.40373421;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-         d="m -1725,1534.1644 v 661.42 h -206.7188 l -47.1113,-661.42 z"
-         id="path5775-6-2-0-0-7" />
-      <path
-         inkscape:connector-curvature="0"
-         style="fill:#9a9a9a;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:16.40373421;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-         d="m -1725,1297.5199 v 236.6445 h -253.8301 l -0.2246,-3.1601 17.2851,-233.4844 z"
-         id="path5775-1-5-7-1-2" />
-      <path
-         inkscape:connector-curvature="0"
-         style="fill:#4a97da;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:18.79507637;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-         d="M -1725,-980.89178 V 1297.5199 h -236.7696 l 128.4883,-2278.41168 z"
-         id="path5775-1-4-6-6-7" />
-      <path
-         inkscape:connector-curvature="0"
-         style="fill:#ffdf65;fill-opacity:1;stroke:none;stroke-width:0.98403859"
-         d="m -1725.4688,2195.5844 v 331.8945 c -28.4672,0 -51.5625,26.2354 -51.5625,58.5722 0,27.0342 16.7849,49.3413 38.6699,56.129 v 490.5195 h -21.4844 c 0,0 -34.3734,-312.3704 -240.623,-468.5567 l 68.75,-468.5585 z"
-         id="path4542-2-0-8-5-0" />
-      <path
-         inkscape:connector-curvature="0"
-         style="fill:#d2d2d2;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:16.40373421;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-         d="m -1725,1534.1644 v 661.42 h 206.7188 l 47.1113,-661.42 z"
-         id="path5775-6-2-0-0-0-0" />
-      <path
-         inkscape:connector-curvature="0"
-         style="fill:#9a9a9a;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:16.40373421;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-         d="m -1725,1297.5199 v 236.6445 h 253.8301 l 0.2246,-3.1601 -17.2851,-233.4844 z"
-         id="path5775-1-5-7-1-1-0" />
-      <path
-         inkscape:connector-curvature="0"
-         style="fill:#4a97da;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:18.79507637;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-         d="M -1725,-980.89178 V 1297.5199 h 236.7696 l -128.4883,-2278.41168 z"
-         id="path5775-1-4-6-6-3-5" />
-      <path
-         inkscape:connector-curvature="0"
-         style="fill:#ffdf65;fill-opacity:1;stroke:none;stroke-width:0.98403859"
-         d="m -1724.5312,2195.5844 v 331.8945 c 28.4672,0 51.5625,26.2354 51.5625,58.5722 0,27.0342 -16.7849,49.3413 -38.6699,56.129 v 490.5195 h 21.4844 c 0,0 34.3734,-312.3704 240.623,-468.5567 l -68.75,-468.5585 z"
-         id="path4542-2-0-8-5-4-4" />
-      <path
-         inkscape:connector-curvature="0"
-         style="fill:#000000;fill-opacity:0.11764706;fill-rule:evenodd;stroke:none;stroke-width:16.40373421;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-         d="m -1725,1534.1644 v 661.42 h 206.7188 l 47.1113,-661.42 z"
-         id="path5775-6-2-0-0-0-8-4" />
-      <path
-         inkscape:connector-curvature="0"
-         style="fill:#000000;fill-opacity:0.11764706;fill-rule:evenodd;stroke:none;stroke-width:16.40373421;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-         d="m -1725,1297.5199 v 236.6445 h 253.8301 l 0.2246,-3.1601 -17.2851,-233.4844 z"
-         id="path5775-1-5-7-1-1-3-4" />
-      <path
-         inkscape:connector-curvature="0"
-         style="fill:#000000;fill-opacity:0.11764706;fill-rule:evenodd;stroke:none;stroke-width:18.79507637;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-         d="m -1725,-980.8918 v 2278.4117 h 236.7696 l -128.4883,-2278.4117 z"
-         id="path5775-1-4-6-6-3-3-7" />
-      <path
-         inkscape:connector-curvature="0"
-         style="fill:#000000;fill-opacity:0.11764706;stroke:none;stroke-width:0.98403859"
-         d="m -1724.5312,2195.5844 v 331.8945 c 28.4672,0 51.5625,26.2354 51.5625,58.5722 0,27.0342 -16.7849,49.3413 -38.6699,56.129 v 490.5195 h 21.4844 c 0,0 34.3734,-312.3704 240.623,-468.5567 l -68.75,-468.5585 z"
-         id="path4542-2-0-8-5-4-5-1" />
-    </g>
-  </g>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 20.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 400 225" style="enable-background:new 0 0 400 225;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#4A97DA;}
+	.st1{opacity:0.15;}
+	.st2{fill:#231F20;}
+	.st3{fill:#FFFFFF;}
+	.st4{fill:#B0AFAD;}
+	.st5{fill:#757575;}
+	.st6{fill:#565656;}
+	.st7{fill:#E29563;}
+	.st8{fill:#494949;}
+	.st9{fill:#D66F6E;}
+	.st10{fill:none;}
+</style>
+<title>fill in the blanks</title>
+<g id="Layer_2">
+	<g id="fill_in_the_blanks">
+		<g>
+			<rect x="134" y="26.8" class="st0" width="139.1" height="173.6"/>
+			<g>
+				<g class="st1">
+					<rect x="151" y="44.5" class="st2" width="113" height="146.1"/>
+				</g>
+				<rect x="147.1" y="40.5" class="st3" width="113" height="146.1"/>
+			</g>
+			<g>
+				<path class="st0" d="M228.6,121.6h-32.3c-4.9,0-8.8-3.9-8.8-8.8s3.9-8.8,8.8-8.8h32.3c4.9,0,8.8,3.9,8.8,8.8
+					S233.5,121.6,228.6,121.6z"/>
+			</g>
+			<path class="st4" d="M197.3,157.7h-33.6c-1.9,0-3.4-1.5-3.4-3.4l0,0c0-1.9,1.5-3.4,3.4-3.4h33.6c1.9,0,3.4,1.5,3.4,3.4l0,0
+				C200.8,156.2,199.2,157.7,197.3,157.7z"/>
+			<path class="st4" d="M232.2,74.9h7.5c1.9,0,3.4-1.5,3.4-3.4l0,0c0-1.9-1.5-3.4-3.4-3.4h-7.5c-1.9,0-3.4,1.5-3.4,3.4l0,0
+				C228.7,73.3,230.3,74.9,232.2,74.9z"/>
+			<path class="st4" d="M197.3,95.7h-33.6c-1.9,0-3.4-1.5-3.4-3.4v0c0-1.9,1.5-3.4,3.4-3.4h33.6c1.9,0,3.4,1.5,3.4,3.4v0
+				C200.8,94.2,199.2,95.7,197.3,95.7z"/>
+			<path class="st4" d="M243.5,95.7h-33.5c-1.9,0-3.4-1.5-3.4-3.4v0c0-1.9,1.5-3.4,3.4-3.4h33.5c1.9,0,3.4,1.5,3.4,3.4v0
+				C246.9,94.2,245.4,95.7,243.5,95.7z"/>
+			<path class="st4" d="M178.8,116.2h-15.1c-1.9,0-3.4-1.5-3.4-3.4v0c0-1.9,1.5-3.4,3.4-3.4h15.1c1.9,0,3.4,1.5,3.4,3.4v0
+				C182.3,114.7,180.7,116.2,178.8,116.2z"/>
+			<path class="st4" d="M214.7,137.1h-50.9c-1.9,0-3.4-1.5-3.4-3.4l0,0c0-1.9,1.5-3.4,3.4-3.4h50.9c1.9,0,3.4,1.5,3.4,3.4l0,0
+				C218.1,135.5,216.5,137.1,214.7,137.1z"/>
+			<g>
+				<path class="st0" d="M215.1,80.3h-51.8c-4.9,0-8.8-3.9-8.8-8.8c0-4.9,3.9-8.8,8.8-8.8h51.8c4.9,0,8.8,3.9,8.8,8.8
+					C223.9,76.3,219.9,80.3,215.1,80.3z"/>
+			</g>
+			<path class="st3" d="M212.9,73.5h-47.5c-1.1,0-2.1-0.9-2.1-2.1l0,0c0-1.1,0.9-2.1,2.1-2.1h47.5c1.1,0,2.1,0.9,2.1,2.1l0,0
+				C215,72.6,214.1,73.5,212.9,73.5z"/>
+			<path class="st3" d="M226.8,114.9h-28.6c-1.1,0-2.1-0.9-2.1-2.1v0c0-1.1,0.9-2.1,2.1-2.1h28.6c1.1,0,2.1,0.9,2.1,2.1v0
+				C228.9,113.9,227.9,114.9,226.8,114.9z"/>
+		</g>
+		<polygon class="st3" points="273.2,92.3 259.9,104.6 259.9,120.6 273.2,120.6 		"/>
+		<polygon class="st3" points="273.2,136.7 259.9,149 259.9,165 273.2,153.3 		"/>
+		<g>
+			<polygon class="st5" points="288.4,107.8 281.4,99.2 236.9,140.5 242.9,149.5 			"/>
+			<polygon class="st6" points="295.5,116.3 288.4,107.8 242.9,149.5 250.9,157.6 			"/>
+			<g>
+				<path class="st7" d="M235.2,155.8c1.2,1.4,2.3,2.9,3.2,4.4l12.6-2.6c0,0-0.3-3.5-5.7-9.7c-5.6-6.6-8.3-7.4-8.3-7.4l-4.8,12.2
+					C233.3,153.7,234.3,154.7,235.2,155.8z"/>
+				<path class="st8" d="M238.4,160.2c-0.9-1.6-2-3-3.2-4.4c-0.9-1.1-1.9-2.1-2.9-3.1l-3.7,9.5L238.4,160.2z"/>
+			</g>
+			<path class="st9" d="M304.5,105.9c0.5-5.4-6.6-13.4-12-13.9c-3.3-0.3-8.5,5.4-8.5,5.4l14,16.5C298,113.9,304.2,109.2,304.5,105.9
+				z"/>
+		</g>
+		<rect y="0" class="st10" width="400" height="225"/>
+	</g>
+</g>
 </svg>
