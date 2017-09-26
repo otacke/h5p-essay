@@ -138,7 +138,12 @@ H5P.Essay = function ($, Question) {
         explanations.push({text: element.message});
       }
     });
-    this.setExplanation(explanations, this.config.feedbackHeader);
+    if (explanations.length > 0) {
+      this.setExplanation(explanations, this.config.feedbackHeader);
+    }
+    else {
+      this.setExplanation();
+    }
 
     // Not all keyword groups might be necessary for mastering
     var score = Math.min(feedback.score, this.scoreMastering);
