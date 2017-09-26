@@ -178,7 +178,7 @@
     "name": "behaviour",
     "type": "group",
     "label": "Behavioural settings",
-    "importance": "medium",
+    "importance": "low",
     "description": "These options will let you control how the task behaves.",
     "fields": [
       {
