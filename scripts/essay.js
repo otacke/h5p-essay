@@ -374,7 +374,7 @@ H5P.Essay = function ($, Question) {
   Essay.prototype.getxAPIDefinition = function () {
     var definition = {};
     definition.name = {'en-US': 'Essay'};
-    definition.description = {'en-US': this.config.inputField.params.taskDescription};
+    definition.description = {'en-US': this.config.taskDescription};
     definition.type = 'http://id.tincanapi.com/activitytype/essay';
     definition.interactionType = 'long-fill-in';
     return definition;
