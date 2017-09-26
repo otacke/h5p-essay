@@ -5,8 +5,8 @@
     "type": "text",
     "widget": "html",
     "importance": "high",
-    "description": "Describe your task here. Task description will appear above text input area",
-    "placeholder": "Summarize the book in 500 words",
+    "description": "Describe your task here. The task description will appear above text input area.",
+    "placeholder": "Summarize the book in 500 words ...",
     "enterMode": "div",
     "tags": [
       "strong",
@@ -24,7 +24,7 @@
     "name": "placeholderText",
     "label": "Help text",
     "type": "text",
-    "description": "This text should help the user start",
+    "description": "This text should help the user to get started.",
     "placeholder": "This book is about ...",
     "importance": "low",
     "optional": true
@@ -58,7 +58,7 @@
           "name": "alternatives",
           "type": "list",
           "label": "Alternatives",
-          "description": "Add optional alternatives for this keyword. Example: For a 'city' add alternatives' town', 'municipality' etc. Points will be given if the user includes any of the specified alternatives.",
+          "description": "Add optional alternatives for this keyword. Example: For a 'city' add alternatives 'town', 'municipality' etc. Points will be awarded if the user includes any of the specified alternatives.",
           "importance": "medium",
           "entity": "alternative",
           "optional": true,
@@ -88,26 +88,26 @@
               "type": "boolean",
               "label": "Case sensitive",
               "default": true,
-              "description": "Makes sure the user input has to be exactly the same as the answer"
+              "description": "Makes sure the user input has to be exactly the same as the answer."
             },
             {
               "name": "forgiveMistakes",
               "type": "boolean",
               "label": "Forgive minor mistakes",
-              "description": "This will accept minor spelling mistakes (3-9 characters: 1 mistake, more than 9 characters: 2 mistakes)"
+              "description": "This will accept minor spelling mistakes (3-9 characters: 1 mistake, more than 9 characters: 2 mistakes)."
             },
             {
               "name": "feedbackIncluded",
               "type": "text",
               "label": "Feedback if included",
-              "description": "This feedback will be displayed if the user includes this keyword or its alternatives in the answer",
+              "description": "This feedback will be displayed if the user includes this keyword or its alternatives in the answer.",
               "optional": true
             },
             {
               "name": "feedbackMissed",
               "type": "text",
               "label": "Feedback if missing",
-              "description": "This feedback will be displayed if the user doesn’t include this keyword or its alternatives in the answer",
+              "description": "This feedback will be displayed if the user doesn’t include this keyword or its alternatives in the answer.",
               "optional": true
             }
           ]
@@ -185,7 +185,7 @@
         "name": "maximumLength",
         "label": "Maximum number of characters",
         "type": "number",
-        "description": "Specify the maximum number of characters that the user can enter",
+        "description": "Specify the maximum number of characters that the user can enter.",
         "importance": "low",
         "optional": true,
         "min": "0"
