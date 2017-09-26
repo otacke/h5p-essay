@@ -5,7 +5,8 @@
     "type": "text",
     "widget": "html",
     "importance": "high",
-    "description": "Tell your students what is expected to input here.",
+    "description": "Describe your task here. Task description will appear above text input area",
+    "placeholder": "Summarize the book in 500 words",
     "enterMode": "div",
     "tags": [
       "strong",
@@ -17,80 +18,60 @@
       "h2",
       "h3",
       "hr"
-    ],
-    "optional": true
+    ]
   },
   {
     "name": "placeholderText",
-    "label": "Placeholder text",
+    "label": "Help text",
     "type": "text",
-    "description": "A placeholder text",
+    "description": "This text should help the user start",
+    "placeholder": "This book is about ...",
     "importance": "low",
     "optional": true
   },
   {
-    "name": "keywordGroups",
+    "name": "keywords",
+    "label": "Keywords",
+    "importance": "high",
     "type": "list",
-    "label": "Keywords or phrases",
-    "entity": "keyword/phrase",
-    "importance": "medium",
+    "widgets": [
+      {
+        "name": "VerticalTabs",
+        "label": "Default"
+      }
+    ],
     "min": 1,
+    "entity": "Keyword",
     "field": {
-      "name": "keywordGroup",
+      "name": "groupy",
       "type": "group",
-      "label": "Group of keywords/phrases",
-      "importance": "low",
-      "expanded": true,
+      "label": "GROUPY",
       "fields": [
+        {
+          "name": "keyword",
+          "type": "text",
+          "label": "Keyword",
+          "description": "Keyword or phrase to look for",
+          "importance": "medium"
+        },
         {
           "name": "alternatives",
           "type": "list",
-          "label": "Keyword/phrase alternatives",
+          "label": "Alternatives",
+          "description": "Add optional alternatives for this keyword. Example: For a 'city' add alternatives' town', 'municipality' etc. Points will be given if the user includes any of the specified alternatives.",
+          "importance": "medium",
           "entity": "alternative",
-          "importance": "low",
           "optional": true,
-          "min": 1,
           "field": {
-            "name": "alternativeGroup",
-            "label": "Alternatives",
-            "type": "group",
-            "fields": [
-              {
-                "name": "alternative",
-                "label": "Keyword/phrase",
-                "importance": "low",
-                "type": "text",
-                "optional": true,
-                "description": "Keyword or phrase to look for. You can use asterisks '*' as wildcards for (multiple) characters."
-              },
-              {
-                "name": "options",
-                "type": "group",
-                "label": "Advanced options",
-                "importance": "low",
-                "fields": [
-                  {
-                    "name": "caseSensitive",
-                    "type": "boolean",
-                    "label": "Case sensitive",
-                    "default": true,
-                    "description": "Makes sure the user input has to be exactly the same as the answer."
-                  },
-                  {
-                    "name": "forgiveMistakes",
-                    "type": "boolean",
-                    "label": "Forgive minor mistakes",
-                    "description": "Will also accept solutions with minor spelling mistakes (3-9 characters: 1 mistake, more than 9 characters: 2 mistakes). Can also be handy for plural forms, etc."
-                  }
-                ]
-              }
-            ]
+            "name": "alternative",
+            "type": "text",
+            "label": "Keyword alternative"
           }
         },
         {
           "name": "options",
           "type": "group",
-          "label": "Advanced options",
+          "label": "Points, Options and Feedback",
           "importance": "low",
           "fields": [
             {
@@ -98,24 +79,38 @@
               "type": "number",
               "label": "Points",
               "default": 1,
-              "description": "Points awarded if one of this group's keywords is used in the text.",
+              "description": "Points that the user will get if he/she includes this keyword or its alternatives in the answer",
               "min": 1
             },
             {
-              "name": "feedbackFound",
+              "name": "caseSensitive",
+              "type": "boolean",
+              "label": "Case sensitive",
+              "default": true,
+              "description": "Makes sure the user input has to be exactly the same as the answer"
+            },
+            {
+              "name": "forgiveMistakes",
+              "type": "boolean",
+              "label": "Forgive minor mistakes",
+              "description": "This will accept minor spelling mistakes (3-9 characters: 1 mistake, more than 9 characters: 2 mistakes)"
+            },
+            {
+              "name": "feedbackIncluded",
               "type": "text",
-              "label": "Feedback if found",
-              "description": "Will be displayed to the user if this keyword group was found in the text.",
+              "label": "Feedback if included",
+              "description": "This feedback will be displayed if the user includes this keyword or its alternatives in the answer",
               "optional": true
             },
             {
               "name": "feedbackMissed",
               "type": "text",
               "label": "Feedback if missing",
-              "description": "Will be displayed to the user if this keyword group is missing in the text.",
+              "description": "This feedback will be displayed if the user doesn’t include this keyword or its alternatives in the answer",
               "optional": true
             }
           ]
+
         }
       ]
     }
@@ -182,14 +177,14 @@
     "name": "behaviour",
     "type": "group",
     "label": "Behavioural settings",
-    "importance": "low",
+    "importance": "medium",
     "description": "These options will let you control how the task behaves.",
     "fields": [
       {
         "name": "maximumLength",
-        "label": "Maximum text length",
+        "label": "Maximum number of characters",
         "type": "number",
-        "description": "Maximum number of characters for the text",
+        "description": "Specify the maximum number of characters that the user can enter",
         "importance": "low",
         "optional": true,
         "min": "0"

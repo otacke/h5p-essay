@@ -23,8 +23,8 @@ H5P.Essay = function ($, Question) {
     this.contentData = contentData || {};
 
     // map function
-    var toPoints = function (keywordGroup) {
-      return keywordGroup.options && keywordGroup.options.points || 0;
+    var toPoints = function (keywords) {
+      return keywords.options && keywords.options.points || 0;
     };
 
     // reduce function
@@ -33,7 +33,7 @@ H5P.Essay = function ($, Question) {
     };
 
     // scoreMax = Maximum number of points available by all keyword groups
-    var scoreMax = this.config.keywordGroups
+    var scoreMax = this.config.keywords
       .map(toPoints)
       .reduce(sum, 0);
 
@@ -59,10 +59,7 @@ H5P.Essay = function ($, Question) {
       this.previousState = this.contentData.previousState;
     }
 
-    /*
-     * TODO: Get rid of jQuery and change H5P.EssayInputField as soon as the
-     *       H5P core runs without jQuery.
-     */
+    // Create InputField
     this.inputField = new H5P.Essay.InputField({
       'taskDescription': this.config.taskDescription,
       'placeholderText': this.config.placeholderText,
@@ -231,7 +228,7 @@ H5P.Essay = function ($, Question) {
     var inputLowerCase = input.toLowerCase();
 
     // Should not happen, but just to be sure ...
-    this.config.keywordGroups = this.config.keywordGroups || [];
+    this.config.keywords = this.config.keywords || [];
 
     /*
      * If you don't want to only find exact matches of keywords, but also
@@ -240,11 +237,10 @@ H5P.Essay = function ($, Question) {
      */
 
     // Within each keyword group check if one of the alternatives is a keyword
-    this.config.keywordGroups.forEach(function (alternativeGroup) {
-      var found = alternativeGroup.alternatives.some(function (candidate) {
-        var alternative = candidate.alternative;
-        var options = candidate.options;
-
+    this.config.keywords.forEach(function (alternativeGroup) {
+      var options = alternativeGroup.options;
+      var alternatives = [alternativeGroup.keyword].concat(alternativeGroup.alternatives || []);
+      var found = alternatives.some(function (alternative) {
         var inputTest = input;
 
         // Check for case sensitivity
@@ -278,14 +274,14 @@ H5P.Essay = function ($, Question) {
       });
 
       if (found) {
-        score += alternativeGroup.options.points;
-        if (alternativeGroup.options.feedbackFound) {
-          text.push({"message": alternativeGroup.options.feedbackFound, "found": true});
+        score += options.points;
+        if (options.feedbackIncluded) {
+          text.push({"message": options.feedbackIncluded, "found": true});
         }
       }
       else {
-        if (alternativeGroup.options.feedbackMissed) {
-          text.push({"message": alternativeGroup.options.feedbackMissed, "found": false});
+        if (options.feedbackMissed) {
+          text.push({"message": options.feedbackMissed, "found": false});
         }
       }
     });
