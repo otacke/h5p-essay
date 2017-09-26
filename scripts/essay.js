@@ -230,6 +230,11 @@ H5P.Essay = function ($, Question) {
     // Should not happen, but just to be sure ...
     this.config.keywords = this.config.keywords || [];
 
+    // optional = false is ignored in Editor
+    this.config.keywords = this.config.keywords.filter(function (element) {
+      return (typeof element.keyword !== 'undefined');
+    });
+
     /*
      * If you don't want to only find exact matches of keywords, but also
      * close resemblences or phrases, things get more complicated then you
@@ -239,7 +244,7 @@ H5P.Essay = function ($, Question) {
     // Within each keyword group check if one of the alternatives is a keyword
     this.config.keywords.forEach(function (alternativeGroup) {
       var options = alternativeGroup.options;
-      var alternatives = [alternativeGroup.keyword].concat(alternativeGroup.alternatives || []);
+      var alternatives = [alternativeGroup.keyword || []].concat(alternativeGroup.alternatives || []);
       var found = alternatives.some(function (alternative) {
         var inputTest = input;
 
