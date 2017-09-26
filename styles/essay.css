@@ -1,3 +1,8 @@
+@keyframes h5p-essay-input-field-message-save-opacity {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
 .h5p-essay {
   padding: 0.5em 1em;
 }
@@ -35,4 +40,46 @@
 
 .h5p-essay-hidden {
   display: none;
+}
+
+
+
+
+.h5p-essay .h5p-essay-input-field-textfield {
+  padding: 0.25em 0.4em;
+  width: calc(100% - 0.8em);
+  resize: none;
+  border: 1px solid #C7C7C7;
+  border-top: 2px solid #C7C7C7;
+  font-size: 16px;
+  font-family: Arial, sans-serif;
+}
+
+.h5p-essay .h5p-essay-input-field-textfield:focus {
+  background-color: #fff;
+}
+
+/* Reduce bottom and top margin of children */
+.h5p-essay .h5p-essay-input-field-label > * {
+  margin-top: 0.2em;
+  margin-bottom: 0.2em;
+}
+
+.h5p-essay .h5p-essay-input-field-message-wrapper {
+  overflow:auto;
+}
+
+.h5p-essay .h5p-essay-input-field-message-char {
+  font-size: 0.8em;
+  float: left;
+}
+
+.h5p-essay .h5p-essay-input-field-message-save {
+  font-size: 0.8em;
+  float: right;
+}
+
+.h5p-essay .h5p-essay-input-field-message-save-animation {
+  animation-name: h5p-essay-input-field-message-save-opacity;
+  animation-duration: 1s;
 }

@@ -1,17 +1,32 @@
 [
   {
-    "name": "inputField",
-    "type": "library",
+    "name": "taskDescription",
+    "label": "Task description",
+    "type": "text",
+    "widget": "html",
     "importance": "high",
-    "options": [
-      "H5P.EssayInputField 0.1"
+    "description": "Tell your students what is expected to input here.",
+    "enterMode": "div",
+    "tags": [
+      "strong",
+      "em",
+      "u",
+      "a",
+      "ul",
+      "ol",
+      "h2",
+      "h3",
+      "hr"
     ],
-    "default": {
-      "library": "H5P.EssayInputField 0.1",
-      "params": {
-        "inputFieldSize": "10"
-      }
-    }
+    "optional": true
+  },
+  {
+    "name": "placeholderText",
+    "label": "Placeholder text",
+    "type": "text",
+    "description": "A placeholder text",
+    "importance": "low",
+    "optional": true
   },
   {
     "name": "keywordGroups",
@@ -171,6 +186,37 @@
     "description": "These options will let you control how the task behaves.",
     "fields": [
       {
+        "name": "maximumLength",
+        "label": "Maximum text length",
+        "type": "number",
+        "description": "Maximum number of characters for the text",
+        "importance": "low",
+        "optional": true,
+        "min": "0"
+      },
+      {
+        "name": "inputFieldSize",
+        "label": "Input field size",
+        "type": "select",
+        "importance": "low",
+        "description": "The size of the input field in amount of lines it will cover",
+        "options": [
+          {
+            "value": "1",
+            "label": "1 line"
+          },
+          {
+            "value": "3",
+            "label": "3 lines"
+          },
+          {
+            "value": "10",
+            "label": "10 lines"
+          }
+        ],
+        "default": "10"
+      },
+      {
         "name": "enableRetry",
         "label": "Enable \"Retry\"",
         "type": "boolean",
@@ -307,5 +353,23 @@
     "importance": "low",
     "default": "Sample solution",
     "common" : true
+  },
+  {
+      "name": "remainingChars",
+      "type": "text",
+      "label": "Remaining characters",
+      "importance": "low",
+      "common": true,
+      "default": "Remaining characters: @chars",
+      "description": "Message for remaining characters. You can use @chars which will be replaced by the corresponding number."
+  },
+  {
+      "name": "messageSave",
+      "type": "text",
+      "label": "Save message",
+      "description": "Message indicating that the text has been saved",
+      "importance": "low",
+      "common": true,
+      "default": "saved"
   }
 ]

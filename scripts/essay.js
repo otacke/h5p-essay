@@ -58,19 +58,18 @@ H5P.Essay = function ($, Question) {
     if (!!this.contentData && !!this.contentData.previousState) {
       this.previousState = this.contentData.previousState;
     }
-    var oldText = (!!this.previousState) ? this.previousState.text || '' : '';
 
     /*
      * TODO: Get rid of jQuery and change H5P.EssayInputField as soon as the
      *       H5P core runs without jQuery.
      */
-    var $wrapperInputfield = $('<div>');
-    this.inputField = new H5P.EssayInputField(this.config.inputField.params,
-      this.contentId, {
-        'standalone': true,
-        'previousState': oldText
-      });
-    this.inputField.attach($wrapperInputfield);
+    this.inputField = new H5P.Essay.InputField({
+      'taskDescription': this.config.taskDescription,
+      'placeholderText': this.config.placeholderText,
+      'maximumLength': this.config.behaviour.maximumLength,
+      'remainingChars': this.config.remainingChars,
+      'inputFieldSize': this.config.behaviour.inputFieldSize
+    }, this.previousState);
 
     // Register task introduction text
     this.setIntroduction(this.inputField.getIntroduction());
@@ -315,7 +314,7 @@ H5P.Essay = function ($, Question) {
    * @return {string} Cleaned input.
    */
   Essay.prototype.getInput = function () {
-    return this.inputField.getInput().value
+    return this.inputField.getText()
         .replace(/(\r\n|\r|\n)/g, ' ')
         .replace(/\s\s/g, ' ');
   };
@@ -339,6 +338,20 @@ H5P.Essay = function ($, Question) {
       }
     }
     return arguments[0];
+  };
+
+  /**
+   * Get current state for H5P.Question.
+   * @return {object} Current state.
+   */
+  Essay.prototype.getCurrentState = function () {
+    // TODO: Replace with param from config
+    this.inputField.updateMessageSaved(this.config.messageSave);
+
+    // We could have just used a string, but you never know when you need to store more parameters
+    return {
+      'inputField': this.inputField.getText()
+    };
   };
 
   /**

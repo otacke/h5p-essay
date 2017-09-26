@@ -14,17 +14,13 @@
     "minorVersion": 6
   },
   "preloadedJs": [
-    { "path": "scripts/essay.js" }
+    { "path": "scripts/essay.js" },
+    { "path": "scripts/inputfield.js" }
   ],
   "preloadedCss": [
-    {"path": "styles/essay.css"}
+    {"path": "styles/essay.css" }
   ],
   "preloadedDependencies": [
-    {
-      "machineName": "H5P.EssayInputField",
-      "majorVersion": 0,
-      "minorVersion": 1
-    },
     {
       "machineName": "H5P.Question",
       "majorVersion": 1,
