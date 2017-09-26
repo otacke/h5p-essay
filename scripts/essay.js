@@ -144,23 +144,16 @@ H5P.Essay = function ($, Question) {
   Essay.prototype.showEvaluation = function () {
     var feedback = this.computeResults();
 
-    // map function
-    var toMessages = function (text) {
-      return text.message;
-    };
-
-    // reduce function
-    var combine = function (a, b) {
-      return a.trim() + ' ' + b.trim();
-    };
-
-    // TODO: This could possibly be made nicer visually if we use the info about found/missing using a filter
-    var feedbackMessage = feedback.text
-       .map(toMessages)
-       .reduce(combine, '');
-    feedbackMessage = (feedbackMessage !== '') ?
-      feedbackMessage = feedbackMessage + '<br />' :
-      feedbackMessage;
+    var explanations = [];
+    feedback.explanation.forEach(function (element) {
+      if (element.found) {
+        explanations.push({correct: element.keyword, text: element.message});
+      }
+      else {
+        explanations.push({text: element.message});
+      }
+    });
+    this.setExplanation(explanations, this.config.feedbackHeader);
 
     // Not all keyword groups might be necessary for mastering
     var score = Math.min(feedback.score, this.scoreMastering);
@@ -170,10 +163,7 @@ H5P.Essay = function ($, Question) {
             .replace('@score', score)
             .replace('@total', this.scoreMastering);
 
-    this.setFeedback(
-        feedbackMessage + textScore,
-        score,
-        this.scoreMastering);
+    this.setFeedback(textScore, score, this.scoreMastering);
 
     this.hideButton('check-answer');
     this.trigger(this.createEssayXAPIEvent('completed'));
@@ -221,7 +211,7 @@ H5P.Essay = function ($, Question) {
   Essay.prototype.computeResults = function () {
     var that = this;
     var score = 0;
-    var text = [];
+    var explanation = [];
 
     // We don't want EOLs to mess up the string.
     var input = this.getInput();
@@ -245,6 +235,7 @@ H5P.Essay = function ($, Question) {
     this.config.keywords.forEach(function (alternativeGroup) {
       var options = alternativeGroup.options;
       var alternatives = [alternativeGroup.keyword || []].concat(alternativeGroup.alternatives || []);
+
       var found = alternatives.some(function (alternative) {
         var inputTest = input;
 
@@ -281,33 +272,23 @@ H5P.Essay = function ($, Question) {
       if (found) {
         score += options.points;
         if (options.feedbackIncluded) {
-          text.push({"message": options.feedbackIncluded, "found": true});
+          explanation.push({
+            "keyword": alternatives.join(' | '),
+            "message": options.feedbackIncluded,
+            "found": true});
         }
       }
       else {
         if (options.feedbackMissed) {
-          text.push({"message": options.feedbackMissed, "found": false});
+          explanation.push({
+            "keyword": alternatives.join(' | '),
+            "message": options.feedbackMissed,
+            "found": false});
         }
       }
     });
 
-    return {"score": score, "text": text};
-  };
-
-  /**
-   * Store the current content content state
-   * @return {Object} current content state
-   */
-  Essay.prototype.getCurrentState = function () {
-    // Collect data from TextInputField (we might need more later)
-    var essayInputField = '';
-    if (this.inputField.getCurrentState instanceof Function ||
-        typeof this.inputField.getCurrentState === 'function') {
-      essayInputField = this.inputField.getCurrentState();
-    }
-    return {
-      'text': essayInputField
-    };
+    return {"score": score, "explanation": explanation};
   };
 
   /**
@@ -343,10 +324,9 @@ H5P.Essay = function ($, Question) {
 
   /**
    * Get current state for H5P.Question.
-   * @return {object} Current state.
+   * @return {Object} Current state.
    */
   Essay.prototype.getCurrentState = function () {
-    // TODO: Replace with param from config
     this.inputField.updateMessageSaved(this.config.messageSave);
 
     // We could have just used a string, but you never know when you need to store more parameters

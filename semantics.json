@@ -335,6 +335,14 @@
     "common": true
   },
   {
+    "name": "feedbackHeader",
+    "type": "text",
+    "label": "Header for panel containing feedback for included/missing keywords",
+    "importance": "low",
+    "default": "Feedback",
+    "common": true
+  },
+  {
     "name": "showSolution",
     "type": "text",
     "label": "Text for \"Show solution\" button",
