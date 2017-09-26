@@ -45,7 +45,7 @@
     "field": {
       "name": "groupy",
       "type": "group",
-      "label": "GROUPY",
+      "label": "Keyword",
       "fields": [
         {
           "name": "keyword",
@@ -62,6 +62,7 @@
           "importance": "medium",
           "entity": "alternative",
           "optional": true,
+          "min": 0,
           "field": {
             "name": "alternative",
             "type": "text",
