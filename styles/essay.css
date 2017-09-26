@@ -11,39 +11,41 @@
   overflow-y: auto;
 }
 
-.h5p-essay .h5p-essay-solution {
-  position: relative;
-  padding: 1.5em 2.2em 2em 2.2em;
-  font-size: 0.9em;
-  margin: 20px 0 20px 0;
-  border: 1px solid #ffde78;
-  background-color: #f9f9d8;
-  color: #000;
+.h5p-essay .h5p-essay-solution-container {
+  margin: 0 0 1em 0;
+  padding: 1em;
+  background: #FAFAFA;
 }
 
 .h5p-essay .h5p-essay-solution-title {
-  font-weight: bold;
-  font-size: 1.2em;
-  vertical-align: bottom;
+  font-size: 1.125em;
+  margin-bottom: 0.5em;
 }
 
 .h5p-essay .h5p-essay-solution-introduction {
+  font-size: 1em;
+  line-height: 1.2;
 }
 
 .h5p-essay .h5p-essay-solution-sample {
-  border: 1px solid #bbde98;
-  display: flex;
-  margin-top: 20px;
-  padding: 15px;
-  background-color: #f6fef1;
+  background: #FFFFFF;
+  border: 1px solid #e0e0e0;
+  overflow: auto;
+  overflow-x: hidden;
+
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  flex-shrink: 0;
+  flex-wrap: wrap;
 }
 
-.h5p-essay-hidden {
-  display: none;
+.h5p-essay .h5p-essay-solution-sample-text {
+  display: inline-flex;
+  padding: 0.5em 0em 0.5em 1em;
+  margin: 0;
+  line-height: 1.2;
 }
-
-
-
 
 .h5p-essay .h5p-essay-input-field-textfield {
   padding: 0.25em 0.4em;

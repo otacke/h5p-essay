@@ -72,11 +72,7 @@ H5P.Essay = function ($, Question) {
     this.setIntroduction(this.inputField.getIntroduction());
 
     // Register content
-    this.$solution = this.getSolution(false);
-    var $content = $('<div>')
-        .append(this.inputField.getContent())
-        .append(this.$solution);
-    this.setContent($content);
+    this.setContent(this.inputField.getContent());
 
     // Register Buttons
     this.addButtons();
@@ -105,37 +101,26 @@ H5P.Essay = function ($, Question) {
   };
 
   /**
-   * Get the solution block.
-   * @return {jQuery} Solution block.
-   */
-  Essay.prototype.getSolution = function (visible) {
-    var $solution = $('<div>').addClass('h5p-essay-solution');
-    $solution.append($('<div>')
-        .addClass('h5p-essay-solution-title')
-        .html(this.config.solutionTitle));
-    $solution.append($('<div>')
-        .addClass('h5p-essay-solution-introduction'));
-    $solution.append($('<div>')
-        .addClass('h5p-essay-solution-sample'));
-    if (!visible) {
-      $solution.addClass('h5p-essay-hidden');
-    }
-    return $solution;
-  };
-
-  /**
    * Show solution.
    */
   Essay.prototype.showSolution = function () {
-    this.$solution.removeClass('h5p-essay-hidden');
-    // We'll insert the text here to make cheating a little harder at least ...
-    this.$solution
-        .find('.h5p-essay-solution-introduction')
-        .html(this.config.solution.introduction);
-    this.$solution
-        .find('.h5p-essay-solution-sample')
-        .html(this.config.solution.sample);
-    this.trigger('resize');
+    if (!this.$solution) {
+      this.$solution = $('<div>')
+          .addClass('h5p-essay-solution-container')
+          .attr('tabIndex', '0')
+          .append($('<div>')
+          .addClass('h5p-essay-solution-title')
+          .html(this.config.solutionTitle))
+          .append($('<div>')
+          .addClass('h5p-essay-solution-introduction')
+          .html(this.config.solution.introduction))
+          .append($('<div>')
+          .addClass('h5p-essay-solution-sample')
+          .html($(this.config.solution.sample).addClass('h5p-essay-solution-sample-text')))
+          .insertBefore('.h5p-question-explanation');
+
+      this.trigger('resize');
+    }
   };
 
   /**
