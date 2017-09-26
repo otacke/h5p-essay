@@ -117,7 +117,7 @@ H5P.Essay = function ($, Question) {
           .append($('<div>')
           .addClass('h5p-essay-solution-sample')
           .html($(this.config.solution.sample).addClass('h5p-essay-solution-sample-text')))
-          .insertBefore('.h5p-question-explanation');
+          .insertAfter('.h5p-question-explanation');
 
       this.trigger('resize');
     }
