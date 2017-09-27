@@ -1,6 +1,6 @@
 {
   "title": "Essay",
-  "description": "Score a student's essay",
+  "description": "Score a student's essay automatically",
   "majorVersion": 0,
   "minorVersion": 1,
   "patchVersion": 1,
@@ -11,11 +11,15 @@
   "machineName": "H5P.Essay",
   "coreApi": {
     "majorVersion": 1,
-    "minorVersion": 6
+    "minorVersion": 13
   },
   "preloadedJs": [
-    { "path": "scripts/essay.js" },
-    { "path": "scripts/inputfield.js" }
+    {
+      "path": "scripts/essay.js"
+    },
+    {
+      "path": "scripts/inputfield.js"
+    }
   ],
   "preloadedCss": [
     {"path": "styles/essay.css" }
