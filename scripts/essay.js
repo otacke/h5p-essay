@@ -129,16 +129,22 @@ H5P.Essay = function ($, Question) {
   Essay.prototype.showEvaluation = function () {
     var feedback = this.computeResults();
 
+    // Add explanations if available
+    var emptyWord = '<span class="h5p-essay-feedback-empty">...</span>';
     var explanations = [];
     feedback.explanation.forEach(function (element) {
       if (element.found) {
         explanations.push({correct: element.keyword, text: element.message});
       }
       else {
-        explanations.push({text: element.message});
+        explanations.push({correct: emptyWord, text: element.message});
       }
     });
     if (explanations.length > 0) {
+      // Included before not included, but keep order otherwise
+      explanations.sort(function (a, b) {
+        return a.correct === emptyWord && b.correct !== emptyWord;
+      });
       this.setExplanation(explanations, this.config.feedbackHeader);
     }
     else {

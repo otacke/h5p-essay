@@ -85,3 +85,7 @@
   animation-name: h5p-essay-input-field-message-save-opacity;
   animation-duration: 1s;
 }
+
+.h5p-essay .h5p-essay-feedback-empty {
+  color: #999999;
+}
