@@ -22,6 +22,9 @@
     // Task description
     this.taskDescription = document.createElement('div');
     this.taskDescription.classList.add(INPUT_LABEL);
+    this.taskDescription.setAttribute('tabindex', 0);
+    this.taskDescription.setAttribute('aria-label',
+        'Task Description:' + this.params.taskDescription.replace(/(<([^>]+)>)/ig, ''));
     this.taskDescription.innerHTML = this.params.taskDescription;
 
     // InputField

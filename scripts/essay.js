@@ -123,9 +123,10 @@ H5P.Essay = function ($, Question) {
               $(this.config.solution.sample)
               .addClass('h5p-essay-solution-sample-text')))
           .insertAfter('.h5p-question-explanation');
-
       this.trigger('resize');
     }
+    this.$solution.focus();
+    this.hideButton('show-solution');
   };
 
   /**
@@ -190,7 +191,7 @@ H5P.Essay = function ($, Question) {
       this.trigger(this.createEssayXAPIEvent('passed'));
     }
 
-    if (this.config.solution.sample) {
+    if (this.config.solution.sample && !this.$solution) {
       this.showButton('show-solution');
     }
 
