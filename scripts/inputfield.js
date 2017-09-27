@@ -2,12 +2,13 @@
   'use strict';
 
   // CSS Classes:
-  var MAIN_CONTAINER = 'h5p-essay-input-field';
-  var INPUT_LABEL = 'h5p-essay-input-field-label';
-  var INPUT_FIELD = 'h5p-essay-input-field-textfield';
-  var WRAPPER_MESSAGE = 'h5p-essay-input-field-message-wrapper';
-  var CHAR_MESSAGE = 'h5p-essay-input-field-message-char';
-  var SAVE_MESSAGE = 'h5p-essay-input-field-message-save';
+  const MAIN_CONTAINER = 'h5p-essay-input-field';
+  const INPUT_LABEL = 'h5p-essay-input-field-label';
+  const INPUT_FIELD = 'h5p-essay-input-field-textfield';
+  const WRAPPER_MESSAGE = 'h5p-essay-input-field-message-wrapper';
+  const CHAR_MESSAGE = 'h5p-essay-input-field-message-char';
+  const SAVE_MESSAGE = 'h5p-essay-input-field-message-save';
+  const ANIMATION_MESSAGE = 'h5p-essay-input-field-message-save-animation';
 
   Essay.InputField = function (params, previousState) {
     var that = this;
@@ -133,10 +134,10 @@
   Essay.InputField.prototype.updateMessageSaved = function (saved) {
     // Add/remove blending effect
     if (saved === undefined || saved === '') {
-      this.statusSaved.classList.remove('h5p-essay-input-field-message-save-animation');
+      this.statusSaved.classList.remove(ANIMATION_MESSAGE);
     }
     else {
-      this.statusSaved.classList.add('h5p-essay-input-field-message-save-animation');
+      this.statusSaved.classList.add(ANIMATION_MESSAGE);
     }
     this.statusSaved.innerHTML = saved;
   };
