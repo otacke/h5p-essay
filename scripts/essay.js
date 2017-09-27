@@ -2,6 +2,7 @@ var H5P = H5P || {};
 
 H5P.Essay = function ($, Question) {
   'use strict';
+
   /**
    * @constructor
    *
@@ -43,7 +44,9 @@ H5P.Essay = function ($, Question) {
         this.config.behaviour.percentageMastering * scoreMax / 100;
 
     // scorePassing: score to pass the task (<= scoreMastering)
-    this.scorePassing = Math.min(this.scoreMastering, this.config.behaviour.percentagePassing * scoreMax / 100 || 0);
+    this.scorePassing = Math.min(
+          this.scoreMastering,
+          this.config.behaviour.percentagePassing * scoreMax / 100 || 0);
   }
 
   // Extends Question
@@ -116,7 +119,9 @@ H5P.Essay = function ($, Question) {
           .html(this.config.solution.introduction))
           .append($('<div>')
           .addClass('h5p-essay-solution-sample')
-          .html($(this.config.solution.sample).addClass('h5p-essay-solution-sample-text')))
+          .html(
+              $(this.config.solution.sample)
+              .addClass('h5p-essay-solution-sample-text')))
           .insertAfter('.h5p-question-explanation');
 
       this.trigger('resize');
@@ -130,7 +135,8 @@ H5P.Essay = function ($, Question) {
     var feedback = this.computeResults();
 
     // Add explanations if available
-    var emptyWord = '<span class="h5p-essay-feedback-empty">...</span>';
+    const emptyWord = '<span class="h5p-essay-feedback-empty">...</span>';
+
     var explanations = [];
     feedback.explanation.forEach(function (element) {
       if (element.found) {
@@ -140,6 +146,7 @@ H5P.Essay = function ($, Question) {
         explanations.push({correct: emptyWord, text: element.message});
       }
     });
+
     if (explanations.length > 0) {
       // Included before not included, but keep order otherwise
       explanations.sort(function (a, b) {
@@ -306,7 +313,8 @@ H5P.Essay = function ($, Question) {
     for(var i = 1; i < arguments.length; i++) {
       for(var key in arguments[i]) {
         if (arguments[i].hasOwnProperty(key)) {
-          if (typeof arguments[0][key] === 'object' && typeof arguments[i][key] === 'object') {
+          if (typeof arguments[0][key] === 'object' &&
+              typeof arguments[i][key] === 'object') {
             this.extend(arguments[0][key], arguments[i][key]);
           }
           else {
