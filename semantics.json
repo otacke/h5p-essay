@@ -57,8 +57,8 @@
         {
           "name": "alternatives",
           "type": "list",
-          "label": "Alternatives",
-          "description": "Add optional alternatives for this keyword. Example: For a 'city' add alternatives 'town', 'municipality' etc. Points will be awarded if the user includes any of the specified alternatives.",
+          "label": "Variations",
+          "description": "Add optional variations for this keyword. Example: For a 'city' add alternatives 'town', 'municipality' etc. Points will be awarded if the user includes any of the specified alternatives.",
           "importance": "medium",
           "entity": "alternative",
           "optional": true,
@@ -66,7 +66,7 @@
           "field": {
             "name": "alternative",
             "type": "text",
-            "label": "Keyword alternative"
+            "label": "Keyword variation"
           }
         },
         {
