@@ -1,9 +1,8 @@
 var H5P = H5P || {};
 
 /*
- * TODO: Add optional media on top
+ * TODO: Add optional media on top (possibly => Could also be done using column)
  * TODO: Only show found keyword in feedback
- * TODO: Male retry more obvious
  * TODO: Add minimum characters
  * TODO: Use Range instead of two numbers
  * TODO: Check areSimilar for errors (with/without case sensitivity)
@@ -103,12 +102,17 @@ H5P.Essay = function ($, Question) {
 
     // Check answer button
     that.addButton('check-answer', that.config.checkAnswer, function () {
+      that.inputField.disable();
       that.showEvaluation();
+      that.hideButton('check-answer');
     }, true, {}, {});
 
     // Retry button
     that.addButton('try-again', that.config.tryAgain, function () {
-      that.showEvaluation();
+      that.inputField.enable();
+      that.hideButton('show-solution');
+      that.hideButton('try-again');
+      that.showButton('check-answer');
     }, false, {}, {});
   };
 
@@ -178,7 +182,8 @@ H5P.Essay = function ($, Question) {
 
     this.setFeedback(textScore, score, this.scoreMastering);
 
-    this.hideButton('check-answer');
+
+    // TODO: Move this out of this function!!!
     this.trigger(this.createEssayXAPIEvent('completed'));
 
     var xAPIEvent = this.createEssayXAPIEvent('scored');

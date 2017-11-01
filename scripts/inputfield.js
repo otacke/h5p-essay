@@ -1,3 +1,5 @@
+/* jslint esversion: 6 */
+
 (function (Essay) {
   'use strict';
 
@@ -96,6 +98,20 @@
    */
   Essay.InputField.prototype.getText = function () {
     return this.inputField.value;
+  };
+
+  /**
+   * Disable the inputField.
+   */
+  Essay.InputField.prototype.disable = function () {
+    this.inputField.disabled = true;
+  };
+
+  /**
+   * Enable the inputField.
+   */
+  Essay.InputField.prototype.enable = function () {
+    this.inputField.disabled = false;
   };
 
   /**
