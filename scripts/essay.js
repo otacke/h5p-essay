@@ -1,5 +1,14 @@
 var H5P = H5P || {};
 
+/*
+ * TODO: Add optional media on top
+ * TODO: Only show found keyword in feedback
+ * TODO: Male retry more obvious
+ * TODO: Add minimum characters
+ * TODO: Use Range instead of two numbers
+ * TODO: Check areSimilar for errors (with/without case sensitivity)
+ */
+
 H5P.Essay = function ($, Question) {
   'use strict';
 
