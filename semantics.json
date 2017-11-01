@@ -60,7 +60,7 @@
           "label": "Variations",
           "description": "Add optional variations for this keyword. Example: For a 'city' add alternatives 'town', 'municipality' etc. Points will be awarded if the user includes any of the specified alternatives.",
           "importance": "medium",
-          "entity": "alternative",
+          "entity": "variation",
           "optional": true,
           "min": 0,
           "field": {
