@@ -55,6 +55,8 @@ H5P.Essay = function ($, Question) {
     this.scorePassing = Math.min(
           this.scoreMastering,
           this.config.behaviour.percentagePassing * scoreMax / 100 || 0);
+
+    this.$solution = this.buildSolution();
   }
 
   // Extends Question
@@ -98,48 +100,72 @@ H5P.Essay = function ($, Question) {
     // Show solution button
     that.addButton('show-solution', that.config.showSolution, function () {
       that.showSolution();
+      that.hideButton('show-solution');
     }, false, {}, {});
 
     // Check answer button
     that.addButton('check-answer', that.config.checkAnswer, function () {
       that.inputField.disable();
       that.showEvaluation();
+      if (that.config.solution.sample !== undefined && that.config.solution.sample !== '') {
+        that.showButton('show-solution');
+      }
       that.hideButton('check-answer');
     }, true, {}, {});
 
     // Retry button
     that.addButton('try-again', that.config.tryAgain, function () {
-      that.inputField.enable();
+      that.setExplanation();
+      that.removeFeedback();
+      that.hideSolution();
+
       that.hideButton('show-solution');
       that.hideButton('try-again');
       that.showButton('check-answer');
+
+      that.inputField.enable();
     }, false, {}, {});
+  };
+
+  /**
+   * Build solution DOM object.
+   * @return {jQuery} DOM object.
+   */
+  Essay.prototype.buildSolution = function () {
+    return $('<div>')
+        .addClass('h5p-essay-solution-container')
+        .attr('tabIndex', '0')
+        .append($('<div>')
+            .addClass('h5p-essay-solution-title')
+            .html(this.config.solutionTitle))
+        .append($('<div>')
+            .addClass('h5p-essay-solution-introduction')
+            .html(this.config.solution.introduction))
+        .append($('<div>')
+            .addClass('h5p-essay-solution-sample'));
   };
 
   /**
    * Show solution.
    */
   Essay.prototype.showSolution = function () {
-    if (!this.$solution) {
-      this.$solution = $('<div>')
-          .addClass('h5p-essay-solution-container')
-          .attr('tabIndex', '0')
-          .append($('<div>')
-          .addClass('h5p-essay-solution-title')
-          .html(this.config.solutionTitle))
-          .append($('<div>')
-          .addClass('h5p-essay-solution-introduction')
-          .html(this.config.solution.introduction))
-          .append($('<div>')
-          .addClass('h5p-essay-solution-sample')
-          .html(
-              $(this.config.solution.sample)
-              .addClass('h5p-essay-solution-sample-text')))
-          .insertAfter('.h5p-question-explanation');
-      this.trigger('resize');
-    }
+    // TODO: Clean up here
+    var text = document.createElement('div');
+    text.classList.add('h5p-essay-solution-sample-text');
+    text.innerHTML = this.config.solution.sample;
+    this.$solution.find('.h5p-essay-solution-sample')
+        .append(text);
+    this.$solution.insertAfter('.h5p-question-explanation');
+
+    this.trigger('resize');
     this.$solution.focus();
-    this.hideButton('show-solution');
+  };
+
+  /**
+   * Hide the solution.
+   */
+  Essay.prototype.hideSolution = function () {
+    this.$solution.remove();
   };
 
   /**
@@ -169,7 +195,9 @@ H5P.Essay = function ($, Question) {
       this.setExplanation(explanations, this.config.feedbackHeader);
     }
     else {
-      this.setExplanation();
+      this.setExplanation([], '');
+      var explanationContainer = document.getElementsByClassName('h5p-question-explanation-container')[0];
+      explanationContainer.remove();
     }
 
     // Not all keyword groups might be necessary for mastering

@@ -47,32 +47,32 @@
     this.container.appendChild(this.taskDescription);
     this.container.appendChild(this.content);
 
+    var statusWrapper = document.createElement('div');
+    statusWrapper.classList.add(WRAPPER_MESSAGE);
+
+    this.statusChars = document.createElement('div');
+    this.statusChars.classList.add(CHAR_MESSAGE);
+    // This will prevent moving the button after save message appears
+    this.statusChars.innerHTML = '&nbsp;';
+    statusWrapper.append(this.statusChars);
+
     if (typeof this.params.maximumLength !== 'undefined') {
-      var statusWrapper = document.createElement('div');
-      statusWrapper.classList.add(WRAPPER_MESSAGE);
-
-      this.statusChars = document.createElement('div');
-      this.statusChars.classList.add(CHAR_MESSAGE);
-      statusWrapper.append(this.statusChars);
-
       ['change', 'keyup', 'paste'].forEach(function (event) {
         that.inputField.addEventListener(event, function () {
           that.updateMessageSaved('');
           that.updateMessageChars();
         });
       });
-
-      this.statusSaved = document.createElement('div');
-      this.statusSaved.classList.add(SAVE_MESSAGE);
-      statusWrapper.append(this.statusSaved);
-
-      this.content.append(statusWrapper);
-      this.updateMessageChars();
     }
-    else {
-      this.statusSaved = document.createElement('div');
-      this.statusSaved.classList.add(SAVE_MESSAGE);
-      this.content.append(this.statusSaved);
+
+    this.statusSaved = document.createElement('div');
+    this.statusSaved.classList.add(SAVE_MESSAGE);
+    statusWrapper.append(this.statusSaved);
+
+    this.content.append(statusWrapper);
+
+    if (typeof this.params.maximumLength !== 'undefined') {
+      this.updateMessageChars();
     }
   };
 
