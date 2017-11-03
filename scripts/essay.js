@@ -2,7 +2,6 @@ var H5P = H5P || {};
 
 /*
  * TODO: Add optional media on top (possibly => Could also be done using column)
- * TODO: Only show found keyword in feedback
  * TODO: Add minimum characters
  * TODO: Use Range instead of two numbers
  * TODO: Check areSimilar for errors (with/without case sensitivity)
@@ -255,6 +254,7 @@ H5P.Essay = function ($, Question) {
    * @return {Object} Feedback of {score: number, text: [{message: String, found: boolean}]}.
    */
   Essay.prototype.computeResults = function () {
+    // TODO: This could be cleaned up, e.g. don't use some for returning true but something else returning undefined || keywordFound
     var that = this;
     var score = 0;
     var explanation = [];
@@ -282,8 +282,10 @@ H5P.Essay = function ($, Question) {
       var options = alternativeGroup.options;
       var alternatives = [alternativeGroup.keyword || []].concat(alternativeGroup.alternatives || []);
 
+      var keywordFound = '';
       var found = alternatives.some(function (alternative) {
         var inputTest = input;
+        var alternativeOriginal = alternative;
 
         // Check for case sensitivity
         if  (!options.caseSensitive ||
@@ -294,6 +296,7 @@ H5P.Essay = function ($, Question) {
 
         // Exact matching
         if (inputTest.indexOf(alternative) !== -1 && H5P.TextUtilities.isIsolated(alternative, inputTest)) {
+          keywordFound = alternativeOriginal;
           return true;
         }
 
@@ -301,6 +304,7 @@ H5P.Essay = function ($, Question) {
         var regex = new RegExp(alternative.replace(/\*/g, '[A-z]*'), 'g');
         var found = (inputTest.match(regex) || []).some(function (match) {
           if (regex.test(inputTest) && H5P.TextUtilities.isIsolated(match, inputTest)) {
+            keywordFound = alternativeOriginal;
             return true;
           }
         });
@@ -311,15 +315,17 @@ H5P.Essay = function ($, Question) {
         // Fuzzy matching
         if ((options.forgiveMistakes || that.config.behaviour.overrideForgiveMistakes === 'on') &&
             H5P.TextUtilities.fuzzyContains(alternative, inputTest)) {
+          keywordFound = alternativeOriginal;
           return true;
         }
       });
 
       if (found) {
+        console.log(keywordFound);
         score += options.points;
         if (options.feedbackIncluded) {
           explanation.push({
-            "keyword": alternatives.join(' | '),
+            "keyword": keywordFound,
             "message": options.feedbackIncluded,
             "found": true});
         }
