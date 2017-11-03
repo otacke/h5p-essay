@@ -4,7 +4,6 @@ var H5P = H5P || {};
  * TODO: Add optional media on top (possibly => Could also be done using column)
  * TODO: Add minimum characters
  * TODO: Use Range instead of two numbers
- * TODO: Make concept of sample solution more clear, e.g. move it up in semantics
  * TODO: Think about scoring for repetitions of keywords 
  */
 
