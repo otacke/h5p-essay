@@ -321,7 +321,6 @@ H5P.Essay = function ($, Question) {
       });
 
       if (found) {
-        console.log(keywordFound);
         score += options.points;
         if (options.feedbackIncluded) {
           explanation.push({
