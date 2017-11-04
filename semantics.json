@@ -225,6 +225,15 @@
     "description": "These options will let you control how the task behaves.",
     "fields": [
       {
+        "name": "minimumLength",
+        "label": "Minimum number of characters",
+        "type": "number",
+        "description": "Specify the minimum number of characters that the user must enter.",
+        "importance": "low",
+        "optional": true,
+        "min": "0"
+      },
+      {
         "name": "maximumLength",
         "label": "Maximum number of characters",
         "type": "number",
@@ -360,21 +369,30 @@
     "common" : true
   },
   {
-      "name": "remainingChars",
-      "type": "text",
-      "label": "Remaining characters",
-      "importance": "low",
-      "common": true,
-      "default": "Remaining characters: @chars",
-      "description": "Message for remaining characters. You can use @chars which will be replaced by the corresponding number."
+    "name": "remainingChars",
+    "type": "text",
+    "label": "Remaining characters",
+    "importance": "low",
+    "common": true,
+    "default": "Remaining characters: @chars",
+    "description": "Message for remaining characters. You can use @chars which will be replaced by the corresponding number."
   },
   {
-      "name": "messageSave",
-      "type": "text",
-      "label": "Save message",
-      "description": "Message indicating that the text has been saved",
-      "importance": "low",
-      "common": true,
-      "default": "saved"
+    "name": "notEnoughChars",
+    "type": "text",
+    "label": "Not enough characters",
+    "importance": "low",
+    "common": true,
+    "default": "You must enter at least @chars characters!",
+    "description": "Message to indicate that the text doesn't contain enough characters. You can use @chars which will be replaced by the corresponding number."
+  },
+  {
+    "name": "messageSave",
+    "type": "text",
+    "label": "Save message",
+    "description": "Message indicating that the text has been saved",
+    "importance": "low",
+    "common": true,
+    "default": "saved"
   }
 ]

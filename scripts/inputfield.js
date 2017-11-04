@@ -11,6 +11,7 @@
   const CHAR_MESSAGE = 'h5p-essay-input-field-message-char';
   const SAVE_MESSAGE = 'h5p-essay-input-field-message-save';
   const ANIMATION_MESSAGE = 'h5p-essay-input-field-message-save-animation';
+  const CHAR_STYLE_WARNING = 'h5p-essay-warning';
 
   Essay.InputField = function (params, previousState) {
     var that = this;
@@ -52,18 +53,15 @@
 
     this.statusChars = document.createElement('div');
     this.statusChars.classList.add(CHAR_MESSAGE);
-    // This will prevent moving the button after save message appears
-    this.statusChars.innerHTML = '&nbsp;';
+
     statusWrapper.append(this.statusChars);
 
-    if (typeof this.params.maximumLength !== 'undefined') {
-      ['change', 'keyup', 'paste'].forEach(function (event) {
-        that.inputField.addEventListener(event, function () {
-          that.updateMessageSaved('');
-          that.updateMessageChars();
-        });
+    ['change', 'keyup', 'paste'].forEach(function (event) {
+      that.inputField.addEventListener(event, function () {
+        that.updateMessageSaved('');
+        that.updateMessageChars();
       });
-    }
+    });
 
     this.statusSaved = document.createElement('div');
     this.statusSaved.classList.add(SAVE_MESSAGE);
@@ -71,9 +69,7 @@
 
     this.content.append(statusWrapper);
 
-    if (typeof this.params.maximumLength !== 'undefined') {
-      this.updateMessageChars();
-    }
+    this.updateMessageChars();
   };
 
   /**
@@ -142,8 +138,12 @@
    * Update character message field
    */
   Essay.InputField.prototype.updateMessageChars = function () {
-    this.statusChars.innerHTML = this.params.remainingChars
-        .replace(/@chars/g, this.computeRemainingChars());
+    if (typeof this.params.maximumLength !== 'undefined') {
+      this.statusChars.innerHTML = this.params.remainingChars
+          .replace(/@chars/g, this.computeRemainingChars());
+    } else {
+      this.statusChars.innerHTML = '&nbsp;';
+    }
   };
 
   /**
@@ -159,6 +159,10 @@
       this.statusSaved.classList.add(ANIMATION_MESSAGE);
     }
     this.statusSaved.innerHTML = saved;
+  };
+
+  Essay.InputField.prototype.setMessageChars = function (message) {
+    this.statusChars.innerHTML = message;
   };
 
 })(H5P.Essay);

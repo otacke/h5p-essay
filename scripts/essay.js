@@ -2,9 +2,7 @@ var H5P = H5P || {};
 
 /*
  * TODO: Add optional media on top (possibly => Could also be done using column)
- * TODO: Add minimum characters
- * TODO: Use Range instead of two numbers
- * TODO: Think about scoring for repetitions of keywords 
+ * TODO: Think about scoring for repetitions of keywords
  */
 
 H5P.Essay = function ($, Question) {
@@ -29,6 +27,11 @@ H5P.Essay = function ($, Question) {
     this.config = config;
     this.contentId = contentId;
     this.contentData = contentData || {};
+
+    this.config.behaviour.minimumLength = this.config.behaviour.minimumLength || 0;
+    if (this.config.behaviour.maximumLength !== undefined) {
+      this.config.behaviour.minimumLength = Math.min(this.config.behaviour.minimumLength, this.config.behaviour.maximumLength);
+    }
 
     // map function
     var toPoints = function (keywords) {
@@ -104,6 +107,10 @@ H5P.Essay = function ($, Question) {
 
     // Check answer button
     that.addButton('check-answer', that.config.checkAnswer, function () {
+      if (that.inputField.getText().length < that.config.behaviour.minimumLength) {
+        that.inputField.setMessageChars(that.config.notEnoughChars.replace(/@chars/g, that.config.behaviour.minimumLength));
+        return;
+      }
       that.inputField.disable();
       that.showEvaluation();
       if (that.config.solution.sample !== undefined && that.config.solution.sample !== '') {
