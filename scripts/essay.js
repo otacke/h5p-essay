@@ -363,8 +363,9 @@ H5P.Essay = function ($, Question) {
         }
 
         // Fuzzy matching
+        var fuzzyFound = H5P.TextUtilities.fuzzyFind(alternative, inputTest);
         if ((options.forgiveMistakes || that.config.behaviour.overrideForgiveMistakes === 'on') &&
-            H5P.TextUtilities.fuzzyContains(alternative, inputTest)) {
+            fuzzyFound.contains) {
           keywordFound = alternativeOriginal;
           return true;
         }
