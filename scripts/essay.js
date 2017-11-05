@@ -265,7 +265,7 @@ H5P.Essay = function ($, Question) {
       }
     }
     else {
-      this.trigger(this.createEssayXAPIEvent('mastered'));
+
       this.hideButton('try-again');
     }
   };
