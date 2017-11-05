@@ -94,7 +94,7 @@
           "name": "keyword",
           "type": "text",
           "label": "Keyword",
-          "description": "Keyword or phrase to look for",
+          "description": "Keyword or phrase to look for. Use an asterisk '*' as a wildcard for one or more characters.",
           "importance": "medium"
         },
         {

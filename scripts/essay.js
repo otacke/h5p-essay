@@ -1,10 +1,5 @@
 var H5P = H5P || {};
 
-/*
- * TODO: Add optional media on top (possibly => Could also be done using column)
- * TODO: Think about scoring for repetitions of keywords
- */
-
 H5P.Essay = function ($, Question) {
   'use strict';
 
@@ -58,7 +53,7 @@ H5P.Essay = function ($, Question) {
           this.scoreMastering,
           this.config.behaviour.percentagePassing * scoreMax / 100 || 0);
 
-    this.$solution = this.buildSolution();
+    this.solution = this.buildSolution();
   }
 
   // Extends Question
@@ -107,12 +102,16 @@ H5P.Essay = function ($, Question) {
 
     // Check answer button
     that.addButton('check-answer', that.config.checkAnswer, function () {
+      // Show message if the minimum number of characters has not been met
       if (that.inputField.getText().length < that.config.behaviour.minimumLength) {
         that.inputField.setMessageChars(that.config.notEnoughChars.replace(/@chars/g, that.config.behaviour.minimumLength));
         return;
       }
+
       that.inputField.disable();
+
       that.showEvaluation();
+
       if (that.config.solution.sample !== undefined && that.config.solution.sample !== '') {
         that.showButton('show-solution');
       }
@@ -135,43 +134,53 @@ H5P.Essay = function ($, Question) {
 
   /**
    * Build solution DOM object.
-   * @return {jQuery} DOM object.
+   * @return {object} DOM object.
    */
   Essay.prototype.buildSolution = function () {
-    return $('<div>')
-        .addClass('h5p-essay-solution-container')
-        .attr('tabIndex', '0')
-        .append($('<div>')
-            .addClass('h5p-essay-solution-title')
-            .html(this.config.solutionTitle))
-        .append($('<div>')
-            .addClass('h5p-essay-solution-introduction')
-            .html(this.config.solution.introduction))
-        .append($('<div>')
-            .addClass('h5p-essay-solution-sample'));
+    var solution = document.createElement('div');
+    solution.classList.add('h5p-essay-solution-container');
+    solution.setAttribute('tabindex', '0');
+
+    var solutionTitle = document.createElement('div');
+    solutionTitle.classList.add('h5p-essay-solution-title');
+    solutionTitle.innerHTML = this.config.solutionTitle;
+    solution.append(solutionTitle);
+
+    var solutionIntroduction = document.createElement('div');
+    solutionIntroduction.classList.add('h5p-essay-solution-introduction');
+    solutionIntroduction.innerHTML = this.config.solution.introduction;
+    solution.append(solutionIntroduction);
+
+    var solutionSample = document.createElement('div');
+    solutionSample.classList.add('h5p-essay-solution-sample');
+    solution.append(solutionSample);
+
+    return solution;
   };
 
   /**
    * Show solution.
    */
   Essay.prototype.showSolution = function () {
-    // TODO: Clean up here
+    // We add the sample solution here to make cheating at least a little more difficult
     var text = document.createElement('div');
     text.classList.add('h5p-essay-solution-sample-text');
     text.innerHTML = this.config.solution.sample;
-    this.$solution.find('.h5p-essay-solution-sample')
-        .append(text);
-    this.$solution.insertAfter('.h5p-question-explanation');
+    this.solution.children[2].append(text);
 
+    // Insert solution after explanations
+    var explanation = document.getElementsByClassName('h5p-question-explanation')[0];
+    explanation.parentNode.insertBefore(this.solution, explanation.nextSibling);
+
+    this.solution.focus();
     this.trigger('resize');
-    this.$solution.focus();
   };
 
   /**
    * Hide the solution.
    */
   Essay.prototype.hideSolution = function () {
-    this.$solution.remove();
+    this.solution.remove();
   };
 
   /**
@@ -180,7 +189,46 @@ H5P.Essay = function ($, Question) {
   Essay.prototype.showEvaluation = function () {
     var feedback = this.computeResults();
 
-    // Add explanations if available
+    // Build explanations
+    var explanations = this.buildExplanation(feedback);
+
+    if (explanations.length > 0) {
+      this.setExplanation(explanations, this.config.feedbackHeader);
+    }
+    else {
+      this.setExplanation([], '');
+      // We don't need this DOM element if there are no explanations
+      var explanationContainer = document.getElementsByClassName('h5p-question-explanation-container')[0];
+      explanationContainer.remove();
+    }
+
+    // Not all keyword groups might be necessary for mastering
+    var score = Math.min(feedback.score, this.scoreMastering);
+    var textScore = H5P.Question.determineOverallFeedback(
+        this.config.overallFeedback, score / this.scoreMastering)
+            .replace('@score', score)
+            .replace('@total', this.scoreMastering);
+    this.setFeedback(textScore, score, this.scoreMastering);
+
+    // Show and hide buttons as necessary
+    this.handleButtons (score);
+
+    // Trigger xAPI statements as necessary
+    this.handleXAPI(score);
+
+    this.trigger('resize');
+  };
+
+  /**
+   * Build explanations from feedback.
+   * @param {object} feedback - Feedback received.
+   * @param {object} feedback.explanation Array of explanation items for feedback.
+   * @param {boolean} feedback.explanation.found - True if the keyword was found.
+   * @param {string} feedback.explanation.keyword - Keyword that was found/not found.
+   * @param {string} feedback.explanation.message - Message for the keyword.
+   * @return {object} Array of explanations.
+   */
+  Essay.prototype.buildExplanation = function (feedback) {
     const emptyWord = '<span class="h5p-essay-feedback-empty">...</span>';
 
     var explanations = [];
@@ -198,48 +246,16 @@ H5P.Essay = function ($, Question) {
       explanations.sort(function (a, b) {
         return a.correct === emptyWord && b.correct !== emptyWord;
       });
-      this.setExplanation(explanations, this.config.feedbackHeader);
     }
-    else {
-      this.setExplanation([], '');
-      var explanationContainer = document.getElementsByClassName('h5p-question-explanation-container')[0];
-      explanationContainer.remove();
-    }
+    return explanations;
+  };
 
-    // Not all keyword groups might be necessary for mastering
-    var score = Math.min(feedback.score, this.scoreMastering);
-
-    var textScore = H5P.Question.determineOverallFeedback(
-        this.config.overallFeedback, score / this.scoreMastering)
-            .replace('@score', score)
-            .replace('@total', this.scoreMastering);
-
-    this.setFeedback(textScore, score, this.scoreMastering);
-
-
-    // TODO: Move this out of this function!!!
-    this.trigger(this.createEssayXAPIEvent('completed'));
-
-    var xAPIEvent = this.createEssayXAPIEvent('scored');
-    xAPIEvent.setScoredResult(score, this.scoreMastering, this, true,
-        feedback.score >= this.scorePassing);
-    xAPIEvent.data.statement.result.response = this.getInput();
-    /*
-     * We could think about adding support for the "correct response pattern",
-     * but the official xAPI documentation discourages to use it if the
-     * criteria for a question are complex and correct responses cannot be
-     * exhaustively listed. They kind of can and can't.
-     */
-    this.trigger(xAPIEvent);
-
-    if (feedback.score < this.scorePassing) {
-      this.trigger(this.createEssayXAPIEvent('failed'));
-    }
-    else {
-      this.trigger(this.createEssayXAPIEvent('passed'));
-    }
-
-    if (this.config.solution.sample && !this.$solution) {
+  /**
+   * Handle buttons' visibility
+   * @param {number} score - Score the user received.
+   */
+  Essay.prototype.handleButtons = function (score) {
+    if (this.config.solution.sample && !this.solution) {
       this.showButton('show-solution');
     }
 
@@ -252,8 +268,36 @@ H5P.Essay = function ($, Question) {
       this.trigger(this.createEssayXAPIEvent('mastered'));
       this.hideButton('try-again');
     }
+  };
 
-    this.trigger('resize');
+  /**
+   * Handle xAPI event triggering
+   * @param {number} score - Score the user received.
+   */
+  Essay.prototype.handleXAPI = function (score) {
+    this.trigger(this.createEssayXAPIEvent('completed'));
+
+    var xAPIEvent = this.createEssayXAPIEvent('scored');
+    xAPIEvent.setScoredResult(score, this.scoreMastering, this, true,
+        score >= this.scorePassing);
+    xAPIEvent.data.statement.result.response = this.getInput();
+    /*
+     * We could think about adding support for the "correct response pattern",
+     * but the official xAPI documentation discourages to use it if the
+     * criteria for a question are complex and correct responses cannot be
+     * exhaustively listed. They kind of can and can't.
+     */
+    this.trigger(xAPIEvent);
+
+    if (score < this.scorePassing) {
+      this.trigger(this.createEssayXAPIEvent('failed'));
+    }
+    else {
+      this.trigger(this.createEssayXAPIEvent('passed'));
+    }
+    if (score >= this.scoreMastering) {
+      this.trigger(this.createEssayXAPIEvent('mastered'));
+    }
   };
 
   /**
@@ -261,7 +305,6 @@ H5P.Essay = function ($, Question) {
    * @return {Object} Feedback of {score: number, text: [{message: String, found: boolean}]}.
    */
   Essay.prototype.computeResults = function () {
-    // TODO: This could be cleaned up, e.g. don't use some for returning true but something else returning undefined || keywordFound
     var that = this;
     var score = 0;
     var explanation = [];
@@ -311,7 +354,7 @@ H5P.Essay = function ($, Question) {
         var regex = new RegExp(alternative.replace(/\*/g, '[A-z]*'), 'g');
         var found = (inputTest.match(regex) || []).some(function (match) {
           if (regex.test(inputTest) && H5P.TextUtilities.isIsolated(match, inputTest)) {
-            keywordFound = alternativeOriginal;
+            keywordFound = match;
             return true;
           }
         });
