@@ -32,6 +32,7 @@ You're welcome to contribute your ideas as an issue on github. For now there are
 - As a teacher, I can receive the texts and the results of students.
 - As a teacher, I can set different levels of difficulty that the students can choose from.
 - As a student, I can select different levels of difficulty in order to gradually test myself.
+- As a teacher, I want to be able to set a minimum number of characters in order to force students to write a certain amount of text.
 
 ### xAPI statements
 Compare https://web.archive.org/web/20170628002610/http://xapi.vocab.pub/datasets/adl/
