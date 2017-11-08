@@ -123,7 +123,15 @@
               "type": "number",
               "label": "Points",
               "default": 1,
-              "description": "Points that the user will get if he/she includes this keyword or its alternatives in the answer",
+              "description": "Points that the user will get if he/she includes this keyword or its alternatives in the answer.",
+              "min": 1
+            },
+            {
+              "name": "occurrences",
+              "type": "number",
+              "label": "Occurrences",
+              "default": 1,
+              "description": "Define how many occurrences of the keyword or its variations should be awarded with points.",
               "min": 1
             },
             {

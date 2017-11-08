@@ -30,7 +30,7 @@ H5P.Essay = function ($, Question) {
 
     // map function
     var toPoints = function (keywords) {
-      return keywords.options && keywords.options.points || 0;
+      return (keywords.options && keywords.options.points || 0) * (keywords.options.occurrences || 1);
     };
 
     // reduce function
@@ -187,11 +187,13 @@ H5P.Essay = function ($, Question) {
    * Show results.
    */
   Essay.prototype.showEvaluation = function () {
-    var feedback = this.computeResults();
+    // TODO: Rework to "handleEvaluation";
+    var results = this.computeResults2();
 
     // Build explanations
-    var explanations = this.buildExplanation(feedback);
+    var explanations = this.buildExplanation2(results);
 
+    // Show explanations
     if (explanations.length > 0) {
       this.setExplanation(explanations, this.config.feedbackHeader);
     }
@@ -203,7 +205,7 @@ H5P.Essay = function ($, Question) {
     }
 
     // Not all keyword groups might be necessary for mastering
-    var score = Math.min(feedback.score, this.scoreMastering);
+    var score = Math.min(this.computeScore(results), this.scoreMastering);
     var textScore = H5P.Question.determineOverallFeedback(
         this.config.overallFeedback, score / this.scoreMastering)
             .replace('@score', score)
@@ -218,6 +220,39 @@ H5P.Essay = function ($, Question) {
 
     this.trigger('resize');
   };
+
+  Essay.prototype.buildExplanation2 = function (results) {
+    const emptyWord = '<span class="h5p-essay-feedback-empty">...</span>';
+
+    var explanations = [];
+
+    for (var i = 0; i < this.config.keywords.length; i++) {
+      if (results[i].length === 0 && this.config.keywords[i].options.feedbackMissed) {
+        explanations.push({correct: emptyWord, text: this.config.keywords[i].options.feedbackMissed});
+      }
+      if (results[i].length > 0 && this.config.keywords[i].options.feedbackIncluded) {
+        explanations.push({correct: this.config.keywords[i].keyword, text: this.config.keywords[i].options.feedbackIncluded});
+      }
+    }
+
+    if (explanations.length > 0) {
+      // Included before not included, but keep order otherwise
+      explanations.sort(function (a, b) {
+        return a.correct === emptyWord && b.correct !== emptyWord;
+      });
+    }
+    return explanations;
+  };
+
+
+  Essay.prototype.computeScore = function (results) {
+    var score = 0;
+    for (var i = 0; i < this.config.keywords.length; i++) {
+      score += Math.min(results[i].length, this.config.keywords[i].options.occurrences) * this.config.keywords[i].options.points;
+    }
+    return score;
+  };
+
 
   /**
    * Build explanations from feedback.
@@ -300,6 +335,59 @@ H5P.Essay = function ($, Question) {
     }
   };
 
+
+  /**
+   * Compute results.
+   * @return {Object} Results.
+   */
+  Essay.prototype.computeResults2 = function () {
+    var that = this;
+    var results = [];
+
+    // We don't want EOLs to mess up the string.
+    var input = this.getInput();
+    var inputLowerCase = input.toLowerCase();
+
+    // Should not happen, but just to be sure ...
+    this.config.keywords = this.config.keywords || [];
+
+    // optional = false is ignored in Editor
+    this.config.keywords = this.config.keywords.filter(function (element) {
+      return (typeof element.keyword !== 'undefined');
+    });
+
+    var resultsGroup;
+    this.config.keywords.forEach(function (alternativeGroup) {
+      resultsGroup = [];
+      var options = alternativeGroup.options;
+      var alternatives = [alternativeGroup.keyword || []].concat(alternativeGroup.alternatives || []);
+
+      // Detect all matches
+      var alternativeOriginal; // TODO: make selection of possible display parameters (one, all)
+      alternatives.forEach(function (alternative) {
+        var inputTest = input;
+        alternativeOriginal = alternativeOriginal || alternative;
+
+        // Check for case sensitivity
+        if  (!options.caseSensitive || that.config.behaviour.overrideCaseSensitive === 'off') {
+          alternative = alternative.toLowerCase();
+          inputTest = inputLowerCase;
+        }
+
+        var matchesExact = that.detectExactMatches(alternative, inputTest);
+        var matchesWildcard = (alternative.indexOf('*') !== -1) ? that.detectWildcardMatches(alternative, inputTest) : [];
+        var matchesFuzzy = (options.forgiveMistakes) ? that.detectFuzzyMatches(alternative, inputTest) : [];
+
+        var foo = that.mergeMatches(matchesExact, matchesWildcard, matchesFuzzy);
+        foo.forEach(function (item) {
+          resultsGroup.push(item);
+        });
+      });
+      results.push(resultsGroup);
+    });
+    return results;
+  };
+
   /**
    * Compute the feedback.
    * @return {Object} Feedback of {score: number, text: [{message: String, found: boolean}]}.
@@ -327,12 +415,12 @@ H5P.Essay = function ($, Question) {
      * might expect. This could probably be improved.
      */
 
-    // Within each keyword group check if one of the alternatives is a keyword
     this.config.keywords.forEach(function (alternativeGroup) {
       var options = alternativeGroup.options;
       var alternatives = [alternativeGroup.keyword || []].concat(alternativeGroup.alternatives || []);
 
       var keywordFound = '';
+
       var found = alternatives.some(function (alternative) {
         var inputTest = input;
         var alternativeOriginal = alternative;
@@ -462,6 +550,117 @@ H5P.Essay = function ($, Question) {
     definition.type = 'http://id.tincanapi.com/activitytype/essay';
     definition.interactionType = 'long-fill-in';
     return definition;
+  };
+
+  /**
+   * Detect exact matches of needle in haystack.
+   * @param {string} needle - Word or phrase to find.
+   * @param {string} haystack - Text to find the word or phrase in.
+   * @param {object} Results.
+   */
+  Essay.prototype.detectExactMatches = function (needle, haystack) {
+    var result = [];
+    var pos;
+    var front = 0;
+    while ((pos = haystack.indexOf(needle)) !== -1) {
+      if (H5P.TextUtilities.isIsolated(needle, haystack)) {
+        result.push({'keyword': needle, 'match': needle, 'index': front + pos});
+      }
+      front += pos + needle.length;
+      haystack = haystack.substr(pos + needle.length);
+    }
+    return result;
+  };
+
+  /**
+   * Detect wildcard matches of needle in haystack.
+   * @param {string} needle - Word or phrase to find.
+   * @param {string} haystack - Text to find the word or phrase in.
+   * @param {object} Results.
+   */
+  Essay.prototype.detectWildcardMatches = function (needle, haystack) {
+    if (needle.indexOf('*') === -1) {
+      return [];
+    }
+    var regexp = new RegExp(needle.replace(/\*/g, '[A-z]*'), 'g');
+    var result = [];
+    var match;
+    while ((match = regexp.exec(haystack)) !== null ) {
+      if (H5P.TextUtilities.isIsolated(match[0], haystack, {'index': match.index})) {
+        result.push({'keyword': needle, 'match': match[0], 'index': match.index});
+      }
+    }
+    return result;
+  };
+
+  /**
+   * Detect fuzzy matches of needle in haystack.
+   * @param {string} needle - Word or phrase to find.
+   * @param {string} haystack - Text to find the word or phrase in.
+   * @param {object} Results.
+   */
+  Essay.prototype.detectFuzzyMatches = function (needle, haystack) {
+    const windowSize = 2;
+    const delimiter = H5P.TextUtilities.WORD_DELIMITER;
+    haystack = haystack.replace(delimiter, ' ');
+
+    var results = [];
+      for (var size = 0; size <= windowSize; size++) {
+        for (var pos = 0; pos < haystack.length; pos++) {
+
+          var straw = haystack.substr(pos, needle.length + size);
+          if (H5P.TextUtilities.areSimilar(needle, straw) && H5P.TextUtilities.isIsolated(straw, haystack, {'index': pos})) {
+            pos += haystack.substr(pos).indexOf(straw.trim());
+            if (!this.contains(results, pos)) {
+              results.push({'keyword': needle, 'match': straw, 'index': pos});
+            }
+          }
+        }
+      }
+    return results;
+  };
+
+  /**
+   * Check if an array of detect results contains the same match in the word's proximity.
+   * Used to prevent double entries that can be caused by fuzzy matching.
+   * @param {object} results - Preliminary results.
+   * @param {string} results.match - Match that was found before at a particular position.
+   * @param {number} results.index - Starting position of the match.
+   * @param {number} index - Index of solution to be checked for double entry.
+   */
+  Essay.prototype.contains = function (results, index) {
+    return results.some(function (result) {
+      return Math.abs(result.index - index) <= result.match.length;
+    });
+  };
+
+  /**
+   * Merge the matches.
+   * TODO: generalize
+   * @param {object} match1 - Matches 1.
+   * @param {object} match2 - Matches 2.
+   * @param {object} match3 - Matches 3.
+   * @return {object} Merged matches.
+   */
+  Essay.prototype.mergeMatches = function (match1, match2, match3) {
+    match1 = match1 || [];
+    match2 = match2 || [];
+    match3 = match3 || [];
+    var results = match1.slice();
+    var that = this;
+    match2.forEach(function (match) {
+      if (!that.contains(results, match.index)) {
+        results.push(match);
+      }
+    });
+    match3.forEach(function (match) {
+      if (!that.contains(results, match.index)) {
+        results.push(match);
+      }
+    });
+    return results.sort(function (a, b) {
+      return a.index > b.index;
+    });
   };
 
   return Essay;
