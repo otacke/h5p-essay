@@ -210,7 +210,13 @@ H5P.Essay = function ($, Question) {
         this.config.overallFeedback, score / this.scoreMastering)
             .replace('@score', score)
             .replace('@total', this.scoreMastering);
-    this.setFeedback(textScore, score, this.scoreMastering);
+
+    if (!this.config.behaviour.ignoreScoring) {
+      this.setFeedback(textScore, score, this.scoreMastering);
+    }
+    else {
+      console.log('NO SCORING');
+    }
 
     // Show and hide buttons as necessary
     this.handleButtons (score);
@@ -294,13 +300,12 @@ H5P.Essay = function ($, Question) {
       this.showButton('show-solution');
     }
 
-    if (score < this.scoreMastering) {
+    if (score < this.scoreMastering || this.config.behaviour.ignoreScoring) {
       if (this.config.behaviour.enableRetry) {
         this.showButton('try-again');
       }
     }
     else {
-
       this.hideButton('try-again');
     }
   };
@@ -312,26 +317,31 @@ H5P.Essay = function ($, Question) {
   Essay.prototype.handleXAPI = function (score) {
     this.trigger(this.createEssayXAPIEvent('completed'));
 
-    var xAPIEvent = this.createEssayXAPIEvent('scored');
-    xAPIEvent.setScoredResult(score, this.scoreMastering, this, true,
-        score >= this.scorePassing);
-    xAPIEvent.data.statement.result.response = this.getInput();
-    /*
-     * We could think about adding support for the "correct response pattern",
-     * but the official xAPI documentation discourages to use it if the
-     * criteria for a question are complex and correct responses cannot be
-     * exhaustively listed. They kind of can and can't.
-     */
-    this.trigger(xAPIEvent);
+    if (!this.config.behaviour.ignoreScoring) {
+      var xAPIEvent = this.createEssayXAPIEvent('scored');
+      xAPIEvent.setScoredResult(score, this.scoreMastering, this, true,
+          score >= this.scorePassing);
+      xAPIEvent.data.statement.result.response = this.getInput();
+      /*
+       * We could think about adding support for the "correct response pattern",
+       * but the official xAPI documentation discourages to use it if the
+       * criteria for a question are complex and correct responses cannot be
+       * exhaustively listed. They kind of can and can't.
+       */
+      this.trigger(xAPIEvent);
 
-    if (score < this.scorePassing) {
-      this.trigger(this.createEssayXAPIEvent('failed'));
+      if (score < this.scorePassing) {
+        this.trigger(this.createEssayXAPIEvent('failed'));
+      }
+      else {
+        this.trigger(this.createEssayXAPIEvent('passed'));
+      }
+      if (score >= this.scoreMastering) {
+        this.trigger(this.createEssayXAPIEvent('mastered'));
+      }
     }
     else {
-      this.trigger(this.createEssayXAPIEvent('passed'));
-    }
-    if (score >= this.scoreMastering) {
-      this.trigger(this.createEssayXAPIEvent('mastered'));
+      console.log('NOSCORING XAPI');
     }
   };
 
@@ -600,23 +610,27 @@ H5P.Essay = function ($, Question) {
    * @param {object} Results.
    */
   Essay.prototype.detectFuzzyMatches = function (needle, haystack) {
+    // Ideally, this should be the maximum number of allowed transformations for the Levenshtein disctance.
     const windowSize = 2;
-    const delimiter = H5P.TextUtilities.WORD_DELIMITER;
-    haystack = haystack.replace(delimiter, ' ');
-
+    /*
+     * We cannot simple split words because we're also looking for phrases.
+     * If we were just looking for exact matches, we could use something smarter
+     * such as the KMP algorithm. Because we're dealing with fuzzy matches, using
+     * this intuitive exhaustive approach might be the best way to go.
+     */
     var results = [];
-      for (var size = 0; size <= windowSize; size++) {
-        for (var pos = 0; pos < haystack.length; pos++) {
-
-          var straw = haystack.substr(pos, needle.length + size);
-          if (H5P.TextUtilities.areSimilar(needle, straw) && H5P.TextUtilities.isIsolated(straw, haystack, {'index': pos})) {
-            pos += haystack.substr(pos).indexOf(straw.trim());
-            if (!this.contains(results, pos)) {
-              results.push({'keyword': needle, 'match': straw, 'index': pos});
-            }
+    // Without looking at the surroundings we'd miss words that have additional or missing chars
+    for (var size = -windowSize; size <= windowSize; size++) {
+      for (var pos = 0; pos < haystack.length; pos++) {
+        var straw = haystack.substr(pos , needle.length + size);
+        if (H5P.TextUtilities.areSimilar(needle, straw) && H5P.TextUtilities.isIsolated(straw, haystack, {'index': pos})) {
+          pos += haystack.substr(pos).indexOf(straw);
+          if (!this.contains(results, pos)) {
+            results.push({'keyword': needle, 'match': straw, 'index': pos});
           }
         }
       }
+    }
     return results;
   };
 

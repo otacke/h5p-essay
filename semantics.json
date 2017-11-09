@@ -277,7 +277,17 @@
         "label": "Enable \"Retry\"",
         "type": "boolean",
         "importance": "low",
+        "description": "If checked, learners can retry the task.",
         "default": true,
+        "optional": true
+      },
+      {
+        "name": "ignoreScoring",
+        "label": "Ignore scoring",
+        "type": "boolean",
+        "importance": "low",
+        "description": "If checked, learners will only see the feedback that you provided for the keywords, but no score.",
+        "default": false,
         "optional": true
       },
       {
