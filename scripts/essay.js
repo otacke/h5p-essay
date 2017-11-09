@@ -1,3 +1,4 @@
+/* jslint esversion: 6 */
 var H5P = H5P || {};
 
 H5P.Essay = function ($, Question) {
@@ -29,17 +30,17 @@ H5P.Essay = function ($, Question) {
     }
 
     // map function
-    var toPoints = function (keywords) {
+    let toPoints = function (keywords) {
       return (keywords.options && keywords.options.points || 0) * (keywords.options.occurrences || 1);
     };
 
     // reduce function
-    var sum = function (a, b) {
+    let sum = function (a, b) {
       return a + b;
     };
 
     // scoreMax = Maximum number of points available by all keyword groups
-    var scoreMax = this.config.keywords
+    let scoreMax = this.config.keywords
       .map(toPoints)
       .reduce(sum, 0);
 
@@ -102,7 +103,7 @@ H5P.Essay = function ($, Question) {
    * Add all the buttons that shall be passed to H5P.Question
    */
   Essay.prototype.addButtons = function () {
-    var that = this;
+    let that = this;
 
     // Show solution button
     that.addButton('show-solution', that.config.showSolution, function () {
@@ -144,24 +145,24 @@ H5P.Essay = function ($, Question) {
 
   /**
    * Build solution DOM object.
-   * @return {object} DOM object.
+   * @return {Object} DOM object.
    */
   Essay.prototype.buildSolution = function () {
-    var solution = document.createElement('div');
+    let solution = document.createElement('div');
     solution.classList.add('h5p-essay-solution-container');
     solution.setAttribute('tabindex', '0');
 
-    var solutionTitle = document.createElement('div');
+    let solutionTitle = document.createElement('div');
     solutionTitle.classList.add('h5p-essay-solution-title');
     solutionTitle.innerHTML = this.config.solutionTitle;
     solution.append(solutionTitle);
 
-    var solutionIntroduction = document.createElement('div');
+    let solutionIntroduction = document.createElement('div');
     solutionIntroduction.classList.add('h5p-essay-solution-introduction');
     solutionIntroduction.innerHTML = this.config.solution.introduction;
     solution.append(solutionIntroduction);
 
-    var solutionSample = document.createElement('div');
+    let solutionSample = document.createElement('div');
     solutionSample.classList.add('h5p-essay-solution-sample');
     solution.append(solutionSample);
 
@@ -173,13 +174,13 @@ H5P.Essay = function ($, Question) {
    */
   Essay.prototype.showSolution = function () {
     // We add the sample solution here to make cheating at least a little more difficult
-    var text = document.createElement('div');
+    let text = document.createElement('div');
     text.classList.add('h5p-essay-solution-sample-text');
     text.innerHTML = this.config.solution.sample;
     this.solution.children[2].append(text);
 
     // Insert solution after explanations
-    var explanation = document.getElementsByClassName('h5p-question-explanation')[0];
+    let explanation = document.getElementsByClassName('h5p-question-explanation')[0];
     explanation.parentNode.insertBefore(this.solution, explanation.nextSibling);
 
     this.solution.focus();
@@ -197,10 +198,10 @@ H5P.Essay = function ($, Question) {
    * Handle the evaluation.
    */
   Essay.prototype.handleEvaluation = function () {
-    var results = this.computeResults();
+    let results = this.computeResults();
 
     // Build explanations
-    var explanations = this.buildExplanation(results);
+    let explanations = this.buildExplanation(results);
 
     // Show explanations
     if (explanations.length > 0) {
@@ -209,13 +210,13 @@ H5P.Essay = function ($, Question) {
     else {
       this.setExplanation([], '');
       // We don't need this DOM element if there are no explanations
-      var explanationContainer = document.getElementsByClassName('h5p-question-explanation-container')[0];
+      let explanationContainer = document.getElementsByClassName('h5p-question-explanation-container')[0];
       explanationContainer.remove();
     }
 
     // Not all keyword groups might be necessary for mastering
-    var score = Math.min(this.computeScore(results), this.scoreMastering);
-    var textScore = H5P.Question.determineOverallFeedback(
+    let score = Math.min(this.computeScore(results), this.scoreMastering);
+    let textScore = H5P.Question.determineOverallFeedback(
         this.config.overallFeedback, score / this.scoreMastering)
             .replace('@score', score)
             .replace('@total', this.scoreMastering);
@@ -235,15 +236,15 @@ H5P.Essay = function ($, Question) {
 
   /**
    * Compute results.
-   * @return {Object} Results: [[{"keyword": keyword, "match": match, "index": index}*]*]
+   * @return {Object[]} Results: [[{"keyword": keyword, "match": match, "index": index}*]*]
    */
   Essay.prototype.computeResults = function () {
-    var that = this;
-    var results = [];
+    let that = this;
+    let results = [];
 
     // We don't want EOLs to mess up the string.
-    var input = this.getInput();
-    var inputLowerCase = input.toLowerCase();
+    let input = this.getInput();
+    let inputLowerCase = input.toLowerCase();
 
     // Should not happen, but just to be sure ...
     this.config.keywords = this.config.keywords || [];
@@ -253,15 +254,15 @@ H5P.Essay = function ($, Question) {
       return (typeof element.keyword !== 'undefined');
     });
 
-    var resultsGroup;
+    let resultsGroup;
     this.config.keywords.forEach(function (alternativeGroup) {
       resultsGroup = [];
-      var options = alternativeGroup.options;
-      var alternatives = [alternativeGroup.keyword || []].concat(alternativeGroup.alternatives || []);
+      let options = alternativeGroup.options;
+      let alternatives = [alternativeGroup.keyword || []].concat(alternativeGroup.alternatives || []);
 
       // Detect all matches
       alternatives.forEach(function (alternative) {
-        var inputTest = input;
+        let inputTest = input;
 
         // Check for case sensitivity
         if  (!options.caseSensitive || that.config.behaviour.overrideCaseSensitive === 'off') {
@@ -270,9 +271,9 @@ H5P.Essay = function ($, Question) {
         }
 
         // Build array of matches for each type of match
-        var matchesExact = that.detectExactMatches(alternative, inputTest);
-        var matchesWildcard = (alternative.indexOf('*') !== -1) ? that.detectWildcardMatches(alternative, inputTest) : [];
-        var matchesFuzzy = (options.forgiveMistakes) ? that.detectFuzzyMatches(alternative, inputTest) : [];
+        let matchesExact = that.detectExactMatches(alternative, inputTest);
+        let matchesWildcard = (alternative.indexOf('*') !== -1) ? that.detectWildcardMatches(alternative, inputTest) : [];
+        let matchesFuzzy = (options.forgiveMistakes) ? that.detectFuzzyMatches(alternative, inputTest) : [];
 
         // Merge matches without duplicates
         that.mergeMatches(matchesExact, matchesWildcard, matchesFuzzy).forEach(function (item) {
@@ -290,8 +291,8 @@ H5P.Essay = function ($, Question) {
    * @return {number} Score.
    */
   Essay.prototype.computeScore = function (results) {
-    var score = 0;
-    for (var i = 0; i < this.config.keywords.length; i++) {
+    let score = 0;
+    for (let i = 0; i < this.config.keywords.length; i++) {
       score += Math.min(results[i].length, this.config.keywords[i].options.occurrences) * this.config.keywords[i].options.points;
     }
     return score;
@@ -300,14 +301,14 @@ H5P.Essay = function ($, Question) {
   /**
    * Build the explanations for H5P.Question.setExplanation.
    * @param {Object} results - Results from the task.
-   * @return {Object} Explanations for H5P.Question.
+   * @return {Object[]} Explanations for H5P.Question.
    */
   Essay.prototype.buildExplanation = function (results) {
     const emptyWord = '<span class="h5p-essay-feedback-empty">...</span>';
 
-    var explanations = [];
+    let explanations = [];
 
-    for (var i = 0; i < this.config.keywords.length; i++) {
+    for (let i = 0; i < this.config.keywords.length; i++) {
       // Keyword was not found and feedback is provided for this case
       if (results[i].length === 0 && this.config.keywords[i].options.feedbackMissed) {
         explanations.push({correct: emptyWord, text: this.config.keywords[i].options.feedbackMissed});
@@ -355,7 +356,7 @@ H5P.Essay = function ($, Question) {
     this.trigger(this.createEssayXAPIEvent('completed'));
 
     if (!this.config.behaviour.ignoreScoring) {
-      var xAPIEvent = this.createEssayXAPIEvent('scored');
+      let xAPIEvent = this.createEssayXAPIEvent('scored');
       xAPIEvent.setScoredResult(score, this.scoreMastering, this, true,
           score >= this.scorePassing);
       xAPIEvent.data.statement.result.response = this.getInput();
@@ -385,7 +386,7 @@ H5P.Essay = function ($, Question) {
    * @return {H5P.XAPIEvent} Event template.
    */
   Essay.prototype.createEssayXAPIEvent = function (verb) {
-    var xAPIEvent = this.createXAPIEventTemplate(verb);
+    let xAPIEvent = this.createXAPIEventTemplate(verb);
     this.extend(
         xAPIEvent.getVerifiedStatementValue(['object', 'definition']),
         this.getxAPIDefinition());
@@ -397,7 +398,7 @@ H5P.Essay = function ($, Question) {
    * return {Object} XAPI definition.
    */
   Essay.prototype.getxAPIDefinition = function () {
-    var definition = {};
+    let definition = {};
     definition.name = {'en-US': 'Essay'};
     definition.description = {'en-US': this.config.taskDescription};
     definition.type = 'http://id.tincanapi.com/activitytype/essay';
@@ -409,13 +410,13 @@ H5P.Essay = function ($, Question) {
    * Detect exact matches of needle in haystack.
    * @param {string} needle - Word or phrase to find.
    * @param {string} haystack - Text to find the word or phrase in.
-   * @return {object} Results: [{'keyword': needle, 'match': needle, 'index': front + pos}*].
+   * @return {Object[]} Results: [{'keyword': needle, 'match': needle, 'index': front + pos}*].
    */
   Essay.prototype.detectExactMatches = function (needle, haystack) {
     // Simply detect all exact matches and its positions in the haystack
-    var result = [];
-    var pos;
-    var front = 0;
+    let result = [];
+    let pos;
+    let front = 0;
     while ((pos = haystack.indexOf(needle)) !== -1) {
       if (H5P.TextUtilities.isIsolated(needle, haystack)) {
         result.push({'keyword': needle, 'match': needle, 'index': front + pos});
@@ -430,16 +431,16 @@ H5P.Essay = function ($, Question) {
    * Detect wildcard matches of needle in haystack.
    * @param {string} needle - Word or phrase to find.
    * @param {string} haystack - Text to find the word or phrase in.
-   * @return {object} Results: [{'keyword': needle, 'match': needle, 'index': front + pos}*].
+   * @return {Object[]} Results: [{'keyword': needle, 'match': needle, 'index': front + pos}*].
    */
   Essay.prototype.detectWildcardMatches = function (needle, haystack) {
     if (needle.indexOf('*') === -1) {
       return [];
     }
     // We accept only characters for the wildcard
-    var regexp = new RegExp(needle.replace(/\*/g, '[A-z]*'), 'g');
-    var result = [];
-    var match;
+    let regexp = new RegExp(needle.replace(/\*/g, '[A-z]*'), 'g');
+    let result = [];
+    let match;
     while ((match = regexp.exec(haystack)) !== null ) {
       if (H5P.TextUtilities.isIsolated(match[0], haystack, {'index': match.index})) {
         result.push({'keyword': needle, 'match': match[0], 'index': match.index});
@@ -452,7 +453,7 @@ H5P.Essay = function ($, Question) {
    * Detect fuzzy matches of needle in haystack.
    * @param {string} needle - Word or phrase to find.
    * @param {string} haystack - Text to find the word or phrase in.
-   * @param {object} Results.
+   * @param {Object[]} Results.
    */
   Essay.prototype.detectFuzzyMatches = function (needle, haystack) {
     // Ideally, this should be the maximum number of allowed transformations for the Levenshtein disctance.
@@ -463,11 +464,11 @@ H5P.Essay = function ($, Question) {
      * such as the KMP algorithm. Because we're dealing with fuzzy matches, using
      * this intuitive exhaustive approach might be the best way to go.
      */
-    var results = [];
+    let results = [];
     // Without looking at the surroundings we'd miss words that have additional or missing chars
-    for (var size = -windowSize; size <= windowSize; size++) {
-      for (var pos = 0; pos < haystack.length; pos++) {
-        var straw = haystack.substr(pos , needle.length + size);
+    for (let size = -windowSize; size <= windowSize; size++) {
+      for (let pos = 0; pos < haystack.length; pos++) {
+        let straw = haystack.substr(pos , needle.length + size);
         if (H5P.TextUtilities.areSimilar(needle, straw) && H5P.TextUtilities.isIsolated(straw, haystack, {'index': pos})) {
           // This will only add the match if it's not a duplicate that we found already in the proximity of pos
           if (!this.contains(results, pos)) {
@@ -481,10 +482,8 @@ H5P.Essay = function ($, Question) {
 
   /**
    * Merge the matches.
-   * @param {object} match1 - Matches 1.
-   * @param {object} match2 - Matches 2.
-   * @param {object} match3 - Matches 3.
-   * @return {object} Merged matches.
+   * @param {...Object[]} matches - Detected matches.
+   * @return {Object[]} Merged matches.
    */
   Essay.prototype.mergeMatches = function () {
     // Sanitization
@@ -496,10 +495,10 @@ H5P.Essay = function ($, Question) {
     }
 
     // Add all elements from args[1+] to args[0] if not already there close by.
-    var results = (arguments[0] || []).slice();
-    for (var i = 1; i < arguments.length; i++) {
-      var match2 = arguments[i] || [];
-      for (var j = 0; j < match2.length; j++) {
+    let results = (arguments[0] || []).slice();
+    for (let i = 1; i < arguments.length; i++) {
+      let match2 = arguments[i] || [];
+      for (let j = 0; j < match2.length; j++) {
         if (!this.contains(results, match2[j].index)) {
           results.push(match2[j]);
         }
@@ -513,7 +512,7 @@ H5P.Essay = function ($, Question) {
   /**
    * Check if an array of detect results contains the same match in the word's proximity.
    * Used to prevent double entries that can be caused by fuzzy matching.
-   * @param {object} results - Preliminary results.
+   * @param {Object} results - Preliminary results.
    * @param {string} results.match - Match that was found before at a particular position.
    * @param {number} results.index - Starting position of the match.
    * @param {number} index - Index of solution to be checked for double entry.
@@ -526,12 +525,12 @@ H5P.Essay = function ($, Question) {
 
   /**
    * Extend an array just like JQuery's extend.
-   * @param {Object} arguments - Objects to be merged.
+   * @param {...Object} arguments - Objects to be merged.
    * @return {Object} Merged objects.
    */
   Essay.prototype.extend = function () {
-    for(var i = 1; i < arguments.length; i++) {
-      for(var key in arguments[i]) {
+    for(let i = 1; i < arguments.length; i++) {
+      for(let key in arguments[i]) {
         if (arguments[i].hasOwnProperty(key)) {
           if (typeof arguments[0][key] === 'object' &&
               typeof arguments[i][key] === 'object') {
