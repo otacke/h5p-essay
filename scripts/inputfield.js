@@ -14,7 +14,7 @@
   const CHAR_STYLE_WARNING = 'h5p-essay-warning';
 
   Essay.InputField = function (params, previousState) {
-    var that = this;
+    let that = this;
     this.params = params;
     this.previousState = previousState;
 
@@ -48,7 +48,7 @@
     this.container.appendChild(this.taskDescription);
     this.container.appendChild(this.content);
 
-    var statusWrapper = document.createElement('div');
+    let statusWrapper = document.createElement('div');
     statusWrapper.classList.add(WRAPPER_MESSAGE);
 
     this.statusChars = document.createElement('div');
