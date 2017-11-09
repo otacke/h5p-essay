@@ -297,7 +297,16 @@
         "description": "Percentage that's necessary for passing",
         "optional": true,
         "min": 0,
-        "max": 100
+        "max": 100,
+        "widget": "showWhen",
+        "showWhen": {
+          "rules": [
+            {
+              "field": "ignoreScoring",
+              "equals": false
+            }
+          ]
+        }
       },
       {
         "name": "percentageMastering",
@@ -306,7 +315,16 @@
         "description": "Percentage that's necessary for mastering",
         "optional": true,
         "min": 0,
-        "max": 100
+        "max": 100,
+        "widget": "showWhen",
+        "showWhen": {
+          "rules": [
+            {
+              "field": "ignoreScoring",
+              "equals": false
+            }
+          ]
+        }
       },
       {
         "name": "overrideCaseSensitive",
