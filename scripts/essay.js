@@ -89,6 +89,16 @@ H5P.Essay = function ($, Question) {
   };
 
   /**
+   * Get the user input from DOM.
+   * @return {string} Cleaned input.
+   */
+  Essay.prototype.getInput = function () {
+    return this.inputField.getText()
+        .replace(/(\r\n|\r|\n)/g, ' ')
+        .replace(/\s\s/g, ' ');
+  };
+
+  /**
    * Add all the buttons that shall be passed to H5P.Question
    */
   Essay.prototype.addButtons = function () {
@@ -110,7 +120,7 @@ H5P.Essay = function ($, Question) {
 
       that.inputField.disable();
 
-      that.showEvaluation();
+      that.handleEvaluation();
 
       if (that.config.solution.sample !== undefined && that.config.solution.sample !== '') {
         that.showButton('show-solution');
@@ -184,14 +194,13 @@ H5P.Essay = function ($, Question) {
   };
 
   /**
-   * Show results.
+   * Handle the evaluation.
    */
-  Essay.prototype.showEvaluation = function () {
-    // TODO: Rework to "handleEvaluation";
-    var results = this.computeResults2();
+  Essay.prototype.handleEvaluation = function () {
+    var results = this.computeResults();
 
     // Build explanations
-    var explanations = this.buildExplanation2(results);
+    var explanations = this.buildExplanation(results);
 
     // Show explanations
     if (explanations.length > 0) {
@@ -214,9 +223,6 @@ H5P.Essay = function ($, Question) {
     if (!this.config.behaviour.ignoreScoring) {
       this.setFeedback(textScore, score, this.scoreMastering);
     }
-    else {
-      console.log('NO SCORING');
-    }
 
     // Show and hide buttons as necessary
     this.handleButtons (score);
@@ -227,30 +233,62 @@ H5P.Essay = function ($, Question) {
     this.trigger('resize');
   };
 
-  Essay.prototype.buildExplanation2 = function (results) {
-    const emptyWord = '<span class="h5p-essay-feedback-empty">...</span>';
+  /**
+   * Compute results.
+   * @return {Object} Results: [[{"keyword": keyword, "match": match, "index": index}*]*]
+   */
+  Essay.prototype.computeResults = function () {
+    var that = this;
+    var results = [];
 
-    var explanations = [];
+    // We don't want EOLs to mess up the string.
+    var input = this.getInput();
+    var inputLowerCase = input.toLowerCase();
 
-    for (var i = 0; i < this.config.keywords.length; i++) {
-      if (results[i].length === 0 && this.config.keywords[i].options.feedbackMissed) {
-        explanations.push({correct: emptyWord, text: this.config.keywords[i].options.feedbackMissed});
-      }
-      if (results[i].length > 0 && this.config.keywords[i].options.feedbackIncluded) {
-        explanations.push({correct: this.config.keywords[i].keyword, text: this.config.keywords[i].options.feedbackIncluded});
-      }
-    }
+    // Should not happen, but just to be sure ...
+    this.config.keywords = this.config.keywords || [];
 
-    if (explanations.length > 0) {
-      // Included before not included, but keep order otherwise
-      explanations.sort(function (a, b) {
-        return a.correct === emptyWord && b.correct !== emptyWord;
+    // optional = false is ignored in Editor
+    this.config.keywords = this.config.keywords.filter(function (element) {
+      return (typeof element.keyword !== 'undefined');
+    });
+
+    var resultsGroup;
+    this.config.keywords.forEach(function (alternativeGroup) {
+      resultsGroup = [];
+      var options = alternativeGroup.options;
+      var alternatives = [alternativeGroup.keyword || []].concat(alternativeGroup.alternatives || []);
+
+      // Detect all matches
+      alternatives.forEach(function (alternative) {
+        var inputTest = input;
+
+        // Check for case sensitivity
+        if  (!options.caseSensitive || that.config.behaviour.overrideCaseSensitive === 'off') {
+          alternative = alternative.toLowerCase();
+          inputTest = inputLowerCase;
+        }
+
+        // Build array of matches for each type of match
+        var matchesExact = that.detectExactMatches(alternative, inputTest);
+        var matchesWildcard = (alternative.indexOf('*') !== -1) ? that.detectWildcardMatches(alternative, inputTest) : [];
+        var matchesFuzzy = (options.forgiveMistakes) ? that.detectFuzzyMatches(alternative, inputTest) : [];
+
+        // Merge matches without duplicates
+        that.mergeMatches(matchesExact, matchesWildcard, matchesFuzzy).forEach(function (item) {
+          resultsGroup.push(item);
+        });
       });
-    }
-    return explanations;
+      results.push(resultsGroup);
+    });
+    return results;
   };
 
-
+  /**
+   * Compute the score for the results.
+   * @param {Object} results - Results from the task.
+   * @return {number} Score.
+   */
   Essay.prototype.computeScore = function (results) {
     var score = 0;
     for (var i = 0; i < this.config.keywords.length; i++) {
@@ -259,28 +297,26 @@ H5P.Essay = function ($, Question) {
     return score;
   };
 
-
   /**
-   * Build explanations from feedback.
-   * @param {object} feedback - Feedback received.
-   * @param {object} feedback.explanation Array of explanation items for feedback.
-   * @param {boolean} feedback.explanation.found - True if the keyword was found.
-   * @param {string} feedback.explanation.keyword - Keyword that was found/not found.
-   * @param {string} feedback.explanation.message - Message for the keyword.
-   * @return {object} Array of explanations.
+   * Build the explanations for H5P.Question.setExplanation.
+   * @param {Object} results - Results from the task.
+   * @return {Object} Explanations for H5P.Question.
    */
-  Essay.prototype.buildExplanation = function (feedback) {
+  Essay.prototype.buildExplanation = function (results) {
     const emptyWord = '<span class="h5p-essay-feedback-empty">...</span>';
 
     var explanations = [];
-    feedback.explanation.forEach(function (element) {
-      if (element.found) {
-        explanations.push({correct: element.keyword, text: element.message});
+
+    for (var i = 0; i < this.config.keywords.length; i++) {
+      // Keyword was not found and feedback is provided for this case
+      if (results[i].length === 0 && this.config.keywords[i].options.feedbackMissed) {
+        explanations.push({correct: emptyWord, text: this.config.keywords[i].options.feedbackMissed});
       }
-      else {
-        explanations.push({correct: emptyWord, text: element.message});
+      // Keyword found and feedback is provided for this case
+      if (results[i].length > 0 && this.config.keywords[i].options.feedbackIncluded) {
+        explanations.push({correct: this.config.keywords[i].keyword, text: this.config.keywords[i].options.feedbackIncluded});
       }
-    });
+    }
 
     if (explanations.length > 0) {
       // Included before not included, but keep order otherwise
@@ -300,6 +336,7 @@ H5P.Essay = function ($, Question) {
       this.showButton('show-solution');
     }
 
+    // We need the retry button if the mastering score has not been reached or scoring is irrelevant
     if (score < this.scoreMastering || this.config.behaviour.ignoreScoring) {
       if (this.config.behaviour.enableRetry) {
         this.showButton('try-again');
@@ -340,165 +377,151 @@ H5P.Essay = function ($, Question) {
         this.trigger(this.createEssayXAPIEvent('mastered'));
       }
     }
-    else {
-      console.log('NOSCORING XAPI');
-    }
   };
 
+  /**
+   * Create an xAPI event for Essay.
+   * @param {string} verb - Short id of the verb we want to trigger.
+   * @return {H5P.XAPIEvent} Event template.
+   */
+  Essay.prototype.createEssayXAPIEvent = function (verb) {
+    var xAPIEvent = this.createXAPIEventTemplate(verb);
+    this.extend(
+        xAPIEvent.getVerifiedStatementValue(['object', 'definition']),
+        this.getxAPIDefinition());
+    return xAPIEvent;
+  };
 
   /**
-   * Compute results.
-   * @return {Object} Results.
+   * Get the xAPI definition for the xAPI object.
+   * return {Object} XAPI definition.
    */
-  Essay.prototype.computeResults2 = function () {
-    var that = this;
+  Essay.prototype.getxAPIDefinition = function () {
+    var definition = {};
+    definition.name = {'en-US': 'Essay'};
+    definition.description = {'en-US': this.config.taskDescription};
+    definition.type = 'http://id.tincanapi.com/activitytype/essay';
+    definition.interactionType = 'long-fill-in';
+    return definition;
+  };
+
+  /**
+   * Detect exact matches of needle in haystack.
+   * @param {string} needle - Word or phrase to find.
+   * @param {string} haystack - Text to find the word or phrase in.
+   * @return {object} Results: [{'keyword': needle, 'match': needle, 'index': front + pos}*].
+   */
+  Essay.prototype.detectExactMatches = function (needle, haystack) {
+    // Simply detect all exact matches and its positions in the haystack
+    var result = [];
+    var pos;
+    var front = 0;
+    while ((pos = haystack.indexOf(needle)) !== -1) {
+      if (H5P.TextUtilities.isIsolated(needle, haystack)) {
+        result.push({'keyword': needle, 'match': needle, 'index': front + pos});
+      }
+      front += pos + needle.length;
+      haystack = haystack.substr(pos + needle.length);
+    }
+    return result;
+  };
+
+  /**
+   * Detect wildcard matches of needle in haystack.
+   * @param {string} needle - Word or phrase to find.
+   * @param {string} haystack - Text to find the word or phrase in.
+   * @return {object} Results: [{'keyword': needle, 'match': needle, 'index': front + pos}*].
+   */
+  Essay.prototype.detectWildcardMatches = function (needle, haystack) {
+    if (needle.indexOf('*') === -1) {
+      return [];
+    }
+    // We accept only characters for the wildcard
+    var regexp = new RegExp(needle.replace(/\*/g, '[A-z]*'), 'g');
+    var result = [];
+    var match;
+    while ((match = regexp.exec(haystack)) !== null ) {
+      if (H5P.TextUtilities.isIsolated(match[0], haystack, {'index': match.index})) {
+        result.push({'keyword': needle, 'match': match[0], 'index': match.index});
+      }
+    }
+    return result;
+  };
+
+  /**
+   * Detect fuzzy matches of needle in haystack.
+   * @param {string} needle - Word or phrase to find.
+   * @param {string} haystack - Text to find the word or phrase in.
+   * @param {object} Results.
+   */
+  Essay.prototype.detectFuzzyMatches = function (needle, haystack) {
+    // Ideally, this should be the maximum number of allowed transformations for the Levenshtein disctance.
+    const windowSize = 2;
+    /*
+     * We cannot simple split words because we're also looking for phrases.
+     * If we were just looking for exact matches, we could use something smarter
+     * such as the KMP algorithm. Because we're dealing with fuzzy matches, using
+     * this intuitive exhaustive approach might be the best way to go.
+     */
     var results = [];
-
-    // We don't want EOLs to mess up the string.
-    var input = this.getInput();
-    var inputLowerCase = input.toLowerCase();
-
-    // Should not happen, but just to be sure ...
-    this.config.keywords = this.config.keywords || [];
-
-    // optional = false is ignored in Editor
-    this.config.keywords = this.config.keywords.filter(function (element) {
-      return (typeof element.keyword !== 'undefined');
-    });
-
-    var resultsGroup;
-    this.config.keywords.forEach(function (alternativeGroup) {
-      resultsGroup = [];
-      var options = alternativeGroup.options;
-      var alternatives = [alternativeGroup.keyword || []].concat(alternativeGroup.alternatives || []);
-
-      // Detect all matches
-      var alternativeOriginal; // TODO: make selection of possible display parameters (one, all)
-      alternatives.forEach(function (alternative) {
-        var inputTest = input;
-        alternativeOriginal = alternativeOriginal || alternative;
-
-        // Check for case sensitivity
-        if  (!options.caseSensitive || that.config.behaviour.overrideCaseSensitive === 'off') {
-          alternative = alternative.toLowerCase();
-          inputTest = inputLowerCase;
+    // Without looking at the surroundings we'd miss words that have additional or missing chars
+    for (var size = -windowSize; size <= windowSize; size++) {
+      for (var pos = 0; pos < haystack.length; pos++) {
+        var straw = haystack.substr(pos , needle.length + size);
+        if (H5P.TextUtilities.areSimilar(needle, straw) && H5P.TextUtilities.isIsolated(straw, haystack, {'index': pos})) {
+          // This will only add the match if it's not a duplicate that we found already in the proximity of pos
+          if (!this.contains(results, pos)) {
+            results.push({'keyword': needle, 'match': straw, 'index': pos});
+          }
         }
-
-        var matchesExact = that.detectExactMatches(alternative, inputTest);
-        var matchesWildcard = (alternative.indexOf('*') !== -1) ? that.detectWildcardMatches(alternative, inputTest) : [];
-        var matchesFuzzy = (options.forgiveMistakes) ? that.detectFuzzyMatches(alternative, inputTest) : [];
-
-        var foo = that.mergeMatches(matchesExact, matchesWildcard, matchesFuzzy);
-        foo.forEach(function (item) {
-          resultsGroup.push(item);
-        });
-      });
-      results.push(resultsGroup);
-    });
+      }
+    }
     return results;
   };
 
   /**
-   * Compute the feedback.
-   * @return {Object} Feedback of {score: number, text: [{message: String, found: boolean}]}.
+   * Merge the matches.
+   * @param {object} match1 - Matches 1.
+   * @param {object} match2 - Matches 2.
+   * @param {object} match3 - Matches 3.
+   * @return {object} Merged matches.
    */
-  Essay.prototype.computeResults = function () {
-    var that = this;
-    var score = 0;
-    var explanation = [];
+  Essay.prototype.mergeMatches = function () {
+    // Sanitization
+    if (arguments.length === 0) {
+      return [];
+    }
+    if (arguments.length === 1) {
+      return arguments[0];
+    }
 
-    // We don't want EOLs to mess up the string.
-    var input = this.getInput();
-    var inputLowerCase = input.toLowerCase();
-
-    // Should not happen, but just to be sure ...
-    this.config.keywords = this.config.keywords || [];
-
-    // optional = false is ignored in Editor
-    this.config.keywords = this.config.keywords.filter(function (element) {
-      return (typeof element.keyword !== 'undefined');
-    });
-
-    /*
-     * If you don't want to only find exact matches of keywords, but also
-     * close resemblences or phrases, things get more complicated then you
-     * might expect. This could probably be improved.
-     */
-
-    this.config.keywords.forEach(function (alternativeGroup) {
-      var options = alternativeGroup.options;
-      var alternatives = [alternativeGroup.keyword || []].concat(alternativeGroup.alternatives || []);
-
-      var keywordFound = '';
-
-      var found = alternatives.some(function (alternative) {
-        var inputTest = input;
-        var alternativeOriginal = alternative;
-
-        // Check for case sensitivity
-        if  (!options.caseSensitive ||
-            that.config.behaviour.overrideCaseSensitive === 'off') {
-              alternative = alternative.toLowerCase();
-              inputTest = inputLowerCase;
-        }
-
-        // Exact matching
-        if (inputTest.indexOf(alternative) !== -1 && H5P.TextUtilities.isIsolated(alternative, inputTest)) {
-          keywordFound = alternativeOriginal;
-          return true;
-        }
-
-        // Wildcard matching
-        var regex = new RegExp(alternative.replace(/\*/g, '[A-z]*'), 'g');
-        var found = (inputTest.match(regex) || []).some(function (match) {
-          if (regex.test(inputTest) && H5P.TextUtilities.isIsolated(match, inputTest)) {
-            keywordFound = match;
-            return true;
-          }
-        });
-        if (found) {
-          return true;
-        }
-
-        // Fuzzy matching
-        var fuzzyFound = H5P.TextUtilities.fuzzyFind(alternative, inputTest);
-        if ((options.forgiveMistakes || that.config.behaviour.overrideForgiveMistakes === 'on') &&
-            fuzzyFound.contains) {
-          keywordFound = alternativeOriginal;
-          return true;
-        }
-      });
-
-      if (found) {
-        score += options.points;
-        if (options.feedbackIncluded) {
-          explanation.push({
-            "keyword": keywordFound,
-            "message": options.feedbackIncluded,
-            "found": true});
+    // Add all elements from args[1+] to args[0] if not already there close by.
+    var results = (arguments[0] || []).slice();
+    for (var i = 1; i < arguments.length; i++) {
+      var match2 = arguments[i] || [];
+      for (var j = 0; j < match2.length; j++) {
+        if (!this.contains(results, match2[j].index)) {
+          results.push(match2[j]);
         }
       }
-      else {
-        if (options.feedbackMissed) {
-          explanation.push({
-            "keyword": alternatives.join(' | '),
-            "message": options.feedbackMissed,
-            "found": false});
-        }
-      }
+    }
+    return results.sort(function (a, b) {
+      return a.index > b.index;
     });
-
-    return {"score": score, "explanation": explanation};
   };
 
   /**
-   * Get the user input from DOM.
-   * @return {string} Cleaned input.
+   * Check if an array of detect results contains the same match in the word's proximity.
+   * Used to prevent double entries that can be caused by fuzzy matching.
+   * @param {object} results - Preliminary results.
+   * @param {string} results.match - Match that was found before at a particular position.
+   * @param {number} results.index - Starting position of the match.
+   * @param {number} index - Index of solution to be checked for double entry.
    */
-  Essay.prototype.getInput = function () {
-    return this.inputField.getText()
-        .replace(/(\r\n|\r|\n)/g, ' ')
-        .replace(/\s\s/g, ' ');
+  Essay.prototype.contains = function (results, index) {
+    return results.some(function (result) {
+      return Math.abs(result.index - index) <= result.match.length;
+    });
   };
 
   /**
@@ -534,147 +557,6 @@ H5P.Essay = function ($, Question) {
     return {
       'inputField': this.inputField.getText()
     };
-  };
-
-  /**
-   * Create an xAPI event for Essay.
-   * @param {string} verb - Short id of the verb we want to trigger.
-   * @return {H5P.XAPIEvent} Event template.
-   */
-  Essay.prototype.createEssayXAPIEvent = function (verb) {
-    var xAPIEvent = this.createXAPIEventTemplate(verb);
-    this.extend(
-        xAPIEvent.getVerifiedStatementValue(['object', 'definition']),
-        this.getxAPIDefinition());
-    return xAPIEvent;
-  };
-
-  /**
-   * Get the xAPI definition for the xAPI object.
-   * return {Object} XAPI definition.
-   */
-  Essay.prototype.getxAPIDefinition = function () {
-    var definition = {};
-    definition.name = {'en-US': 'Essay'};
-    definition.description = {'en-US': this.config.taskDescription};
-    definition.type = 'http://id.tincanapi.com/activitytype/essay';
-    definition.interactionType = 'long-fill-in';
-    return definition;
-  };
-
-  /**
-   * Detect exact matches of needle in haystack.
-   * @param {string} needle - Word or phrase to find.
-   * @param {string} haystack - Text to find the word or phrase in.
-   * @param {object} Results.
-   */
-  Essay.prototype.detectExactMatches = function (needle, haystack) {
-    var result = [];
-    var pos;
-    var front = 0;
-    while ((pos = haystack.indexOf(needle)) !== -1) {
-      if (H5P.TextUtilities.isIsolated(needle, haystack)) {
-        result.push({'keyword': needle, 'match': needle, 'index': front + pos});
-      }
-      front += pos + needle.length;
-      haystack = haystack.substr(pos + needle.length);
-    }
-    return result;
-  };
-
-  /**
-   * Detect wildcard matches of needle in haystack.
-   * @param {string} needle - Word or phrase to find.
-   * @param {string} haystack - Text to find the word or phrase in.
-   * @param {object} Results.
-   */
-  Essay.prototype.detectWildcardMatches = function (needle, haystack) {
-    if (needle.indexOf('*') === -1) {
-      return [];
-    }
-    var regexp = new RegExp(needle.replace(/\*/g, '[A-z]*'), 'g');
-    var result = [];
-    var match;
-    while ((match = regexp.exec(haystack)) !== null ) {
-      if (H5P.TextUtilities.isIsolated(match[0], haystack, {'index': match.index})) {
-        result.push({'keyword': needle, 'match': match[0], 'index': match.index});
-      }
-    }
-    return result;
-  };
-
-  /**
-   * Detect fuzzy matches of needle in haystack.
-   * @param {string} needle - Word or phrase to find.
-   * @param {string} haystack - Text to find the word or phrase in.
-   * @param {object} Results.
-   */
-  Essay.prototype.detectFuzzyMatches = function (needle, haystack) {
-    // Ideally, this should be the maximum number of allowed transformations for the Levenshtein disctance.
-    const windowSize = 2;
-    /*
-     * We cannot simple split words because we're also looking for phrases.
-     * If we were just looking for exact matches, we could use something smarter
-     * such as the KMP algorithm. Because we're dealing with fuzzy matches, using
-     * this intuitive exhaustive approach might be the best way to go.
-     */
-    var results = [];
-    // Without looking at the surroundings we'd miss words that have additional or missing chars
-    for (var size = -windowSize; size <= windowSize; size++) {
-      for (var pos = 0; pos < haystack.length; pos++) {
-        var straw = haystack.substr(pos , needle.length + size);
-        if (H5P.TextUtilities.areSimilar(needle, straw) && H5P.TextUtilities.isIsolated(straw, haystack, {'index': pos})) {
-          pos += haystack.substr(pos).indexOf(straw);
-          if (!this.contains(results, pos)) {
-            results.push({'keyword': needle, 'match': straw, 'index': pos});
-          }
-        }
-      }
-    }
-    return results;
-  };
-
-  /**
-   * Check if an array of detect results contains the same match in the word's proximity.
-   * Used to prevent double entries that can be caused by fuzzy matching.
-   * @param {object} results - Preliminary results.
-   * @param {string} results.match - Match that was found before at a particular position.
-   * @param {number} results.index - Starting position of the match.
-   * @param {number} index - Index of solution to be checked for double entry.
-   */
-  Essay.prototype.contains = function (results, index) {
-    return results.some(function (result) {
-      return Math.abs(result.index - index) <= result.match.length;
-    });
-  };
-
-  /**
-   * Merge the matches.
-   * TODO: generalize
-   * @param {object} match1 - Matches 1.
-   * @param {object} match2 - Matches 2.
-   * @param {object} match3 - Matches 3.
-   * @return {object} Merged matches.
-   */
-  Essay.prototype.mergeMatches = function (match1, match2, match3) {
-    match1 = match1 || [];
-    match2 = match2 || [];
-    match3 = match3 || [];
-    var results = match1.slice();
-    var that = this;
-    match2.forEach(function (match) {
-      if (!that.contains(results, match.index)) {
-        results.push(match);
-      }
-    });
-    match3.forEach(function (match) {
-      if (!that.contains(results, match.index)) {
-        results.push(match);
-      }
-    });
-    return results.sort(function (a, b) {
-      return a.index > b.index;
-    });
   };
 
   return Essay;
