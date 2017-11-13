@@ -1,4 +1,3 @@
-/* jslint esversion: 6 */
 var H5P = H5P || {};
 
 H5P.Essay = function ($, Question) {
