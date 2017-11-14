@@ -154,16 +154,16 @@ H5P.Essay = function ($, Question) {
     let solutionTitle = document.createElement('div');
     solutionTitle.classList.add('h5p-essay-solution-title');
     solutionTitle.innerHTML = this.config.solutionTitle;
-    solution.append(solutionTitle);
+    solution.appendChild(solutionTitle);
 
     let solutionIntroduction = document.createElement('div');
     solutionIntroduction.classList.add('h5p-essay-solution-introduction');
     solutionIntroduction.innerHTML = this.config.solution.introduction;
-    solution.append(solutionIntroduction);
+    solution.appendChild(solutionIntroduction);
 
     let solutionSample = document.createElement('div');
     solutionSample.classList.add('h5p-essay-solution-sample');
-    solution.append(solutionSample);
+    solution.appendChild(solutionSample);
 
     return solution;
   };
@@ -176,7 +176,7 @@ H5P.Essay = function ($, Question) {
     let text = document.createElement('div');
     text.classList.add('h5p-essay-solution-sample-text');
     text.innerHTML = this.config.solution.sample;
-    this.solution.children[2].append(text);
+    this.solution.children[2].appendChild(text);
 
     // Insert solution after explanations
     let explanation = document.getElementsByClassName('h5p-question-explanation')[0];
