@@ -111,6 +111,13 @@
   };
 
   /**
+   * Enable the inputField.
+   */
+  Essay.InputField.prototype.focus = function () {
+    this.inputField.focus();
+  };
+
+  /**
    * Set the text for the InputField.
    * @param {string|object} previousState Previous state that was saved.
    */

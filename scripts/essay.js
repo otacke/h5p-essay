@@ -139,6 +139,7 @@ H5P.Essay = function ($, Question) {
       that.showButton('check-answer');
 
       that.inputField.enable();
+      that.inputField.focus();
     }, false, {}, {});
   };
 

@@ -6,7 +6,7 @@
     "widget": "html",
     "importance": "high",
     "description": "Describe your task here. The task description will appear above text input area.",
-    "placeholder": "Summarize the book in 500 words ...",
+    "placeholder": "Summarize the book in 500 characters ...",
     "enterMode": "div",
     "tags": [
       "strong",
@@ -150,14 +150,14 @@
             {
               "name": "feedbackIncluded",
               "type": "text",
-              "label": "Feedback if included",
+              "label": "Feedback if keyword included",
               "description": "This feedback will be displayed if the user includes this keyword or its alternatives in the answer.",
               "optional": true
             },
             {
               "name": "feedbackMissed",
               "type": "text",
-              "label": "Feedback if missing",
+              "label": "Feedback if keyword missing",
               "description": "This feedback will be displayed if the user doesn’t include this keyword or its alternatives in the answer.",
               "optional": true
             }
@@ -381,20 +381,20 @@
     "common": true
   },
   {
-    "name": "feedbackHeader",
-    "type": "text",
-    "label": "Header for panel containing feedback for included/missing keywords",
-    "importance": "low",
-    "default": "Feedback",
-    "common": true
-  },
-  {
     "name": "showSolution",
     "type": "text",
     "label": "Text for \"Show solution\" button",
     "importance": "low",
     "default": "Show solution",
     "common" : true
+  },
+  {
+    "name": "feedbackHeader",
+    "type": "text",
+    "label": "Header for panel containing feedback for included/missing keywords",
+    "importance": "low",
+    "default": "Feedback",
+    "common": true
   },
   {
     "name": "solutionTitle",
