@@ -2,12 +2,12 @@
   "semantics": [
     {
       "label": "Aufgabenbeschreibung",
-      "description": "Beschreibe hier die Aufgabe. Die Beschreibung wird oberhalb des Texteingabefeldes erscheinen.",
+      "description": "Die Beschreibung wird oberhalb des Texteingabefeldes erscheinen.",
       "placeholder": "Fasse das Buch in maximal 500 Zeichen zusammen ..."
     },
     {
       "label": "Hilfetext",
-      "description": "Dieser Text soll den Lernenden am Anfang helfen.",
+      "description": "Dieser Text soll die Lernenden am Anfang unterstützen.",
       "placeholder": "Dieses Buch handelt von ..."
     },
     {
@@ -21,7 +21,7 @@
         },
         {
           "label": "Text des Lösungsvorschlags",
-          "description": "Der/die Lernende sieht nach dem Prüfen seiner/ihrer Lösung einen \"Lösung zeigen\"-Button, wenn du hier Text angibst."
+          "description": "Die Lernenden sehen nach dem Prüfen ihrer Lösung einen \"Lösung zeigen\"-Button, wenn du hier Text angibst."
         }
       ]
     },
@@ -42,7 +42,7 @@
           },
           {
             "label": "Variationen",
-            "description": "Füge dem Schlagwort optional Variationen hinzu. Beispiel: Für 'Stadt' könnten auch passen 'Ortschaft', 'Gemeinde', etc. Punkte werden für auch für gefundene Alternativen vergeben.",
+            "description": "Füge dem Schlagwort optional Variationen hinzu. Beispiel: Für 'Stadt' könnten auch 'Ortschaft', 'Gemeinde', etc. passen. Punkte werden für auch für gefundene Alternativen vergeben.",
             "entity": "Variation",
             "field": {
               "label": "Schlagwortvariation"
@@ -53,7 +53,7 @@
             "fields": [
               {
                 "label": "Punkte",
-                "description": "Punkte die der/die Lernende erhält, wenn er/sie das Schlagwort oder eine Variation verwendet hat."
+                "description": "Punkte die die Lernenden erhalten, wenn sie das Schlagwort oder eine Variation verwenden."
               },
               {
                 "label": "Fundstellen",
@@ -65,15 +65,15 @@
               },
               {
                 "label": "Kleine Rechtschreibfehler akzeptieren",
-                "description": "Wenn gewählt, wird eine Antwort bei kleinen Rechtschreibfehlern noch als richtig gewertet. (3-9 Zeichen: 1 Fehler, mehr als 9 Zeichen: 2 Fehler)."
+                "description": "Wenn diese Option gewählt wird, wird eine Antwort bei kleinen Rechtschreibfehlern noch als richtig gewertet. (3-9 Zeichen: 1 Fehler, mehr als 9 Zeichen: 2 Fehler)."
               },
               {
                 "label": "Rückmeldung, wenn Schlagwort verwendet",
-                "description": "Diese Rückmeldung wird angezeigt, wenn der/die Lernende das Schlagwort oder seine Variationen im Text verwendet hat."
+                "description": "Diese Rückmeldung wird angezeigt, wenn die Lernenden das Schlagwort oder seine Variationen im Text verwendet haben."
               },
               {
                 "label": "Rückmeldung, wenn Schlagwort nicht verwendet",
-                "description": "Diese Rückmeldung wird angezeigt, wenn der/die Lernende das Schlagwort oder seine Variationen im Text nicht verwendet hat."
+                "description": "Diese Rückmeldung wird angezeigt, wenn die Lernenden das Schlagwort oder seine Variationen im Text nicht verwendet haben."
               }
             ]
           }
@@ -113,11 +113,11 @@
       "fields": [
         {
           "label": "Minimale Zeichenzahl",
-          "description": "Gib die minimale Zeichenzahl an, die der/die Lernende eingeben muss."
+          "description": "Gib die minimale Zeichenzahl an, die die Lernenden eingeben müssen."
         },
         {
           "label": "Maximale Zeichenzahl",
-          "description": "Gib die maximale Zeichenzahl an, die der/die Lernende eingeben darf."
+          "description": "Gib die maximale Zeichenzahl an, die die Lernenden eingeben dürfen."
         },
         {
           "label": "Größe des Eingabefelds",
@@ -141,7 +141,7 @@
         },
         {
           "label": "Ignoriere die Bepunktung",
-          "description": "Wenn diese Option gewählt ist, sehen die Lernenden nur deine Rückmeldung, nicht aber die Bepunktung."
+          "description": "Wenn diese Option gewählt ist, sehen die Lernenden nur deine Rückmeldung, nicht aber die Bepunktung. Es wird nichts gewertet."
         },
         {
           "label": "Prozentsatz zum Bestehen",
