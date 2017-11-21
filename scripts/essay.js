@@ -44,14 +44,14 @@ H5P.Essay = function ($, Question) {
       .reduce(sum, 0);
 
     // scoreMastering: score indicating mastery and maximum number on progress bar (can be < scoreMax)
-    this.scoreMastering = (typeof this.config.behaviour.percentageMastering === 'undefined') ?
+    this.scoreMastering = this.config.behaviour.percentageMastering === undefined ?
         scoreMax :
         this.config.behaviour.percentageMastering * scoreMax / 100;
 
     // scorePassing: score to pass the task (<= scoreMastering)
     this.scorePassing = Math.min(
-          this.scoreMastering,
-          this.config.behaviour.percentagePassing * scoreMax / 100 || 0);
+        this.scoreMastering,
+        this.config.behaviour.percentagePassing * scoreMax / 100 || 0);
 
     this.solution = this.buildSolution();
   }
@@ -139,7 +139,7 @@ H5P.Essay = function ($, Question) {
       that.showButton('check-answer');
 
       that.inputField.enable();
-      that.inputField.focus();
+      //that.inputField.focus();
     }, false, {}, {});
   };
 
@@ -183,7 +183,7 @@ H5P.Essay = function ($, Question) {
     let explanation = document.getElementsByClassName('h5p-question-explanation')[0];
     explanation.parentNode.insertBefore(this.solution, explanation.nextSibling);
 
-    this.solution.focus();
+    //this.solution.focus();
     this.trigger('resize');
   };
 
@@ -216,17 +216,16 @@ H5P.Essay = function ($, Question) {
 
     // Not all keyword groups might be necessary for mastering
     let score = Math.min(this.computeScore(results), this.scoreMastering);
-    let textScore = H5P.Question.determineOverallFeedback(
-        this.config.overallFeedback, score / this.scoreMastering)
-            .replace('@score', score)
-            .replace('@total', this.scoreMastering);
+    let textScore = H5P.Question.determineOverallFeedback(this.config.overallFeedback, score / this.scoreMastering)
+          .replace('@score', score)
+          .replace('@total', this.scoreMastering);
 
     if (!this.config.behaviour.ignoreScoring) {
       this.setFeedback(textScore, score, this.scoreMastering);
     }
 
     // Show and hide buttons as necessary
-    this.handleButtons (score);
+    this.handleButtons(score);
 
     // Trigger xAPI statements as necessary
     this.handleXAPI(score);
@@ -251,10 +250,10 @@ H5P.Essay = function ($, Question) {
 
     // optional = false is ignored in Editor
     this.config.keywords = this.config.keywords.filter(function (element) {
-      return (typeof element.keyword !== 'undefined');
+      return (element.keyword !== undefined);
     });
 
-    let resultsGroup;
+    let resultsGroup = [];
     this.config.keywords.forEach(function (alternativeGroup) {
       resultsGroup = [];
       let options = alternativeGroup.options;
@@ -265,15 +264,15 @@ H5P.Essay = function ($, Question) {
         let inputTest = input;
 
         // Check for case sensitivity
-        if  (!options.caseSensitive || that.config.behaviour.overrideCaseSensitive === 'off') {
+        if (!options.caseSensitive || that.config.behaviour.overrideCaseSensitive === 'off') {
           alternative = alternative.toLowerCase();
           inputTest = inputLowerCase;
         }
 
         // Build array of matches for each type of match
         let matchesExact = that.detectExactMatches(alternative, inputTest);
-        let matchesWildcard = (alternative.indexOf('*') !== -1) ? that.detectWildcardMatches(alternative, inputTest) : [];
-        let matchesFuzzy = (options.forgiveMistakes) ? that.detectFuzzyMatches(alternative, inputTest) : [];
+        let matchesWildcard = alternative.indexOf('*') !== -1 ? that.detectWildcardMatches(alternative, inputTest) : [];
+        let matchesFuzzy = options.forgiveMistakes ? that.detectFuzzyMatches(alternative, inputTest) : [];
 
         // Merge matches without duplicates
         that.mergeMatches(matchesExact, matchesWildcard, matchesFuzzy).forEach(function (item) {
@@ -468,7 +467,7 @@ H5P.Essay = function ($, Question) {
     // Without looking at the surroundings we'd miss words that have additional or missing chars
     for (let size = -windowSize; size <= windowSize; size++) {
       for (let pos = 0; pos < haystack.length; pos++) {
-        let straw = haystack.substr(pos , needle.length + size);
+        let straw = haystack.substr(pos, needle.length + size);
         if (H5P.TextUtilities.areSimilar(needle, straw) && H5P.TextUtilities.isIsolated(straw, haystack, {'index': pos})) {
           // This will only add the match if it's not a duplicate that we found already in the proximity of pos
           if (!this.contains(results, pos)) {
@@ -529,8 +528,8 @@ H5P.Essay = function ($, Question) {
    * @return {Object} Merged objects.
    */
   Essay.prototype.extend = function () {
-    for(let i = 1; i < arguments.length; i++) {
-      for(let key in arguments[i]) {
+    for (let i = 1; i < arguments.length; i++) {
+      for (let key in arguments[i]) {
         if (arguments[i].hasOwnProperty(key)) {
           if (typeof arguments[0][key] === 'object' &&
               typeof arguments[i][key] === 'object') {

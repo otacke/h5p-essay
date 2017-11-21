@@ -11,7 +11,6 @@
   const CHAR_MESSAGE = 'h5p-essay-input-field-message-char';
   const SAVE_MESSAGE = 'h5p-essay-input-field-message-save';
   const ANIMATION_MESSAGE = 'h5p-essay-input-field-message-save-animation';
-  const CHAR_STYLE_WARNING = 'h5p-essay-warning';
 
   Essay.InputField = function (params, previousState) {
     let that = this;
