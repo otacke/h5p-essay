@@ -139,7 +139,7 @@ H5P.Essay = function ($, Question) {
       that.showButton('check-answer');
 
       that.inputField.enable();
-      //that.inputField.focus();
+      that.inputField.focus();
     }, false, {}, {});
   };
 
@@ -174,16 +174,18 @@ H5P.Essay = function ($, Question) {
    */
   Essay.prototype.showSolution = function () {
     // We add the sample solution here to make cheating at least a little more difficult
-    let text = document.createElement('div');
-    text.classList.add('h5p-essay-solution-sample-text');
-    text.innerHTML = this.config.solution.sample;
-    this.solution.children[2].appendChild(text);
+    if (this.solution.children[2].children.length === 0) {
+      let text = document.createElement('div');
+      text.classList.add('h5p-essay-solution-sample-text');
+      text.innerHTML = this.config.solution.sample;
+      this.solution.children[2].appendChild(text);
+    }
 
-    // Insert solution after explanations
-    let explanation = document.getElementsByClassName('h5p-question-explanation')[0];
-    explanation.parentNode.insertBefore(this.solution, explanation.nextSibling);
+    // Insert solution after explanations or content
+    let predecessor = document.getElementsByClassName('h5p-question-explanation')[0] || document.getElementsByClassName('h5p-question-content')[0];
+    predecessor.parentNode.insertBefore(this.solution, predecessor.nextSibling);
 
-    //this.solution.focus();
+    this.solution.focus();
     this.trigger('resize');
   };
 
@@ -191,7 +193,9 @@ H5P.Essay = function ($, Question) {
    * Hide the solution.
    */
   Essay.prototype.hideSolution = function () {
-    this.solution.remove();
+    if (this.solution.parentNode !== null) {
+      this.solution.parentNode.removeChild(this.solution);
+    }
   };
 
   /**
@@ -207,18 +211,12 @@ H5P.Essay = function ($, Question) {
     if (explanations.length > 0) {
       this.setExplanation(explanations, this.config.feedbackHeader);
     }
-    else {
-      this.setExplanation([], '');
-      // We don't need this DOM element if there are no explanations
-      let explanationContainer = document.getElementsByClassName('h5p-question-explanation-container')[0];
-      explanationContainer.remove();
-    }
 
     // Not all keyword groups might be necessary for mastering
     let score = Math.min(this.computeScore(results), this.scoreMastering);
     let textScore = H5P.Question.determineOverallFeedback(this.config.overallFeedback, score / this.scoreMastering)
-          .replace('@score', score)
-          .replace('@total', this.scoreMastering);
+        .replace('@score', score)
+        .replace('@total', this.scoreMastering);
 
     if (!this.config.behaviour.ignoreScoring) {
       this.setFeedback(textScore, score, this.scoreMastering);
@@ -250,12 +248,12 @@ H5P.Essay = function ($, Question) {
 
     // optional = false is ignored in Editor
     this.config.keywords = this.config.keywords.filter(function (element) {
-      return (element.keyword !== undefined);
+      return element.keyword !== undefined;
     });
 
     let resultsGroup = [];
     this.config.keywords.forEach(function (alternativeGroup) {
-      resultsGroup = [];
+      resultsGroup = []; // TODO ...
       let options = alternativeGroup.options;
       let alternatives = [alternativeGroup.keyword || []].concat(alternativeGroup.alternatives || []);
 

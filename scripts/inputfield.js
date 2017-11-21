@@ -53,7 +53,7 @@ var H5P = H5P || {};
     this.statusChars = document.createElement('div');
     this.statusChars.classList.add(CHAR_MESSAGE);
 
-    statusWrapper.append(this.statusChars);
+    statusWrapper.appendChild(this.statusChars);
 
     ['change', 'keyup', 'paste'].forEach(function (event) {
       that.inputField.addEventListener(event, function () {
@@ -64,9 +64,9 @@ var H5P = H5P || {};
 
     this.statusSaved = document.createElement('div');
     this.statusSaved.classList.add(SAVE_MESSAGE);
-    statusWrapper.append(this.statusSaved);
+    statusWrapper.appendChild(this.statusSaved);
 
-    this.content.append(statusWrapper);
+    this.content.appendChild(statusWrapper);
 
     this.updateMessageChars();
   };
