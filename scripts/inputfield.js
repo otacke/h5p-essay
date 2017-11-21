@@ -1,4 +1,4 @@
-/* jslint esversion: 6 */
+var H5P = H5P || {};
 
 (function (Essay) {
   'use strict';
