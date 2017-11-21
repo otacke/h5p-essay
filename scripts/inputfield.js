@@ -4,16 +4,16 @@ var H5P = H5P || {};
   'use strict';
 
   // CSS Classes:
-  const MAIN_CONTAINER = 'h5p-essay-input-field';
-  const INPUT_LABEL = 'h5p-essay-input-field-label';
-  const INPUT_FIELD = 'h5p-essay-input-field-textfield';
-  const WRAPPER_MESSAGE = 'h5p-essay-input-field-message-wrapper';
-  const CHAR_MESSAGE = 'h5p-essay-input-field-message-char';
-  const SAVE_MESSAGE = 'h5p-essay-input-field-message-save';
-  const ANIMATION_MESSAGE = 'h5p-essay-input-field-message-save-animation';
+  var MAIN_CONTAINER = 'h5p-essay-input-field';
+  var INPUT_LABEL = 'h5p-essay-input-field-label';
+  var INPUT_FIELD = 'h5p-essay-input-field-textfield';
+  var WRAPPER_MESSAGE = 'h5p-essay-input-field-message-wrapper';
+  var CHAR_MESSAGE = 'h5p-essay-input-field-message-char';
+  var SAVE_MESSAGE = 'h5p-essay-input-field-message-save';
+  var ANIMATION_MESSAGE = 'h5p-essay-input-field-message-save-animation';
 
   Essay.InputField = function (params, previousState) {
-    let that = this;
+    var that = this;
     this.params = params;
     this.previousState = previousState;
 
@@ -47,7 +47,7 @@ var H5P = H5P || {};
     this.container.appendChild(this.taskDescription);
     this.container.appendChild(this.content);
 
-    let statusWrapper = document.createElement('div');
+    var statusWrapper = document.createElement('div');
     statusWrapper.classList.add(WRAPPER_MESSAGE);
 
     this.statusChars = document.createElement('div');
