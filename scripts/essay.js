@@ -12,6 +12,9 @@ H5P.Essay = function ($, Question) {
   var QUESTION_EXPLANATION = 'h5p-question-explanation';
   var QUESTION_CONTENT = 'h5p-question-content';
 
+  // The H5P feedback right now only expects true (green)/false (red) feedback, not neutral feedback
+  var FEEDBACK_EMPTY= '<span class="h5p-essay-feedback-empty">...</span>';
+
   /**
    * @constructor
    *
@@ -247,10 +250,6 @@ H5P.Essay = function ($, Question) {
     var that = this;
     var results = [];
 
-    // We don't want EOLs to mess up the string.
-    var input = this.getInput();
-    var inputLowerCase = input.toLowerCase();
-
     // Should not happen, but just to be sure ...
     this.config.keywords = this.config.keywords || [];
 
@@ -259,20 +258,19 @@ H5P.Essay = function ($, Question) {
       return element.keyword !== undefined;
     });
 
-    var resultsGroup = [];
     this.config.keywords.forEach(function (alternativeGroup) {
-      resultsGroup = []; // TODO ...
+      var resultsGroup = [];
       var options = alternativeGroup.options;
       var alternatives = [alternativeGroup.keyword || []].concat(alternativeGroup.alternatives || []);
 
       // Detect all matches
       alternatives.forEach(function (alternative) {
-        var inputTest = input;
+        var inputTest = that.getInput();
 
         // Check for case sensitivity
         if (!options.caseSensitive || that.config.behaviour.overrideCaseSensitive === 'off') {
           alternative = alternative.toLowerCase();
-          inputTest = inputLowerCase;
+          inputTest = inputTest.toLowerCase();
         }
 
         // Build array of matches for each type of match
@@ -309,14 +307,12 @@ H5P.Essay = function ($, Question) {
    * @return {Object[]} Explanations for H5P.Question.
    */
   Essay.prototype.buildExplanation = function (results) {
-    var emptyWord = '<span class="h5p-essay-feedback-empty">...</span>';
-
     var explanations = [];
 
     for (var i = 0; i < this.config.keywords.length; i++) {
       // Keyword was not found and feedback is provided for this case
       if (results[i].length === 0 && this.config.keywords[i].options.feedbackMissed) {
-        explanations.push({correct: emptyWord, text: this.config.keywords[i].options.feedbackMissed});
+        explanations.push({correct: FEEDBACK_EMPTY, text: this.config.keywords[i].options.feedbackMissed});
       }
       // Keyword found and feedback is provided for this case
       if (results[i].length > 0 && this.config.keywords[i].options.feedbackIncluded) {
@@ -325,9 +321,9 @@ H5P.Essay = function ($, Question) {
     }
 
     if (explanations.length > 0) {
-      // Included before not included, but keep order otherwise
+      // Sort "included" before "not included", but keep order otherwise
       explanations.sort(function (a, b) {
-        return a.correct === emptyWord && b.correct !== emptyWord;
+        return a.correct === FEEDBACK_EMPTY && b.correct !== FEEDBACK_EMPTY;
       });
     }
     return explanations;
@@ -362,8 +358,7 @@ H5P.Essay = function ($, Question) {
 
     if (!this.config.behaviour.ignoreScoring) {
       var xAPIEvent = this.createEssayXAPIEvent('scored');
-      xAPIEvent.setScoredResult(score, this.scoreMastering, this, true,
-          score >= this.scorePassing);
+      xAPIEvent.setScoredResult(score, this.scoreMastering, this, true, score >= this.scorePassing);
       xAPIEvent.data.statement.result.response = this.getInput();
       /*
        * We could think about adding support for the "correct response pattern",
@@ -420,7 +415,7 @@ H5P.Essay = function ($, Question) {
   Essay.prototype.detectExactMatches = function (needle, haystack) {
     // Simply detect all exact matches and its positions in the haystack
     var result = [];
-    var pos;
+    var pos = -1;
     var front = 0;
     while ((pos = haystack.indexOf(needle)) !== -1) {
       if (H5P.TextUtilities.isIsolated(needle, haystack)) {
