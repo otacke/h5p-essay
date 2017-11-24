@@ -3,12 +3,13 @@ var H5P = H5P || {};
 (function (Essay) {
   'use strict';
 
-  // CSS Classes:
+  // CSS Classes
   var MAIN_CONTAINER = 'h5p-essay-input-field';
   var INPUT_LABEL = 'h5p-essay-input-field-label';
   var INPUT_FIELD = 'h5p-essay-input-field-textfield';
   var WRAPPER_MESSAGE = 'h5p-essay-input-field-message-wrapper';
   var CHAR_MESSAGE = 'h5p-essay-input-field-message-char';
+  var CHAR_MESSAGE_IMPORTANT = 'h5p-essay-input-field-message-char-important';
   var SAVE_MESSAGE = 'h5p-essay-input-field-message-save';
   var ANIMATION_MESSAGE = 'h5p-essay-input-field-message-save-animation';
 
@@ -145,10 +146,9 @@ var H5P = H5P || {};
    */
   Essay.InputField.prototype.updateMessageChars = function () {
     if (typeof this.params.maximumLength !== 'undefined') {
-      this.statusChars.innerHTML = this.params.remainingChars
-          .replace(/@chars/g, this.computeRemainingChars());
+      this.setMessageChars(this.params.remainingChars.replace(/@chars/g, this.computeRemainingChars()), false);
     } else {
-      this.statusChars.innerHTML = '&nbsp;';
+      this.setMessageChars('&nbsp;', false);
     }
   };
 
@@ -167,8 +167,22 @@ var H5P = H5P || {};
     this.statusSaved.innerHTML = saved;
   };
 
-  Essay.InputField.prototype.setMessageChars = function (message) {
+  /**
+   * Set the text for the character message.
+   * @param {string} message - Message text.
+   * @param {boolean} important - If true, message will added a particular CSS class.
+   */
+  Essay.InputField.prototype.setMessageChars = function (message, important) {
+    if (typeof message !== 'string') {
+      return;
+    }
     this.statusChars.innerHTML = message;
+    if (important) {
+      this.statusChars.classList.add(CHAR_MESSAGE_IMPORTANT);
+    }
+    else {
+      this.statusChars.classList.remove(CHAR_MESSAGE_IMPORTANT);
+    }
   };
 
 })(H5P.Essay);

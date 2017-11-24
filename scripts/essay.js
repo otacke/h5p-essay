@@ -3,6 +3,15 @@ var H5P = H5P || {};
 H5P.Essay = function ($, Question) {
   'use strict';
 
+  // CSS Classes
+  var SOLUTION_CONTAINER = 'h5p-essay-solution-container';
+  var SOLUTION_TITLE = 'h5p-essay-solution-title';
+  var SOLUTION_INTRODUCTION = 'h5p-essay-solution-introduction';
+  var SOLUTION_SAMPLE = 'h5p-essay-solution-sample';
+  var SOLUTION_SAMPLE_TEXT = 'h5p-essay-solution-sample-text';
+  var QUESTION_EXPLANATION = 'h5p-question-explanation';
+  var QUESTION_CONTENT = 'h5p-question-content';
+
   /**
    * @constructor
    *
@@ -23,6 +32,7 @@ H5P.Essay = function ($, Question) {
     this.contentId = contentId;
     this.contentData = contentData || {};
 
+    // Determine the minimum number of characters that should be entered
     this.config.behaviour.minimumLength = this.config.behaviour.minimumLength || 0;
     if (this.config.behaviour.maximumLength !== undefined) {
       this.config.behaviour.minimumLength = Math.min(this.config.behaviour.minimumLength, this.config.behaviour.maximumLength);
@@ -93,9 +103,7 @@ H5P.Essay = function ($, Question) {
    * @return {string} Cleaned input.
    */
   Essay.prototype.getInput = function () {
-    return this.inputField.getText()
-        .replace(/(\r\n|\r|\n)/g, ' ')
-        .replace(/\s\s/g, ' ');
+    return this.inputField.getText().replace(/(\r\n|\r|\n)/g, ' ').replace(/\s\s/g, ' ');
   };
 
   /**
@@ -114,7 +122,7 @@ H5P.Essay = function ($, Question) {
     that.addButton('check-answer', that.config.checkAnswer, function () {
       // Show message if the minimum number of characters has not been met
       if (that.inputField.getText().length < that.config.behaviour.minimumLength) {
-        that.inputField.setMessageChars(that.config.notEnoughChars.replace(/@chars/g, that.config.behaviour.minimumLength));
+        that.inputField.setMessageChars(that.config.notEnoughChars.replace(/@chars/g, that.config.behaviour.minimumLength), true);
         return;
       }
 
@@ -149,21 +157,21 @@ H5P.Essay = function ($, Question) {
    */
   Essay.prototype.buildSolution = function () {
     var solution = document.createElement('div');
-    solution.classList.add('h5p-essay-solution-container');
+    solution.classList.add(SOLUTION_CONTAINER);
     solution.setAttribute('tabindex', '0');
 
     var solutionTitle = document.createElement('div');
-    solutionTitle.classList.add('h5p-essay-solution-title');
+    solutionTitle.classList.add(SOLUTION_TITLE);
     solutionTitle.innerHTML = this.config.solutionTitle;
     solution.appendChild(solutionTitle);
 
     var solutionIntroduction = document.createElement('div');
-    solutionIntroduction.classList.add('h5p-essay-solution-introduction');
+    solutionIntroduction.classList.add(SOLUTION_INTRODUCTION);
     solutionIntroduction.innerHTML = this.config.solution.introduction;
     solution.appendChild(solutionIntroduction);
 
     var solutionSample = document.createElement('div');
-    solutionSample.classList.add('h5p-essay-solution-sample');
+    solutionSample.classList.add(SOLUTION_SAMPLE);
     solution.appendChild(solutionSample);
 
     return solution;
@@ -176,13 +184,13 @@ H5P.Essay = function ($, Question) {
     // We add the sample solution here to make cheating at least a little more difficult
     if (this.solution.children[2].children.length === 0) {
       var text = document.createElement('div');
-      text.classList.add('h5p-essay-solution-sample-text');
+      text.classList.add(SOLUTION_SAMPLE_TEXT);
       text.innerHTML = this.config.solution.sample;
       this.solution.children[2].appendChild(text);
     }
 
     // Insert solution after explanations or content
-    var predecessor = document.getElementsByClassName('h5p-question-explanation')[0] || document.getElementsByClassName('h5p-question-content')[0];
+    var predecessor = document.getElementsByClassName(QUESTION_EXPLANATION)[0] || document.getElementsByClassName(QUESTION_CONTENT)[0];
     predecessor.parentNode.insertBefore(this.solution, predecessor.nextSibling);
 
     this.solution.focus();

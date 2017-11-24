@@ -76,6 +76,10 @@
   float: left;
 }
 
+.h5p-essay .h5p-essay-input-field-message-char-important {
+  font-weight: bold;
+}
+
 .h5p-essay .h5p-essay-input-field-message-save {
   font-size: 0.8em;
   float: right;
