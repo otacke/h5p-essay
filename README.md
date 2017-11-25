@@ -49,6 +49,7 @@ Compare https://web.archive.org/web/20170628002610/http://xapi.vocab.pub/dataset
 - text statistics and metrics, e.g. readability metrics or maybe something related to the AFINN file
 - different levels of difficulty, choosable by teacher and/or student
 - add css styling to feedback text (?)
+- improve accessibility
 - add options for different keyword display in feedback (original keyword|original keyword and alternatives){1}(match found)
 - later on: possibly build a model that allows to relate texts with scores from a human, so you can train the content type and then use this model to compute the/a score, too.
 
