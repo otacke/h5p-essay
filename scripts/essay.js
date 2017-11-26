@@ -196,7 +196,8 @@ H5P.Essay = function ($, Question) {
     var predecessor = document.getElementsByClassName(QUESTION_EXPLANATION)[0] || document.getElementsByClassName(QUESTION_CONTENT)[0];
     predecessor.parentNode.insertBefore(this.solution, predecessor.nextSibling);
 
-    this.solution.focus();
+    // Could be useful for accessibility, but seems to jump to wrong position on some Safari versions
+    //this.solution.focus();
     this.trigger('resize');
   };
 
