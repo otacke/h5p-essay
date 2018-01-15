@@ -38,7 +38,7 @@
         "fields": [
           {
             "label": "Schlagwort",
-            "description": "Gesuchtes Schlagwort oder gesuchte Phrase. Du kannst ein Sternchen '*' als Platzhalter für einen oder mehrerer Buchstaben verwenden."
+            "description": "Gesuchtes Schlagwort oder gesuchte Phrase. Du kannst ein Sternchen '*' als Platzhalter für einen oder mehrerer Buchstaben verwenden. Du kannst Schrägstriche '/' am Anfang und Ende für reguläre Ausdrücke benutzen."
           },
           {
             "label": "Variationen",

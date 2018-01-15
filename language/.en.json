@@ -38,7 +38,7 @@
         "fields": [
           {
             "label": "Keyword",
-            "description": "Keyword or phrase to look for. Use an asterisk '*' as a wildcard for one or more characters."
+            "description": "Keyword or phrase to look for. Use an asterisk '*' as a wildcard for one or more characters. Use a slash '/' at the beginning and the end to use a regular expression."
           },
           {
             "label": "Variations",

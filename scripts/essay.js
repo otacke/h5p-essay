@@ -254,6 +254,29 @@ H5P.Essay = function ($, Question) {
   };
 
   /**
+   * Get all the matches found to a regular expression alternative.
+   * @param {string[]} alternatives - Alternatives.
+   * @param {string} inputTest - Original text by student.
+   * @return {string[]} Matches by regular expressions.
+   */
+  Essay.prototype.getRegularAlternatives = function (alternatives, inputTest) {
+    return alternatives
+      .filter(function (alternative) {
+        return (alternative.startsWith('/') && alternative.endsWith('/'));
+      })
+      .map(function (alternative) {
+        var regNeedle = new RegExp(alternative.slice(1, -1), 'g');
+        return inputTest.match(regNeedle);
+      })
+      .reduce(function (a, b) {
+        return a.concat(b);
+      }, [])
+      .filter(function(item) {
+        return item !== null;
+      });
+  };
+
+  /**
    * Compute results.
    * @return {Object[]} Results: [[{"keyword": keyword, "match": match, "index": index}*]*]
    */
@@ -273,6 +296,12 @@ H5P.Essay = function ($, Question) {
       var resultsGroup = [];
       var options = alternativeGroup.options;
       var alternatives = [alternativeGroup.keyword || []].concat(alternativeGroup.alternatives || []);
+      // Add all regular matches found within the text to alternatives
+      var alternativesRegular = that.getRegularAlternatives(alternatives, that.getInput());
+      var alternativesNormal = alternatives.filter(function (alternative) {
+        return (!alternative.startsWith('/') || !alternative.endsWith('/'));
+      });
+      alternatives = alternativesNormal.concat(alternativesRegular);
 
       // Detect all matches
       alternatives.forEach(function (alternative) {
