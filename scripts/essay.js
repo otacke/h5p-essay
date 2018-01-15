@@ -9,8 +9,7 @@ H5P.Essay = function ($, Question) {
   var SOLUTION_INTRODUCTION = 'h5p-essay-solution-introduction';
   var SOLUTION_SAMPLE = 'h5p-essay-solution-sample';
   var SOLUTION_SAMPLE_TEXT = 'h5p-essay-solution-sample-text';
-  var QUESTION_EXPLANATION = 'h5p-question-explanation';
-  var QUESTION_CONTENT = 'h5p-question-content';
+  var QUESTION_CONTENT = 'h5p-essay-content-';
 
   // The H5P feedback right now only expects true (green)/false (red) feedback, not neutral feedback
   var FEEDBACK_EMPTY= '<span class="h5p-essay-feedback-empty">...</span>';
@@ -34,6 +33,8 @@ H5P.Essay = function ($, Question) {
     this.config = config;
     this.contentId = contentId;
     this.contentData = contentData || {};
+
+    this.isAnswered = false;
 
     // Determine the minimum number of characters that should be entered
     this.config.behaviour.minimumLength = this.config.behaviour.minimumLength || 0;
@@ -95,7 +96,7 @@ H5P.Essay = function ($, Question) {
     this.setIntroduction(this.inputField.getIntroduction());
 
     // Register content
-    this.setContent(this.inputField.getContent());
+    this.setContent(this.inputField.getContent(), {"class": QUESTION_CONTENT + this.contentId});
 
     // Register Buttons
     this.addButtons();
@@ -130,8 +131,8 @@ H5P.Essay = function ($, Question) {
       }
 
       that.inputField.disable();
-
       that.handleEvaluation();
+      that.isAnswered = true;
 
       if (that.config.solution.sample !== undefined && that.config.solution.sample !== '') {
         that.showButton('show-solution');
@@ -141,17 +142,26 @@ H5P.Essay = function ($, Question) {
 
     // Retry button
     that.addButton('try-again', that.config.tryAgain, function () {
-      that.setExplanation();
-      that.removeFeedback();
-      that.hideSolution();
-
-      that.hideButton('show-solution');
-      that.hideButton('try-again');
-      that.showButton('check-answer');
-
-      that.inputField.enable();
-      that.inputField.focus();
+      that.resetTask();
     }, false, {}, {});
+  };
+
+  /**
+   * Reset task
+   */
+  Essay.prototype.resetTask = function () {
+    this.setExplanation();
+    this.removeFeedback();
+    this.hideSolution();
+
+    this.hideButton('show-solution');
+    this.hideButton('try-again');
+    this.showButton('check-answer');
+
+    this.inputField.enable();
+    this.inputField.focus();
+
+    this.isAnswered = false;
   };
 
   /**
@@ -193,7 +203,7 @@ H5P.Essay = function ($, Question) {
     }
 
     // Insert solution after explanations or content
-    var predecessor = document.getElementsByClassName(QUESTION_EXPLANATION)[0] || document.getElementsByClassName(QUESTION_CONTENT)[0];
+    var predecessor = document.getElementsByClassName(QUESTION_CONTENT + this.contentId)[0];
     predecessor.parentNode.insertBefore(this.solution, predecessor.nextSibling);
 
     // Could be useful for accessibility, but seems to jump to wrong position on some Safari versions
@@ -225,20 +235,20 @@ H5P.Essay = function ($, Question) {
     }
 
     // Not all keyword groups might be necessary for mastering
-    var score = Math.min(this.computeScore(results), this.scoreMastering);
-    var textScore = H5P.Question.determineOverallFeedback(this.config.overallFeedback, score / this.scoreMastering)
-        .replace('@score', score)
+    this.score = Math.min(this.computeScore(results), this.scoreMastering);
+    var textScore = H5P.Question.determineOverallFeedback(this.config.overallFeedback, this.score / this.scoreMastering)
+        .replace('@score', this.score)
         .replace('@total', this.scoreMastering);
 
     if (!this.config.behaviour.ignoreScoring) {
-      this.setFeedback(textScore, score, this.scoreMastering);
+      this.setFeedback(textScore, this.score, this.scoreMastering);
     }
 
     // Show and hide buttons as necessary
-    this.handleButtons(score);
+    this.handleButtons(this.score);
 
     // Trigger xAPI statements as necessary
-    this.handleXAPI(score);
+    this.handleXAPI(this.score);
 
     this.trigger('resize');
   };
@@ -356,6 +366,8 @@ H5P.Essay = function ($, Question) {
    */
   Essay.prototype.handleXAPI = function (score) {
     this.trigger(this.createEssayXAPIEvent('completed'));
+    // Needed by QuestionSet
+    this.trigger(this.createEssayXAPIEvent('answered'));
 
     if (!this.config.behaviour.ignoreScoring) {
       var xAPIEvent = this.createEssayXAPIEvent('scored');
@@ -508,6 +520,28 @@ H5P.Essay = function ($, Question) {
     return results.sort(function (a, b) {
       return a.index > b.index;
     });
+  };
+
+  /**
+   * Check if Essay has been submitted/minimum length met
+   * @return {Boolean}
+   */
+  Essay.prototype.getAnswerGiven = function () {
+    return this.isAnswered || (this.inputField.getText().length >= this.config.behaviour.minimumLength);
+  };
+
+  /**
+   * Get latest score.
+   */
+  Essay.prototype.getScore = function () {
+    return this.score;
+  };
+
+  /**
+   * Get maximum possible score.
+   */
+  Essay.prototype.getMaxScore = function () {
+    return this.scoreMastering;
   };
 
   /**
