@@ -26,6 +26,7 @@ If you like what I do, please consider to become my supporter at patreon: https:
 - As a teacher, I can define multiple ranges that will allow more diverse feedback.
 - As a teacher, I can define optional feedback phrases for a keyword; one for "if found in text" and one for "if not found in text". The content type might glue those phrases together, thus creating a feedback text.
 - As a student, I can receive instant feedback beyond a simple score.
+- As a teacher, I can use regular expressions for keywords if I feel the need to.
 
 ## Further Ideas
 You're welcome to contribute your ideas as an issue on github. For now there are (in no particular order or guarantee):
