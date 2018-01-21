@@ -30,16 +30,17 @@ H5P.Essay = function ($, Question) {
     // Inheritance
     Question.call(this, 'essay');
 
-    this.config = config;
+    this.params = config;
     this.contentId = contentId;
     this.contentData = contentData || {};
 
     this.isAnswered = false;
+    this.params.behaviour.enableSolutionsButton = (this.params.solution.sample !== undefined && this.params.solution.sample !== '');
 
     // Determine the minimum number of characters that should be entered
-    this.config.behaviour.minimumLength = this.config.behaviour.minimumLength || 0;
-    if (this.config.behaviour.maximumLength !== undefined) {
-      this.config.behaviour.minimumLength = Math.min(this.config.behaviour.minimumLength, this.config.behaviour.maximumLength);
+    this.params.behaviour.minimumLength = this.params.behaviour.minimumLength || 0;
+    if (this.params.behaviour.maximumLength !== undefined) {
+      this.params.behaviour.minimumLength = Math.min(this.params.behaviour.minimumLength, this.params.behaviour.maximumLength);
     }
 
     // map function
@@ -53,19 +54,19 @@ H5P.Essay = function ($, Question) {
     };
 
     // scoreMax = Maximum number of points available by all keyword groups
-    var scoreMax = this.config.keywords
+    var scoreMax = this.params.keywords
       .map(toPoints)
       .reduce(sum, 0);
 
     // scoreMastering: score indicating mastery and maximum number on progress bar (can be < scoreMax)
-    this.scoreMastering = this.config.behaviour.percentageMastering === undefined ?
+    this.scoreMastering = this.params.behaviour.percentageMastering === undefined ?
         scoreMax :
-        this.config.behaviour.percentageMastering * scoreMax / 100;
+        this.params.behaviour.percentageMastering * scoreMax / 100;
 
     // scorePassing: score to pass the task (<= scoreMastering)
     this.scorePassing = Math.min(
         this.scoreMastering,
-        this.config.behaviour.percentagePassing * scoreMax / 100 || 0);
+        this.params.behaviour.percentagePassing * scoreMax / 100 || 0);
 
     this.solution = this.buildSolution();
   }
@@ -85,11 +86,11 @@ H5P.Essay = function ($, Question) {
 
     // Create InputField
     this.inputField = new H5P.Essay.InputField({
-      'taskDescription': this.config.taskDescription,
-      'placeholderText': this.config.placeholderText,
-      'maximumLength': this.config.behaviour.maximumLength,
-      'remainingChars': this.config.remainingChars,
-      'inputFieldSize': this.config.behaviour.inputFieldSize
+      'taskDescription': this.params.taskDescription,
+      'placeholderText': this.params.placeholderText,
+      'maximumLength': this.params.behaviour.maximumLength,
+      'remainingChars': this.params.remainingChars,
+      'inputFieldSize': this.params.behaviour.inputFieldSize
     }, this.previousState);
 
     // Register task introduction text
@@ -117,16 +118,15 @@ H5P.Essay = function ($, Question) {
     var that = this;
 
     // Show solution button
-    that.addButton('show-solution', that.config.showSolution, function () {
-      that.showSolution();
-      that.hideButton('show-solution');
+    that.addButton('show-solution', that.params.showSolution, function () {
+      that.showSolutions();
     }, false, {}, {});
 
     // Check answer button
-    that.addButton('check-answer', that.config.checkAnswer, function () {
+    that.addButton('check-answer', that.params.checkAnswer, function () {
       // Show message if the minimum number of characters has not been met
-      if (that.inputField.getText().length < that.config.behaviour.minimumLength) {
-        that.inputField.setMessageChars(that.config.notEnoughChars.replace(/@chars/g, that.config.behaviour.minimumLength), true);
+      if (that.inputField.getText().length < that.params.behaviour.minimumLength) {
+        that.inputField.setMessageChars(that.params.notEnoughChars.replace(/@chars/g, that.params.behaviour.minimumLength), true);
         return;
       }
 
@@ -134,14 +134,14 @@ H5P.Essay = function ($, Question) {
       that.handleEvaluation();
       that.isAnswered = true;
 
-      if (that.config.solution.sample !== undefined && that.config.solution.sample !== '') {
+      if (that.params.behaviour.enableSolutionsButton === true) {
         that.showButton('show-solution');
       }
       that.hideButton('check-answer');
     }, true, {}, {});
 
     // Retry button
-    that.addButton('try-again', that.config.tryAgain, function () {
+    that.addButton('try-again', that.params.tryAgain, function () {
       that.resetTask();
     }, false, {}, {});
   };
@@ -175,12 +175,12 @@ H5P.Essay = function ($, Question) {
 
     var solutionTitle = document.createElement('div');
     solutionTitle.classList.add(SOLUTION_TITLE);
-    solutionTitle.innerHTML = this.config.solutionTitle;
+    solutionTitle.innerHTML = this.params.solutionTitle;
     solution.appendChild(solutionTitle);
 
     var solutionIntroduction = document.createElement('div');
     solutionIntroduction.classList.add(SOLUTION_INTRODUCTION);
-    solutionIntroduction.innerHTML = this.config.solution.introduction;
+    solutionIntroduction.innerHTML = this.params.solution.introduction;
     solution.appendChild(solutionIntroduction);
 
     var solutionSample = document.createElement('div');
@@ -193,12 +193,12 @@ H5P.Essay = function ($, Question) {
   /**
    * Show solution.
    */
-  Essay.prototype.showSolution = function () {
+  Essay.prototype.showSolutions = function () {
     // We add the sample solution here to make cheating at least a little more difficult
     if (this.solution.children[2].children.length === 0) {
       var text = document.createElement('div');
       text.classList.add(SOLUTION_SAMPLE_TEXT);
-      text.innerHTML = this.config.solution.sample;
+      text.innerHTML = this.params.solution.sample;
       this.solution.children[2].appendChild(text);
     }
 
@@ -208,6 +208,9 @@ H5P.Essay = function ($, Question) {
 
     // Could be useful for accessibility, but seems to jump to wrong position on some Safari versions
     //this.solution.focus();
+
+    this.hideButton('show-solution');
+
     this.trigger('resize');
   };
 
@@ -231,16 +234,16 @@ H5P.Essay = function ($, Question) {
 
     // Show explanations
     if (explanations.length > 0) {
-      this.setExplanation(explanations, this.config.feedbackHeader);
+      this.setExplanation(explanations, this.params.feedbackHeader);
     }
 
     // Not all keyword groups might be necessary for mastering
     this.score = Math.min(this.computeScore(results), this.scoreMastering);
-    var textScore = H5P.Question.determineOverallFeedback(this.config.overallFeedback, this.score / this.scoreMastering)
+    var textScore = H5P.Question.determineOverallFeedback(this.params.overallFeedback, this.score / this.scoreMastering)
         .replace('@score', this.score)
         .replace('@total', this.scoreMastering);
 
-    if (!this.config.behaviour.ignoreScoring) {
+    if (!this.params.behaviour.ignoreScoring) {
       this.setFeedback(textScore, this.score, this.scoreMastering);
     }
 
@@ -285,14 +288,14 @@ H5P.Essay = function ($, Question) {
     var results = [];
 
     // Should not happen, but just to be sure ...
-    this.config.keywords = this.config.keywords || [];
+    this.params.keywords = this.params.keywords || [];
 
     // optional = false is ignored in Editor
-    this.config.keywords = this.config.keywords.filter(function (element) {
+    this.params.keywords = this.params.keywords.filter(function (element) {
       return element.keyword !== undefined;
     });
 
-    this.config.keywords.forEach(function (alternativeGroup) {
+    this.params.keywords.forEach(function (alternativeGroup) {
       var resultsGroup = [];
       var options = alternativeGroup.options;
       var alternatives = [alternativeGroup.keyword || []].concat(alternativeGroup.alternatives || []);
@@ -308,7 +311,7 @@ H5P.Essay = function ($, Question) {
         var inputTest = that.getInput();
 
         // Check for case sensitivity
-        if (!options.caseSensitive || that.config.behaviour.overrideCaseSensitive === 'off') {
+        if (!options.caseSensitive || that.params.behaviour.overrideCaseSensitive === 'off') {
           alternative = alternative.toLowerCase();
           inputTest = inputTest.toLowerCase();
         }
@@ -335,8 +338,8 @@ H5P.Essay = function ($, Question) {
    */
   Essay.prototype.computeScore = function (results) {
     var score = 0;
-    for (var i = 0; i < this.config.keywords.length; i++) {
-      score += Math.min(results[i].length, this.config.keywords[i].options.occurrences) * this.config.keywords[i].options.points;
+    for (var i = 0; i < this.params.keywords.length; i++) {
+      score += Math.min(results[i].length, this.params.keywords[i].options.occurrences) * this.params.keywords[i].options.points;
     }
     return score;
   };
@@ -349,14 +352,14 @@ H5P.Essay = function ($, Question) {
   Essay.prototype.buildExplanation = function (results) {
     var explanations = [];
 
-    for (var i = 0; i < this.config.keywords.length; i++) {
+    for (var i = 0; i < this.params.keywords.length; i++) {
       // Keyword was not found and feedback is provided for this case
-      if (results[i].length === 0 && this.config.keywords[i].options.feedbackMissed) {
-        explanations.push({correct: FEEDBACK_EMPTY, text: this.config.keywords[i].options.feedbackMissed});
+      if (results[i].length === 0 && this.params.keywords[i].options.feedbackMissed) {
+        explanations.push({correct: FEEDBACK_EMPTY, text: this.params.keywords[i].options.feedbackMissed});
       }
       // Keyword found and feedback is provided for this case
-      if (results[i].length > 0 && this.config.keywords[i].options.feedbackIncluded) {
-        explanations.push({correct: this.config.keywords[i].keyword, text: this.config.keywords[i].options.feedbackIncluded});
+      if (results[i].length > 0 && this.params.keywords[i].options.feedbackIncluded) {
+        explanations.push({correct: this.params.keywords[i].keyword, text: this.params.keywords[i].options.feedbackIncluded});
       }
     }
 
@@ -374,13 +377,13 @@ H5P.Essay = function ($, Question) {
    * @param {number} score - Score the user received.
    */
   Essay.prototype.handleButtons = function (score) {
-    if (this.config.solution.sample && !this.solution) {
+    if (this.params.solution.sample && !this.solution) {
       this.showButton('show-solution');
     }
 
     // We need the retry button if the mastering score has not been reached or scoring is irrelevant
-    if (score < this.scoreMastering || this.config.behaviour.ignoreScoring) {
-      if (this.config.behaviour.enableRetry) {
+    if (score < this.scoreMastering || this.params.behaviour.ignoreScoring) {
+      if (this.params.behaviour.enableRetry) {
         this.showButton('try-again');
       }
     }
@@ -398,7 +401,7 @@ H5P.Essay = function ($, Question) {
     // Needed by QuestionSet
     this.trigger(this.createEssayXAPIEvent('answered'));
 
-    if (!this.config.behaviour.ignoreScoring) {
+    if (!this.params.behaviour.ignoreScoring) {
       var xAPIEvent = this.createEssayXAPIEvent('scored');
       xAPIEvent.setScoredResult(score, this.scoreMastering, this, true, score >= this.scorePassing);
       xAPIEvent.data.statement.result.response = this.getInput();
@@ -442,11 +445,21 @@ H5P.Essay = function ($, Question) {
   Essay.prototype.getxAPIDefinition = function () {
     var definition = {};
     definition.name = {'en-US': 'Essay'};
-    definition.description = {'en-US': this.config.taskDescription};
+    definition.description = {'en-US': this.params.taskDescription};
     definition.type = 'http://id.tincanapi.com/activitytype/essay';
     definition.interactionType = 'long-fill-in';
     return definition;
   };
+
+  /**
+   * Retrieve the xAPI data necessary for generating result reports.
+   * @return {object} xAPI data for report.
+   */
+  Essay.prototype.getXAPIData = function () {
+    // TODO!
+    return {};
+  };
+
 
   /**
    * Detect exact matches of needle in haystack.
@@ -556,7 +569,7 @@ H5P.Essay = function ($, Question) {
    * @return {Boolean}
    */
   Essay.prototype.getAnswerGiven = function () {
-    return this.isAnswered || (this.inputField.getText().length >= this.config.behaviour.minimumLength);
+    return this.isAnswered || (this.inputField.getText().length >= this.params.behaviour.minimumLength);
   };
 
   /**
@@ -614,7 +627,7 @@ H5P.Essay = function ($, Question) {
    * @return {Object} Current state.
    */
   Essay.prototype.getCurrentState = function () {
-    this.inputField.updateMessageSaved(this.config.messageSave);
+    this.inputField.updateMessageSaved(this.params.messageSave);
 
     // We could have just used a string, but you never know when you need to store more parameters
     return {
