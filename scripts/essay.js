@@ -251,7 +251,7 @@ H5P.Essay = function ($, Question) {
     this.handleButtons(this.score);
 
     // Trigger xAPI statements as necessary
-    this.handleXAPI(this.score);
+    this.handleXAPI();
 
     this.trigger('resize');
   };
@@ -396,30 +396,17 @@ H5P.Essay = function ($, Question) {
    * Handle xAPI event triggering
    * @param {number} score - Score the user received.
    */
-  Essay.prototype.handleXAPI = function (score) {
-    this.trigger(this.createEssayXAPIEvent('completed'));
-    // Needed by QuestionSet
-    this.trigger(this.createEssayXAPIEvent('answered'));
+  Essay.prototype.handleXAPI = function () {
+    this.trigger(this.getXAPIAnswerEvent());
 
     if (!this.params.behaviour.ignoreScoring) {
-      var xAPIEvent = this.createEssayXAPIEvent('scored');
-      xAPIEvent.setScoredResult(score, this.scoreMastering, this, true, score >= this.scorePassing);
-      xAPIEvent.data.statement.result.response = this.getInput();
-      /*
-       * We could think about adding support for the "correct response pattern",
-       * but the official xAPI documentation discourages to use it if the
-       * criteria for a question are complex and correct responses cannot be
-       * exhaustively listed. They kind of can and can't.
-       */
-      this.trigger(xAPIEvent);
-
-      if (score < this.scorePassing) {
+      if (this.getScore() < this.scorePassing) {
         this.trigger(this.createEssayXAPIEvent('failed'));
       }
       else {
         this.trigger(this.createEssayXAPIEvent('passed'));
       }
-      if (score >= this.scoreMastering) {
+      if (this.getScore() >= this.scoreMastering) {
         this.trigger(this.createEssayXAPIEvent('mastered'));
       }
     }
@@ -433,8 +420,8 @@ H5P.Essay = function ($, Question) {
   Essay.prototype.createEssayXAPIEvent = function (verb) {
     var xAPIEvent = this.createXAPIEventTemplate(verb);
     this.extend(
-        xAPIEvent.getVerifiedStatementValue(['object', 'definition']),
-        this.getxAPIDefinition());
+      xAPIEvent.getVerifiedStatementValue(['object', 'definition']),
+      this.getxAPIDefinition());
     return xAPIEvent;
   };
 
@@ -448,18 +435,46 @@ H5P.Essay = function ($, Question) {
     definition.description = {'en-US': this.params.taskDescription};
     definition.type = 'http://id.tincanapi.com/activitytype/essay';
     definition.interactionType = 'long-fill-in';
+    /*
+     * We could think about adding support for the "correct response pattern",
+     * but the official xAPI documentation discourages to use it if the
+     * criteria for a question are complex and correct responses cannot be
+     * exhaustively listed. They kind of can and can't.
+     */
+    definition.correctResponsesPattern = [];
     return definition;
   };
 
   /**
-   * Retrieve the xAPI data necessary for generating result reports.
-   * @return {object} xAPI data for report.
-   */
-  Essay.prototype.getXAPIData = function () {
-    // TODO!
-    return {};
+     * Get xAPI data.
+     * Contract used by report rendering engine.
+     *
+     * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-6}
+     */
+  Essay.prototype.getXAPIData = function() {
+    return {
+      statement: this.getXAPIAnswerEvent().data.statement
+    };
   };
 
+  /**
+   * Build xAPI answer event.
+   * @return {object} xAPI answer event.
+   */
+  Essay.prototype.getXAPIAnswerEvent = function () {
+    var xAPIEvent = this.createEssayXAPIEvent('answered');
+
+    if (!this.params.behaviour.ignoreScoring) {
+      xAPIEvent.setScoredResult(this.getScore(), this.scoreMastering, this, true, this.getScore() >= this.scorePassing);
+    }
+    else {
+      // Score and maxScore (although irrelevant here) need to be set for being reported
+      xAPIEvent.setScoredResult(0, 0, this, true, true);
+    }
+    xAPIEvent.data.statement.result.response = this.getInput();
+
+    return xAPIEvent;
+  };
 
   /**
    * Detect exact matches of needle in haystack.
