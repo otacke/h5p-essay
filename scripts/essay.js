@@ -84,6 +84,25 @@ H5P.Essay = function ($, Question) {
       this.previousState = this.contentData.previousState;
     }
 
+    if (this.params.media && this.params.media.library) {
+      var type = this.params.media.library.split(' ')[0];
+      if (type === 'H5P.Image') {
+        if (this.params.media.params.file) {
+          // Register task image
+          this.setImage(this.params.media.params.file.path, {
+            disableImageZooming: this.params.behaviour.disableImageZooming,
+            alt: this.params.media.params.alt
+          });
+        }
+      }
+      else if (type === 'H5P.Video') {
+        if (this.params.media.params.sources) {
+          // Register task video
+          this.setVideo(this.params.media);
+        }
+      }
+    }
+
     // Create InputField
     this.inputField = new H5P.Essay.InputField({
       'taskDescription': this.params.taskDescription,
