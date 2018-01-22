@@ -91,7 +91,8 @@ H5P.Essay = function ($, Question) {
           // Register task image
           this.setImage(this.params.media.params.file.path, {
             disableImageZooming: this.params.behaviour.disableImageZooming,
-            alt: this.params.media.params.alt
+            alt: this.params.media.params.alt,
+            title: this.params.media.params.title
           });
         }
       }
