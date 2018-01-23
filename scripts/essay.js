@@ -30,6 +30,11 @@ H5P.Essay = function ($, Question) {
     // Inheritance
     Question.call(this, 'essay');
 
+    /*
+     * this.params.behaviour.enableSolutionsButton and this.params.behaviour.enableRetry are used by
+     * contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-8} and
+     * {@link https://h5p.org/documentation/developers/contracts#guides-header-9}
+     */
     this.params = config;
     this.contentId = contentId;
     this.contentData = contentData || {};
@@ -124,14 +129,6 @@ H5P.Essay = function ($, Question) {
   };
 
   /**
-   * Get the user input from DOM.
-   * @return {string} Cleaned input.
-   */
-  Essay.prototype.getInput = function () {
-    return this.inputField.getText().replace(/(\r\n|\r|\n)/g, ' ').replace(/\s\s/g, ' ');
-  };
-
-  /**
    * Add all the buttons that shall be passed to H5P.Question
    */
   Essay.prototype.addButtons = function () {
@@ -167,51 +164,45 @@ H5P.Essay = function ($, Question) {
   };
 
   /**
-   * Reset task
+   * Get the user input from DOM.
+   * @return {string} Cleaned input.
    */
-  Essay.prototype.resetTask = function () {
-    this.setExplanation();
-    this.removeFeedback();
-    this.hideSolution();
-
-    this.hideButton('show-solution');
-    this.hideButton('try-again');
-    this.showButton('check-answer');
-
-    this.inputField.enable();
-    this.inputField.focus();
-
-    this.isAnswered = false;
+  Essay.prototype.getInput = function () {
+    return this.inputField.getText().replace(/(\r\n|\r|\n)/g, ' ').replace(/\s\s/g, ' ');
   };
 
   /**
-   * Build solution DOM object.
-   * @return {Object} DOM object.
+   * Check if Essay has been submitted/minimum length met
+   * @return {Boolean}
+   *
+   * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-1}
    */
-  Essay.prototype.buildSolution = function () {
-    var solution = document.createElement('div');
-    solution.classList.add(SOLUTION_CONTAINER);
-    solution.setAttribute('tabindex', '0');
+  Essay.prototype.getAnswerGiven = function () {
+    return this.isAnswered || (this.inputField.getText().length >= this.params.behaviour.minimumLength);
+  };
 
-    var solutionTitle = document.createElement('div');
-    solutionTitle.classList.add(SOLUTION_TITLE);
-    solutionTitle.innerHTML = this.params.solutionTitle;
-    solution.appendChild(solutionTitle);
+  /**
+   * Get latest score.
+   *
+   * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-2}
+   */
+  Essay.prototype.getScore = function () {
+    return this.score;
+  };
 
-    var solutionIntroduction = document.createElement('div');
-    solutionIntroduction.classList.add(SOLUTION_INTRODUCTION);
-    solutionIntroduction.innerHTML = this.params.solution.introduction;
-    solution.appendChild(solutionIntroduction);
-
-    var solutionSample = document.createElement('div');
-    solutionSample.classList.add(SOLUTION_SAMPLE);
-    solution.appendChild(solutionSample);
-
-    return solution;
+  /**
+   * Get maximum possible score.
+   *
+   * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-3}
+   */
+  Essay.prototype.getMaxScore = function () {
+    return this.scoreMastering;
   };
 
   /**
    * Show solution.
+   *
+   * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-4}
    */
   Essay.prototype.showSolutions = function () {
     // We add the sample solution here to make cheating at least a little more difficult
@@ -235,12 +226,34 @@ H5P.Essay = function ($, Question) {
   };
 
   /**
-   * Hide the solution.
+   * Reset task
+   *
+   * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-5}
    */
-  Essay.prototype.hideSolution = function () {
-    if (this.solution.parentNode !== null) {
-      this.solution.parentNode.removeChild(this.solution);
-    }
+  Essay.prototype.resetTask = function () {
+    this.setExplanation();
+    this.removeFeedback();
+    this.hideSolution();
+
+    this.hideButton('show-solution');
+    this.hideButton('try-again');
+    this.showButton('check-answer');
+
+    this.inputField.enable();
+    this.inputField.focus();
+
+    this.isAnswered = false;
+  };
+
+  /**
+   * Get xAPI data.
+   *
+   * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-6}
+   */
+  Essay.prototype.getXAPIData = function () {
+    return {
+      statement: this.getXAPIAnswerEvent().data.statement
+    };
   };
 
   /**
@@ -277,26 +290,38 @@ H5P.Essay = function ($, Question) {
   };
 
   /**
-   * Get all the matches found to a regular expression alternative.
-   * @param {string[]} alternatives - Alternatives.
-   * @param {string} inputTest - Original text by student.
-   * @return {string[]} Matches by regular expressions.
+   * Build solution DOM object.
+   * @return {Object} DOM object.
    */
-  Essay.prototype.getRegularAlternatives = function (alternatives, inputTest) {
-    return alternatives
-      .filter(function (alternative) {
-        return (alternative.startsWith('/') && alternative.endsWith('/'));
-      })
-      .map(function (alternative) {
-        var regNeedle = new RegExp(alternative.slice(1, -1), 'g');
-        return inputTest.match(regNeedle);
-      })
-      .reduce(function (a, b) {
-        return a.concat(b);
-      }, [])
-      .filter(function(item) {
-        return item !== null;
-      });
+  Essay.prototype.buildSolution = function () {
+    var solution = document.createElement('div');
+    solution.classList.add(SOLUTION_CONTAINER);
+    solution.setAttribute('tabindex', '0');
+
+    var solutionTitle = document.createElement('div');
+    solutionTitle.classList.add(SOLUTION_TITLE);
+    solutionTitle.innerHTML = this.params.solutionTitle;
+    solution.appendChild(solutionTitle);
+
+    var solutionIntroduction = document.createElement('div');
+    solutionIntroduction.classList.add(SOLUTION_INTRODUCTION);
+    solutionIntroduction.innerHTML = this.params.solution.introduction;
+    solution.appendChild(solutionIntroduction);
+
+    var solutionSample = document.createElement('div');
+    solutionSample.classList.add(SOLUTION_SAMPLE);
+    solution.appendChild(solutionSample);
+
+    return solution;
+  };
+
+  /**
+   * Hide the solution.
+   */
+  Essay.prototype.hideSolution = function () {
+    if (this.solution.parentNode !== null) {
+      this.solution.parentNode.removeChild(this.solution);
+    }
   };
 
   /**
@@ -419,6 +444,7 @@ H5P.Essay = function ($, Question) {
   Essay.prototype.handleXAPI = function () {
     this.trigger(this.getXAPIAnswerEvent());
 
+    // Additional xAPI verbs that might be useful for making analytics easier
     if (!this.params.behaviour.ignoreScoring) {
       if (this.getScore() < this.scorePassing) {
         this.trigger(this.createEssayXAPIEvent('failed'));
@@ -463,18 +489,6 @@ H5P.Essay = function ($, Question) {
      */
     definition.correctResponsesPattern = [];
     return definition;
-  };
-
-  /**
-     * Get xAPI data.
-     * Contract used by report rendering engine.
-     *
-     * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-6}
-     */
-  Essay.prototype.getXAPIData = function() {
-    return {
-      statement: this.getXAPIAnswerEvent().data.statement
-    };
   };
 
   /**
@@ -571,6 +585,29 @@ H5P.Essay = function ($, Question) {
   };
 
   /**
+   * Get all the matches found to a regular expression alternative.
+   * @param {string[]} alternatives - Alternatives.
+   * @param {string} inputTest - Original text by student.
+   * @return {string[]} Matches by regular expressions.
+   */
+  Essay.prototype.getRegularAlternatives = function (alternatives, inputTest) {
+    return alternatives
+      .filter(function (alternative) {
+        return (alternative.startsWith('/') && alternative.endsWith('/'));
+      })
+      .map(function (alternative) {
+        var regNeedle = new RegExp(alternative.slice(1, -1), 'g');
+        return inputTest.match(regNeedle);
+      })
+      .reduce(function (a, b) {
+        return a.concat(b);
+      }, [])
+      .filter(function (item) {
+        return item !== null;
+      });
+  };
+
+  /**
    * Merge the matches.
    * @param {...Object[]} matches - Detected matches.
    * @return {Object[]} Merged matches.
@@ -597,28 +634,6 @@ H5P.Essay = function ($, Question) {
     return results.sort(function (a, b) {
       return a.index > b.index;
     });
-  };
-
-  /**
-   * Check if Essay has been submitted/minimum length met
-   * @return {Boolean}
-   */
-  Essay.prototype.getAnswerGiven = function () {
-    return this.isAnswered || (this.inputField.getText().length >= this.params.behaviour.minimumLength);
-  };
-
-  /**
-   * Get latest score.
-   */
-  Essay.prototype.getScore = function () {
-    return this.score;
-  };
-
-  /**
-   * Get maximum possible score.
-   */
-  Essay.prototype.getMaxScore = function () {
-    return this.scoreMastering;
   };
 
   /**
