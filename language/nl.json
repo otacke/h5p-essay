@@ -1,0 +1,226 @@
+{
+  "semantics": [
+    {
+      "label": "Taakomschrijving",
+      "description": "Omschrijf hier je taak. Deze zal boven het tekstinvoerveld verschijnen.",
+      "placeholder": "Vat het boek in maximaal 500 tekens samen ..."
+    },
+    {
+      "label": "Helptekst",
+      "description": "Deze tekst dient de gebruiker te helpen bij het starten.",
+      "placeholder": "Dit boek gaat over ..."
+    },
+    {
+      "label": "Voorbeeld oplossing",
+      "description": "Je kunt optioneel een voorbeeldoplossing toevoegen, die wordt getoond wordt nadat de gebruiker de tekst heeft geschreven. Het wordt een voorbeeldoplossing genoemd omdat het waarschijnlijk niet de enige oplossing is",
+      "fields": [
+        {
+          "label": "Introductie",
+          "description": "Optioneel kun je de gebruikers uitleg geven over jouw voorbeeld.",
+          "placeholder": "Onthoud dat er niet van je wordt verwacht, dat je met de exact dezelfde oplossing komt. Het is gewoon een goed voorbeeld."
+        },
+        {
+          "label": "Voorbeeld oplossingstekst",
+          "description": "De gebruiker zal een \"Toon oplossing\" knop zien na het indienen als je hier tekst plaatst."
+        }
+      ]
+    },
+    {
+      "label": "Trefwoorden",
+      "widgets": [
+        {
+          "label": "Standaard"
+        }
+      ],
+      "entity": "Trefwoord",
+      "field": {
+        "label": "Trefwoord",
+        "fields": [
+          {
+            "label": "Trefwoord",
+            "description": "Trefwoord of zinsdeel waarnaar moet worden gezocht. Gebruik een asterisk '*' als jokerteken voor één of meerdere tekens. Gebruik een schuine streep '/' aan het begin en het einde om een reguliere uitdrukking te gebruiken."
+          },
+          {
+            "label": "Variaties",
+            "description": "Voeg optioneel variaties toe voor dit trefwoord. Voorbeeld: Voor een 'stad' voeg aternatieven toe als 'plaats', 'gemeente' etc. Punten worden toegekend als de gebruiker een van de opgegeven alternatieven hanteert.",
+            "entity": "variatie",
+            "field": {
+              "label": "Trefwoord variatie"
+            }
+          },
+          {
+            "label": "Punten, opties en feedback",
+            "fields": [
+              {
+                "label": "Punten",
+                "description": "Punten die de gebruiker krijgt als hij/ zij dit trefwoord of de alternatieven in het antwoord opneemt."
+              },
+              {
+                "label": "Verschijningen",
+                "description": "Geef op hoeveel punten, aan het verschene trefwoord of de varianten ervan, moeten worden toegekend."
+              },
+              {
+                "label": "Hoofdlettergevoelig",
+                "description": "Zorg ervoor dat de invoer van de gebruiker exact hetzelfde is als het antwoord."
+              },
+              {
+                "label": "Kleine vergissingen ontzien",
+                "description": "Dit zal kleine spelfouten accepteren (3-9 tekens: 1 fout, meer dan 9 tekens: 2 fouten)."
+              },
+              {
+                "label": "Feedback als het trefwoord is opgenomen",
+                "description": "Deze feedback wordt getoond als de gebruiker dit trefwoord of de alternatieven in het antwoord opneemt."
+              },
+              {
+                "label": "Feedback als het trefwoord ontbreekt",
+                "description": "Deze feedback wordt getoond als de gebruiker dit trefwoord of de alternatieven niet in het antwoord opneemt."
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "label": "Algemene feedback",
+      "fields": [
+        {
+          "widgets": [
+            {
+              "label": "Standaard"
+            }
+          ],
+          "label": "Definieer aangepaste feedback voor elk scorebereik",
+          "description": "Druk op de \"Voeg reeks\" -knop om zoveel reeksen toe te voegen als je nodig hebt. Voorbeeld: 0-20% Slechte score, 21-91% Gemiddelde score, 91-100% Geweldige score!",
+          "entity": "reeks",
+          "field": {
+            "fields": [
+              {
+                "label": "Score reeks"
+              },
+              {},
+              {
+                "label": "Feedback voor gedefinieerd scorebereik",
+                "placeholder": "Vul de feedback in"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "label": "Gedragsinstellingen",
+      "description": "Met deze opties kun je bepalen hoe de taak zich gedraagt.",
+      "fields": [
+        {
+          "label": "Minimum aantal tekens",
+          "description": "Bepaal het minimum aantal tekens dat de gebruiker moet invoeren."
+        },
+        {
+          "label": "Maximum aantal tekens",
+          "description": "Bepaal het maximaal aantal tekens dat de gebruiker kan invoeren."
+        },
+        {
+          "label": "Invoer veldgrootte",
+          "description": "De grootte van het invoerveld uitgedrukt in het aantal regels dat het omvat",
+          "options": [
+            {
+              "label": "1 regel"
+            },
+            {
+              "label": "3 regel"
+            },
+            {
+              "label": "10 regels"
+            }
+          ],
+          "default": "10"
+        },
+        {
+          "label": "Schakel \"Opnieuw\" in",
+          "description": "Indien aangevinkt, kunnen de gebruikers de taak opnieuw proberen."
+        },
+        {
+          "label": "Negeer score",
+          "description": "Indien aangevinkt, zien de gebruikers alleen de feedback die je hebt gegeven voor de trefwoorden, maar geen score."
+        },
+        {
+          "label": "Slagingspercentage",
+          "description": "Het percentage dat nodig is om te slagen",
+          "showWhen": {
+            "rules": [
+              {}
+            ]
+          }
+        },
+        {
+          "label": "Beheersingspercentage",
+          "description": "Het percentage dat nodig is om de stof te beheersen",
+          "showWhen": {
+            "rules": [
+              {}
+            ]
+          }
+        },
+        {
+          "label": "Hef de hoofdlettergevoeligheid op",
+          "description": "Deze optie bepaalt of de \"Hooflettergevoelig\" instelling wordt geactiveerd voor alle trefwoorden.",
+          "options": [
+            {
+              "label": "Ingeschakeld"
+            },
+            {
+              "label": "Uitgeschakeld"
+            }
+          ]
+        },
+        {
+          "label": "Hef ontzie fouten op",
+          "description": "Deze optie bepaalt of de \"Ontzie fouten\" instelling wordt geactiveerd voor alle trefwoorden.",
+          "options": [
+            {
+              "label": "Ingeschakeld"
+            },
+            {
+              "label": "Uitgeschakeld"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Tekst voor \"Controleer\" knop",
+      "default": "Controleer"
+    },
+    {
+      "label": "Tekst voor \"Opnieuw\" knop",
+      "default": "Opnieuw"
+    },
+    {
+      "label": "Tekst voor \"Toon oplossing\" knop",
+      "default": "Toon oplossing"
+    },
+    {
+      "label": "Titel voor het feedbackpaneel met opgenomen/ ontbrekende trefwoorden",
+      "default": "Feedback"
+    },
+    {
+      "label": "Label voor de oplossing",
+      "default": "Voorbeeld oplossing"
+    },
+    {
+      "label": "Resterende tekens",
+      "default": "Resterende tekens: @chars",
+      "description": "Bericht voor resterende tekens. Je kunt @chars gebruiken, die worden vervangen door het overeenkomstige nummer."
+    },
+    {
+      "label": "Onvoldoende tekens",
+      "default": "Je moet minstens @chars tekens invoeren!",
+      "description": "Bericht om aan te geven dat de tekst niet genoeg tekensbevat. Je kan @chars gebruiken, die worden vervangen door het overeenkomstige nummer."
+    },
+    {
+      "label": "Opslaan bericht",
+      "description": "Bericht om aan te gevewn dat de tekst is opgeslagen",
+      "default": "opgeslagen"
+    }
+  ]
+}
