@@ -499,7 +499,7 @@ H5P.Essay = function ($, Question) {
     var xAPIEvent = this.createEssayXAPIEvent('answered');
 
     if (!this.params.behaviour.ignoreScoring) {
-      xAPIEvent.setScoredResult(this.getScore(), this.scoreMastering, this, true, this.getScore() >= this.scorePassing);
+      xAPIEvent.setScoredResult(this.getScore(), this.getMaxScore(), this, true, this.getScore() >= this.scorePassing);
     }
     else {
       // Score and maxScore (although irrelevant here) need to be set for being reported
