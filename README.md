@@ -10,6 +10,9 @@ The content type could possibly evolve into a solution for [automated essay scor
 ## Support me at patreon!
 If you like what I do, please consider to become my supporter at patreon: https://www.patreon.com/otacke
 
+## Example
+!["Sample Content with H5P Essay"](https://ibin.co/3s9w39KcHu0W.png "Sample Content with H5P Essay")
+
 ## Done
 - As a student, I can enter an essay text and submit it for "grading".
 - As a student, I can (automatically) save a draft and continue writing later.
