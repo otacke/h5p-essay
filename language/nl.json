@@ -5,7 +5,7 @@
       "fields": [
         {
           "label": "Type",
-          "description": "Optional media to display above the question."
+          "description": "Optionele media, die boven de vragen worden getoond."
         }
       ]
     },
@@ -149,7 +149,7 @@
           "description": "Indien aangevinkt, kunnen de gebruikers de taak opnieuw proberen."
         },
         {
-          "label": "Disable image zooming for question image"
+          "label": "Deactiveer zoomen op een afbeelding bij een vraag afbeelding"
         },
         {
           "label": "Negeer score",

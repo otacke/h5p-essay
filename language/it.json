@@ -4,8 +4,8 @@
       "label": "Media",
       "fields": [
         {
-          "label": "Type",
-          "description": "Optional media to display above the question."
+          "label": "Tipo",
+          "description": "Media opzionale da mostrare sopra la domanda."
         }
       ]
     },
@@ -149,7 +149,7 @@
           "description": "Se selezionato, gli studenti possono riprovare a fare il compito."
         },
         {
-          "label": "Disable image zooming for question image"
+          "label": "Disabilita lo zoom dell'immagine su immagini-domanda"
         },
         {
           "label": "Ignora il punteggio",
