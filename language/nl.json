@@ -1,6 +1,15 @@
 {
   "semantics": [
     {
+      "label": "Media",
+      "fields": [
+        {
+          "label": "Type",
+          "description": "Optional media to display above the question."
+        }
+      ]
+    },
+    {
       "label": "Taakomschrijving",
       "description": "Omschrijf hier je taak. Deze zal boven het tekstinvoerveld verschijnen.",
       "placeholder": "Vat het boek in maximaal 500 tekens samen ..."
@@ -138,6 +147,9 @@
         {
           "label": "Schakel \"Opnieuw\" in",
           "description": "Indien aangevinkt, kunnen de gebruikers de taak opnieuw proberen."
+        },
+        {
+          "label": "Disable image zooming for question image"
         },
         {
           "label": "Negeer score",

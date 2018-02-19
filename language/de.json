@@ -1,6 +1,15 @@
 {
   "semantics": [
     {
+      "label": "Medien",
+      "fields": [
+        {
+          "label": "Typ",
+          "description": "Optionale Medien, die vor der Aufgabe angezeigt werden können."
+        }
+      ]
+    },
+    {
       "label": "Aufgabenbeschreibung",
       "description": "Die Beschreibung wird oberhalb des Texteingabefeldes erscheinen.",
       "placeholder": "Fasse das Buch in maximal 500 Zeichen zusammen ..."
@@ -138,6 +147,9 @@
         {
           "label": "\"Wiederholen\" zulassen",
           "description": "Wenn diese Option angewählt ist, können Lernende die Aufgabe wiederholen."
+        },
+        {
+          "label": "Bildzoom für das Bild deaktivieren"
         },
         {
           "label": "Ignoriere die Bepunktung",

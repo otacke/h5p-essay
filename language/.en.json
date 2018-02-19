@@ -1,6 +1,15 @@
 {
   "semantics": [
     {
+      "label": "Media",
+      "fields": [
+        {
+          "label": "Type",
+          "description": "Optional media to display above the question."
+        }
+      ]
+    },
+    {
       "label": "Task description",
       "description": "Describe your task here. The task description will appear above text input area.",
       "placeholder": "Summarize the book in 500 characters ..."
@@ -138,6 +147,9 @@
         {
           "label": "Enable \"Retry\"",
           "description": "If checked, learners can retry the task."
+        },
+        {
+          "label": "Disable image zooming for question image"
         },
         {
           "label": "Ignore scoring",
