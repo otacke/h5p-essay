@@ -86,6 +86,36 @@
               {
                 "label": "Rückmeldung, wenn Schlagwort nicht verwendet",
                 "description": "Diese Rückmeldung wird angezeigt, wenn die Lernenden das Schlagwort oder seine Variationen im Text nicht verwendet haben."
+              },
+              {
+                "label": "Wort bei Rückmeldung, wenn Schlagwort verwendet",
+                "description": "Diese Option erlaubt es anzugeben, welches Wort vor der Rückmeldung angezeigt wird, wenn ein Schlagwort verwendet wurde.",
+                "options": [
+                  {
+                    "label": "Schlagwort"
+                  },
+                  {
+                    "label": "gefundene Alternative"
+                  },
+                  {
+                    "label": "gegebene Antwort"
+                  },
+                  {
+                    "label": "nichts"
+                  }
+                ]
+              },
+              {
+                "label": "Wort bei Rückmeldung, wenn Schlagwort nicht verwendet",
+                "description": "Diese Option erlaubt es anzugeben, welches Wort vor der Rückmeldung angezeigt wird, wenn ein Schlagwort verwendet wurde.",
+                "options": [
+                  {
+                    "label": "Schlagwort"
+                  },
+                  {
+                    "label": "nichts"
+                  }
+                ]
               }
             ]
           }

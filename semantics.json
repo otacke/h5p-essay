@@ -197,6 +197,52 @@
               "label": "Feedback if keyword missing",
               "description": "This feedback will be displayed if the user doesn’t include this keyword or its alternatives in the answer.",
               "optional": true
+            },
+            {
+              "name": "feedbackIncludedWord",
+              "type": "select",
+              "label": "Feedback word shown if keyword included",
+              "importance": "low",
+              "description": "This option allows you to specify which word should be shown in front of your feedback if a keyword was found in the text.",
+              "optional": false,
+              "default": "keyword",
+              "options": [
+                {
+                  "value": "keyword",
+                  "label": "keyword"
+                },
+                {
+                  "value": "alternative",
+                  "label": "alternative found"
+                },
+                {
+                  "value": "answer",
+                  "label": "answer given"
+                },
+                {
+                  "value": "none",
+                  "label": "none"
+                }
+              ]
+            },
+            {
+              "name": "feedbackMissedWord",
+              "type": "select",
+              "label": "Feedback word shown if keyword missing",
+              "importance": "low",
+              "description": "This option allows you to specify which word should be shown in front of your feedback if a keyword was not found in the text.",
+              "optional": false,
+              "default": "none",
+              "options": [
+                {
+                  "value": "keyword",
+                  "label": "keyword"
+                },
+                {
+                  "value": "none",
+                  "label": "none"
+                }
+              ]
             }
           ]
         }

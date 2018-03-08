@@ -86,6 +86,36 @@
               {
                 "label": "Feedback if keyword missing",
                 "description": "This feedback will be displayed if the user doesn’t include this keyword or its alternatives in the answer."
+              },
+              {
+                "label": "Feedback word shown if keyword included",
+                "description": "This option allows you to specify which word should be shown in front of your feedback if a keyword was found in the text.",
+                "options": [
+                  {
+                    "label": "keyword"
+                  },
+                  {
+                    "label": "alternative found"
+                  },
+                  {
+                    "label": "answer given"
+                  },
+                  {
+                    "label": "none"
+                  }
+                ]
+              },
+              {
+                "label": "Feedback word shown if keyword missing",
+                "description": "This option allows you to specify which word should be shown in front of your feedback if a keyword was not found in the text.",
+                "options": [
+                  {
+                    "label": "keyword"
+                  },
+                  {
+                    "label": "none"
+                  }
+                ]
               }
             ]
           }

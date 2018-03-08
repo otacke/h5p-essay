@@ -397,16 +397,36 @@ H5P.Essay = function ($, Question) {
   Essay.prototype.buildExplanation = function (results) {
     var explanations = [];
 
-    for (var i = 0; i < this.params.keywords.length; i++) {
+    var word = FEEDBACK_EMPTY;
+    this.params.keywords.forEach(function (keyword, i) {
       // Keyword was not found and feedback is provided for this case
-      if (results[i].length === 0 && this.params.keywords[i].options.feedbackMissed) {
-        explanations.push({correct: FEEDBACK_EMPTY, text: this.params.keywords[i].options.feedbackMissed});
+      if (results[i].length === 0 && keyword.options.feedbackMissed) {
+        if (keyword.options.feedbackMissedWord === 'keyword') {
+          // Main keyword defined
+          word = keyword.keyword;
+        }
+        explanations.push({correct: word, text: keyword.options.feedbackMissed});
       }
       // Keyword found and feedback is provided for this case
-      if (results[i].length > 0 && this.params.keywords[i].options.feedbackIncluded) {
-        explanations.push({correct: this.params.keywords[i].keyword, text: this.params.keywords[i].options.feedbackIncluded});
+      if (results[i].length > 0 && keyword.options.feedbackIncluded) {
+        // Set word in front of feedback
+        switch (keyword.options.feedbackIncludedWord) {
+          case 'keyword':
+            // Main keyword defined
+            word = keyword.keyword;
+            break;
+          case 'alternative':
+            // Alternative that was found
+            word = results[i][0].keyword;
+            break;
+          case 'answer':
+            // Answer matching an alternative at the learner typed it
+            word = results[i][0].match;
+            break;
+        }
+        explanations.push({correct: word, text: keyword.options.feedbackIncluded});
       }
-    }
+    });
 
     if (explanations.length > 0) {
       // Sort "included" before "not included", but keep order otherwise
