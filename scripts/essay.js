@@ -9,7 +9,6 @@ H5P.Essay = function ($, Question) {
   var SOLUTION_INTRODUCTION = 'h5p-essay-solution-introduction';
   var SOLUTION_SAMPLE = 'h5p-essay-solution-sample';
   var SOLUTION_SAMPLE_TEXT = 'h5p-essay-solution-sample-text';
-  var QUESTION_CONTENT = 'h5p-essay-content-';
 
   // The H5P feedback right now only expects true (green)/false (red) feedback, not neutral feedback
   var FEEDBACK_EMPTY= '<span class="h5p-essay-feedback-empty">...</span>';
@@ -29,7 +28,6 @@ H5P.Essay = function ($, Question) {
 
     // Inheritance
     Question.call(this, 'essay');
-
     /*
      * this.params.behaviour.enableSolutionsButton and this.params.behaviour.enableRetry are used by
      * contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-8} and
@@ -122,7 +120,8 @@ H5P.Essay = function ($, Question) {
     this.setIntroduction(this.inputField.getIntroduction());
 
     // Register content
-    this.setContent(this.inputField.getContent(), {"class": QUESTION_CONTENT + this.contentId});
+    this.content = this.inputField.getContent();
+    this.setContent(this.content);
 
     // Register Buttons
     this.addButtons();
@@ -213,8 +212,8 @@ H5P.Essay = function ($, Question) {
       this.solution.children[2].appendChild(text);
     }
 
-    // Insert solution after explanations or content
-    var predecessor = document.getElementsByClassName(QUESTION_CONTENT + this.contentId)[0];
+    // Insert solution after explanations or content. Might fail if DOM structure created by H5P.Question.setContent is changed in the future
+    var predecessor = this.content.parentNode;
     predecessor.parentNode.insertBefore(this.solution, predecessor.nextSibling);
 
     // Could be useful for accessibility, but seems to jump to wrong position on some Safari versions
