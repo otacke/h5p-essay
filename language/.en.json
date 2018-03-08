@@ -6,6 +6,9 @@
         {
           "label": "Type",
           "description": "Optional media to display above the question."
+        },
+        {
+          "label": "Disable image zooming"
         }
       ]
     },
@@ -141,15 +144,11 @@
             {
               "label": "10 lines"
             }
-          ],
-          "default": "10"
+          ]
         },
         {
           "label": "Enable \"Retry\"",
           "description": "If checked, learners can retry the task."
-        },
-        {
-          "label": "Disable image zooming for question image"
         },
         {
           "label": "Ignore scoring",
@@ -157,21 +156,11 @@
         },
         {
           "label": "Passing percentage",
-          "description": "Percentage that's necessary for passing",
-          "showWhen": {
-            "rules": [
-              {}
-            ]
-          }
+          "description": "Percentage that's necessary for passing"
         },
         {
           "label": "Mastering percentage",
-          "description": "Percentage that's necessary for mastering",
-          "showWhen": {
-            "rules": [
-              {}
-            ]
-          }
+          "description": "Percentage that's necessary for mastering"
         },
         {
           "label": "Override case sensitive",

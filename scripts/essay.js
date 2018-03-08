@@ -87,22 +87,23 @@ H5P.Essay = function ($, Question) {
       this.previousState = this.contentData.previousState;
     }
 
-    if (this.params.media && this.params.media.library) {
-      var type = this.params.media.library.split(' ')[0];
+    var media = this.params.media.type;
+    if (media && media.library) {
+      var type = media.library.split(' ')[0];
       if (type === 'H5P.Image') {
-        if (this.params.media.params.file) {
+        if (media.params.file) {
           // Register task image
-          this.setImage(this.params.media.params.file.path, {
-            disableImageZooming: this.params.behaviour.disableImageZooming,
-            alt: this.params.media.params.alt,
-            title: this.params.media.params.title
+          this.setImage(media.params.file.path, {
+            disableImageZooming: this.params.media.disableImageZooming,
+            alt: media.params.alt,
+            title: media.params.title
           });
         }
       }
       else if (type === 'H5P.Video') {
-        if (this.params.media.params.sources) {
+        if (media.params.sources) {
           // Register task video
-          this.setVideo(this.params.media);
+          this.setVideo(media);
         }
       }
     }

@@ -6,6 +6,9 @@
         {
           "label": "Type",
           "description": "Optionele media, die boven de vragen worden getoond."
+        },
+        {
+          "label": "Deactiveer zoomen op een afbeelding"
         }
       ]
     },
@@ -141,15 +144,11 @@
             {
               "label": "10 regels"
             }
-          ],
-          "default": "10"
+          ]
         },
         {
           "label": "Schakel \"Opnieuw\" in",
           "description": "Indien aangevinkt, kunnen de gebruikers de taak opnieuw proberen."
-        },
-        {
-          "label": "Deactiveer zoomen op een afbeelding bij een vraag afbeelding"
         },
         {
           "label": "Negeer score",
@@ -157,21 +156,11 @@
         },
         {
           "label": "Slagingspercentage",
-          "description": "Het percentage dat nodig is om te slagen",
-          "showWhen": {
-            "rules": [
-              {}
-            ]
-          }
+          "description": "Het percentage dat nodig is om te slagen"
         },
         {
           "label": "Beheersingspercentage",
-          "description": "Het percentage dat nodig is om de stof te beheersen",
-          "showWhen": {
-            "rules": [
-              {}
-            ]
-          }
+          "description": "Het percentage dat nodig is om de stof te beheersen"
         },
         {
           "label": "Hef de hoofdlettergevoeligheid op",

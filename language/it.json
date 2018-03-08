@@ -6,6 +6,9 @@
         {
           "label": "Tipo",
           "description": "Media opzionale da mostrare sopra la domanda."
+        },
+        {
+          "label": "Disabilita lo zoom dell'immagine"
         }
       ]
     },
@@ -141,15 +144,11 @@
             {
               "label": "10 righe"
             }
-          ],
-          "default": "10"
+          ]
         },
         {
           "label": "Attiva \"Riprova\"",
           "description": "Se selezionato, gli studenti possono riprovare a fare il compito."
-        },
-        {
-          "label": "Disabilita lo zoom dell'immagine su immagini-domanda"
         },
         {
           "label": "Ignora il punteggio",
@@ -157,21 +156,11 @@
         },
         {
           "label": "Percentuale di superamento",
-          "description": "Percentuale necessaria per superare la prova",
-          "showWhen": {
-            "rules": [
-              {}
-            ]
-          }
+          "description": "Percentuale necessaria per superare la prova"
         },
         {
           "label": "Percentuale di eccellenza",
-          "description": "Percentuale necessaria per il riconoscimento dell'eccellenza",
-          "showWhen": {
-            "rules": [
-              {}
-            ]
-          }
+          "description": "Percentuale necessaria per il riconoscimento dell'eccellenza"
         },
         {
           "label": "Non considerare maiuscolo/minuscolo",

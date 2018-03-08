@@ -16,6 +16,23 @@
         ],
         "optional": true,
         "description": "Optional media to display above the question."
+      },
+      {
+        "name": "disableImageZooming",
+        "type": "boolean",
+        "label": "Disable image zooming",
+        "importance": "low",
+        "default": false,
+        "optional": true,
+        "widget": "showWhen",
+        "showWhen": {
+          "rules": [
+            {
+              "field": "type",
+              "equals": "H5P.Image 1.0"
+            }
+          ]
+        }
       }
     ]
   },
@@ -182,7 +199,6 @@
               "optional": true
             }
           ]
-
         }
       ]
     }
@@ -302,14 +318,6 @@
         "optional": true
       },
       {
-        "label": "Disable image zooming for question image",
-        "importance": "low",
-        "name": "disableImageZooming",
-        "type": "boolean",
-        "default": false,
-        "optional": true
-      },
-      {
         "name": "ignoreScoring",
         "label": "Ignore scoring",
         "type": "boolean",
@@ -414,7 +422,7 @@
     "label": "Text for \"Show solution\" button",
     "importance": "low",
     "default": "Show solution",
-    "common" : true
+    "common": true
   },
   {
     "name": "feedbackHeader",
@@ -430,7 +438,7 @@
     "label": "Label for solution",
     "importance": "low",
     "default": "Sample solution",
-    "common" : true
+    "common": true
   },
   {
     "name": "remainingChars",

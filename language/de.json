@@ -6,6 +6,9 @@
         {
           "label": "Typ",
           "description": "Optionale Medien, die vor der Aufgabe angezeigt werden können."
+        },
+        {
+          "label": "Bildzoom deaktivieren"
         }
       ]
     },
@@ -141,15 +144,11 @@
             {
               "label": "10 Zeilen"
             }
-          ],
-          "default": "10"
+          ]
         },
         {
           "label": "\"Wiederholen\" zulassen",
           "description": "Wenn diese Option angewählt ist, können Lernende die Aufgabe wiederholen."
-        },
-        {
-          "label": "Bildzoom für das Bild deaktivieren"
         },
         {
           "label": "Ignoriere die Bepunktung",
@@ -157,21 +156,11 @@
         },
         {
           "label": "Prozentsatz zum Bestehen",
-          "description": "Prozentsatz, der zum Bestehen nötig ist",
-          "showWhen": {
-            "rules": [
-              {}
-            ]
-          }
+          "description": "Prozentsatz, der zum Bestehen nötig ist"
         },
         {
           "label": "Prozentsatz zum Meistern",
-          "description": "Prozentsatz, der zum Meistern nötig ist",
-          "showWhen": {
-            "rules": [
-              {}
-            ]
-          }
+          "description": "Prozentsatz, der zum Meistern nötig ist"
         },
         {
           "label": "Einstellung für \"Groß-Kleinschreibung\" überschreiben",
