@@ -49,13 +49,13 @@
         "label": "Parole chiave",
         "fields": [
           {
-            "label": "Parole chiave",
+            "label": "Parola chiave",
             "description": "Parola chiave o frase da cercare. Usa un asterisco '*' come carta jolly per significare uno o più caratteri."
           },
           {
             "label": "Alternative",
             "description": "Se vuoi, puoi aggiungere delle alternative a questa parola chiave. Per esempio, per una 'nazione' puoi indicare alternative come 'stato', 'Paese' ecc. Se lo studente utilizza le alternative qui specificate riceverà il punteggio che gli spetta per la risposta giusta.",
-            "entity": "Variation",
+            "entity": "alternativa",
             "field": {
               "label": "Parola chiave alternativa"
             }
@@ -77,7 +77,7 @@
               },
               {
                 "label": "Tralascia gli errori meno gravi",
-                "description": "Questa opzione permette di accettare errori ortografici meno gravi (da 3 a 9 caratteri: 1 errore; più di 9 characters: 2 errori) [quantitative criteria; 'minor mistakes' relates to qualitative]."
+                "description": "Questa opzione permette di accettare errori ortografici meno gravi (da 3 a 9 caratteri: 1 errore; più di 9 characters: 2 errori)."
               },
               {
                 "label": "Feedback per la parola chiave",
@@ -88,32 +88,32 @@
                 "description": "Questo feedback sarà visualizzato se nella risposta lo studente non usa né questa parola chiave, né una sua alternativa."
               },
               {
-                "label": "Feedback word shown if keyword included",
-                "description": "This option allows you to specify which word should be shown in front of your feedback if a keyword was found in the text.",
+                "label": "Parola di feedback mostrata se c'è la parola chiave",
+                "description": "Questa opzione permette di specificare quale parola dovrebbe essere mostrata come feedback se una data parola chiave è presente nel testo.",
                 "options": [
                   {
-                    "label": "keyword"
+                    "label": "parola chiave"
                   },
                   {
-                    "label": "alternative found"
+                    "label": "alternativa trovata"
                   },
                   {
-                    "label": "answer given"
+                    "label": "risposta data"
                   },
                   {
-                    "label": "none"
+                    "label": "nessuna"
                   }
                 ]
               },
               {
-                "label": "Feedback word shown if keyword missing",
-                "description": "This option allows you to specify which word should be shown in front of your feedback if a keyword was not found in the text.",
+                "label": "Parola di feedback mostrata se manca la parola chiave",
+                "description": "Questa opzione permette di specificare quale parola dovrebbe essere mostrata come feedback se una parola chiave non è presente nel testo.",
                 "options": [
                   {
-                    "label": "keyword"
+                    "label": "parola chiave"
                   },
                   {
-                    "label": "none"
+                    "label": "nessuna"
                   }
                 ]
               }
@@ -193,7 +193,7 @@
           "description": "Percentuale necessaria per il riconoscimento dell'eccellenza"
         },
         {
-          "label": "Non considerare maiuscolo/minuscolo",
+          "label": "Non considerare \"Maiuscolo/minuscolo\"",
           "description": "Consente di specificare se l'opzione \"Maiuscolo/minuscolo\" debba essere attiva su tutte le parole chiave.",
           "options": [
             {
@@ -205,8 +205,8 @@
           ]
         },
         {
-          "label": "Non considerare Tralascia errori (meno gravi - minor)",
-          "description": "Consente di specificare se l'opzione \"Tralascia errori\" (minor mistakes) debba essere attiva su tutte le parole chiave.",
+          "label": "Non considerare \"Tralascia gli errori meno gravi\"",
+          "description": "Consente di specificare se l'opzione \"Tralascia gli errori meno gravi\" debba essere attiva su tutte le parole chiave.",
           "options": [
             {
               "label": "Abilita"
@@ -231,7 +231,7 @@
       "default": "Mostra soluzione"
     },
     {
-      "label": "Intestazione del pannello con il feedback per le parole chiave (incluse/mancanti)",
+      "label": "Intestazione della scheda con il feedback per le parole chiave",
       "default": "Feedback"
     },
     {
