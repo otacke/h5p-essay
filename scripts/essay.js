@@ -18,7 +18,7 @@ H5P.Essay = function ($, Question) {
    *
    * @param {Object} config - Config from semantics.json.
    * @param {string} contentId - ContentId.
-   * @param {Object} contentData - contentData.
+   * @param {Object} [contentData] - contentData.
    */
   function Essay(config, contentId, contentData) {
     // Initialize
@@ -173,7 +173,7 @@ H5P.Essay = function ($, Question) {
 
   /**
    * Check if Essay has been submitted/minimum length met
-   * @return {Boolean}
+   * @return {boolean} True, if answer was given.
    *
    * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-1}
    */
@@ -183,6 +183,7 @@ H5P.Essay = function ($, Question) {
 
   /**
    * Get latest score.
+   * @return {number} latest score.
    *
    * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-2}
    */
@@ -192,6 +193,7 @@ H5P.Essay = function ($, Question) {
 
   /**
    * Get maximum possible score.
+   * @return {number} Score necessary for mastering.
    *
    * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-3}
    */
@@ -247,6 +249,7 @@ H5P.Essay = function ($, Question) {
 
   /**
    * Get xAPI data.
+   * @return {Object} xAPI statement.
    *
    * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-6}
    */
@@ -378,14 +381,14 @@ H5P.Essay = function ($, Question) {
 
   /**
    * Compute the score for the results.
-   * @param {Object} results - Results from the task.
+   * @param {Object[]} results - Results from the task.
    * @return {number} Score.
    */
   Essay.prototype.computeScore = function (results) {
     var score = 0;
-    for (var i = 0; i < this.params.keywords.length; i++) {
-      score += Math.min(results[i].length, this.params.keywords[i].options.occurrences) * this.params.keywords[i].options.points;
-    }
+    this.params.keywords.forEach(function (keyword, i) {
+      score += Math.min(results[i].length, keyword.options.occurrences) * keyword.options.points;
+    });
     return score;
   };
 
@@ -513,7 +516,7 @@ H5P.Essay = function ($, Question) {
 
   /**
    * Build xAPI answer event.
-   * @return {object} xAPI answer event.
+   * @return {H5P.XAPIEvent} xAPI answer event.
    */
   Essay.prototype.getXAPIAnswerEvent = function () {
     var xAPIEvent = this.createEssayXAPIEvent('answered');
