@@ -30,6 +30,7 @@ If you like what I do, please consider to become my supporter at patreon: https:
 - As a teacher, I can define optional feedback phrases for a keyword; one for "if found in text" and one for "if not found in text". The content type might glue those phrases together, thus creating a feedback text.
 - As a student, I can receive instant feedback beyond a simple score.
 - As a teacher, I can use regular expressions for keywords if I feel the need to.
+- As a teacher, I can decide if the learner will see the keyword, an alternative, the matched word or none with the feedback.
 
 ## Further Ideas
 You're welcome to contribute your ideas as an issue on github. For now there are (in no particular order or guarantee):
@@ -54,7 +55,6 @@ Compare https://web.archive.org/web/20170628002610/http://xapi.vocab.pub/dataset
 - different levels of difficulty, choosable by teacher and/or student
 - add css styling to feedback text (?)
 - improve accessibility
-- add options for different keyword display in feedback (original keyword|original keyword and alternatives){1}(match found)
 - later on: possibly build a model that allows to relate texts with scores from a human, so you can train the content type and then use this model to compute the/a score, too.
 
 ## About this repository
