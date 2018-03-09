@@ -13,22 +13,30 @@ var H5P = H5P || {};
   var SAVE_MESSAGE = 'h5p-essay-input-field-message-save';
   var ANIMATION_MESSAGE = 'h5p-essay-input-field-message-save-animation';
 
+  /**
+   * Constructor.
+   * @param {Object} params - Parameters.
+   * @param {string} [params.taskDescription] - Task description (HTML).
+   * @param {string} [params.placeholderText] - Placeholder text for input field.
+   * @param {number} [params.maximumLength] - Maximum text length.
+   * @param {string} [remainingChars] - Label for remaining chars information.
+   * @param {number} [inputFieldSize] - Number of rows for inputfield.
+   * @param {Object} previousState - Content state of previous attempt.
+   */
   Essay.InputField = function (params, previousState) {
     var that = this;
+
     this.params = params;
     this.previousState = previousState;
 
     // Sanitization
     this.params.taskDescription = this.params.taskDescription || '';
-    this.params.taskDescriptionARIA = this.params.taskDescriptionARIA || 'Task description';
     this.params.placeholderText = this.params.placeholderText || '';
 
     // Task description
     this.taskDescription = document.createElement('div');
     this.taskDescription.classList.add(INPUT_LABEL);
     this.taskDescription.setAttribute('tabindex', 0);
-    this.taskDescription.setAttribute('aria-label',
-      this.params.taskDescriptionARIA + ': ' + this.params.taskDescription.replace(/(<([^>]+)>)/ig, ''));
     this.taskDescription.innerHTML = this.params.taskDescription;
 
     // InputField
@@ -54,6 +62,7 @@ var H5P = H5P || {};
 
     this.statusChars = document.createElement('div');
     this.statusChars.classList.add(CHAR_MESSAGE);
+    this.statusChars.setAttribute('tabindex', 0);
 
     statusWrapper.appendChild(this.statusChars);
 
@@ -75,7 +84,7 @@ var H5P = H5P || {};
 
   /**
    * Get introduction for H5P.Question.
-   * @return {object} DOM elements for introduction.
+   * @return {Object} DOM elements for introduction.
    */
   Essay.InputField.prototype.getIntroduction = function () {
     return this.taskDescription;
@@ -83,7 +92,7 @@ var H5P = H5P || {};
 
   /**
    * Get content for H5P.Question.
-   * @return {object} DOM elements for content.
+   * @return {Object} DOM elements for content.
    */
   Essay.InputField.prototype.getContent = function () {
     return this.content;
@@ -135,35 +144,38 @@ var H5P = H5P || {};
   };
 
   /**
-   * Compute the remaining number of characters
-   * @returns {number} Returns number of characters left
+   * Compute the remaining number of characters.
+   * @return {number} Return number of characters left.
    */
   Essay.InputField.prototype.computeRemainingChars = function () {
     return this.params.maximumLength - this.inputField.value.length;
   };
 
   /**
-   * Update character message field
+   * Update character message field.
    */
   Essay.InputField.prototype.updateMessageChars = function () {
     if (typeof this.params.maximumLength !== 'undefined') {
       this.setMessageChars(this.params.remainingChars.replace(/@chars/g, this.computeRemainingChars()), false);
-    } else {
+    }
+    else {
       this.setMessageChars('&nbsp;', false);
     }
   };
 
   /**
-   * Update the indicator message for saved text
-   * @param {string} saved - Message to indicate the text was saved
+   * Update the indicator message for saved text.
+   * @param {string} saved - Message to indicate the text was saved.
    */
   Essay.InputField.prototype.updateMessageSaved = function (saved) {
     // Add/remove blending effect
-    if (saved === undefined || saved === '') {
+    if (typeof saved === 'undefined' || saved === '') {
       this.statusSaved.classList.remove(ANIMATION_MESSAGE);
+      this.statusSaved.removeAttribute('tabindex');
     }
     else {
       this.statusSaved.classList.add(ANIMATION_MESSAGE);
+      this.statusSaved.setAttribute('tabindex', 0);
     }
     this.statusSaved.innerHTML = saved;
   };

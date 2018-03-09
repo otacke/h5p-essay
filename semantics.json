@@ -514,14 +514,5 @@
     "importance": "low",
     "common": true,
     "default": "saved"
-  },
-  {
-    "name": "taskDescriptionARIA",
-    "type": "text",
-    "label": "Task description (not displayed)",
-    "description": "Accessibility text used for readspeakers",
-    "importance": "low",
-    "common": true,
-    "default": "Task description"
   }
 ]

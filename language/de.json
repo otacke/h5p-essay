@@ -252,11 +252,6 @@
       "label": "Speichernachricht",
       "description": "Nachricht, die darauf hinweist, dass der Text gespeichert wurde",
       "default": "gespeichert"
-    },
-    {
-      "label": "Aufgabenbeschreibung (nicht dargestellt)",
-      "description": "Text für Readspeaker zwecks Barrierefreiheit",
-      "default": "Aufgabenbeschreibung"
     }
   ]
 }
