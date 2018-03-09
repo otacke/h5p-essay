@@ -16,11 +16,11 @@ var H5P = H5P || {};
   /**
    * Constructor.
    * @param {Object} params - Parameters.
-   * @param {string} [params.taskDescription] - Task description (HTML).
-   * @param {string} [params.placeholderText] - Placeholder text for input field.
+   * @param {number} [params.inputFieldSize] - Number of rows for inputfield.
    * @param {number} [params.maximumLength] - Maximum text length.
-   * @param {string} [remainingChars] - Label for remaining chars information.
-   * @param {number} [inputFieldSize] - Number of rows for inputfield.
+   * @param {string} [params.placeholderText] - Placeholder text for input field.
+   * @param {string} [params.remainingChars] - Label for remaining chars information.
+   * @param {string} [params.taskDescription] - Task description (HTML).
    * @param {Object} previousState - Content state of previous attempt.
    */
   Essay.InputField = function (params, previousState) {
@@ -129,10 +129,10 @@ var H5P = H5P || {};
 
   /**
    * Set the text for the InputField.
-   * @param {string|object} previousState Previous state that was saved.
+   * @param {string|Object} previousState - Previous state that was saved.
    */
   Essay.InputField.prototype.setText = function (previousState) {
-    if (previousState === undefined) {
+    if (typeof previousState === 'undefined') {
       return;
     }
     if (typeof previousState === 'string') {
@@ -145,7 +145,7 @@ var H5P = H5P || {};
 
   /**
    * Compute the remaining number of characters.
-   * @return {number} Return number of characters left.
+   * @return {number} Number of characters left.
    */
   Essay.InputField.prototype.computeRemainingChars = function () {
     return this.params.maximumLength - this.inputField.value.length;
