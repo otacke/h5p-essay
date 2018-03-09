@@ -189,14 +189,16 @@
               "type": "text",
               "label": "Feedback if keyword included",
               "description": "This feedback will be displayed if the user includes this keyword or its alternatives in the answer.",
-              "optional": true
+              "optional": true,
+              "maxLength": 1000
             },
             {
               "name": "feedbackMissed",
               "type": "text",
               "label": "Feedback if keyword missing",
               "description": "This feedback will be displayed if the user doesn’t include this keyword or its alternatives in the answer.",
-              "optional": true
+              "optional": true,
+              "maxLength": 1000
             },
             {
               "name": "feedbackIncludedWord",
