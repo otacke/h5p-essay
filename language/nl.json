@@ -88,32 +88,32 @@
                 "description": "Deze feedback wordt getoond als de gebruiker dit trefwoord of de alternatieven niet in het antwoord opneemt."
               },
               {
-                "label": "Feedback word shown if keyword included",
-                "description": "This option allows you to specify which word should be shown in front of your feedback if a keyword was found in the text.",
+                "label": "De getoonde feedback als het trefwoord is opgenomen",
+                "description": "Met deze optie kun je opgeven welk woord voorafgaand aan je feedback moet worden weergegeven als er een trefwoord in de tekst is gevonden.",
                 "options": [
                   {
-                    "label": "keyword"
+                    "label": "trefwoord"
                   },
                   {
-                    "label": "alternative found"
+                    "label": "alternatief gevonden"
                   },
                   {
-                    "label": "answer given"
+                    "label": "antwoord gegeven"
                   },
                   {
-                    "label": "none"
+                    "label": "geen"
                   }
                 ]
               },
               {
-                "label": "Feedback word shown if keyword missing",
-                "description": "This option allows you to specify which word should be shown in front of your feedback if a keyword was not found in the text.",
+                "label": "De getoonde feedback als het trefwoord ontbreekt",
+                "description": "Met deze optie kun je opgeven welk woord voorafgaand aan je feedback moet worden weergegeven als er geen trefwoord in de tekst is gevonden.",
                 "options": [
                   {
-                    "label": "keyword"
+                    "label": "trefwoord"
                   },
                   {
-                    "label": "none"
+                    "label": "geen"
                   }
                 ]
               }
