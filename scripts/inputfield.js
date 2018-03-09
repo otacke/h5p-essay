@@ -20,6 +20,7 @@ var H5P = H5P || {};
 
     // Sanitization
     this.params.taskDescription = this.params.taskDescription || '';
+    this.params.taskDescriptionARIA = this.params.taskDescriptionARIA || 'Task description';
     this.params.placeholderText = this.params.placeholderText || '';
 
     // Task description
@@ -27,7 +28,7 @@ var H5P = H5P || {};
     this.taskDescription.classList.add(INPUT_LABEL);
     this.taskDescription.setAttribute('tabindex', 0);
     this.taskDescription.setAttribute('aria-label',
-      'Task Description:' + this.params.taskDescription.replace(/(<([^>]+)>)/ig, ''));
+      this.params.taskDescriptionARIA + ': ' + this.params.taskDescription.replace(/(<([^>]+)>)/ig, ''));
     this.taskDescription.innerHTML = this.params.taskDescription;
 
     // InputField

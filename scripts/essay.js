@@ -111,6 +111,7 @@ H5P.Essay = function ($, Question) {
     // Create InputField
     this.inputField = new H5P.Essay.InputField({
       'taskDescription': this.params.taskDescription,
+      'taskDescriptionARIA': this.params.taskDescriptionARIA,
       'placeholderText': this.params.placeholderText,
       'maximumLength': this.params.behaviour.maximumLength,
       'remainingChars': this.params.remainingChars,

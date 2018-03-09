@@ -252,6 +252,11 @@
       "label": "Salva messaggio",
       "description": "Messaggio per indicare che il testo è stato salvato",
       "default": "salvato"
+    },
+    {
+      "label": "Descrizione del compito (non visualizzato)",
+      "description": "Testo di accessibilità utilizzato per riproduttori vocali",
+      "default": "Descrizione del compito"
     }
   ]
 }

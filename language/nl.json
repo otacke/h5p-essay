@@ -252,6 +252,11 @@
       "label": "Opslaan bericht",
       "description": "Bericht om aan te gevewn dat de tekst is opgeslagen",
       "default": "opgeslagen"
+    },
+    {
+      "label": "Taakomschrijving (niet getoond)",
+      "description": "Toegankelijkheidstekst voor readspeakers",
+      "default": "Taakomschrijving"
     }
   ]
 }
