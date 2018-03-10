@@ -186,7 +186,7 @@
         },
         {
           "label": "Points in host environment",
-          "description": "Used to award points for completion in host environment (not shown to learner)."
+          "description": "Used to award points in host environment merely for answering (not shown to learner)."
         },
         {
           "label": "Slagingspercentage",
