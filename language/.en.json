@@ -185,6 +185,10 @@
           "description": "If checked, learners will only see the feedback that you provided for the keywords, but no score."
         },
         {
+          "label": "Points in host environment",
+          "description": "Used to award points for completion in host environment (not shown to learner)."
+        },
+        {
           "label": "Passing percentage",
           "description": "Percentage that's necessary for passing"
         },

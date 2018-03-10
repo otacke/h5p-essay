@@ -185,6 +185,10 @@
           "description": "Se selezionato, gli studenti vedranno soltanto il feedback che hai fornito per le parole chiave, ma non avranno nessun punteggio."
         },
         {
+          "label": "Points in host environment",
+          "description": "Used to award points for completion in host environment (not shown to learner)."
+        },
+        {
           "label": "Percentuale di superamento",
           "description": "Percentuale necessaria per superare la prova"
         },

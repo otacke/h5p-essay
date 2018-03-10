@@ -14,7 +14,7 @@ var H5P = H5P || {};
   var ANIMATION_MESSAGE = 'h5p-essay-input-field-message-save-animation';
 
   /**
-   * Constructor.
+   * @constructor
    * @param {Object} params - Parameters.
    * @param {number} [params.inputFieldSize] - Number of rows for inputfield.
    * @param {number} [params.maximumLength] - Maximum text length.

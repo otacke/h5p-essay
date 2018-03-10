@@ -15,7 +15,6 @@ H5P.Essay = function ($, Question) {
 
   /**
    * @constructor
-   *
    * @param {Object} config - Config from semantics.json.
    * @param {string} contentId - ContentId.
    * @param {Object} [contentData] - contentData.
@@ -28,17 +27,23 @@ H5P.Essay = function ($, Question) {
 
     // Inheritance
     Question.call(this, 'essay');
+    this.params = config;
+    this.contentId = contentId;
+
+    this.isAnswered = false;
+
+    // Get previous state from content data
+    if (typeof contentData !== 'undefined' && typeof contentData.previousState !== 'undefined') {
+      this.previousState = contentData.previousState;
+    }
+
     /*
      * this.params.behaviour.enableSolutionsButton and this.params.behaviour.enableRetry are used by
      * contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-8} and
      * {@link https://h5p.org/documentation/developers/contracts#guides-header-9}
      */
-    this.params = config;
-    this.contentId = contentId;
-    this.contentData = contentData || {};
-
-    this.isAnswered = false;
-    this.params.behaviour.enableSolutionsButton = (this.params.solution.sample !== undefined && this.params.solution.sample !== '');
+    this.params.behaviour.enableSolutionsButton = (typeof this.params.solution.sample !== 'undefined' && this.params.solution.sample !== '');
+    this.params.behaviour.enableRetry = this.params.behaviour.enableRetry || false;
 
     // Determine the minimum number of characters that should be entered
     this.params.behaviour.minimumLength = this.params.behaviour.minimumLength || 0;
@@ -82,17 +87,12 @@ H5P.Essay = function ($, Question) {
    * Register the DOM elements with H5P.Question.
    */
   Essay.prototype.registerDomElements = function () {
-    // Get previous state
-    if (!!this.contentData && !!this.contentData.previousState) {
-      this.previousState = this.contentData.previousState;
-    }
-
+    // Set optional media
     var media = this.params.media.type;
     if (media && media.library) {
       var type = media.library.split(' ')[0];
       if (type === 'H5P.Image') {
         if (media.params.file) {
-          // Register task image
           this.setImage(media.params.file.path, {
             disableImageZooming: this.params.media.disableImageZooming,
             alt: media.params.alt,
@@ -102,7 +102,6 @@ H5P.Essay = function ($, Question) {
       }
       else if (type === 'H5P.Video') {
         if (media.params.sources) {
-          // Register task video
           this.setVideo(media);
         }
       }
@@ -129,7 +128,7 @@ H5P.Essay = function ($, Question) {
   };
 
   /**
-   * Add all the buttons that shall be passed to H5P.Question
+   * Add all the buttons that shall be passed to H5P.Question.
    */
   Essay.prototype.addButtons = function () {
     var that = this;
@@ -168,13 +167,15 @@ H5P.Essay = function ($, Question) {
    * @return {string} Cleaned input.
    */
   Essay.prototype.getInput = function () {
-    return this.inputField.getText().replace(/(\r\n|\r|\n)/g, ' ').replace(/\s\s/g, ' ');
+    return this.inputField
+      .getText()
+      .replace(/(\r\n|\r|\n)/g, ' ')
+      .replace(/\s\s/g, ' ');
   };
 
   /**
-   * Check if Essay has been submitted/minimum length met
+   * Check if Essay has been submitted/minimum length met.
    * @return {boolean} True, if answer was given.
-   *
    * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-1}
    */
   Essay.prototype.getAnswerGiven = function () {
@@ -184,38 +185,35 @@ H5P.Essay = function ($, Question) {
   /**
    * Get latest score.
    * @return {number} latest score.
-   *
    * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-2}
    */
   Essay.prototype.getScore = function () {
-    return this.score;
+    return (this.params.behaviour.ignoreScoring) ? null : this.score;
   };
 
   /**
    * Get maximum possible score.
    * @return {number} Score necessary for mastering.
-   *
    * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-3}
    */
   Essay.prototype.getMaxScore = function () {
-    return this.scoreMastering;
+    return (this.params.behaviour.ignoreScoring) ? this.params.behaviour.pointsHost || 0 : this.scoreMastering;
   };
 
   /**
    * Show solution.
-   *
    * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-4}
    */
   Essay.prototype.showSolutions = function () {
     // We add the sample solution here to make cheating at least a little more difficult
-    if (this.solution.children[2].children.length === 0) {
+    if (this.solution.getElementsByClassName(SOLUTION_SAMPLE)[0].children.length === 0) {
       var text = document.createElement('div');
       text.classList.add(SOLUTION_SAMPLE_TEXT);
       text.innerHTML = this.params.solution.sample;
-      this.solution.children[2].appendChild(text);
+      this.solution.getElementsByClassName(SOLUTION_SAMPLE)[0].appendChild(text);
     }
 
-    // Insert solution after explanations or content. Might fail if DOM structure created by H5P.Question.setContent is changed in the future
+    // Insert solution after explanations or content.
     var predecessor = this.content.parentNode;
     predecessor.parentNode.insertBefore(this.solution, predecessor.nextSibling);
 
@@ -228,8 +226,7 @@ H5P.Essay = function ($, Question) {
   };
 
   /**
-   * Reset task
-   *
+   * Reset task.
    * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-5}
    */
   Essay.prototype.resetTask = function () {
@@ -250,13 +247,20 @@ H5P.Essay = function ($, Question) {
   /**
    * Get xAPI data.
    * @return {Object} xAPI statement.
-   *
    * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-6}
    */
   Essay.prototype.getXAPIData = function () {
     return {
       statement: this.getXAPIAnswerEvent().data.statement
     };
+  };
+
+  /**
+   * Determine whether the task has been passed by the user.
+   * @return {boolean} True if user passed or task is not scored.
+   */
+  Essay.prototype.isPassed = function () {
+    return (this.params.behaviour.ignoreScoring || this.getScore() >= this.scorePassing);
   };
 
   /**
@@ -275,9 +279,10 @@ H5P.Essay = function ($, Question) {
 
     // Not all keyword groups might be necessary for mastering
     this.score = Math.min(this.computeScore(results), this.scoreMastering);
-    var textScore = H5P.Question.determineOverallFeedback(this.params.overallFeedback, this.score / this.scoreMastering)
-        .replace('@score', this.score)
-        .replace('@total', this.scoreMastering);
+    var textScore = H5P.Question
+      .determineOverallFeedback(this.params.overallFeedback, this.score / this.scoreMastering)
+      .replace('@score', this.score)
+      .replace('@total', this.scoreMastering);
 
     if (!this.params.behaviour.ignoreScoring) {
       this.setFeedback(textScore, this.score, this.scoreMastering);
@@ -329,7 +334,7 @@ H5P.Essay = function ($, Question) {
 
   /**
    * Compute results.
-   * @return {Object[]} Results: [[{"keyword": keyword, "match": match, "index": index}*]*]
+   * @return {Object[]} Results: [[{"keyword": keyword, "match": match, "index": index}*]*].
    */
   Essay.prototype.computeResults = function () {
     var that = this;
@@ -338,21 +343,22 @@ H5P.Essay = function ($, Question) {
     // Should not happen, but just to be sure ...
     this.params.keywords = this.params.keywords || [];
 
-    // optional = false is ignored in Editor
+    // Filter out keywords that have not been set.
     this.params.keywords = this.params.keywords.filter(function (element) {
-      return element.keyword !== undefined;
+      return typeof element.keyword !== 'undefined';
     });
 
     this.params.keywords.forEach(function (alternativeGroup) {
       var resultsGroup = [];
       var options = alternativeGroup.options;
       var alternatives = [alternativeGroup.keyword || []].concat(alternativeGroup.alternatives || []);
-      // Add all regular matches found within the text to alternatives
-      var alternativesRegular = that.getRegularAlternatives(alternatives, that.getInput());
-      var alternativesNormal = alternatives.filter(function (alternative) {
-        return (!alternative.startsWith('/') || !alternative.endsWith('/'));
-      });
-      alternatives = alternativesNormal.concat(alternativesRegular);
+      alternatives = alternatives
+        // only "normal" alternatives
+        .filter(function (alternative) {
+          return (alternative[0] !== '/' || alternative[alternative.length - 1] !== '/');
+        })
+        // regular matches found in text for alternatives
+        .concat(that.getRegExpAlternatives(alternatives, that.getInput()));
 
       // Detect all matches
       alternatives.forEach(function (alternative) {
@@ -410,6 +416,7 @@ H5P.Essay = function ($, Question) {
         }
         explanations.push({correct: word, text: keyword.options.feedbackMissed});
       }
+
       // Keyword found and feedback is provided for this case
       if (results[i].length > 0 && keyword.options.feedbackIncluded) {
         // Set word in front of feedback
@@ -441,7 +448,7 @@ H5P.Essay = function ($, Question) {
   };
 
   /**
-   * Handle buttons' visibility
+   * Handle buttons' visibility.
    * @param {number} score - Score the user received.
    */
   Essay.prototype.handleButtons = function (score) {
@@ -505,10 +512,9 @@ H5P.Essay = function ($, Question) {
     definition.type = 'http://id.tincanapi.com/activitytype/essay';
     definition.interactionType = 'long-fill-in';
     /*
-     * We could think about adding support for the "correct response pattern",
-     * but the official xAPI documentation discourages to use it if the
-     * criteria for a question are complex and correct responses cannot be
-     * exhaustively listed. They kind of can and can't.
+     * The official xAPI documentation discourages to use a correct response
+     * pattern it if the criteria for a question are complex and correct
+     * responses cannot be exhaustively listed. They can't.
      */
     definition.correctResponsesPattern = [];
     return definition;
@@ -521,13 +527,7 @@ H5P.Essay = function ($, Question) {
   Essay.prototype.getXAPIAnswerEvent = function () {
     var xAPIEvent = this.createEssayXAPIEvent('answered');
 
-    if (!this.params.behaviour.ignoreScoring) {
-      xAPIEvent.setScoredResult(this.getScore(), this.getMaxScore(), this, true, this.getScore() >= this.scorePassing);
-    }
-    else {
-      // Score and maxScore (although irrelevant here) need to be set for being reported
-      xAPIEvent.setScoredResult(0, 0, this, true, true);
-    }
+    xAPIEvent.setScoredResult(this.getScore(), this.getMaxScore(), this, true, this.isPassed());
     xAPIEvent.data.statement.result.response = this.getInput();
 
     return xAPIEvent;
@@ -613,10 +613,10 @@ H5P.Essay = function ($, Question) {
    * @param {string} inputTest - Original text by student.
    * @return {string[]} Matches by regular expressions.
    */
-  Essay.prototype.getRegularAlternatives = function (alternatives, inputTest) {
+  Essay.prototype.getRegExpAlternatives = function (alternatives, inputTest) {
     return alternatives
       .filter(function (alternative) {
-        return (alternative.startsWith('/') && alternative.endsWith('/'));
+        return (alternative[0] === '/' && alternative[alternative.length - 1] === '/');
       })
       .map(function (alternative) {
         var regNeedle = new RegExp(alternative.slice(1, -1), 'g');
@@ -660,7 +660,7 @@ H5P.Essay = function ($, Question) {
   };
 
   /**
-   * Check if an array of detect results contains the same match in the word's proximity.
+   * Check if an array of detected results contains the same match in the word's proximity.
    * Used to prevent double entries that can be caused by fuzzy matching.
    * @param {Object} results - Preliminary results.
    * @param {string} results.match - Match that was found before at a particular position.

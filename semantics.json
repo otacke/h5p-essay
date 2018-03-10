@@ -375,6 +375,24 @@
         "optional": true
       },
       {
+        "name": "pointsHost",
+        "label": "Points in host environment",
+        "type": "number",
+        "importance": "low",
+        "description": "Used to award points for completion in host environment (not shown to learner).",
+        "min": 0,
+        "default": 1,
+        "widget": "showWhen",
+        "showWhen": {
+          "rules": [
+            {
+              "field": "ignoreScoring",
+              "equals": true
+            }
+          ]
+        }
+      },
+      {
         "name": "percentagePassing",
         "type": "number",
         "label": "Passing percentage",

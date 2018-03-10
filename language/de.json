@@ -185,6 +185,10 @@
           "description": "Wenn diese Option gewählt ist, sehen die Lernenden nur deine Rückmeldung, nicht aber die Bepunktung. Es wird nichts gewertet."
         },
         {
+          "label": "Points in host environment",
+          "description": "Used to award points for completion in host environment (not shown to learner)."
+        },
+        {
           "label": "Prozentsatz zum Bestehen",
           "description": "Prozentsatz, der zum Bestehen nötig ist"
         },
