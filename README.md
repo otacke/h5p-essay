@@ -31,6 +31,7 @@ If you like what I do, please consider to become my supporter at patreon: https:
 - As a student, I can receive instant feedback beyond a simple score.
 - As a teacher, I can use regular expressions for keywords if I feel the need to.
 - As a teacher, I can decide if the learner will see the keyword, an alternative, the matched word or none with the feedback.
+- As a teacher, I can set points that will be awarded in the host system (e.g. LMS) for merely answering an unscored question.
 
 ## Further Ideas
 You're welcome to contribute your ideas as an issue on github. For now there are (in no particular order or guarantee):
