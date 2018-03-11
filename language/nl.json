@@ -185,8 +185,8 @@
           "description": "Indien aangevinkt, zien de gebruikers alleen de feedback die je hebt gegeven voor de trefwoorden, maar geen score."
         },
         {
-          "label": "Points in host environment",
-          "description": "Used to award points in host environment merely for answering (not shown to learner)."
+          "label": "Punten in de hostingomgeving",
+          "description": "Dit wordt gebruikt om in de hostingomgeving alleen punten toe te kennen voor het beantwoorden (deze worden niet getoond aan de gebruiker)."
         },
         {
           "label": "Slagingspercentage",

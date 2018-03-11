@@ -185,8 +185,8 @@
           "description": "Se selezionato, gli studenti vedranno soltanto il feedback che hai fornito per le parole chiave, ma non avranno nessun punteggio."
         },
         {
-          "label": "Points in host environment",
-          "description": "Used to award points in host environment merely for answering (not shown to learner)."
+          "label": "Punti assegnati in piattaforma",
+          "description": "Usato per assegnare punti in piattaforma per il solo aver dato una risposta (non mostrato allo studente)."
         },
         {
           "label": "Percentuale di superamento",
