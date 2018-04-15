@@ -52,8 +52,8 @@ H5P.Essay = function ($, Question) {
     }
 
     // map function
-    var toPoints = function (keywords) {
-      return (keywords.options && keywords.options.points || 0) * (keywords.options.occurrences || 1);
+    var toPoints = function (keyword) {
+      return (keyword.keyword && keyword.options && keyword.options.points || 0) * (keyword.options.occurrences || 1);
     };
 
     // reduce function
