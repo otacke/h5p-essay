@@ -194,7 +194,7 @@
         },
         {
           "label": "Mastering percentage",
-          "description": "Percentage that's necessary for mastering"
+          "description": "Percentage that's necessary for mastering. Setting the mastering percentage below 100 % will lower the maximum possible score accordingly. It's intended to give some leeway to students, not to \"graciously accept\" solutions that do not contain all keywords."
         },
         {
           "label": "Override case sensitive",

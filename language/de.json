@@ -194,7 +194,7 @@
         },
         {
           "label": "Prozentsatz zum Meistern",
-          "description": "Prozentsatz, der zum Meistern nötig ist"
+          "description": "Prozentsatz, der zum Meistern nötig ist. Ein Prozenzsatz unter 100 % verringert die maximale Punktzahl entsprechend. Lerndenden soll damit Spielraum gegeben werden, statt \"gnädigerweise\" Lösungen ohne alle Schlagworte zu akzeptieren."
         },
         {
           "label": "Einstellung für \"Groß-Kleinschreibung\" überschreiben",

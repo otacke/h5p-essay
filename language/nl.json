@@ -194,7 +194,7 @@
         },
         {
           "label": "Beheersingspercentage",
-          "description": "Het percentage dat nodig is om de stof te beheersen"
+          "description": "Het percentage dat nodig is om de stof te beheersen. Setting the mastering percentage below 100 % will lower the maximum possible score accordingly. It's intended to give some leeway to students, not to \"graciously accept\" solutions that do not contain all keywords."
         },
         {
           "label": "Hef de hoofdlettergevoeligheid op",

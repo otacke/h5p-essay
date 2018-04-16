@@ -194,7 +194,7 @@
         },
         {
           "label": "Percentuale di eccellenza",
-          "description": "Percentuale necessaria per il riconoscimento dell'eccellenza"
+          "description": "Percentuale necessaria per il riconoscimento dell'eccellenza. Setting the mastering percentage below 100 % will lower the maximum possible score accordingly. It's intended to give some leeway to students, not to \"graciously accept\" solutions that do not contain all keywords."
         },
         {
           "label": "Non considerare \"Maiuscolo/minuscolo\"",
