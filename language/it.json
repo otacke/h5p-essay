@@ -256,6 +256,11 @@
       "label": "Salva messaggio",
       "description": "Messaggio per indicare che il testo è stato salvato",
       "default": "salvato"
+    },
+    {
+      "label": "Il tuo risultato (non visualizzato)",
+      "description": "Testo di accessibilità utilizzato per riproduttori vocali",
+      "default": "Il tuo risultato"
     }
   ]
 }

@@ -256,6 +256,11 @@
       "label": "Save message",
       "description": "Message indicating that the text has been saved",
       "default": "saved"
+    },
+    {
+      "label": "Your result (not displayed)",
+      "description": "Accessibility text used for readspeakers",
+      "default": "Your result"
     }
   ]
 }

@@ -142,7 +142,9 @@ H5P.Essay = function ($, Question) {
     that.addButton('check-answer', that.params.checkAnswer, function () {
       // Show message if the minimum number of characters has not been met
       if (that.inputField.getText().length < that.params.behaviour.minimumLength) {
-        that.inputField.setMessageChars(that.params.notEnoughChars.replace(/@chars/g, that.params.behaviour.minimumLength), true);
+        var message = that.params.notEnoughChars.replace(/@chars/g, that.params.behaviour.minimumLength);
+        that.inputField.setMessageChars(message, true);
+        that.read(message);
         return;
       }
 
@@ -217,8 +219,8 @@ H5P.Essay = function ($, Question) {
     var predecessor = this.content.parentNode;
     predecessor.parentNode.insertBefore(this.solution, predecessor.nextSibling);
 
-    // Could be useful for accessibility, but seems to jump to wrong position on some Safari versions
-    //this.solution.focus();
+    // Useful for accessibility, but seems to jump to wrong position on some Safari versions
+    this.solution.focus();
 
     this.hideButton('show-solution');
 
@@ -285,7 +287,7 @@ H5P.Essay = function ($, Question) {
       .replace('@total', this.scoreMastering);
 
     if (!this.params.behaviour.ignoreScoring) {
-      this.setFeedback(textScore, this.score, this.scoreMastering);
+      this.setFeedback(textScore, this.score, this.scoreMastering, this.params.ariaYourResult);
     }
 
     // Show and hide buttons as necessary

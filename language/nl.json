@@ -256,6 +256,11 @@
       "label": "Opslaan bericht",
       "description": "Bericht om aan te gevewn dat de tekst is opgeslagen",
       "default": "opgeslagen"
+    },
+    {
+      "label": "Jouw resultaat (niet getoond)",
+      "description": "Aanwezige tekst voor readspeakers",
+      "default": "Jouw resultaat"
     }
   ]
 }

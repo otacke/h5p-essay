@@ -12,6 +12,7 @@ var H5P = H5P || {};
   var CHAR_MESSAGE_IMPORTANT = 'h5p-essay-input-field-message-char-important';
   var SAVE_MESSAGE = 'h5p-essay-input-field-message-save';
   var ANIMATION_MESSAGE = 'h5p-essay-input-field-message-save-animation';
+  var EMPTY_MESSAGE = '&nbsp;';
 
   /**
    * @constructor
@@ -62,7 +63,6 @@ var H5P = H5P || {};
 
     this.statusChars = document.createElement('div');
     this.statusChars.classList.add(CHAR_MESSAGE);
-    this.statusChars.setAttribute('tabindex', 0);
 
     statusWrapper.appendChild(this.statusChars);
 
@@ -159,7 +159,8 @@ var H5P = H5P || {};
       this.setMessageChars(this.params.remainingChars.replace(/@chars/g, this.computeRemainingChars()), false);
     }
     else {
-      this.setMessageChars('&nbsp;', false);
+      // Use EMPTY_MESSAGE to keep height
+      this.setMessageChars(EMPTY_MESSAGE, false);
     }
   };
 
@@ -171,11 +172,11 @@ var H5P = H5P || {};
     // Add/remove blending effect
     if (typeof saved === 'undefined' || saved === '') {
       this.statusSaved.classList.remove(ANIMATION_MESSAGE);
-      this.statusSaved.removeAttribute('tabindex');
+      //this.statusSaved.removeAttribute('tabindex');
     }
     else {
       this.statusSaved.classList.add(ANIMATION_MESSAGE);
-      this.statusSaved.setAttribute('tabindex', 0);
+      //this.statusSaved.setAttribute('tabindex', 0);
     }
     this.statusSaved.innerHTML = saved;
   };
@@ -189,6 +190,18 @@ var H5P = H5P || {};
     if (typeof message !== 'string') {
       return;
     }
+
+    if (message === EMPTY_MESSAGE || important) {
+      /*
+       * Important messages should be read for a readspeaker by caller and need
+       * not be accessible when tabbing back again.
+       */
+      this.statusChars.removeAttribute('tabindex');
+    }
+    else {
+      this.statusChars.setAttribute('tabindex', 0);
+    }
+
     this.statusChars.innerHTML = message;
     if (important) {
       this.statusChars.classList.add(CHAR_MESSAGE_IMPORTANT);

@@ -256,6 +256,11 @@
       "label": "Speichernachricht",
       "description": "Nachricht, die darauf hinweist, dass der Text gespeichert wurde",
       "default": "gespeichert"
+    },
+    {
+      "label": "Dein Ergebnis (nicht angezeigt)",
+      "description": "Anzeigetext für Readspeakers (Barrierefreiheit)",
+      "default": "Dein Ergebnis"
     }
   ]
 }
