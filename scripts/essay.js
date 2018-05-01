@@ -88,7 +88,7 @@ H5P.Essay = function ($, Question) {
    */
   Essay.prototype.registerDomElements = function () {
     // Set optional media
-    var media = this.params.media.type;
+    var media = (this.params.media) ? this.params.media.type : undefined;
     if (media && media.library) {
       var type = media.library.split(' ')[0];
       if (type === 'H5P.Image') {
