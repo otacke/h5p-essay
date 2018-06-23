@@ -621,7 +621,6 @@ H5P.Essay = function ($, Question) {
    * @return {string[]} Matches by regular expressions.
    */
   Essay.prototype.getRegExpAlternatives = function (alternatives, inputTest) {
-    console.log(alternatives);
     return alternatives
       .filter(function (alternative) {
         return (alternative[0] === '/' && alternative[alternative.length - 1] === '/');
