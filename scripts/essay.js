@@ -353,7 +353,12 @@ H5P.Essay = function ($, Question) {
     this.params.keywords.forEach(function (alternativeGroup) {
       var resultsGroup = [];
       var options = alternativeGroup.options;
-      var alternatives = [alternativeGroup.keyword || []].concat(alternativeGroup.alternatives || []);
+      var alternatives = [alternativeGroup.keyword || []]
+        .concat(alternativeGroup.alternatives || [])
+        .map(function (alternative) {
+          return that.htmlDecode(alternative);
+        });
+      // Not chained, because we still need the old value inside
       alternatives = alternatives
         // only "normal" alternatives
         .filter(function (alternative) {
@@ -616,6 +621,7 @@ H5P.Essay = function ($, Question) {
    * @return {string[]} Matches by regular expressions.
    */
   Essay.prototype.getRegExpAlternatives = function (alternatives, inputTest) {
+    console.log(alternatives);
     return alternatives
       .filter(function (alternative) {
         return (alternative[0] === '/' && alternative[alternative.length - 1] === '/');
@@ -695,6 +701,16 @@ H5P.Essay = function ($, Question) {
       }
     }
     return arguments[0];
+  };
+
+  /**
+   * Retrieve true string from HTML encoded string
+   * @param {string} input - Input string.
+   * @return {string} Output string.
+   */
+  Essay.prototype.htmlDecode = function (input) {
+    var dparser = new DOMParser().parseFromString(input, 'text/html');
+    return dparser.documentElement.textContent;
   };
 
   /**
