@@ -28,7 +28,7 @@
     {
       "machineName": "H5P.Question",
       "majorVersion": 1,
-      "minorVersion": 3
+      "minorVersion": 4
     },
     {
       "machineName": "H5P.JoubelUI",
@@ -38,7 +38,7 @@
     {
       "machineName": "H5P.TextUtilities",
       "majorVersion": 1,
-      "minorVersion": 2
+      "minorVersion": 3
     }
   ],
   "editorDependencies": [
