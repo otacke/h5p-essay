@@ -29,7 +29,7 @@
         {
           "label": "Introduction",
           "description": "Optionnel. Vous pouvez fournir des explications sur cette solution.",
-          "default": "Rappelez-vous que chaque réponse est unique et ne doit pas forcément correspondre à cette solution. Ce n'est qu'un bon exemple."
+          "placeholder": "Rappelez-vous que chaque réponse est unique et ne doit pas forcément correspondre à cette solution. Ce n'est qu'un bon exemple."
         },
         {
           "label": "Texte pour la solution",
@@ -256,6 +256,11 @@
       "label": "Sauvegarder le message",
       "description": "Message indiquant que le texte a été sauvegardé.",
       "default": "texte sauvegardé"
+    },
+    {
+      "label": "Your result (not displayed)",
+      "description": "Accessibility text used for readspeakers",
+      "default": "Your result"
     }
   ]
 }
