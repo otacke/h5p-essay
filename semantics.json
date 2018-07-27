@@ -79,7 +79,7 @@
         "type": "text",
         "label": "Introduction",
         "importance": "low",
-        "description": "You can optionally leave the students some explanations about your sample.",
+        "description": "You can optionally leave the students some explanations about your example. The explanation will only show up if you add an example, too.",
         "placeholder": "Please remember that you were not expected to come up with the exact same solution. It's just a good example.",
         "optional": true,
         "widget": "html",

@@ -28,7 +28,7 @@
       "fields": [
         {
           "label": "Introduction",
-          "description": "Optionnel. Vous pouvez fournir des explications sur cette solution.",
+          "description": "Optionnel. Vous pouvez fournir des explications sur cette solution. Les explications ne sont affichées que si vous ajoutez un exemple.",
           "placeholder": "Rappelez-vous que chaque réponse est unique et ne doit pas forcément correspondre à cette solution. Ce n'est qu'un bon exemple."
         },
         {

@@ -28,7 +28,7 @@
       "fields": [
         {
           "label": "Einleitung",
-          "description": "Du kannst deinem Lösungsvorschlag optional eine Erklärung voranstellen.",
+          "description": "Du kannst deinem Lösungsvorschlag optional eine Erklärung voranstellen. Sie wird nur angezeigt, wenn du auch einen Vorschlag angibst.",
           "placeholder": "Bitte bedenke, dass es von dir nicht erwartet war, exakt dieselbe Lösung zu finden. Sie ist lediglich ein gutes Beispiel."
         },
         {
