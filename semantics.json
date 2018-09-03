@@ -11,8 +11,8 @@
         "label": "Type",
         "importance": "medium",
         "options": [
-          "H5P.Image 1.0",
-          "H5P.Video 1.3"
+          "H5P.Image 1.1",
+          "H5P.Video 1.5"
         ],
         "optional": true,
         "description": "Optional media to display above the question."
@@ -29,7 +29,7 @@
           "rules": [
             {
               "field": "type",
-              "equals": "H5P.Image 1.0"
+              "equals": "H5P.Image 1.1"
             }
           ]
         }
@@ -79,7 +79,7 @@
         "type": "text",
         "label": "Introduction",
         "importance": "low",
-        "description": "You can optionally leave the students some explanations about your sample.",
+        "description": "You can optionally leave the students some explanations about your example. The explanation will only show up if you add an example, too.",
         "placeholder": "Please remember that you were not expected to come up with the exact same solution. It's just a good example.",
         "optional": true,
         "widget": "html",
