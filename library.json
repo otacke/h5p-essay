@@ -3,9 +3,11 @@
   "description": "Score a student's essay automatically",
   "majorVersion": 1,
   "minorVersion": 2,
-  "patchVersion": 0,
+  "patchVersion": 1,
   "runnable": 1,
-  "embedTypes": ["iframe"],
+  "embedTypes": [
+    "iframe"
+  ],
   "author": "Oliver Tacke",
   "license": "MIT",
   "machineName": "H5P.Essay",
@@ -22,7 +24,9 @@
     }
   ],
   "preloadedCss": [
-    {"path": "styles/essay.css" }
+    {
+      "path": "styles/essay.css"
+    }
   ],
   "preloadedDependencies": [
     {
