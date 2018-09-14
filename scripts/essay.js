@@ -32,6 +32,9 @@ H5P.Essay = function ($, Question) {
 
     this.isAnswered = false;
 
+    // Sanitize HTML encoding
+    this.params.placeholderText = this.htmlDecode(this.params.placeholderText);
+
     // Get previous state from content data
     if (typeof contentData !== 'undefined' && typeof contentData.previousState !== 'undefined') {
       this.previousState = contentData.previousState;
