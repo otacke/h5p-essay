@@ -68,13 +68,13 @@ H5P.Essay = function ($, Question) {
 
     // scoreMastering: score indicating mastery and maximum number on progress bar (can be < scoreMax)
     this.scoreMastering = this.params.behaviour.percentageMastering === undefined ?
-        scoreMax :
-        this.params.behaviour.percentageMastering * scoreMax / 100;
+      scoreMax :
+      this.params.behaviour.percentageMastering * scoreMax / 100;
 
     // scorePassing: score to pass the task (<= scoreMastering)
     this.scorePassing = Math.min(
-        this.scoreMastering,
-        this.params.behaviour.percentagePassing * scoreMax / 100 || 0);
+      this.scoreMastering,
+      this.params.behaviour.percentagePassing * scoreMax / 100 || 0);
 
     this.solution = this.buildSolution();
   }
