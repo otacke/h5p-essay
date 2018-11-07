@@ -259,8 +259,13 @@
     },
     {
       "label": "Your result (not displayed)",
+      "description": "Accessibility text used for readspeakers. @score will be replaced by the number of points. @total will be replaced by the maximum possible points.",
+      "default": "You got @score out of @total points"
+    },
+    {
+      "label": "Navigation message (not displayed)",
       "description": "Accessibility text used for readspeakers",
-      "default": "Your result"
+      "default": "Navigated to newly included sample solution after textarea."
     }
   ]
 }

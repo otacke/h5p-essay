@@ -37,7 +37,6 @@ var H5P = H5P || {};
     // Task description
     this.taskDescription = document.createElement('div');
     this.taskDescription.classList.add(INPUT_LABEL);
-    this.taskDescription.setAttribute('tabindex', 0);
     this.taskDescription.innerHTML = this.params.taskDescription;
 
     // InputField
@@ -46,7 +45,6 @@ var H5P = H5P || {};
     this.inputField.setAttribute('rows', this.params.inputFieldSize);
     this.inputField.setAttribute('maxlength', this.params.maximumLength);
     this.inputField.setAttribute('placeholder', this.params.placeholderText);
-    this.inputField.setAttribute('tabindex', 0);
     this.setText(previousState);
 
     this.content = document.createElement('div');

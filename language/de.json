@@ -259,8 +259,13 @@
     },
     {
       "label": "Dein Ergebnis (nicht angezeigt)",
+      "description": "Anzeigetext für Readspeakers (Barrierefreiheit). @score wird durch die erreichten Punkte ersetzt. @total wird durch die maximal mögliche Punktzahl ersetzt.",
+      "default": "Du hast @score von @total Punkten"
+    },
+    {
+      "label": "Navigationsmeldung (nicht angezeigt)",
       "description": "Anzeigetext für Readspeakers (Barrierefreiheit)",
-      "default": "Dein Ergebnis"
+      "default": "Unterhalb des Texteingabefeldes wurde eine Musterlösung eingefügt. Dorthin navigiert."
     }
   ]
 }

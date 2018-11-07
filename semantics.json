@@ -537,9 +537,18 @@
     "name": "ariaYourResult",
     "type": "text",
     "label": "Your result (not displayed)",
+    "description": "Accessibility text used for readspeakers. @score will be replaced by the number of points. @total will be replaced by the maximum possible points.",
+    "importance": "low",
+    "common": true,
+    "default": "You got @score out of @total points"
+  },
+  {
+    "name": "ariaNavigatedToSolution",
+    "type": "text",
+    "label": "Navigation message (not displayed)",
     "description": "Accessibility text used for readspeakers",
     "importance": "low",
     "common": true,
-    "default": "Your result"
+    "default": "Navigated to newly included sample solution after textarea."
   }
 ]

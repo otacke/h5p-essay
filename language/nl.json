@@ -259,8 +259,13 @@
     },
     {
       "label": "Jouw resultaat (niet getoond)",
+      "description": "Aanwezige tekst voor readspeakers. @score will be replaced by the number of points. @total will be replaced by the maximum possible points.",
+      "default": "You got @score out of @total points"
+    },
+    {
+      "label": "Navigation message (niet getoond)",
       "description": "Aanwezige tekst voor readspeakers",
-      "default": "Jouw resultaat"
+      "default": "Navigated to newly included sample solution after textarea."
     }
   ]
 }

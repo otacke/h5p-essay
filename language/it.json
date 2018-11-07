@@ -259,8 +259,13 @@
     },
     {
       "label": "Il tuo risultato (non visualizzato)",
+      "description": "Testo di accessibilità utilizzato per riproduttori vocali. @score will be replaced by the number of points. @total will be replaced by the maximum possible points.",
+      "default": "You got @score out of @total points"
+    },
+    {
+      "label": "Navigation message (non visualizzato)",
       "description": "Testo di accessibilità utilizzato per riproduttori vocali",
-      "default": "Il tuo risultato"
+      "default": "Navigated to newly included sample solution after textarea."
     }
   ]
 }

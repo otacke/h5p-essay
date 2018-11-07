@@ -223,7 +223,7 @@ H5P.Essay = function ($, Question) {
     predecessor.parentNode.insertBefore(this.solution, predecessor.nextSibling);
 
     // Useful for accessibility, but seems to jump to wrong position on some Safari versions
-    this.solution.focus();
+    this.solutionAnnouncer.focus();
 
     this.hideButton('show-solution');
 
@@ -290,7 +290,10 @@ H5P.Essay = function ($, Question) {
       .replace('@total', this.scoreMastering);
 
     if (!this.params.behaviour.ignoreScoring) {
-      this.setFeedback(textScore, this.score, this.scoreMastering, this.params.ariaYourResult);
+      var ariaMessage = (this.params.ariaYourResult)
+        .replace('@score', this.score)
+        .replace('@total', this.scoreMastering);
+      this.setFeedback(textScore, this.score, this.scoreMastering, ariaMessage);
     }
 
     // Show and hide buttons as necessary
@@ -309,7 +312,16 @@ H5P.Essay = function ($, Question) {
   Essay.prototype.buildSolution = function () {
     var solution = document.createElement('div');
     solution.classList.add(SOLUTION_CONTAINER);
-    solution.setAttribute('tabindex', '0');
+
+    this.solutionAnnouncer = document.createElement('div');
+    this.solutionAnnouncer.setAttribute('tabindex', '0');
+    this.solutionAnnouncer.setAttribute('aria-label', this.params.ariaNavigatedToSolution);
+    this.solutionAnnouncer.addEventListener('focus', function (event) {
+      // Just temporary tabbable element. Will be announced by readspaker.
+      event.target.blur();
+      event.target.setAttribute('tabindex', '-1');
+    });
+    solution.appendChild(this.solutionAnnouncer);
 
     var solutionTitle = document.createElement('div');
     solutionTitle.classList.add(SOLUTION_TITLE);
