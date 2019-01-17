@@ -104,7 +104,8 @@
         "widget": "html",
         "enterMode": "div",
         "tags": [
-          "strong"
+          "strong",
+          "a"
         ]
       }
     ]
