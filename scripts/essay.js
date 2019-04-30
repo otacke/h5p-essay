@@ -76,7 +76,7 @@ H5P.Essay = function ($, Question) {
 
     // scorePassing: score to pass the task (<= scoreMastering)
     this.scorePassing = Math.min(
-      this.scoreMastering,
+      this.getMaxScore(),
       this.params.behaviour.percentagePassing * scoreMax / 100 || 0);
 
     this.solution = this.buildSolution();
@@ -193,7 +193,8 @@ H5P.Essay = function ($, Question) {
    * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-2}
    */
   Essay.prototype.getScore = function () {
-    return (this.params.behaviour.ignoreScoring) ? null : this.score;
+    // Return value is rounded because reporting module for moodle's H5P plugin expects integers
+    return (this.params.behaviour.ignoreScoring) ? null : Math.round(this.score);
   };
 
   /**
@@ -202,7 +203,8 @@ H5P.Essay = function ($, Question) {
    * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-3}
    */
   Essay.prototype.getMaxScore = function () {
-    return (this.params.behaviour.ignoreScoring) ? this.params.behaviour.pointsHost || 0 : this.scoreMastering;
+    // Return value is rounded because reporting module for moodle's H5P plugin expects integers
+    return (this.params.behaviour.ignoreScoring) ? this.params.behaviour.pointsHost || 0 : Math.round(this.scoreMastering);
   };
 
   /**
@@ -283,21 +285,21 @@ H5P.Essay = function ($, Question) {
     }
 
     // Not all keyword groups might be necessary for mastering
-    this.score = Math.min(this.computeScore(results), this.scoreMastering);
+    this.score = Math.min(this.computeScore(results), this.getMaxScore());
     var textScore = H5P.Question
-      .determineOverallFeedback(this.params.overallFeedback, this.score / this.scoreMastering)
-      .replace('@score', this.score)
-      .replace('@total', this.scoreMastering);
+      .determineOverallFeedback(this.params.overallFeedback, this.getScore() / this.getMaxScore())
+      .replace('@score', this.getScore())
+      .replace('@total', this.getMaxScore());
 
     if (!this.params.behaviour.ignoreScoring) {
       var ariaMessage = (this.params.ariaYourResult)
-        .replace('@score', this.score)
-        .replace('@total', this.scoreMastering);
-      this.setFeedback(textScore, this.score, this.scoreMastering, ariaMessage);
+        .replace('@score', this.getScore())
+        .replace('@total', this.getMaxScore());
+      this.setFeedback(textScore, this.getScore(), this.getMaxScore(), ariaMessage);
     }
 
     // Show and hide buttons as necessary
-    this.handleButtons(this.score);
+    this.handleButtons(this.getScore());
 
     // Trigger xAPI statements as necessary
     this.handleXAPI();
@@ -479,7 +481,7 @@ H5P.Essay = function ($, Question) {
     }
 
     // We need the retry button if the mastering score has not been reached or scoring is irrelevant
-    if (score < this.scoreMastering || this.params.behaviour.ignoreScoring) {
+    if (score < this.getMaxScore() || this.params.behaviour.ignoreScoring) {
       if (this.params.behaviour.enableRetry) {
         this.showButton('try-again');
       }
@@ -504,7 +506,7 @@ H5P.Essay = function ($, Question) {
       else {
         this.trigger(this.createEssayXAPIEvent('passed'));
       }
-      if (this.getScore() >= this.scoreMastering) {
+      if (this.getScore() >= this.getMaxScore()) {
         this.trigger(this.createEssayXAPIEvent('mastered'));
       }
     }
