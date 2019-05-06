@@ -532,7 +532,8 @@ H5P.Essay = function ($, Question) {
   Essay.prototype.getxAPIDefinition = function () {
     var definition = {};
     definition.name = {'en-US': 'Essay'};
-    definition.description = {'en-US': this.params.taskDescription};
+    // The H5P reporting module expects the "blanks" to be added to the description
+    definition.description = {'en-US': this.params.taskDescription + Essay.FILL_IN_PLACEHOLDER};
     definition.type = 'http://id.tincanapi.com/activitytype/essay';
     definition.interactionType = 'long-fill-in';
     /*
@@ -540,7 +541,6 @@ H5P.Essay = function ($, Question) {
      * pattern it if the criteria for a question are complex and correct
      * responses cannot be exhaustively listed. They can't.
      */
-    definition.correctResponsesPattern = [];
     return definition;
   };
 
@@ -741,6 +741,11 @@ H5P.Essay = function ($, Question) {
       'inputField': this.inputField.getText()
     };
   };
+
+  /** @constant {string}
+   * Required to be added to xAPI object description for H5P reporting
+   */
+  Essay.FILL_IN_PLACEHOLDER = '__________';
 
   return Essay;
 }(H5P.jQuery, H5P.Question);
