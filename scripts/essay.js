@@ -27,7 +27,34 @@ H5P.Essay = function ($, Question) {
 
     // Inheritance
     Question.call(this, 'essay');
-    this.params = config;
+
+    // Sanitize defaults
+    this.params = this.extend(
+      {
+        media: {},
+        taskDescription: '',
+        solution: {},
+        keywords: [],
+        overallFeedback: {},
+        behaviour: {
+          minimumLength: 0,
+          inputFieldSize: 10,
+          enableRetry: true,
+          ignoreScoring: false,
+          pointsHost: 1
+        },
+        checkAnswer: 'Check',
+        tryAgain: 'Retry',
+        showSolution: 'Show solution',
+        feedbackHeader: 'Feedback',
+        solutionTitle: 'Sample solution',
+        remainingChars: 'Remaining characters: @chars',
+        notEnoughChars: 'You must enter at least @chars characters!',
+        messageSave: 'saved',
+        ariaYourResult: 'You got @score out of @total points',
+        ariaNavigatedToSolution: 'Navigated to newly included sample solution after textarea.'
+      },
+      config);
     this.contentId = contentId;
 
     this.isAnswered = false;
