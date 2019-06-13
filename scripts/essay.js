@@ -457,8 +457,9 @@ H5P.Essay = function ($, Question) {
   Essay.prototype.buildExplanation = function (results) {
     var explanations = [];
 
-    var word = FEEDBACK_EMPTY;
+    var word;
     this.params.keywords.forEach(function (keyword, i) {
+      word = FEEDBACK_EMPTY;
       // Keyword was not found and feedback is provided for this case
       if (results[i].length === 0 && keyword.options.feedbackMissed) {
         if (keyword.options.feedbackMissedWord === 'keyword') {
