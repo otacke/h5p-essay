@@ -265,7 +265,7 @@
     {
       "label": "Navigaation teksti",
       "description": "Teksti ruudunlukijoille.",
-      "default": Navigoitiin esimerkkivastaukseen tekstialueen jälkeen."
+      "default": "Navigoitiin esimerkkivastaukseen tekstialueen jälkeen."
     }
   ]
 }
