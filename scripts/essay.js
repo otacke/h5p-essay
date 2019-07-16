@@ -57,7 +57,9 @@ H5P.Essay = function ($, Question) {
       config);
     this.contentId = contentId;
 
+    this.score = 0;
     this.isAnswered = false;
+    this.internalShowSolutionsCall = false;
 
     // Sanitize HTML encoding
     this.params.placeholderText = this.htmlDecode(this.params.placeholderText || '');
@@ -165,7 +167,10 @@ H5P.Essay = function ($, Question) {
 
     // Show solution button
     that.addButton('show-solution', that.params.showSolution, function () {
+      // Not using a parameter for showSolutions to not mess with possibe future contract changes
+      that.internalShowSolutionsCall = true;
       that.showSolutions();
+      that.internalShowSolutionsCall = false;
     }, false, {}, {});
 
     // Check answer button
@@ -179,8 +184,13 @@ H5P.Essay = function ($, Question) {
       }
 
       that.inputField.disable();
-      that.handleEvaluation();
+      /*
+       * Only set true on "check". Result computation may take some time if
+       * there are many keywords due to the fuzzy match checking, so it's not
+       * a good idea to do this while typing.
+       */
       that.isAnswered = true;
+      that.handleEvaluation();
 
       if (that.params.behaviour.enableSolutionsButton === true) {
         that.showButton('show-solution');
@@ -211,7 +221,7 @@ H5P.Essay = function ($, Question) {
    * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-1}
    */
   Essay.prototype.getAnswerGiven = function () {
-    return this.isAnswered || (this.inputField.getText().length >= this.params.behaviour.minimumLength);
+    return this.isAnswered;
   };
 
   /**
@@ -249,12 +259,19 @@ H5P.Essay = function ($, Question) {
 
     // Insert solution after explanations or content.
     var predecessor = this.content.parentNode;
+
     predecessor.parentNode.insertBefore(this.solution, predecessor.nextSibling);
 
     // Useful for accessibility, but seems to jump to wrong position on some Safari versions
     this.solutionAnnouncer.focus();
 
     this.hideButton('show-solution');
+
+    // Handle calls from the outside
+    if (!this.internalShowSolutionsCall) {
+      this.hideButton('check-answer');
+      this.hideButton('try-again');
+    }
 
     this.trigger('resize');
   };
