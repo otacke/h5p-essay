@@ -634,7 +634,7 @@ H5P.Essay = function ($, Question) {
       return [];
     }
     // We accept only characters for the wildcard
-    var regexp = new RegExp(needle.replace(/\*/g, '[A-z]*'), 'g');
+    var regexp = new RegExp(needle.replace(/\*/g, Essay.CHARS_WILDCARD + '*'), 'g');
     var result = [];
     var match;
     while ((match = regexp.exec(haystack)) !== null ) {
@@ -786,6 +786,16 @@ H5P.Essay = function ($, Question) {
       'inputField': this.inputField.getText()
     };
   };
+
+  /** @constant {string}
+   * latin special chars: \u00C0-\u00D6\u00D8-\u00F6\u00F8-\u00FF
+   * greek chars: \u0370-\u03FF
+   * kyrillic chars: \u0400-\u04FF
+   * hiragana + katakana: \u3040-\u30FF
+   * common CJK characters: \u4E00-\u62FF\u6300-\u77FF\u7800-\u8CFF\u8D00-\u9FFF
+   * thai chars: \u0E00-\u0E7F
+   */
+  Essay.CHARS_WILDCARD = '[A-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u00FF\u0370-\u03FF\u0400-\u04FF\u3040-\u309F\u3040-\u30FF\u4E00-\u62FF\u6300-\u77FF\u7800-\u8CFF\u8D00-\u9FFF\u0E00-\u0E7F]';
 
   /** @constant {string}
    * Required to be added to xAPI object description for H5P reporting
