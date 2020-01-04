@@ -5,7 +5,7 @@
       "fields": [
         {
           "label": "Typ",
-          "description": "Optionale Medien, die vor der Aufgabe angezeigt werden können."
+          "description": "Medium, das wahlweise oberhalb der Aufgabe angezeigt wird."
         },
         {
           "label": "Bildzoom deaktivieren"
@@ -41,7 +41,7 @@
       "label": "Schlagworte",
       "widgets": [
         {
-          "label": "Vorgabe"
+          "label": "Eingabemaske"
         }
       ],
       "entity": "Schlagwort",
@@ -151,7 +151,7 @@
     },
     {
       "label": "Interaktionseinstellungen",
-      "description": "Diese Optionen legen fest, wie sich die Aufgabe auf Eingaben verhält.",
+      "description": "Diese Optionen legen fest, wie die Aufgabe im Detail funktioniert.",
       "fields": [
         {
           "label": "Minimale Zeichenzahl",
@@ -223,7 +223,7 @@
       ]
     },
     {
-      "label": "Beschriftung für den \"Überprüfen\"-Button",
+      "label": "Beschriftung des \"Überprüfen\"-Buttons",
       "default": "Überprüfen"
     },
     {
