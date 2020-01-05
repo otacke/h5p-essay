@@ -41,7 +41,7 @@
       "label": "Keywords",
       "widgets": [
         {
-          "label": "Default"
+          "label": "Standard"
         }
       ],
       "entity": "Keyword",

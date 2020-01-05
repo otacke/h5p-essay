@@ -1,11 +1,11 @@
 {
   "semantics": [
     {
-      "label": "Media",
+      "label": "Média",
       "fields": [
         {
           "label": "Type",
-          "description": "Optional media to display above the question."
+          "description": "Média à afficher au-dessus de la question (facultatif)."
         },
         {
           "label": "Disable image zooming"
@@ -223,7 +223,7 @@
       ]
     },
     {
-      "label": "Texte pour le bouton \"Vérifier\"",
+      "label": "Texte du bouton \"Vérifier\"",
       "default": "Vérifier"
     },
     {

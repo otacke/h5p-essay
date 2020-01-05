@@ -5,7 +5,7 @@
       "fields": [
         {
           "label": "Tipo",
-          "description": "Media opzionale da mostrare sopra la domanda."
+          "description": "Media facoltativo da mostrare sopra la domanda"
         },
         {
           "label": "Disabilita lo zoom dell'immagine"
@@ -13,27 +13,27 @@
       ]
     },
     {
-      "label": "Descrizione del compito",
-      "description": "Descrivi qui il tuo compito. La descrizione apparirà sopra la casella per l'immissione del testo.",
-      "placeholder": "Sintetizza il libro in 500 caratteri (in meno di 100 parole)..."
+      "label": "Descrizione attività",
+      "description": "Descrivi qui il tuo compito. La descrizione apparirà sopra la casella per l'immissione del testo",
+      "placeholder": "Sintetizza il libro in 500 caratteri..."
     },
     {
       "label": "Testo di aiuto",
       "description": "Questo testo dovrebbe aiutare a iniziare il lavoro",
-      "placeholder": "Questo parla del..."
+      "placeholder": "Questo libro parla di..."
     },
     {
       "label": "Esempio di soluzione",
-      "description": "Se vuoi, puoi aggiungere una soluzione di esempio, che viene mostrata dopo che lo studente ha creato un testo. È detta di esempio perché, con ogni probabilità, non ci sarà una sola soluzione.",
+      "description": "Se vuoi, puoi aggiungere una soluzione di esempio che viene mostrata dopo che lo studente ha creato un testo. È detta di esempio perché probabilmente non sarà l'unica soluzione",
       "fields": [
         {
           "label": "Introduzione",
-          "description": "Se vuoi, puoi lasciare agli studenti qualche spiegazione sul tuo esempio.",
-          "placeholder": "Ricorda che non esiste un'unica soluzione. Questo è solo un esempio valido."
+          "description": "Se vuoi, puoi lasciare agli studenti qualche spiegazione sul tuo esempio",
+          "placeholder": "Ricorda che non esiste un'unica soluzione. Questo è solo un esempio valido"
         },
         {
-          "label": "Testo della soluzione modello",
-          "description": "Dopo l'invio, lo studente vedrà un pulsante \"Mostra soluzione\" se qui è stato inserito del testo."
+          "label": "Testo della soluzione di esempio",
+          "description": "Dopo l'invio, lo studente vedrà un pulsante \"Mostra soluzione\" se qui è stato inserito del testo"
         }
       ]
     },
@@ -50,11 +50,11 @@
         "fields": [
           {
             "label": "Parola chiave",
-            "description": "Parola chiave o frase da cercare. Usa un asterisco '*' come carta jolly per significare uno o più caratteri."
+            "description": "Parola chiave o frase da cercare. Usa un asterisco '*' come carta jolly per significare uno o più caratteri"
           },
           {
             "label": "Alternative",
-            "description": "Se vuoi, puoi aggiungere delle alternative a questa parola chiave. Per esempio, per una 'nazione' puoi indicare alternative come 'stato', 'Paese' ecc. Se lo studente utilizza le alternative qui specificate riceverà il punteggio che gli spetta per la risposta giusta.",
+            "description": "Se vuoi, puoi aggiungere delle alternative a questa parola chiave. Per esempio, per una 'nazione' puoi indicare alternative come 'stato', 'Paese' ecc. Se lo studente utilizza le alternative qui specificate riceverà il punteggio che gli spetta per la risposta giusta",
             "entity": "alternativa",
             "field": {
               "label": "Parola chiave alternativa"
@@ -65,31 +65,31 @@
             "fields": [
               {
                 "label": "Punti",
-                "description": "Punti che lo studente otterrà se nella risposta usa questa parola chiave o una sua alternativa."
+                "description": "Punti che lo studente otterrà se nella risposta usa questa parola chiave o una sua alternativa"
               },
               {
                 "label": "Occorrenze",
-                "description": "Specifica quante occorrenze della parola chiave o delle sue alternative danno diritto a ricevere punti."
+                "description": "Specifica quante occorrenze della parola chiave o delle sue alternative danno diritto a ricevere punti"
               },
               {
                 "label": "Maiuscolo/minuscolo",
-                "description": "Assicurati che il testo inserito sia esattamente quello giusto."
+                "description": "Assicurati che il testo inserito sia esattamente quello giusto"
               },
               {
                 "label": "Tralascia gli errori meno gravi",
-                "description": "Questa opzione permette di accettare errori ortografici meno gravi (da 3 a 9 caratteri: 1 errore; più di 9 characters: 2 errori)."
+                "description": "Questa opzione permette di accettare errori ortografici meno gravi (da 3 a 9 caratteri: 1 errore; più di 9 characters: 2 errori)"
               },
               {
                 "label": "Feedback per la parola chiave",
-                "description": "Questo feedback sarà visualizzato se nella risposta lo studente usa questa parola chiave o una sua alternativa."
+                "description": "Questo feedback sarà visualizzato se nella risposta lo studente usa questa parola chiave o una sua alternativa"
               },
               {
                 "label": "Feedback in mancanza della parola chiave",
-                "description": "Questo feedback sarà visualizzato se nella risposta lo studente non usa né questa parola chiave, né una sua alternativa."
+                "description": "Questo feedback sarà visualizzato se nella risposta lo studente non usa né questa parola chiave, né una sua alternativa"
               },
               {
                 "label": "Parola di feedback mostrata se c'è la parola chiave",
-                "description": "Questa opzione permette di specificare quale parola dovrebbe essere mostrata come feedback se una data parola chiave è presente nel testo.",
+                "description": "Questa opzione permette di specificare quale parola dovrebbe essere mostrata come feedback se una data parola chiave è presente nel testo",
                 "options": [
                   {
                     "label": "parola chiave"
@@ -107,7 +107,7 @@
               },
               {
                 "label": "Parola di feedback mostrata se manca la parola chiave",
-                "description": "Questa opzione permette di specificare quale parola dovrebbe essere mostrata come feedback se una parola chiave non è presente nel testo.",
+                "description": "Questa opzione permette di specificare quale parola dovrebbe essere mostrata come feedback se una parola chiave non è presente nel testo",
                 "options": [
                   {
                     "label": "parola chiave"
@@ -132,7 +132,7 @@
             }
           ],
           "label": "Specifica un feedback per ogni intervallo di punteggio",
-          "description": "Clicca sul pulsante \"Aggiungi intervallo\" per aggiungere tutti gli intervalli di cui hai bisogno. Per esempio, 0-20%: Cattivo punteggio; 21-91%: Punteggio medio; 91-100%: Grande punteggio!",
+          "description": "Clicca sul pulsante \"Aggiungi intervallo\" per aggiungere gli intervalli che ti servono. Per esempio: 0-20%, Punteggio scarso; 21-90%, Punteggio medio; 91-100% Punteggio ottimo!",
           "entity": "intervallo",
           "field": {
             "fields": [
@@ -151,15 +151,15 @@
     },
     {
       "label": "Impostazioni di esecuzione",
-      "description": "Queste opzioni permettono di impostare l'esecuzione del compito.",
+      "description": "Queste opzioni permettono di controllare il comportamento del compito",
       "fields": [
         {
           "label": "Numero minimo di caratteri",
-          "description": "Specifica il numero minimo di caratteri che l'utente deve immettere."
+          "description": "Specifica il numero minimo di caratteri che l'utente deve immettere"
         },
         {
           "label": "Numero massimo di caratteri",
-          "description": "Specifica il numero massimo di caratteri che l'utente deve immettere."
+          "description": "Specifica il numero massimo di caratteri che l'utente deve immettere"
         },
         {
           "label": "Dimensione del campo di immissione",
@@ -178,15 +178,15 @@
         },
         {
           "label": "Attiva \"Riprova\"",
-          "description": "Se selezionato, gli studenti possono riprovare a fare il compito."
+          "description": "Se selezionato, gli studenti possono riprovare a fare il compito"
         },
         {
           "label": "Ignora il punteggio",
-          "description": "Se selezionato, gli studenti vedranno soltanto il feedback che hai fornito per le parole chiave, ma non avranno nessun punteggio."
+          "description": "Se selezionato, gli studenti vedranno soltanto il feedback che hai fornito per le parole chiave, ma non avranno nessun punteggio"
         },
         {
           "label": "Punti assegnati in piattaforma",
-          "description": "Usato per assegnare punti in piattaforma per il solo aver dato una risposta (non mostrato allo studente)."
+          "description": "Usato per assegnare punti in piattaforma per il solo aver dato una risposta (non mostrato allo studente)"
         },
         {
           "label": "Percentuale di superamento",
@@ -194,29 +194,29 @@
         },
         {
           "label": "Percentuale di eccellenza",
-          "description": "Percentuale necessaria per il riconoscimento dell'eccellenza. Setting the mastering percentage below 100 % will lower the maximum possible score accordingly. It's intended to give some leeway to students, not to \"graciously accept\" solutions that do not contain all keywords."
+          "description": "Percentuale necessaria per l'eccellenza. Impostare la percentuale di eccellenza al di sotto del 100% ridurrà conseguentemente il massimo punteggio ottenibile. Lo scopo non è ammettere soluzioni che non contengano tutte le parole chiave ma offrire agli studenti un qualche margine di manovra"
         },
         {
-          "label": "Non considerare \"Maiuscolo/minuscolo\"",
-          "description": "Consente di specificare se l'opzione \"Maiuscolo/minuscolo\" debba essere attiva su tutte le parole chiave.",
+          "label": "Non considerare \"maiuscolo/minuscolo\"",
+          "description": "Consente di specificare se l'opzione \"maiuscolo/minuscolo\" debba essere attiva su tutte le parole chiave",
           "options": [
             {
-              "label": "Abilita"
+              "label": "Abilitata"
             },
             {
-              "label": "Disabilita"
+              "label": "Disabilitata"
             }
           ]
         },
         {
           "label": "Non considerare \"Tralascia gli errori meno gravi\"",
-          "description": "Consente di specificare se l'opzione \"Tralascia gli errori meno gravi\" debba essere attiva su tutte le parole chiave.",
+          "description": "Consente di specificare se l'opzione \"Tralascia gli errori meno gravi\" debba essere abilitata su tutte le parole chiave",
           "options": [
             {
-              "label": "Abilita"
+              "label": "Abilitata"
             },
             {
-              "label": "Disabilita"
+              "label": "Disabilitata"
             }
           ]
         }
@@ -245,12 +245,12 @@
     {
       "label": "Caratteri rimanenti",
       "default": "Caratteri rimanenti: @chars",
-      "description": "Messaggio per i caratteri rimanenti. Puoi usare @chars, che sarà rimpiazzato dal numero corrispondente."
+      "description": "Messaggio per i caratteri rimanenti. Puoi usare @chars, che sarà rimpiazzato dal numero corrispondente"
     },
     {
       "label": "Caratteri insufficienti",
       "default": "Devi inserire almeno @chars caratteri!",
-      "description": "Messaggio per indicare che non il testo prodotto non è sufficientemente lungo. Puoi usare @chars, che sarà rimpiazzato dal numero corrispondente."
+      "description": "Messaggio per indicare che il testo prodotto non è sufficientemente lungo. Puoi usare @chars, che sarà rimpiazzato dal numero corrispondente"
     },
     {
       "label": "Salva messaggio",
@@ -259,13 +259,13 @@
     },
     {
       "label": "Il tuo risultato (non visualizzato)",
-      "description": "Testo di accessibilità utilizzato per riproduttori vocali. @score will be replaced by the number of points. @total will be replaced by the maximum possible points.",
-      "default": "You got @score out of @total points"
+      "description": "Testo di accessibilità utilizzato per lettori vocali. @score sarà sostituito dal numero di punti. @total sarà sostituito dai punti massimi possibili",
+      "default": "Il tuo punteggio è di @score su @total"
     },
     {
-      "label": "Navigation message (non visualizzato)",
-      "description": "Testo di accessibilità utilizzato per riproduttori vocali",
-      "default": "Navigated to newly included sample solution after textarea."
+      "label": "Messaggio di navigazione (non visualizzato)",
+      "description": "Testo di accessibilità utilizzato per lettori vocali",
+      "default": "Passato alla soluzione di esempio appena inclusa dopo l'area di testo"
     }
   ]
 }
