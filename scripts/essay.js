@@ -613,6 +613,8 @@ H5P.Essay = function ($, Question) {
     var result = [];
     var pos = -1;
     var front = 0;
+
+    needle = needle.replace(/\*/, '');
     while ((pos = haystack.indexOf(needle)) !== -1) {
       if (H5P.TextUtilities.isIsolated(needle, haystack)) {
         result.push({'keyword': needle, 'match': needle, 'index': front + pos});
