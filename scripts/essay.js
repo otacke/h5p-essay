@@ -640,6 +640,9 @@ H5P.Essay = function ($, Question) {
       return [];
     }
 
+    // Clean needle from successive wildcards
+    needle = needle.replace(/[*]{2,}/g, '*');
+
     // Clean needle from regular expression characters, * needed for wildcard
     var regexpChars = ['\\', '.', '[', ']', '?', '+', '(', ')', '{', '}', '|', '!', '^', '-'];
     regexpChars.forEach(function (char) {
