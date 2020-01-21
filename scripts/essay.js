@@ -634,7 +634,7 @@ H5P.Essay = function ($, Question) {
       return [];
     }
     // We accept only characters for the wildcard
-    var regexp = new RegExp(needle.replace(/\*/g, Essay.CHARS_WILDCARD + '*'), 'g');
+    var regexp = new RegExp(needle.replace(/\*/g, Essay.CHARS_WILDCARD + '+'), 'g');
     var result = [];
     var match;
     while ((match = regexp.exec(haystack)) !== null ) {
