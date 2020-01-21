@@ -635,6 +635,13 @@ H5P.Essay = function ($, Question) {
     if (needle.indexOf('*') === -1) {
       return [];
     }
+
+    // Clean needle from regular expression characters, * needed for wildcard
+    var regexpChars = ['\\', '.', '[', ']', '?', '+', '(', ')', '{', '}', '|', '!', '^', '-'];
+    regexpChars.forEach(function (char) {
+      needle = needle.split(char).join('\\' + char);
+    });
+
     // We accept only characters for the wildcard
     var regexp = new RegExp(needle.replace(/\*/g, Essay.CHARS_WILDCARD + '+'), 'g');
     var result = [];
