@@ -426,7 +426,11 @@ H5P.Essay = function ($, Question) {
           return (alternative[0] !== '/' || alternative[alternative.length - 1] !== '/');
         })
         // regular matches found in text for alternatives
-        .concat(that.getRegExpAlternatives(alternatives, that.getInput()));
+        .concat(that.getRegExpAlternatives(alternatives, that.getInput()))
+        // regular matches could match empty string
+        .filter(function (alternative) {
+          return alternative !== '';
+        });
 
       // Detect all matches
       alternatives.forEach(function (alternative) {
