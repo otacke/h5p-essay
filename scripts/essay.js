@@ -601,7 +601,7 @@ H5P.Essay = function ($, Question) {
     var xAPIEvent = this.createEssayXAPIEvent('answered');
 
     xAPIEvent.setScoredResult(this.getScore(), this.getMaxScore(), this, true, this.isPassed());
-    xAPIEvent.data.statement.result.response = this.getInput();
+    xAPIEvent.data.statement.result.response = this.inputField.getText();
 
     return xAPIEvent;
   };
