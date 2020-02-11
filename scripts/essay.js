@@ -206,12 +206,15 @@ H5P.Essay = function ($, Question) {
 
   /**
    * Get the user input from DOM.
+   * @param {string} [linebreakReplacement=' '] Replacement for line breaks.
    * @return {string} Cleaned input.
    */
-  Essay.prototype.getInput = function () {
+  Essay.prototype.getInput = function (linebreakReplacement) {
+    linebreakReplacement = linebreakReplacement || ' ';
+
     return this.inputField
       .getText()
-      .replace(/(\r\n|\r|\n)/g, ' ')
+      .replace(/(\r\n|\r|\n)/g, linebreakReplacement)
       .replace(/\s\s/g, ' ');
   };
 
