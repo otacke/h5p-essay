@@ -35,7 +35,7 @@ H5P.Essay = function ($, Question) {
         taskDescription: '',
         solution: {},
         keywords: [],
-        overallFeedback: {},
+        overallFeedback: [],
         behaviour: {
           minimumLength: 0,
           inputFieldSize: 10,
