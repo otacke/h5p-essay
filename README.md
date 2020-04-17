@@ -7,9 +7,6 @@ Initially (and maybe finally), this feedback will simply be based on a list of k
 
 The content type could possibly evolve into a solution for [automated essay scoring](https://en.wikipedia.org/wiki/Automated_essay_scoring) using machine learning techniques. However, that's merely wishful thinking right now. Also: Beware the pedagogical implications and stumbling blocks!
 
-## Support me at patreon!
-If you like what I do, please consider to become my supporter at patreon: https://www.patreon.com/otacke
-
 ## Example
 !["Sample Content with H5P Essay"](https://ibin.co/3s9w39KcHu0W.png "Sample Content with H5P Essay")
 
