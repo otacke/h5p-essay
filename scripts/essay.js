@@ -11,7 +11,7 @@ H5P.Essay = function ($, Question) {
   var SOLUTION_SAMPLE_TEXT = 'h5p-essay-solution-sample-text';
 
   // The H5P feedback right now only expects true (green)/false (red) feedback, not neutral feedback
-  var FEEDBACK_EMPTY= '<span class="h5p-essay-feedback-empty">...</span>';
+  var FEEDBACK_EMPTY = '<span class="h5p-essay-feedback-empty">...</span>';
 
   /**
    * @constructor
