@@ -5,13 +5,11 @@
     "H5PEditor": true
   },
   "env": {
-    "browser": true,
-    "es6": true
+    "browser": true
   },
   "extends": "eslint:recommended",
   "parserOptions": {
-    "sourceType": "module",
-    "ecmaVersion": 2017
+    "sourceType": "module"
   },
   "rules": {
     "valid-jsdoc": "off",
