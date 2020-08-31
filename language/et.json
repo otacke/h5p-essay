@@ -50,7 +50,7 @@
         "fields": [
           {
             "label": "Märksõna",
-            "description": "Märksõna või fraas, mida otsida. Kasuta asteriski '*' metamärgina ühe või rohkema karakteri asemel. Kasuta kaldkriipsu '/' alguses ja lõpus, et kasutada regulaaravaldust."
+            "description": "Märksõna või fraas, mida otsida. Kasuta asteriski '*' metamärgina ühe või rohkema tähemärgi asemel. Kasuta kaldkriipsu '/' alguses ja lõpus, et kasutada regulaaravaldust."
           },
           {
             "label": "Variatsioonid",
@@ -243,14 +243,14 @@
       "default": "Näidislahendus"
     },
     {
-      "label": "Alles jäänud karaktereid",
-      "default": "Karaktereid alles: @chars",
-      "description": "Sõnum alles jäänud karakterite jaoks. Sa saad kasutada @chars, mis asendatakse vastava numbriga."
+      "label": "Alles jäänud tähemärke",
+      "default": "Tähemärke alles: @chars",
+      "description": "Sõnum alles jäänud tähemärkide jaoks. Sa saad kasutada @chars, mis asendatakse vastava numbriga."
     },
     {
-      "label": "Pole piisavalt karaktereid",
-      "default": "Sa pead sisestama vähemalt @chars karakterit!",
-      "description": "Sõnum näitamaks, et tekstis pole piisavalt karaktereid. Sa saad kasutada @chars, mis asendatakse vastava numbriga."
+      "label": "Pole piisavalt tähemärke",
+      "default": "Sa pead sisestama vähemalt @chars tähemärki!",
+      "description": "Sõnum näitamaks, et tekstis pole piisavalt tähemärke. Sa saad kasutada @chars, mis asendatakse vastava numbriga."
     },
     {
       "label": "Salvestamise sõnum",
