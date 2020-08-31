@@ -50,7 +50,7 @@
         "fields": [
           {
             "label": "Märksõna",
-            "description": "Märksõna või fraas, mida otsida. Kasuta asteriski '*' metamärgina ühe või rohkema karakteri asemel. Kasuta kaldkriipsu '/' alguses ja lõpus, et kasutada regulaaravaldust."
+            "description": "Märksõna või fraas, mida otsida. Kasuta asteriski '*' metamärgina ühe või rohkema tähemärgi asemel. Kasuta kaldkriipsu '/' alguses ja lõpus, et kasutada regulaaravaldust."
           },
           {
             "label": "Variatsioonid",
