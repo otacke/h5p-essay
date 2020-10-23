@@ -4,14 +4,14 @@ H5P.Essay = function ($, Question) {
   'use strict';
 
   // CSS Classes
-  var SOLUTION_CONTAINER = 'h5p-essay-solution-container';
-  var SOLUTION_TITLE = 'h5p-essay-solution-title';
-  var SOLUTION_INTRODUCTION = 'h5p-essay-solution-introduction';
-  var SOLUTION_SAMPLE = 'h5p-essay-solution-sample';
-  var SOLUTION_SAMPLE_TEXT = 'h5p-essay-solution-sample-text';
+  const SOLUTION_CONTAINER = 'h5p-essay-solution-container';
+  const SOLUTION_TITLE = 'h5p-essay-solution-title';
+  const SOLUTION_INTRODUCTION = 'h5p-essay-solution-introduction';
+  const SOLUTION_SAMPLE = 'h5p-essay-solution-sample';
+  const SOLUTION_SAMPLE_TEXT = 'h5p-essay-solution-sample-text';
 
   // The H5P feedback right now only expects true (green)/false (red) feedback, not neutral feedback
-  var FEEDBACK_EMPTY = '<span class="h5p-essay-feedback-empty">...</span>';
+  const FEEDBACK_EMPTY = '<span class="h5p-essay-feedback-empty">...</span>';
 
   /**
    * @constructor
@@ -88,17 +88,17 @@ H5P.Essay = function ($, Question) {
     }
 
     // map function
-    var toPoints = function (keyword) {
+    const toPoints = function (keyword) {
       return (keyword.keyword && keyword.options && keyword.options.points || 0) * (keyword.options.occurrences || 1);
     };
 
     // reduce function
-    var sum = function (a, b) {
+    const sum = function (a, b) {
       return a + b;
     };
 
     // scoreMax = Maximum number of points available by all keyword groups
-    var scoreMax = this.params.keywords
+    const scoreMax = this.params.keywords
       .map(toPoints)
       .reduce(sum, 0);
 
@@ -124,9 +124,9 @@ H5P.Essay = function ($, Question) {
    */
   Essay.prototype.registerDomElements = function () {
     // Set optional media
-    var media = (this.params.media) ? this.params.media.type : undefined;
+    const media = (this.params.media) ? this.params.media.type : undefined;
     if (media && media.library) {
-      var type = media.library.split(' ')[0];
+      const type = media.library.split(' ')[0];
       if (type === 'H5P.Image') {
         if (media.params.file) {
           this.setImage(media.params.file.path, {
@@ -167,7 +167,7 @@ H5P.Essay = function ($, Question) {
    * Add all the buttons that shall be passed to H5P.Question.
    */
   Essay.prototype.addButtons = function () {
-    var that = this;
+    const that = this;
 
     // Show solution button
     that.addButton('show-solution', that.params.showSolution, function () {
@@ -181,7 +181,7 @@ H5P.Essay = function ($, Question) {
     that.addButton('check-answer', that.params.checkAnswer, function () {
       // Show message if the minimum number of characters has not been met
       if (that.inputField.getText().length < that.params.behaviour.minimumLength) {
-        var message = that.params.notEnoughChars.replace(/@chars/g, that.params.behaviour.minimumLength);
+        const message = that.params.notEnoughChars.replace(/@chars/g, that.params.behaviour.minimumLength);
         that.inputField.setMessageChars(message, true);
         that.read(message);
         return;
@@ -258,14 +258,14 @@ H5P.Essay = function ($, Question) {
   Essay.prototype.showSolutions = function () {
     // We add the sample solution here to make cheating at least a little more difficult
     if (this.solution.getElementsByClassName(SOLUTION_SAMPLE)[0].children.length === 0) {
-      var text = document.createElement('div');
+      const text = document.createElement('div');
       text.classList.add(SOLUTION_SAMPLE_TEXT);
       text.innerHTML = this.params.solution.sample;
       this.solution.getElementsByClassName(SOLUTION_SAMPLE)[0].appendChild(text);
     }
 
     // Insert solution after explanations or content.
-    var predecessor = this.content.parentNode;
+    const predecessor = this.content.parentNode;
 
     predecessor.parentNode.insertBefore(this.solution, predecessor.nextSibling);
 
@@ -325,10 +325,10 @@ H5P.Essay = function ($, Question) {
    * Handle the evaluation.
    */
   Essay.prototype.handleEvaluation = function () {
-    var results = this.computeResults();
+    const results = this.computeResults();
 
     // Build explanations
-    var explanations = this.buildExplanation(results);
+    const explanations = this.buildExplanation(results);
 
     // Show explanations
     if (explanations.length > 0) {
@@ -337,13 +337,13 @@ H5P.Essay = function ($, Question) {
 
     // Not all keyword groups might be necessary for mastering
     this.score = Math.min(this.computeScore(results), this.getMaxScore());
-    var textScore = H5P.Question
+    const textScore = H5P.Question
       .determineOverallFeedback(this.params.overallFeedback, this.getScore() / this.getMaxScore())
       .replace('@score', this.getScore())
       .replace('@total', this.getMaxScore());
 
     if (!this.params.behaviour.ignoreScoring) {
-      var ariaMessage = (this.params.ariaYourResult)
+      const ariaMessage = (this.params.ariaYourResult)
         .replace('@score', this.getScore())
         .replace('@total', this.getMaxScore());
       this.setFeedback(textScore, this.getScore(), this.getMaxScore(), ariaMessage);
@@ -363,7 +363,7 @@ H5P.Essay = function ($, Question) {
    * @return {Object} DOM object.
    */
   Essay.prototype.buildSolution = function () {
-    var solution = document.createElement('div');
+    const solution = document.createElement('div');
     solution.classList.add(SOLUTION_CONTAINER);
 
     this.solutionAnnouncer = document.createElement('div');
@@ -376,17 +376,17 @@ H5P.Essay = function ($, Question) {
     });
     solution.appendChild(this.solutionAnnouncer);
 
-    var solutionTitle = document.createElement('div');
+    const solutionTitle = document.createElement('div');
     solutionTitle.classList.add(SOLUTION_TITLE);
     solutionTitle.innerHTML = this.params.solutionTitle;
     solution.appendChild(solutionTitle);
 
-    var solutionIntroduction = document.createElement('div');
+    const solutionIntroduction = document.createElement('div');
     solutionIntroduction.classList.add(SOLUTION_INTRODUCTION);
     solutionIntroduction.innerHTML = this.params.solution.introduction;
     solution.appendChild(solutionIntroduction);
 
-    var solutionSample = document.createElement('div');
+    const solutionSample = document.createElement('div');
     solutionSample.classList.add(SOLUTION_SAMPLE);
     solution.appendChild(solutionSample);
 
@@ -407,8 +407,8 @@ H5P.Essay = function ($, Question) {
    * @return {Object[]} Results: [[{"keyword": keyword, "match": match, "index": index}*]*].
    */
   Essay.prototype.computeResults = function () {
-    var that = this;
-    var results = [];
+    const that = this;
+    const results = [];
 
     // Should not happen, but just to be sure ...
     this.params.keywords = this.params.keywords || [];
@@ -419,9 +419,9 @@ H5P.Essay = function ($, Question) {
     });
 
     this.params.keywords.forEach(function (alternativeGroup) {
-      var resultsGroup = [];
-      var options = alternativeGroup.options;
-      var alternatives = [alternativeGroup.keyword || []]
+      const resultsGroup = [];
+      const options = alternativeGroup.options;
+      let alternatives = [alternativeGroup.keyword || []]
         .concat(alternativeGroup.alternatives || [])
         .map(function (alternative) {
           return that.htmlDecode(alternative);
@@ -441,7 +441,7 @@ H5P.Essay = function ($, Question) {
 
       // Detect all matches
       alternatives.forEach(function (alternative) {
-        var inputTest = that.getInput();
+        let inputTest = that.getInput();
 
         // Check for case sensitivity
         if (!options.caseSensitive || that.params.behaviour.overrideCaseSensitive === 'off') {
@@ -450,9 +450,9 @@ H5P.Essay = function ($, Question) {
         }
 
         // Build array of matches for each type of match
-        var matchesExact = that.detectExactMatches(alternative, inputTest);
-        var matchesWildcard = alternative.indexOf('*') !== -1 ? that.detectWildcardMatches(alternative, inputTest) : [];
-        var matchesFuzzy = options.forgiveMistakes ? that.detectFuzzyMatches(alternative, inputTest) : [];
+        const matchesExact = that.detectExactMatches(alternative, inputTest);
+        const matchesWildcard = alternative.indexOf('*') !== -1 ? that.detectWildcardMatches(alternative, inputTest) : [];
+        const matchesFuzzy = options.forgiveMistakes ? that.detectFuzzyMatches(alternative, inputTest) : [];
 
         // Merge matches without duplicates
         that.mergeMatches(matchesExact, matchesWildcard, matchesFuzzy).forEach(function (item) {
@@ -470,7 +470,7 @@ H5P.Essay = function ($, Question) {
    * @return {number} Score.
    */
   Essay.prototype.computeScore = function (results) {
-    var score = 0;
+    let score = 0;
     this.params.keywords.forEach(function (keyword, i) {
       score += Math.min(results[i].length, keyword.options.occurrences) * keyword.options.points;
     });
@@ -483,9 +483,9 @@ H5P.Essay = function ($, Question) {
    * @return {Object[]} Explanations for H5P.Question.
    */
   Essay.prototype.buildExplanation = function (results) {
-    var explanations = [];
+    const explanations = [];
 
-    var word;
+    let word;
     this.params.keywords.forEach(function (keyword, i) {
       word = FEEDBACK_EMPTY;
       // Keyword was not found and feedback is provided for this case
@@ -574,7 +574,7 @@ H5P.Essay = function ($, Question) {
    * @return {H5P.XAPIEvent} Event template.
    */
   Essay.prototype.createEssayXAPIEvent = function (verb) {
-    var xAPIEvent = this.createXAPIEventTemplate(verb);
+    const xAPIEvent = this.createXAPIEventTemplate(verb);
     Essay.extend(
       xAPIEvent.getVerifiedStatementValue(['object', 'definition']),
       this.getxAPIDefinition());
@@ -586,7 +586,7 @@ H5P.Essay = function ($, Question) {
    * return {Object} XAPI definition.
    */
   Essay.prototype.getxAPIDefinition = function () {
-    var definition = {};
+    const definition = {};
     definition.name = {};
     definition.name[this.languageTag] = this.getTitle();
     // The H5P reporting module expects the "blanks" to be added to the description
@@ -607,7 +607,7 @@ H5P.Essay = function ($, Question) {
    * @return {H5P.XAPIEvent} xAPI answer event.
    */
   Essay.prototype.getXAPIAnswerEvent = function () {
-    var xAPIEvent = this.createEssayXAPIEvent('answered');
+    const xAPIEvent = this.createEssayXAPIEvent('answered');
 
     xAPIEvent.setScoredResult(this.getScore(), this.getMaxScore(), this, true, this.isPassed());
     xAPIEvent.data.statement.result.response = this.inputField.getText();
@@ -623,9 +623,9 @@ H5P.Essay = function ($, Question) {
    */
   Essay.prototype.detectExactMatches = function (needle, haystack) {
     // Simply detect all exact matches and its positions in the haystack
-    var result = [];
-    var pos = -1;
-    var front = 0;
+    const result = [];
+    let pos = -1;
+    let front = 0;
 
     needle = needle.replace(/\*/, '');
     while ((pos = haystack.indexOf(needle)) !== -1) {
@@ -653,15 +653,15 @@ H5P.Essay = function ($, Question) {
     needle = needle.replace(/[*]{2,}/g, '*');
 
     // Clean needle from regular expression characters, * needed for wildcard
-    var regexpChars = ['\\', '.', '[', ']', '?', '+', '(', ')', '{', '}', '|', '!', '^', '-'];
+    const regexpChars = ['\\', '.', '[', ']', '?', '+', '(', ')', '{', '}', '|', '!', '^', '-'];
     regexpChars.forEach(function (char) {
       needle = needle.split(char).join('\\' + char);
     });
 
     // We accept only characters for the wildcard
-    var regexp = new RegExp(needle.replace(/\*/g, Essay.CHARS_WILDCARD + '+'), 'g');
-    var result = [];
-    var match;
+    const regexp = new RegExp(needle.replace(/\*/g, Essay.CHARS_WILDCARD + '+'), 'g');
+    const result = [];
+    let match;
     while ((match = regexp.exec(haystack)) !== null ) {
       if (H5P.TextUtilities.isIsolated(match[0], haystack, {'index': match.index})) {
         result.push({'keyword': needle, 'match': match[0], 'index': match.index});
@@ -678,18 +678,18 @@ H5P.Essay = function ($, Question) {
    */
   Essay.prototype.detectFuzzyMatches = function (needle, haystack) {
     // Ideally, this should be the maximum number of allowed transformations for the Levenshtein disctance.
-    var windowSize = 2;
+    const windowSize = 2;
     /*
      * We cannot simple split words because we're also looking for phrases.
      * If we were just looking for exact matches, we could use something smarter
      * such as the KMP algorithm. Because we're dealing with fuzzy matches, using
      * this intuitive exhaustive approach might be the best way to go.
      */
-    var results = [];
+    const results = [];
     // Without looking at the surroundings we'd miss words that have additional or missing chars
-    for (var size = -windowSize; size <= windowSize; size++) {
-      for (var pos = 0; pos < haystack.length; pos++) {
-        var straw = haystack.substr(pos, needle.length + size);
+    for (let size = -windowSize; size <= windowSize; size++) {
+      for (let pos = 0; pos < haystack.length; pos++) {
+        const straw = haystack.substr(pos, needle.length + size);
         if (H5P.TextUtilities.areSimilar(needle, straw) && H5P.TextUtilities.isIsolated(straw, haystack, {'index': pos})) {
           // This will only add the match if it's not a duplicate that we found already in the proximity of pos
           if (!this.contains(results, pos)) {
@@ -713,7 +713,7 @@ H5P.Essay = function ($, Question) {
         return (alternative[0] === '/' && alternative[alternative.length - 1] === '/');
       })
       .map(function (alternative) {
-        var regNeedle = new RegExp(alternative.slice(1, -1), 'g');
+        const regNeedle = new RegExp(alternative.slice(1, -1), 'g');
         return inputTest.match(regNeedle);
       })
       .reduce(function (a, b) {
@@ -739,10 +739,10 @@ H5P.Essay = function ($, Question) {
     }
 
     // Add all elements from args[1+] to args[0] if not already there close by.
-    var results = (arguments[0] || []).slice();
-    for (var i = 1; i < arguments.length; i++) {
-      var match2 = arguments[i] || [];
-      for (var j = 0; j < match2.length; j++) {
+    const results = (arguments[0] || []).slice();
+    for (let i = 1; i < arguments.length; i++) {
+      const match2 = arguments[i] || [];
+      for (let j = 0; j < match2.length; j++) {
         if (!this.contains(results, match2[j].index)) {
           results.push(match2[j]);
         }
@@ -773,8 +773,8 @@ H5P.Essay = function ($, Question) {
    * @return {Object} Merged objects.
    */
   Essay.extend = function () {
-    for (var i = 1; i < arguments.length; i++) {
-      for (var key in arguments[i]) {
+    for (let i = 1; i < arguments.length; i++) {
+      for (let key in arguments[i]) {
         if (arguments[i].hasOwnProperty(key)) {
           if (typeof arguments[0][key] === 'object' &&
               typeof arguments[i][key] === 'object') {
@@ -835,7 +835,7 @@ H5P.Essay = function ($, Question) {
    * @return {string} Output string.
    */
   Essay.prototype.htmlDecode = function (input) {
-    var dparser = new DOMParser().parseFromString(input, 'text/html');
+    const dparser = new DOMParser().parseFromString(input, 'text/html');
     return dparser.documentElement.textContent;
   };
 
