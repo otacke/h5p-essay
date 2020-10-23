@@ -29,7 +29,7 @@ H5P.Essay = function ($, Question) {
     Question.call(this, 'essay');
 
     // Sanitize defaults
-    this.params = this.extend(
+    this.params = Essay.extend(
       {
         media: {},
         taskDescription: '',
@@ -56,6 +56,10 @@ H5P.Essay = function ($, Question) {
       },
       config);
     this.contentId = contentId;
+    this.extras = contentData;
+
+    const defaultLanguage = (this.extras && this.extras.metadata) ? this.extras.metadata.defaultLanguage || 'en' : 'en';
+    this.languageTag = Essay.formatLanguageCode(defaultLanguage);
 
     this.score = 0;
     this.isAnswered = false;
@@ -571,7 +575,7 @@ H5P.Essay = function ($, Question) {
    */
   Essay.prototype.createEssayXAPIEvent = function (verb) {
     var xAPIEvent = this.createXAPIEventTemplate(verb);
-    this.extend(
+    Essay.extend(
       xAPIEvent.getVerifiedStatementValue(['object', 'definition']),
       this.getxAPIDefinition());
     return xAPIEvent;
@@ -583,9 +587,11 @@ H5P.Essay = function ($, Question) {
    */
   Essay.prototype.getxAPIDefinition = function () {
     var definition = {};
-    definition.name = {'en-US': 'Essay'};
+    definition.name = {};
+    definition.name[this.languageTag] = this.getTitle();
     // The H5P reporting module expects the "blanks" to be added to the description
-    definition.description = {'en-US': this.params.taskDescription + Essay.FILL_IN_PLACEHOLDER};
+    definition.description = {};
+    definition.description[this.languageTag] = this.params.taskDescription + Essay.FILL_IN_PLACEHOLDER;
     definition.type = 'http://id.tincanapi.com/activitytype/essay';
     definition.interactionType = 'long-fill-in';
     /*
@@ -766,7 +772,7 @@ H5P.Essay = function ($, Question) {
    * @param {...Object} arguments - Objects to be merged.
    * @return {Object} Merged objects.
    */
-  Essay.prototype.extend = function () {
+  Essay.extend = function () {
     for (var i = 1; i < arguments.length; i++) {
       for (var key in arguments[i]) {
         if (arguments[i].hasOwnProperty(key)) {
@@ -781,6 +787,46 @@ H5P.Essay = function ($, Question) {
       }
     }
     return arguments[0];
+  };
+
+  /**
+   * Get task title.
+   * @return {string} Title.
+   */
+  Essay.prototype.getTitle = function () {
+    let raw;
+    if (this.extras.metadata) {
+      raw = this.extras.metadata.title;
+    }
+    raw = raw || Essay.DEFAULT_DESCRIPTION;
+
+    // H5P Core function: createTitle
+    return H5P.createTitle(raw);
+  };
+
+  /**
+   * Format language tag (RFC 5646). Assuming "language-coutry". No validation.
+   * Cmp. https://tools.ietf.org/html/rfc5646
+   * @param {string} languageTag Language tag.
+   * @return {string} Formatted language tag.
+   */
+  Essay.formatLanguageCode = function (languageCode) {
+    if (typeof languageCode !== 'string') {
+      return languageCode;
+    }
+
+    /*
+     * RFC 5646 states that language tags are case insensitive, but
+     * recommendations may be followed to improve human interpretation
+     */
+    const segments = languageCode.split('-');
+    segments[0] = segments[0].toLowerCase(); // ISO 639 recommendation
+    if (segments.length > 1) {
+      segments[1] = segments[1].toUpperCase(); // ISO 3166-1 recommendation
+    }
+    languageCode = segments.join('-');
+
+    return languageCode;
   };
 
   /**
@@ -820,6 +866,9 @@ H5P.Essay = function ($, Question) {
    * Required to be added to xAPI object description for H5P reporting
    */
   Essay.FILL_IN_PLACEHOLDER = '__________';
+
+  /** @constant {string} */
+  Essay.DEFAULT_DESCRIPTION = 'Essay';
 
   return Essay;
 }(H5P.jQuery, H5P.Question);
