@@ -52,7 +52,10 @@ H5P.Essay = function ($, Question) {
         notEnoughChars: 'You must enter at least @chars characters!',
         messageSave: 'saved',
         ariaYourResult: 'You got @score out of @total points',
-        ariaNavigatedToSolution: 'Navigated to newly included sample solution after textarea.'
+        ariaNavigatedToSolution: 'Navigated to newly included sample solution after textarea.',
+        ariaCheck: 'Check the answers.',
+        ariaShowSolution: 'Show the solution. You will be provided with a sample solution.',
+        ariaRetry: 'Retry the task. You can improve your previous answer if the author allowed that.'
       },
       config);
     this.contentId = contentId;
@@ -175,7 +178,9 @@ H5P.Essay = function ($, Question) {
       that.internalShowSolutionsCall = true;
       that.showSolutions();
       that.internalShowSolutionsCall = false;
-    }, false, {}, {});
+    }, false, {
+      'aria-label': this.params.ariaShowSolution
+    }, {});
 
     // Check answer button
     that.addButton('check-answer', that.params.checkAnswer, function () {
@@ -200,12 +205,16 @@ H5P.Essay = function ($, Question) {
         that.showButton('show-solution');
       }
       that.hideButton('check-answer');
-    }, true, {}, {});
+    }, true, {
+      'aria-label': this.params.ariaCheck
+    }, {});
 
     // Retry button
     that.addButton('try-again', that.params.tryAgain, function () {
       that.resetTask();
-    }, false, {}, {});
+    }, false, {
+      'aria-label': this.params.ariaRetry
+    }, {});
   };
 
   /**

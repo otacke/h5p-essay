@@ -266,6 +266,18 @@
       "label": "Sporočilo o navigaciji po oknu (ni prikazano)",
       "description": "Besedilo je namenjeno bralnikom zaslona.",
       "default": "Pomaknjeno do na novo vključenega vzorčnega primera."
+    },
+    {
+      "label": "Assistive technology description for \"Check\" button",
+      "default": "Check the answers."
+    },
+    {
+      "label": "Assistive technology description for \"Show Solution\" button",
+      "default": "Show the solution. You will be provided with a sample solution."
+    },
+    {
+      "label": "Assistive technology description for \"Retry\" button",
+      "default": "Retry the task. You can improve your previous answer if the author allowed that."
     }
   ]
 }

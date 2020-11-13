@@ -554,5 +554,29 @@
     "importance": "low",
     "common": true,
     "default": "Navigated to newly included sample solution after textarea."
+  },
+  {
+    "name": "ariaCheck",
+    "type": "text",
+    "label": "Assistive technology description for \"Check\" button",
+    "importance": "low",
+    "common": true,
+    "default": "Check the answers."
+  },
+  {
+    "name": "ariaShowSolution",
+    "type": "text",
+    "label": "Assistive technology description for \"Show Solution\" button",
+    "importance": "low",
+    "common": true,
+    "default": "Show the solution. You will be provided with a sample solution."
+  },
+  {
+    "name": "ariaRetry",
+    "type": "text",
+    "label": "Assistive technology description for \"Retry\" button",
+    "importance": "low",
+    "common": true,
+    "default": "Retry the task. You can improve your previous answer if the author allowed that."
   }
 ]

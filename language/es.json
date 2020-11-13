@@ -266,6 +266,18 @@
       "label": "Mensaje de navegación (no mostrado)",
       "description": "Texto de accesibilidad usado para lectores en voz alta",
       "default": "Navegado a solución de muestra incluida después de área de texto."
+    },
+    {
+      "label": "Assistive technology description for \"Check\" button",
+      "default": "Check the answers."
+    },
+    {
+      "label": "Assistive technology description for \"Show Solution\" button",
+      "default": "Show the solution. You will be provided with a sample solution."
+    },
+    {
+      "label": "Assistive technology description for \"Retry\" button",
+      "default": "Retry the task. You can improve your previous answer if the author allowed that."
     }
   ]
 }

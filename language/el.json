@@ -266,6 +266,18 @@
       "label": "Μήνυμα πλοήγησης (δεν εμφανίζεται)",
       "description": "Κείμενο ακουστικής υποβοήθησης",
       "default": "Πλοηγήθηκες στην πρόσφατα συμπεριληφθείσα ενδεικτική απάντηση."
+    },
+    {
+      "label": "Assistive technology description for \"Check\" button",
+      "default": "Check the answers."
+    },
+    {
+      "label": "Assistive technology description for \"Show Solution\" button",
+      "default": "Show the solution. You will be provided with a sample solution."
+    },
+    {
+      "label": "Assistive technology description for \"Retry\" button",
+      "default": "Retry the task. You can improve your previous answer if the author allowed that."
     }
   ]
 }
