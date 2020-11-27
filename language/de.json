@@ -268,16 +268,16 @@
       "default": "Unterhalb des Texteingabefeldes wurde eine Musterlösung eingefügt. Dorthin navigiert."
     },
     {
-      "label": "Assistive technology description for \"Check\" button",
-      "default": "Check the answers."
+      "label": "Beschreibung des \"Überprüfen\"-Buttons (für Hilfsmittel zur Barrierefreiheit)",
+      "default": "Die Antwort überprüfen."
     },
     {
-      "label": "Assistive technology description for \"Show Solution\" button",
-      "default": "Show the solution. You will be provided with a sample solution."
+      "label": "Beschreibung des \"Lösung anzeigen\"-Buttons (für Hilfsmittel zur Barrierefreiheit)",
+      "default": "Zeige die Lösung an. Du erhältst dann eine Musterlösung."
     },
     {
-      "label": "Assistive technology description for \"Retry\" button",
-      "default": "Retry the task. You can improve your previous answer if the author allowed that."
+      "label": "Beschreibung des \"Wiederholen\"-Buttons (für Hilfsmittel zur Barrierefreiheit)",
+      "default": "Wiederhole die Aufgabe. Du kannst deine vorherige Antwort verbessern, sofern dies für diese Aufgabe erlaubt ist."
     }
   ]
 }
