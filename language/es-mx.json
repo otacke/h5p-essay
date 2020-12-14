@@ -268,16 +268,16 @@
       "default": "Navegado a solución de muestra incluida después de área de texto."
     },
     {
-      "label": "Assistive technology description for \"Check\" button",
-      "default": "Check the answers."
+      "label": "Descripción de tecnología asistiva para botón \"Revisar\" ",
+      "default": "Revisar las respuestas."
     },
     {
-      "label": "Assistive technology description for \"Show Solution\" button",
-      "default": "Show the solution. You will be provided with a sample solution."
+      "label": "Descripción de tecnología asistiva para botón \"Mostrar solución\" ",
+      "default": "Mostrar la solución. Se le proporcionará una solución de muestra."
     },
     {
-      "label": "Assistive technology description for \"Retry\" button",
-      "default": "Retry the task. You can improve your previous answer if the author allowed that."
+      "label": "Descripción de tecnología asistiva para botón \"Reintentar\" ",
+      "default": "Reintentar la tarea. Puede mejorar su respuesta anterior si el autor lo permitió."
     }
   ]
 }
