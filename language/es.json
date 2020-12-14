@@ -268,15 +268,15 @@
       "default": "Navegado a solución de muestra incluida después de área de texto."
     },
     {
-      "label": "Descripción de tecnología asistiva para botón \"Revisar\" ",
+      "label": "Descripción de tecnología asistiva para botón \"Revisar\"",
       "default": "Revisar las respuestas."
     },
     {
-      "label": "Descripción de tecnología asistiva para botón \"Mostrar solución\" ",
+      "label": "Descripción de tecnología asistiva para botón \"Mostrar solución\"",
       "default": "Mostrar la solución. Se le proporcionará una solución de muestra."
     },
     {
-      "label": "Descripción de tecnología asistiva para botón \"Reintentar\" ",
+      "label": "Descripción de tecnología asistiva para botón \"Reintentar\"",
       "default": "Reintentar la tarea. Puede mejorar su respuesta anterior si el autor lo permitió."
     }
   ]
