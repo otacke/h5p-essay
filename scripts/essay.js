@@ -430,11 +430,15 @@ H5P.Essay = function ($, Question) {
     this.params.keywords.forEach(function (alternativeGroup) {
       const resultsGroup = [];
       const options = alternativeGroup.options;
+      const caseSensitive = (that.params.behaviour.overrideCaseSensitive !== 'off') &&
+        (that.params.behaviour.overrideCaseSensitive === 'on' || options.caseSensitive);
+
       let alternatives = [alternativeGroup.keyword || []]
         .concat(alternativeGroup.alternatives || [])
         .map(function (alternative) {
           return that.htmlDecode(alternative);
         });
+
       // Not chained, because we still need the old value inside
       alternatives = alternatives
         // only "normal" alternatives
@@ -442,7 +446,7 @@ H5P.Essay = function ($, Question) {
           return (alternative[0] !== '/' || alternative[alternative.length - 1] !== '/');
         })
         // regular matches found in text for alternatives
-        .concat(that.getRegExpAlternatives(alternatives, that.getInput()))
+        .concat(that.getRegExpAlternatives(alternatives, that.getInput(), caseSensitive))
         // regular matches could match empty string
         .filter(function (alternative) {
           return alternative !== '';
@@ -453,14 +457,15 @@ H5P.Essay = function ($, Question) {
         let inputTest = that.getInput();
 
         // Check for case sensitivity
-        if (!options.caseSensitive || that.params.behaviour.overrideCaseSensitive === 'off') {
+        const caseSensitive = that.params.behaviour.overrideCaseSensitive === 'on' || options.caseSensitive;
+        if (!caseSensitive) {
           alternative = alternative.toLowerCase();
           inputTest = inputTest.toLowerCase();
         }
 
         // Build array of matches for each type of match
         const matchesExact = that.detectExactMatches(alternative, inputTest);
-        const matchesWildcard = alternative.indexOf('*') !== -1 ? that.detectWildcardMatches(alternative, inputTest) : [];
+        const matchesWildcard = alternative.indexOf('*') !== -1 ? that.detectWildcardMatches(alternative, inputTest, caseSensitive) : [];
         const matchesFuzzy = options.forgiveMistakes ? that.detectFuzzyMatches(alternative, inputTest) : [];
 
         // Merge matches without duplicates
@@ -655,9 +660,10 @@ H5P.Essay = function ($, Question) {
    * Detect wildcard matches of needle in haystack.
    * @param {string} needle - Word or phrase to find.
    * @param {string} haystack - Text to find the word or phrase in.
+   * @param {boolean} caseSensitive - If true, alternative is case sensitive.
    * @return {Object[]} Results: [{'keyword': needle, 'match': needle, 'index': front + pos}*].
    */
-  Essay.prototype.detectWildcardMatches = function (needle, haystack) {
+  Essay.prototype.detectWildcardMatches = function (needle, haystack, caseSensitive) {
     if (needle.indexOf('*') === -1) {
       return [];
     }
@@ -672,7 +678,7 @@ H5P.Essay = function ($, Question) {
     });
 
     // We accept only characters for the wildcard
-    const regexp = new RegExp(needle.replace(/\*/g, Essay.CHARS_WILDCARD + '+'), 'g');
+    const regexp = new RegExp(needle.replace(/\*/g, Essay.CHARS_WILDCARD + '+'), this.getRegExpModifiers(caseSensitive));
     const result = [];
     let match;
     while ((match = regexp.exec(haystack)) !== null ) {
@@ -718,15 +724,18 @@ H5P.Essay = function ($, Question) {
    * Get all the matches found to a regular expression alternative.
    * @param {string[]} alternatives - Alternatives.
    * @param {string} inputTest - Original text by student.
+   * @param {boolean} caseSensitive - If true, alternative is case sensitive.
    * @return {string[]} Matches by regular expressions.
    */
-  Essay.prototype.getRegExpAlternatives = function (alternatives, inputTest) {
+  Essay.prototype.getRegExpAlternatives = function (alternatives, inputTest, caseSensitive) {
+    const that = this;
+
     return alternatives
       .filter(function (alternative) {
         return (alternative[0] === '/' && alternative[alternative.length - 1] === '/');
       })
       .map(function (alternative) {
-        const regNeedle = new RegExp(alternative.slice(1, -1), 'g');
+        const regNeedle = new RegExp(alternative.slice(1, -1), that.getRegExpModifiers(caseSensitive));
         return inputTest.match(regNeedle);
       })
       .reduce(function (a, b) {
@@ -735,6 +744,20 @@ H5P.Essay = function ($, Question) {
       .filter(function (item) {
         return item !== null;
       });
+  };
+
+  /**
+   * Get modifiers for regular expressions.
+   * @param {boolean} caseSensitive - If true, alternative is case sensitive.
+   * @return {string} Modifiers for regular expressions.
+   */
+  Essay.prototype.getRegExpModifiers = function (caseSensitive) {
+    const modifiers = ['g'];
+    if (!caseSensitive) {
+      modifiers.push('i');
+    }
+
+    return modifiers.join('');
   };
 
   /**
