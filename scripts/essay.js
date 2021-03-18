@@ -439,6 +439,18 @@ H5P.Essay = function ($, Question) {
           return that.htmlDecode(alternative);
         });
 
+      /*
+       * Get all matches to regular expressions and pretend the matches were
+       * given as alternative answers in order to be able to detect them.
+       * This result computation might need a rewrite ...
+       */
+      const regularExpressionMatches = that
+        .getRegExpAlternatives(alternatives, that.getInput(), caseSensitive)
+        .map(function (match) {
+          // Allow to differentiate from wildcard asterisk
+          return match = match.replace(/\*/, Essay.REGULAR_EXPRESSION_ASTERISK);
+        });
+
       // Not chained, because we still need the old value inside
       alternatives = alternatives
         // only "normal" alternatives
@@ -446,7 +458,7 @@ H5P.Essay = function ($, Question) {
           return (alternative[0] !== '/' || alternative[alternative.length - 1] !== '/');
         })
         // regular matches found in text for alternatives
-        .concat(that.getRegExpAlternatives(alternatives, that.getInput(), caseSensitive))
+        .concat(regularExpressionMatches)
         // regular matches could match empty string
         .filter(function (alternative) {
           return alternative !== '';
@@ -645,7 +657,10 @@ H5P.Essay = function ($, Question) {
     let pos = -1;
     let front = 0;
 
-    needle = needle.replace(/\*/, '');
+    needle = needle
+      .replace(/\*/, '') // Wildcards checked separately
+      .replace(new RegExp(Essay.REGULAR_EXPRESSION_ASTERISK, 'g'), '*'); // Asterisk from regexp
+
     while ((pos = haystack.indexOf(needle)) !== -1) {
       if (H5P.TextUtilities.isIsolated(needle, haystack)) {
         result.push({'keyword': needle, 'match': needle, 'index': front + pos});
@@ -905,6 +920,9 @@ H5P.Essay = function ($, Question) {
 
   /** @constant {string} */
   Essay.DEFAULT_DESCRIPTION = 'Essay';
+
+  /** @constant {string} */
+  Essay.REGULAR_EXPRESSION_ASTERISK = ':::H5P-Essay-REGEXP-ASTERISK:::';
 
   return Essay;
 }(H5P.jQuery, H5P.Question);
