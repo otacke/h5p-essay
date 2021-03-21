@@ -5,7 +5,7 @@
       "fields": [
         {
           "label": "Tipo",
-          "description": "Medio opcional a mostrar arriba de pregunta."
+          "description": "Medio opcional a mostrar arriba de la pregunta."
         },
         {
           "label": "Deshabilitar zoom de imagen"
@@ -24,16 +24,16 @@
     },
     {
       "label": "Solución de muestra",
-      "description": "Opcionalmente Usted puede añadir una solución de muestra sencilla que es mostrada después que ele estudiante creó un texto. Se llama solución de muestra porque probablemente no sea la única solución",
+      "description": "Opcionalmente Usted puede añadir una solución de muestra sencilla que es mostrada después que el estudiante creó un texto. Se llama solución de muestra porque probablemente no sea la única solución",
       "fields": [
         {
           "label": "Introducción",
           "description": "Opcionalmente Usted puede dejarles a los estudiantes unas explicaciones acerca de su ejemplo. La explicación solamente se mostrará si Usted también añade un ejemplo.",
-          "placeholder": "Por favor recuerde que no se espera que Usted proporcione exactamente la misma solucin. ´Solamente es un buen ejemplo"
+          "placeholder": "Por favor recuerde que no se espera que Usted proporcione exactamente la misma solución. Solamente es un buen ejemplo."
         },
         {
           "label": "Texto de solución de muestra",
-          "description": "El estudiante verá un botón para \"Mostrar solución\" después de enviar si Usted proporciona el texto aquí."
+          "description": "El estudiante verá un botón para \"Mostrar solución\" después de enviar si Usted proporciona un texto aquí."
         }
       ]
     },
@@ -55,7 +55,7 @@
           {
             "label": "Variaciones",
             "description": "Añada variaciones opcionales para esta palabra clave. Ejemplo: Para una 'ciudad' añada las alternativas 'poblado', 'municipio' etc. Se otorgarán puntos si el usuario incluye cualquiera de las alternativas especificadas.",
-            "entity": "variation",
+            "entity": "variación",
             "field": {
               "label": "Variación de palabra clave"
             }
@@ -65,15 +65,15 @@
             "fields": [
               {
                 "label": "Puntos",
-                "description": "Puntos que obtendrá el  usuariosi incluye esta palabra clave o sus alternativas en la respuesta."
+                "description": "Puntos que obtendrá el usuario si incluye esta palabra clave o sus alternativas en la respuesta."
               },
               {
                 "label": "Ocurrencias",
-                "description": "Define cuantas ocurrencias de la palabra clave o sus variaciones deberían ser premiadas con puntos."
+                "description": "Define cuantas ocurrencias de la palabra clave o sus variaciones deberían ser recompensadas con puntos."
               },
               {
-                "label": "MAYÚSCULAS/minúsculas importan",
-                "description": "Asegurarse que la entrada del usuario sea exactamente la misma que la respuesta."
+                "label": "MAYÚSCULAS/minúsculas si importan",
+                "description": "Asegurarse que la entrada del usuario tenga que ser exactamente la misma que la respuesta."
               },
               {
                 "label": "Perdonar errores menores",
@@ -123,7 +123,7 @@
       }
     },
     {
-      "label": "Retroalimentación global",
+      "label": "Retroalimentación Global",
       "fields": [
         {
           "widgets": [
@@ -132,7 +132,7 @@
             }
           ],
           "label": "Definir retroalimentación personalizada para cualquier rango de puntaje",
-          "description": "Clic en el botón de \"Añadir rango\" para añadir cuantos rangos necesite. Ejemplo: ¡0-20% Mal Puntaje, 21-91% Puntaje Promedio, 91-100% Excelente Puntaje!",
+          "description": "Haga clic en el botón de \"Añadir rango\" para añadir cuantos rangos necesite. Ejemplo: 0-20% Mal puntaje, 21-91% Puntaje promedio, 91-100% ¡Magnífico puntaje!",
           "entity": "rango",
           "field": {
             "fields": [
@@ -142,7 +142,7 @@
               {},
               {
                 "label": "Retroalimentación para rango de puntaje definido",
-                "placeholder": "LLenar la retroalimentación"
+                "placeholder": "Complete la retroalimentación"
               }
             ]
           }
@@ -150,19 +150,19 @@
       ]
     },
     {
-      "label": "Ajustes del comportamiento",
-      "description": "Estas opciones le permitirán controlar como se porta el trabajo.",
+      "label": "Configuraciones del comportamiento",
+      "description": "Estas opciones le permitirán controlar como se comporta el trabajo.",
       "fields": [
         {
           "label": "Número mínimo de caracteres",
           "description": "Especificar el número mínimo de caracteres que debe ingresar el usuario."
         },
         {
-          "label": "Número máximo  de caracteres",
-          "description": "Especificar el número máximo  de caracteres que debe ingresar el usuario."
+          "label": "Número máximo de caracteres",
+          "description": "Especificar el número máximo de caracteres que debe ingresar el usuario."
         },
         {
-          "label": "Tamño de campo de entrada",
+          "label": "Tamaño de campo de entrada",
           "description": "El tamaño del campo para entrada en cantidad de líneas que cubrirá",
           "options": [
             {
@@ -185,20 +185,20 @@
           "description": "Si se activa, los estudiantes solamente verán la retroalimentación que Usted proporcione para las palabras clave, pero sin puntaje."
         },
         {
-          "label": "Puntos en el entorno del host",
-          "description": "Usado para otorgar puntos en el entorno delhost meramente por contestar (no mostrado al estudiante)."
+          "label": "Puntos en el entorno del anfitrión",
+          "description": "Usado para otorgar puntos en el entorno del anfitrión meramente por contestar (no mostrado al estudiante)."
         },
         {
           "label": "Porcentaje aprobatorio",
-          "description": "Porcentaje necesario para pasar"
+          "description": "Porcentaje que es necesario para pasar"
         },
         {
           "label": "Porcentaje de dominio",
-          "description": "Porcentaje que es necesario para el dominio. Configurar el porcentaje de dominio  debajo de 100 % disminuirá el puntaje máximo posible respectivamente. Se usa para darle holgura a los estudiantes, no es para \"aceptar graciosamente\" soluciones que no contienen todas las palabras clave."
+          "description": "Porcentaje que es necesario para el dominio. Configurar el porcentaje de dominio debajo de 100 % disminuirá el puntaje máximo posible respectivamente. Se usa para darle holgura a los estudiantes, no es para \"aceptar graciosamente\" soluciones que no contienen todas las palabras clave."
         },
         {
           "label": "Anular sensibilidad a MAYÚSCULAS/minúsculas",
-          "description": "Esta opción determina si la opción de \"MAYÚSCULAS/minúsculas importan\" será activada para todas las palabras clave.",
+          "description": "Esta opción determina si la opción de \"MAYÚSCULAS/minúsculas importan\" estará activada para todas las palabras clave.",
           "options": [
             {
               "label": "Habilitada"
@@ -210,7 +210,7 @@
         },
         {
           "label": "Anular perdonar errores",
-          "description": "Esta opción determina si la opción para \"Perdonar errores\" será activada para todas las palabras clave.",
+          "description": "Esta opción determina si la opción para \"Perdonar errores\" estará activada para todas las palabras clave.",
           "options": [
             {
               "label": "Habilitada"
@@ -223,19 +223,19 @@
       ]
     },
     {
-      "label": "Texto para botón \"Revisar\" ",
-      "default": "Check"
+      "label": "Texto para botón \"Comprobar\"",
+      "default": "Comprobar"
     },
     {
-      "label": "Textopara botón \"Reintentar\" ",
-      "default": "Retry"
+      "label": "Texto para botón \"Reintentar\"",
+      "default": "Reintentar"
     },
     {
-      "label": "Texto para botón \"Mostrar solución\" ",
-      "default": "Show solution"
+      "label": "Texto para botón \"Mostrar solución\"",
+      "default": "Mostrar solución"
     },
     {
-      "label": "Encabezadopara panel que contiene retroalimentación parapalabras clave incluidas/faltantes",
+      "label": "Encabezado para panel que contiene retroalimentación para palabras clave incluidas/faltantes",
       "default": "Retroalimentación"
     },
     {
@@ -245,15 +245,15 @@
     {
       "label": "Caracteres restantes",
       "default": "Caracteres restantes: @chars",
-      "description": "Mensaje para caracteres restantes. Puede usar @chars que serán remplazados por el número correspondiente."
+      "description": "Mensaje para caracteres restantes. Puede usar @chars que será remplazado por el número correspondiente."
     },
     {
-      "label": "Not hay suficientes caracteres",
+      "label": "No hay suficientes caracteres",
       "default": "¡Usted debe ingresar al menos @chars caracteres!",
-      "description": "Mensaje para indicar que eltexto no contiene suficientes caracteres. Puede usar @chars que será remplazado por el número correspondiente."
+      "description": "Mensaje para indicar que el texto no contiene suficientes caracteres. Puede usar @chars que será remplazado por el número correspondiente."
     },
     {
-      "label": "Mensaje de Guardado",
+      "label": "Mensaje Guardado",
       "description": "Mensaje que indica que el texto ha sido guardado",
       "default": "guardado"
     },
@@ -265,11 +265,11 @@
     {
       "label": "Mensaje de navegación (no mostrado)",
       "description": "Texto de accesibilidad usado para lectores en voz alta",
-      "default": "Navegado a solución de muestra incluida después de área de texto."
+      "default": "Navegado a solución de muestra recién incluida después de área de texto."
     },
     {
-      "label": "Descripción de tecnología asistiva para botón \"Revisar\"",
-      "default": "Revisar las respuestas."
+      "label": "Descripción de tecnología asistiva para botón \"Comprobar\"",
+      "default": "Comprobar las respuestas."
     },
     {
       "label": "Descripción de tecnología asistiva para botón \"Mostrar solución\"",
@@ -277,7 +277,7 @@
     },
     {
       "label": "Descripción de tecnología asistiva para botón \"Reintentar\"",
-      "default": "Reintentar la tarea. Puede mejorar su respuesta anterior si el autor lo permitió."
+      "default": "Reintentar el trabajo. Puede mejorar su respuesta anterior si el autor lo permitió."
     }
   ]
 }
