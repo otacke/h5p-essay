@@ -1,14 +1,14 @@
 {
   "semantics": [
     {
-      "label": "Medien",
+      "label": "Medium",
       "fields": [
         {
           "label": "Typ",
-          "description": "Medium, das wahlweise oberhalb der Aufgabe angezeigt wird."
+          "description": "Optionales Medium, das über der Frage dargestellt wird."
         },
         {
-          "label": "Bildzoom deaktivieren"
+          "label": "Bild-Zoom deaktivieren"
         }
       ]
     },
@@ -150,8 +150,8 @@
       ]
     },
     {
-      "label": "Interaktionseinstellungen",
-      "description": "Diese Optionen legen fest, wie die Aufgabe im Detail funktioniert.",
+      "label": "Verhaltenseinstellungen",
+      "description": "Hier kannst Du einstellen, wie sich die Aufgabe verhält.",
       "fields": [
         {
           "label": "Minimale Zeichenzahl",
