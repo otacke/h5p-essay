@@ -253,7 +253,7 @@
       "description": "Mensaje para indicar que el texto no contiene suficientes caracteres. Puede usar @chars que será remplazado por el número correspondiente."
     },
     {
-      "label": "Mensaje Guardado",
+      "label": "Guardar mensaje",
       "description": "Mensaje que indica que el texto ha sido guardado",
       "default": "guardado"
     },
@@ -265,14 +265,14 @@
     {
       "label": "Mensaje de navegación (no mostrado)",
       "description": "Texto de accesibilidad usado para lectores en voz alta",
-      "default": "Navegado a solución de muestra recién incluida después de área de texto."
+      "default": "Navegado a solución de muestra recientemente incluida después de área de texto."
     },
     {
       "label": "Descripción de tecnología asistiva para botón \"Comprobar\"",
       "default": "Comprobar las respuestas."
     },
     {
-      "label": "Descripción de tecnología asistiva para botón \"Mostrar solución\"",
+      "label": "Descripción de tecnología asistiva para botón \"Mostrar Solución\"",
       "default": "Mostrar la solución. Se le proporcionará una solución de muestra."
     },
     {
