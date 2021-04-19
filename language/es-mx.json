@@ -5,7 +5,7 @@
       "fields": [
         {
           "label": "Tipo",
-          "description": "Medio opcional a mostrar arriba de la pregunta."
+          "description": "Medio opcional para mostrar arriba de la pregunta."
         },
         {
           "label": "Deshabilitar zoom de imagen"
@@ -132,7 +132,7 @@
             }
           ],
           "label": "Definir retroalimentación personalizada para cualquier rango de puntaje",
-          "description": "Haga clic en el botón de \"Añadir rango\" para añadir cuantos rangos necesite. Ejemplo: 0-20% Mal puntaje, 21-91% Puntaje promedio, 91-100% ¡Magnífico puntaje!",
+          "description": "Haga clic en el botón \"Añadir rango\" para añadir cuantos rangos necesite. Ejemplo: 0-20% Mal puntaje, 21-91% Puntaje Promedio, 91-100% ¡Magnífico Puntaje!",
           "entity": "rango",
           "field": {
             "fields": [
