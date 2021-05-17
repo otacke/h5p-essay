@@ -126,6 +126,8 @@ H5P.Essay = function ($, Question) {
    * Register the DOM elements with H5P.Question.
    */
   Essay.prototype.registerDomElements = function () {
+    const that = this;
+
     // Set optional media
     const media = (this.params.media) ? this.params.media.type : undefined;
     if (media && media.library) {
@@ -148,12 +150,17 @@ H5P.Essay = function ($, Question) {
 
     // Create InputField
     this.inputField = new H5P.Essay.InputField({
-      'taskDescription': this.params.taskDescription,
-      'placeholderText': this.params.placeholderText,
-      'maximumLength': this.params.behaviour.maximumLength,
-      'remainingChars': this.params.remainingChars,
-      'inputFieldSize': this.params.behaviour.inputFieldSize
-    }, this.previousState);
+      taskDescription: this.params.taskDescription,
+      placeholderText: this.params.placeholderText,
+      maximumLength: this.params.behaviour.maximumLength,
+      remainingChars: this.params.remainingChars,
+      inputFieldSize: this.params.behaviour.inputFieldSize,
+      previousState: this.previousState
+    }, {
+      onInteracted: (function () {
+        that.handleInteracted();
+      })
+    });
 
     // Register task introduction text
     this.setIntroduction(this.inputField.getIntroduction());
@@ -229,6 +236,13 @@ H5P.Essay = function ($, Question) {
       .getText()
       .replace(/(\r\n|\r|\n)/g, linebreakReplacement)
       .replace(/\s\s/g, ' ');
+  };
+
+  /**
+   * Handle user interacted.
+   */
+  Essay.prototype.handleInteracted = function () {
+    this.triggerXAPI('interacted');
   };
 
   /**

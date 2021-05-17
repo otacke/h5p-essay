@@ -16,19 +16,25 @@ var H5P = H5P || {};
 
   /**
    * @constructor
-   * @param {Object} params - Parameters.
+   * @param {object} params - Parameters.
    * @param {number} [params.inputFieldSize] - Number of rows for inputfield.
    * @param {number} [params.maximumLength] - Maximum text length.
    * @param {string} [params.placeholderText] - Placeholder text for input field.
    * @param {string} [params.remainingChars] - Label for remaining chars information.
    * @param {string} [params.taskDescription] - Task description (HTML).
-   * @param {Object} previousState - Content state of previous attempt.
+   * @param {object} [params.previousState] - Content state of previous attempt.
+   * @param {object} [callbacks] - Callbacks.
+   * @param {function} [callbacks.onInteracted] - Interacted callback.
    */
-  Essay.InputField = function (params, previousState) {
+  Essay.InputField = function (params, callbacks) {
     var that = this;
 
     this.params = params;
-    this.previousState = previousState;
+    this.previousState = params.previousState || '';
+
+    // Callbacks
+    this.callbacks = callbacks || {};
+    this.callbacks.onInteracted = this.callbacks.onInteracted || (function () {});
 
     // Sanitization
     this.params.taskDescription = this.params.taskDescription || '';
@@ -45,7 +51,17 @@ var H5P = H5P || {};
     this.inputField.setAttribute('rows', this.params.inputFieldSize);
     this.inputField.setAttribute('maxlength', this.params.maximumLength);
     this.inputField.setAttribute('placeholder', this.params.placeholderText);
-    this.setText(previousState);
+    this.setText(this.previousState);
+    this.oldValue = this.previousState;
+
+    // Interacted listener
+    this.inputField.addEventListener('blur', function () {
+      if (that.oldValue !== that.getText()) {
+        that.callbacks.onInteracted();
+      }
+
+      that.oldValue = that.getText();
+    });
 
     this.content = document.createElement('div');
     this.content.appendChild(this.inputField);
