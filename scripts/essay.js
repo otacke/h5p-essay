@@ -675,7 +675,7 @@ H5P.Essay = function ($, Question) {
       .replace(/\*/, '') // Wildcards checked separately
       .replace(new RegExp(Essay.REGULAR_EXPRESSION_ASTERISK, 'g'), '*'); // Asterisk from regexp
 
-    while ((pos = haystack.indexOf(needle)) !== -1) {
+    while (((pos = haystack.indexOf(needle))) !== -1 && needle !== '') {
       if (H5P.TextUtilities.isIsolated(needle, haystack)) {
         result.push({'keyword': needle, 'match': needle, 'index': front + pos});
       }
