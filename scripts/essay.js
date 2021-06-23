@@ -367,8 +367,8 @@ H5P.Essay = function ($, Question) {
 
     if (!this.params.behaviour.ignoreScoring) {
       const ariaMessage = (this.params.ariaYourResult)
-        .replace('@score', this.getScore())
-        .replace('@total', this.getMaxScore());
+        .replace('@score', ':num')
+        .replace('@total', ':total');
       this.setFeedback(textScore, this.getScore(), this.getMaxScore(), ariaMessage);
     }
 
