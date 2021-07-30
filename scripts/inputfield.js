@@ -54,6 +54,8 @@ var H5P = H5P || {};
     this.setText(this.previousState);
     this.oldValue = this.previousState;
 
+    this.containsText = this.oldValue.length > 0;
+
     // Interacted listener
     this.inputField.addEventListener('blur', function () {
       if (that.oldValue !== that.getText()) {
@@ -61,6 +63,20 @@ var H5P = H5P || {};
       }
 
       that.oldValue = that.getText();
+    });
+
+    /*
+     * Extra listener required to be used in QuestionSet properly
+     */
+    this.inputField.addEventListener('input', function () {
+      if (
+        that.containsText && that.getText().length === 0 ||
+        !that.containsText && that.getText().length > 0
+      ) {
+        that.callbacks.onInteracted();
+      }
+
+      that.containsText = that.getText().length > 0;
     });
 
     this.content = document.createElement('div');

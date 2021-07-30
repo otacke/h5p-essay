@@ -39,6 +39,7 @@ H5P.Essay = function ($, Question) {
         behaviour: {
           minimumLength: 0,
           inputFieldSize: 10,
+          enableCheckButton: true,
           enableRetry: true,
           ignoreScoring: false,
           pointsHost: 1
@@ -65,7 +66,6 @@ H5P.Essay = function ($, Question) {
     this.languageTag = Essay.formatLanguageCode(defaultLanguage);
 
     this.score = 0;
-    this.isAnswered = false;
     this.internalShowSolutionsCall = false;
 
     // Sanitize HTML encoding
@@ -76,6 +76,7 @@ H5P.Essay = function ($, Question) {
       this.previousState = contentData.previousState;
     }
 
+    this.isAnswered = this.previousState && this.previousState.inputField && this.previousState.inputField !== '';
     /*
      * this.params.behaviour.enableSolutionsButton and this.params.behaviour.enableRetry are used by
      * contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-8} and
@@ -159,6 +160,9 @@ H5P.Essay = function ($, Question) {
     }, {
       onInteracted: (function () {
         that.handleInteracted();
+      }),
+      onInput: (function () {
+        that.handleInput();
       })
     });
 
@@ -212,7 +216,7 @@ H5P.Essay = function ($, Question) {
         that.showButton('show-solution');
       }
       that.hideButton('check-answer');
-    }, true, {
+    }, this.params.behaviour.enableCheckButton, {
       'aria-label': this.params.ariaCheck
     }, {});
 
@@ -242,6 +246,8 @@ H5P.Essay = function ($, Question) {
    * Handle user interacted.
    */
   Essay.prototype.handleInteracted = function () {
+    // Deliberately keeping the state once answered
+    this.isAnswered = this.isAnswered || this.inputField.getText().length > 0;
     this.triggerXAPI('interacted');
   };
 
@@ -317,7 +323,11 @@ H5P.Essay = function ($, Question) {
 
     this.hideButton('show-solution');
     this.hideButton('try-again');
-    this.showButton('check-answer');
+
+    // QuestionSet can control check button despite not in Question Type contract
+    if (this.params.behaviour.enableCheckButton) {
+      this.showButton('check-answer');
+    }
 
     this.inputField.enable();
     this.inputField.focus();
