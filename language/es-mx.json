@@ -8,7 +8,7 @@
           "description": "Medio opcional para mostrar arriba de la pregunta."
         },
         {
-          "label": "Deshabilitar zoom de imagen"
+          "label": "Deshabilitar agrandado de imagen"
         }
       ]
     },
