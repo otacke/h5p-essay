@@ -91,3 +91,7 @@
 .h5p-essay .h5p-essay-feedback-empty {
   color: #999999;
 }
+
+.h5p-essay .h5p-question-explanation-container {
+  margin: 0 1em;
+}
