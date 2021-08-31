@@ -88,28 +88,30 @@ var H5P = H5P || {};
     this.container.appendChild(this.taskDescription);
     this.container.appendChild(this.content);
 
-    var statusWrapper = document.createElement('div');
-    statusWrapper.classList.add(WRAPPER_MESSAGE);
+    if (params.statusBar) {
+      var statusWrapper = document.createElement('div');
+      statusWrapper.classList.add(WRAPPER_MESSAGE);
 
-    this.statusChars = document.createElement('div');
-    this.statusChars.classList.add(CHAR_MESSAGE);
+      this.statusChars = document.createElement('div');
+      this.statusChars.classList.add(CHAR_MESSAGE);
 
-    statusWrapper.appendChild(this.statusChars);
+      statusWrapper.appendChild(this.statusChars);
 
-    ['change', 'keyup', 'paste'].forEach(function (event) {
-      that.inputField.addEventListener(event, function () {
-        that.updateMessageSaved('');
-        that.updateMessageChars();
+      ['change', 'keyup', 'paste'].forEach(function (event) {
+        that.inputField.addEventListener(event, function () {
+          that.updateMessageSaved('');
+          that.updateMessageChars();
+        });
       });
-    });
 
-    this.statusSaved = document.createElement('div');
-    this.statusSaved.classList.add(SAVE_MESSAGE);
-    statusWrapper.appendChild(this.statusSaved);
+      this.statusSaved = document.createElement('div');
+      this.statusSaved.classList.add(SAVE_MESSAGE);
+      statusWrapper.appendChild(this.statusSaved);
 
-    this.content.appendChild(statusWrapper);
+      this.content.appendChild(statusWrapper);
 
-    this.updateMessageChars();
+      this.updateMessageChars();
+    }
   };
 
   /**
@@ -185,6 +187,10 @@ var H5P = H5P || {};
    * Update character message field.
    */
   Essay.InputField.prototype.updateMessageChars = function () {
+    if (!this.params.statusBar) {
+      return;
+    }
+
     if (typeof this.params.maximumLength !== 'undefined') {
       this.setMessageChars(this.params.remainingChars.replace(/@chars/g, this.computeRemainingChars()), false);
     }
@@ -199,6 +205,10 @@ var H5P = H5P || {};
    * @param {string} saved - Message to indicate the text was saved.
    */
   Essay.InputField.prototype.updateMessageSaved = function (saved) {
+    if (!this.params.statusBar) {
+      return;
+    }
+
     // Add/remove blending effect
     if (typeof saved === 'undefined' || saved === '') {
       this.statusSaved.classList.remove(ANIMATION_MESSAGE);
@@ -217,6 +227,10 @@ var H5P = H5P || {};
    * @param {boolean} important - If true, message will added a particular CSS class.
    */
   Essay.InputField.prototype.setMessageChars = function (message, important) {
+    if (!this.params.statusBar) {
+      return;
+    }
+
     if (typeof message !== 'string') {
       return;
     }

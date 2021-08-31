@@ -149,6 +149,13 @@ H5P.Essay = function ($, Question) {
       }
     }
 
+    // Check whether status bar is needed
+    const statusBar = (
+      this.params.behaviour.minimumLength ||
+      this.params.behaviour.maximumLength ||
+      (H5PIntegration && H5PIntegration.saveFreq)
+    );
+
     // Create InputField
     this.inputField = new H5P.Essay.InputField({
       taskDescription: this.params.taskDescription,
@@ -156,7 +163,8 @@ H5P.Essay = function ($, Question) {
       maximumLength: this.params.behaviour.maximumLength,
       remainingChars: this.params.remainingChars,
       inputFieldSize: this.params.behaviour.inputFieldSize,
-      previousState: this.previousState
+      previousState: this.previousState,
+      statusBar: statusBar
     }, {
       onInteracted: (function () {
         that.handleInteracted();
