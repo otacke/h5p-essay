@@ -165,7 +165,7 @@
               "label": "Points",
               "default": 1,
               "description": "Points that the user will get if he/she includes this keyword or its alternatives in the answer.",
-              "min": 1
+              "min": 0
             },
             {
               "name": "occurrences",

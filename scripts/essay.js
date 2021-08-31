@@ -375,7 +375,7 @@ H5P.Essay = function ($, Question) {
       .replace('@score', this.getScore())
       .replace('@total', this.getMaxScore());
 
-    if (!this.params.behaviour.ignoreScoring) {
+    if (!this.params.behaviour.ignoreScoring && this.getMaxScore() > 0) {
       const ariaMessage = (this.params.ariaYourResult)
         .replace('@score', ':num')
         .replace('@total', ':total');
@@ -605,7 +605,7 @@ H5P.Essay = function ($, Question) {
     this.trigger(this.getXAPIAnswerEvent());
 
     // Additional xAPI verbs that might be useful for making analytics easier
-    if (!this.params.behaviour.ignoreScoring) {
+    if (!this.params.behaviour.ignoreScoring && this.getMaxScore() > 0) {
       if (this.getScore() < this.scorePassing) {
         this.trigger(this.createEssayXAPIEvent('failed'));
       }
