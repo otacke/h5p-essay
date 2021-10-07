@@ -166,8 +166,8 @@ H5P.Essay = function ($, Question) {
       previousState: this.previousState,
       statusBar: statusBar
     }, {
-      onInteracted: (function () {
-        that.handleInteracted();
+      onInteracted: (function (params) {
+        that.handleInteracted(params);
       }),
       onInput: (function () {
         that.handleInput();
@@ -252,10 +252,19 @@ H5P.Essay = function ($, Question) {
 
   /**
    * Handle user interacted.
+   * @param {object} params Parameters.
+   * @param {boolean} [params.updateScore] If true, will trigger score computation.
    */
-  Essay.prototype.handleInteracted = function () {
+  Essay.prototype.handleInteracted = function (params) {
+    params = params || {};
+
     // Deliberately keeping the state once answered
     this.isAnswered = this.isAnswered || this.inputField.getText().length > 0;
+    if (params.updateScore) {
+      // Only triggered when explicitly requested due to potential complexity
+      this.updateScore();
+    }
+
     this.triggerXAPI('interacted');
   };
 
@@ -363,6 +372,15 @@ H5P.Essay = function ($, Question) {
   };
 
   /**
+   * Update score.
+   * @param {object} results Results.
+   */
+  Essay.prototype.updateScore = function (results) {
+    results = results || this.computeResults();
+    this.score = Math.min(this.computeScore(results), this.getMaxScore());
+  };
+
+  /**
    * Handle the evaluation.
    */
   Essay.prototype.handleEvaluation = function () {
@@ -377,7 +395,7 @@ H5P.Essay = function ($, Question) {
     }
 
     // Not all keyword groups might be necessary for mastering
-    this.score = Math.min(this.computeScore(results), this.getMaxScore());
+    this.updateScore(results);
     const textScore = H5P.Question
       .determineOverallFeedback(this.params.overallFeedback, this.getScore() / this.getMaxScore())
       .replace('@score', this.getScore())

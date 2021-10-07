@@ -59,7 +59,7 @@ var H5P = H5P || {};
     // Interacted listener
     this.inputField.addEventListener('blur', function () {
       if (that.oldValue !== that.getText()) {
-        that.callbacks.onInteracted();
+        that.callbacks.onInteracted({ updateScore: true });
       }
 
       that.oldValue = that.getText();
