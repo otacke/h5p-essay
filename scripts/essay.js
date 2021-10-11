@@ -76,7 +76,7 @@ H5P.Essay = function ($, Question) {
       this.previousState = contentData.previousState;
     }
 
-    this.isAnswered = this.previousState && this.previousState.inputField && this.previousState.inputField !== '';
+    this.isAnswered = this.previousState && this.previousState.inputField && this.previousState.inputField !== '' || false;
     /*
      * this.params.behaviour.enableSolutionsButton and this.params.behaviour.enableRetry are used by
      * contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-8} and
