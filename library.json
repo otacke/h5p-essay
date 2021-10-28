@@ -2,8 +2,8 @@
   "title": "Essay",
   "description": "Score a student's essay automatically",
   "majorVersion": 1,
-  "minorVersion": 3,
-  "patchVersion": 2,
+  "minorVersion": 4,
+  "patchVersion": 0,
   "runnable": 1,
   "embedTypes": [
     "iframe"
@@ -32,7 +32,7 @@
     {
       "machineName": "H5P.Question",
       "majorVersion": 1,
-      "minorVersion": 4
+      "minorVersion": 5
     },
     {
       "machineName": "H5P.JoubelUI",

@@ -147,6 +147,11 @@ H5P.Essay = function ($, Question) {
           this.setVideo(media);
         }
       }
+      else if (type === 'H5P.Audio') {
+        if (media.params.files) {
+          this.setAudio(media);
+        }
+      }
     }
 
     // Check whether status bar is needed
