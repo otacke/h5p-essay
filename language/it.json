@@ -227,6 +227,10 @@
       "default": "Verifica"
     },
     {
+      "label": "Text for \"Submit\" button",
+      "default": "Submit"
+    },
+    {
       "label": "Testo per il pulsante \"Riprova\"",
       "default": "Riprova"
     },
