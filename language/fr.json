@@ -227,6 +227,10 @@
       "default": "Vérifier"
     },
     {
+      "label": "Text for \"Submit\" button",
+      "default": "Submit"
+    },
+    {
       "label": "Texte pour le bouton \"Recommencer\"",
       "default": "Recommencer"
     },

@@ -45,6 +45,7 @@ H5P.Essay = function ($, Question) {
           pointsHost: 1
         },
         checkAnswer: 'Check',
+        submitAnswer: 'Submit',
         tryAgain: 'Retry',
         showSolution: 'Show solution',
         feedbackHeader: 'Feedback',
@@ -226,7 +227,10 @@ H5P.Essay = function ($, Question) {
       that.hideButton('check-answer');
     }, this.params.behaviour.enableCheckButton, {
       'aria-label': this.params.ariaCheck
-    }, {});
+    }, {
+      contentData: this.extras,
+      textIfSubmitting: this.params.submitAnswer,
+    });
 
     // Retry button
     that.addButton('try-again', that.params.tryAgain, function () {

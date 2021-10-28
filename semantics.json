@@ -479,6 +479,14 @@
     "common": true
   },
   {
+    "name": "submitAnswer",
+    "type": "text",
+    "label": "Text for \"Submit\" button",
+    "importance": "low",
+    "default": "Submit",
+    "common": true
+  },
+  {
     "name": "tryAgain",
     "label": "Text for \"Retry\" button",
     "type": "text",
