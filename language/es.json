@@ -5,10 +5,10 @@
       "fields": [
         {
           "label": "Tipo",
-          "description": "Medio opcional para mostrar arriba de la pregunta."
+          "description": "Medio opcional a mostrar arriba de la pregunta."
         },
         {
-          "label": "Deshabilitar zoom de imagen"
+          "label": "Deshabilitar acercamiento de imagen"
         }
       ]
     },
@@ -159,7 +159,7 @@
         },
         {
           "label": "Número máximo de caracteres",
-          "description": "Especificar el número máximo de caracteres que debe ingresar el usuario."
+          "description": "Especificar el número máximo de caracteres que puede ingresar el usuario."
         },
         {
           "label": "Tamaño de campo de entrada",
@@ -227,7 +227,7 @@
       "default": "Comprobar"
     },
     {
-      "label": "Text for \"Submit\" button",
+      "label": "Texto para botón \"Enviar\"",
       "default": "Submit"
     },
     {
