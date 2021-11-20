@@ -885,7 +885,7 @@ H5P.Essay = function ($, Question) {
   Essay.extend = function () {
     for (let i = 1; i < arguments.length; i++) {
       for (let key in arguments[i]) {
-        if (arguments[i].hasOwnProperty(key)) {
+        if (Object.prototype.hasOwnProperty.call(arguments[i], key)) {
           if (typeof arguments[0][key] === 'object' &&
               typeof arguments[i][key] === 'object') {
             this.extend(arguments[0][key], arguments[i][key]);
