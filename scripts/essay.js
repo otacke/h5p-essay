@@ -311,21 +311,25 @@ H5P.Essay = function ($, Question) {
    * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-4}
    */
   Essay.prototype.showSolutions = function () {
-    // We add the sample solution here to make cheating at least a little more difficult
-    if (this.solution.getElementsByClassName(SOLUTION_SAMPLE)[0].children.length === 0) {
-      const text = document.createElement('div');
-      text.classList.add(SOLUTION_SAMPLE_TEXT);
-      text.innerHTML = this.params.solution.sample;
-      this.solution.getElementsByClassName(SOLUTION_SAMPLE)[0].appendChild(text);
+    this.inputField.disable();
+
+    if (typeof this.params.solution.sample !== 'undefined' && this.params.solution.sample !== '') {
+      // We add the sample solution here to make cheating at least a little more difficult
+      if (this.solution.getElementsByClassName(SOLUTION_SAMPLE)[0].children.length === 0) {
+        const text = document.createElement('div');
+        text.classList.add(SOLUTION_SAMPLE_TEXT);
+        text.innerHTML = this.params.solution.sample;
+        this.solution.getElementsByClassName(SOLUTION_SAMPLE)[0].appendChild(text);
+      }
+
+      // Insert solution after explanations or content.
+      const predecessor = this.content.parentNode;
+
+      predecessor.parentNode.insertBefore(this.solution, predecessor.nextSibling);
+
+      // Useful for accessibility, but seems to jump to wrong position on some Safari versions
+      this.solutionAnnouncer.focus();
     }
-
-    // Insert solution after explanations or content.
-    const predecessor = this.content.parentNode;
-
-    predecessor.parentNode.insertBefore(this.solution, predecessor.nextSibling);
-
-    // Useful for accessibility, but seems to jump to wrong position on some Safari versions
-    this.solutionAnnouncer.focus();
 
     this.hideButton('show-solution');
 
