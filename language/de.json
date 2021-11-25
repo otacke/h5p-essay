@@ -227,7 +227,7 @@
       "default": "Überprüfen"
     },
     {
-      "label": "Text for \"Submit\" button",
+      "label": "Beschriftung des \"Absenden\"-Buttons",
       "default": "Submit"
     },
     {
@@ -235,7 +235,7 @@
       "default": "Wiederholen"
     },
     {
-      "label": "Beschriftung für den \"Lösung anzeigen\"-Button",
+      "label": "Beschriftung des \"Lösung anzeigen\"-Buttons",
       "default": "Lösung anzeigen"
     },
     {
