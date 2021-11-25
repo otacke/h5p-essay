@@ -5,10 +5,10 @@
       "fields": [
         {
           "label": "Type",
-          "description": "Optionele media, die boven de vragen worden getoond."
+          "description": "Optionele media om boven de vraag te tonen."
         },
         {
-          "label": "Deactiveer zoomen op een afbeelding"
+          "label": "Beeld zoomen uitschakelen"
         }
       ]
     },
@@ -280,8 +280,8 @@
       "default": "Show the solution. You will be provided with a sample solution."
     },
     {
-      "label": "Assistive technology description for \"Retry\" button",
-      "default": "Retry the task. You can improve your previous answer if the author allowed that."
+      "label": "Beschrijving van ondersteunende technologie voor de knop \"Opnieuw proberen\"",
+      "default": "Probeer de opdracht opnieuw. Je kunt je vorige antwoord verbeteren als de auteur dat toestaat."
     }
   ]
 }
