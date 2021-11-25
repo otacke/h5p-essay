@@ -5,7 +5,7 @@
       "fields": [
         {
           "label": "Mota",
-          "description": "Aukerazko multimedia galderaren aurretik erakusteko."
+          "description": "Galderaren gainean erakusteko aukerazko multimedia."
         },
         {
           "label": "Desgaitu irudien zooma"
@@ -33,7 +33,7 @@
         },
         {
           "label": "Emaitza-adibidearen testua",
-          "description": ""
+          "description": "Ikasleak bidalketa egin ondoren \"Erakutsi emaitza\" botoia ikusiko du hemen testu bat idazten baduzu."
         }
       ]
     },
@@ -53,11 +53,11 @@
             "description": ""
           },
           {
-            "label": "",
+            "label": "Aldakuntzak",
             "description": "",
-            "entity": "",
+            "entity": "aldakuntza",
             "field": {
-              "label": ""
+              "label": "Aldakuntzaren hitz-gakoa"
             }
           },
           {
@@ -68,19 +68,19 @@
                 "description": ""
               },
               {
-                "label": "",
-                "description": ""
+                "label": "Gertakariak",
+                "description": "Hitz-gakoa edo bere aldakuntzei puntuatu beharko diren gertakari kopurua definitzen du."
               },
               {
                 "label": "",
-                "description": ""
+                "description": "Erabiltzaileak idatzitakoa erantzunaren berdin-berdina dela ziurtatzen du."
               },
               {
-                "label": "",
-                "description": ""
+                "label": "Barkatu akats txikiak",
+                "description": "Honek letreiatze-akats txikiak onartuko ditu (3-9 karakteretan: akats 1, 9 karaktere baino gehiagotan: 2 akats)."
               },
               {
-                "label": "",
+                "label": "Feedbacka hitz-gakoa badago",
                 "description": ""
               },
               {
@@ -95,7 +95,7 @@
                     "label": "hitz-gakoa"
                   },
                   {
-                    "label": ""
+                    "label": "alternatiba aurkitu da"
                   },
                   {
                     "label": "emandako erantzuna"
@@ -177,7 +177,7 @@
           ]
         },
         {
-          "label": "Gaitu \"Berriz saiatu\"",
+          "label": "Gaitu \"Saiatu berriro\"",
           "description": "Markatuz gero, ikasleek lana berriz egiten saiatu ahalko dira."
         },
         {
@@ -189,7 +189,7 @@
           "description": ""
         },
         {
-          "label": "",
+          "label": "Gainditzeko ehunekoa",
           "description": ""
         },
         {
@@ -204,12 +204,12 @@
               "label": "Gaituta"
             },
             {
-              "label": ""
+              "label": "Desgaituta"
             }
           ]
         },
         {
-          "label": "",
+          "label": "Baliogabetu akatsak barkatzea",
           "description": "",
           "options": [
             {
@@ -227,16 +227,16 @@
       "default": "Egiaztatu"
     },
     {
-      "label": "Text for \"Submit\" button",
-      "default": "Submit"
+      "label": "\"Bidali\" botoiaren testua",
+      "default": "Bidali"
     },
     {
       "label": "\"Saiatu berriro\" botoiarentzako testua",
-      "default": "Berriz saiatu"
+      "default": "Saiatu berriro"
     },
     {
-      "label": "",
-      "default": ""
+      "label": "\"Erakutsi emaitza\" botoiaren testua",
+      "default": "Erakutsi emaitza"
     },
     {
       "label": "",
@@ -276,11 +276,11 @@
       "default": "Egiaztatu erantzunak."
     },
     {
-      "label": "\"Erakutsi Erantzuna\" botoiaren laguntza-teknologientzako etiketa",
-      "default": ""
+      "label": "\"Erakutsi emaitza\" botoiaren laguntza-teknologientzako etiketa",
+      "default": "Erakutsi emaitza. Adibiderako erantzun bat emango zaizu."
     },
     {
-      "label": "\"Berriz saiatu\" botoiaren laguntza-teknologientzako etiketa",
+      "label": "\"Saiatu berriro\" botoiaren laguntza-teknologientzako etiketa",
       "default": ""
     }
   ]
