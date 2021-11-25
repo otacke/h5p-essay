@@ -137,11 +137,11 @@
           "field": {
             "fields": [
               {
-                "label": "Rango del Puntaje"
+                "label": "Rango de Puntaje"
               },
               {},
               {
-                "label": "Retroalimentación para rango de puntaje definido",
+                "label": "Retroalimentación para rango definido de puntaje",
                 "placeholder": "Complete la retroalimentación"
               }
             ]
