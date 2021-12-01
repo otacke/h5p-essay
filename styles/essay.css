@@ -47,7 +47,8 @@
 
 .h5p-essay .h5p-essay-input-field-textfield {
   padding: 0.25em 0.4em;
-  width: calc(100% - 0.8em);
+  width: 100%;
+  box-sizing: border-box;
   resize: none;
   border: 1px solid #C7C7C7;
   border-top: 2px solid #C7C7C7;
