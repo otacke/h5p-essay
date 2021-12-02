@@ -50,11 +50,11 @@
         "fields": [
           {
             "label": "Hitz-gakoa",
-            "description": ""
+            "description": "Keyword or phrase to look for. Use an asterisk '*' as a wildcard for one or more characters. Use a slash '/' at the beginning and the end to use a regular expression."
           },
           {
             "label": "Aldakuntzak",
-            "description": "",
+            "description": "Add optional variations for this keyword. Example: For a 'city' add alternatives 'town', 'municipality' etc. Points will be awarded if the user includes any of the specified alternatives.",
             "entity": "aldakuntza",
             "field": {
               "label": "Aldakuntzaren hitz-gakoa"
@@ -65,14 +65,14 @@
             "fields": [
               {
                 "label": "Puntuak",
-                "description": ""
+                "description": "Points that the user will get if he/she includes this keyword or its alternatives in the answer."
               },
               {
                 "label": "Gertakariak",
                 "description": "Hitz-gakoa edo bere aldakuntzei puntuatu beharko diren gertakari kopurua definitzen du."
               },
               {
-                "label": "",
+                "label": "Case sensitive",
                 "description": "Erabiltzaileak idatzitakoa erantzunaren berdin-berdina dela ziurtatzen du."
               },
               {
@@ -81,15 +81,15 @@
               },
               {
                 "label": "Feedbacka hitz-gakoa badago",
-                "description": ""
+                "description": "This feedback will be displayed if the user includes this keyword or its alternatives in the answer."
               },
               {
-                "label": "",
-                "description": ""
+                "label": "Feedback if keyword missing",
+                "description": "This feedback will be displayed if the user doesn’t include this keyword or its alternatives in the answer."
               },
               {
-                "label": "",
-                "description": "",
+                "label": "Feedback word shown if keyword included",
+                "description": "This option allows you to specify which word should be shown in front of your feedback if a keyword was found in the text.",
                 "options": [
                   {
                     "label": "hitz-gakoa"
@@ -106,8 +106,8 @@
                 ]
               },
               {
-                "label": "",
-                "description": "",
+                "label": "Feedback word shown if keyword missing",
+                "description": "This option allows you to specify which word should be shown in front of your feedback if a keyword was not found in the text.",
                 "options": [
                   {
                     "label": "hitz-gakoa"
@@ -154,16 +154,16 @@
       "description": "Aukera hauek lanaren portaera kontrolatzea ahalbidetzen dizute.",
       "fields": [
         {
-          "label": "",
-          "description": ""
+          "label": "Minimum number of characters",
+          "description": "Specify the minimum number of characters that the user must enter."
         },
         {
-          "label": "",
-          "description": ""
+          "label": "Maximum number of characters",
+          "description": "Specify the maximum number of characters that the user can enter."
         },
         {
-          "label": "",
-          "description": "",
+          "label": "Input field size",
+          "description": "The size of the input field in amount of lines it will cover",
           "options": [
             {
               "label": "lerro 1"
@@ -181,24 +181,24 @@
           "description": "Markatuz gero, ikasleek lana berriz egiten saiatu ahalko dira."
         },
         {
-          "label": "",
-          "description": ""
+          "label": "Ignore scoring",
+          "description": "If checked, learners will only see the feedback that you provided for the keywords, but no score."
         },
         {
-          "label": "",
-          "description": ""
+          "label": "Points in host environment",
+          "description": "Used to award points in host environment merely for answering (not shown to learner)."
         },
         {
           "label": "Gainditzeko ehunekoa",
-          "description": ""
+          "description": "Percentage that's necessary for passing"
         },
         {
-          "label": "",
-          "description": ""
+          "label": "Mastering percentage",
+          "description": "Percentage that's necessary for mastering. Setting the mastering percentage below 100 % will lower the maximum possible score accordingly. It's intended to give some leeway to students, not to \"graciously accept\" solutions that do not contain all keywords."
         },
         {
-          "label": "",
-          "description": "",
+          "label": "Override case sensitive",
+          "description": "This option determines if the \"Case sensitive\" option will be activated for all keywords.",
           "options": [
             {
               "label": "Gaituta"
@@ -210,7 +210,7 @@
         },
         {
           "label": "Baliogabetu akatsak barkatzea",
-          "description": "",
+          "description": "This option determines if the \"Forgive mistakes\" option will be activated for all keywords.",
           "options": [
             {
               "label": "Gaituta"
@@ -239,37 +239,37 @@
       "default": "Erakutsi emaitza"
     },
     {
-      "label": "",
+      "label": "Header for panel containing feedback for included/missing keywords",
       "default": "Feedbacka"
     },
     {
-      "label": "",
-      "default": ""
+      "label": "Label for solution",
+      "default": "Sample solution"
     },
     {
-      "label": "",
-      "default": "",
-      "description": ""
+      "label": "Remaining characters",
+      "default": "Remaining characters: @chars",
+      "description": "Message for remaining characters. You can use @chars which will be replaced by the corresponding number."
     },
     {
-      "label": "",
-      "default": "",
-      "description": ""
+      "label": "Not enough characters",
+      "default": "You must enter at least @chars characters!",
+      "description": "Message to indicate that the text doesn't contain enough characters. You can use @chars which will be replaced by the corresponding number."
     },
     {
       "label": "Gorde mezua",
-      "description": "",
+      "description": "Message indicating that the text has been saved",
       "default": "gordeta"
     },
     {
-      "label": "",
-      "description": "",
+      "label": "Your result (not displayed)",
+      "description": "Accessibility text used for readspeakers. @score will be replaced by the number of points. @total will be replaced by the maximum possible points.",
       "default": "@total puntutatik @score puntu lortu duzu"
     },
     {
-      "label": "",
-      "description": "",
-      "default": ""
+      "label": "Navigation message (not displayed)",
+      "description": "Accessibility text used for readspeakers",
+      "default": "Navigated to newly included sample solution after textarea."
     },
     {
       "label": "\"Egiaztatu\" botoiaren laguntza-teknologientzako etiketa",
@@ -281,7 +281,7 @@
     },
     {
       "label": "\"Saiatu berriro\" botoiaren laguntza-teknologientzako etiketa",
-      "default": ""
+      "default": "Retry the task. You can improve your previous answer if the author allowed that."
     }
   ]
 }
