@@ -24,7 +24,7 @@
     },
     {
       "label": "Voorbeeld oplossing",
-      "description": "Je kunt optioneel een voorbeeldoplossing toevoegen, die wordt getoond wordt nadat de gebruiker de tekst heeft geschreven. Het wordt een voorbeeldoplossing genoemd omdat het waarschijnlijk niet de enige oplossing is",
+      "description": "Je kunt optioneel een voorbeeldoplossing toevoegen, die wordt getoond wordt nadat de gebruiker de tekst heeft geschreven. Het wordt een voorbeeldoplossing genoemd omdat het waarschijnlijk niet de enige oplossing is.",
       "fields": [
         {
           "label": "Introductie",

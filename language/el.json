@@ -24,7 +24,7 @@
     },
     {
       "label": "Ενδεικτική απάντηση",
-      "description": "Μπορείτε να προσθέσετε μια ενδεικτική απάντηση που θα εμφανίζεται στο χρήστη αφού γράψει το κείμενό του. It's called sample solution because there probably is not only one solution",
+      "description": "Μπορείτε να προσθέσετε μια ενδεικτική απάντηση που θα εμφανίζεται στο χρήστη αφού γράψει το κείμενό του. It's called sample solution because there probably is not only one solution.",
       "fields": [
         {
           "label": "Εισαγωγή",

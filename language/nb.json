@@ -24,7 +24,7 @@
     },
     {
       "label": "Sample solution",
-      "description": "You can optionally add a sample solution that's shown after the student created a text. It's called sample solution because there probably is not only one solution",
+      "description": "You can optionally add a sample solution that's shown after the student created a text. It's called sample solution because there probably is not only one solution.",
       "fields": [
         {
           "label": "Introduction",

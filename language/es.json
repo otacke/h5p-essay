@@ -24,7 +24,7 @@
     },
     {
       "label": "Solución de muestra",
-      "description": "Opcionalmente Usted puede añadir una solución de muestra sencilla que es mostrada después que ele estudiante creó un texto. Se llama solución de muestra porque probablemente no sea la única solución",
+      "description": "Opcionalmente Usted puede añadir una solución de muestra sencilla que es mostrada después que ele estudiante creó un texto. Se llama solución de muestra porque probablemente no sea la única solución.",
       "fields": [
         {
           "label": "Introducción",

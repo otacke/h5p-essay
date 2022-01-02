@@ -24,7 +24,7 @@
     },
     {
       "label": "Voorbeeld antwoord",
-      "description": "Jy kan ook 'n voorbeeld antwoord byvoeg wat vertoon word nadat die student 'n teks geskep het. Dit word 'n voorbeeld antwoord genoem, omdat daar waarskynlik meer as een regte antwoord is",
+      "description": "Jy kan ook 'n voorbeeld antwoord byvoeg wat vertoon word nadat die student 'n teks geskep het. Dit word 'n voorbeeld antwoord genoem, omdat daar waarskynlik meer as een regte antwoord is.",
       "fields": [
         {
           "label": "Inleiding",

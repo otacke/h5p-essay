@@ -24,7 +24,7 @@
     },
     {
       "label": "Esempio di soluzione",
-      "description": "Se vuoi, puoi aggiungere una soluzione di esempio che viene mostrata dopo che lo studente ha creato un testo. È detta di esempio perché probabilmente non sarà l'unica soluzione",
+      "description": "Se vuoi, puoi aggiungere una soluzione di esempio che viene mostrata dopo che lo studente ha creato un testo. È detta di esempio perché probabilmente non sarà l'unica soluzione.",
       "fields": [
         {
           "label": "Introduzione",

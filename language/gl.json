@@ -24,7 +24,7 @@
     },
     {
       "label": "Exemplo de solución",
-      "description": "Podes engadir un exemplo de solución opcional que se amosará despois de que o alumno cree un texto. Chámase exemplo de solución porque probablemente non sexa a única solución posible",
+      "description": "Podes engadir un exemplo de solución opcional que se amosará despois de que o alumno cree un texto. Chámase exemplo de solución porque probablemente non sexa a única solución posible.",
       "fields": [
         {
           "label": "Introdución",

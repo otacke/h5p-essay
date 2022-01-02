@@ -24,7 +24,7 @@
     },
     {
       "label": "Adibidezko emaitza",
-      "description": "Nahi baduzu emaitzaren adibide bat gehitu dezakezu ikasleak testua sortu ondoren erakusteko. Adibidezko emaitza deitzen zaio emaitza zuzen bat baino gehiago egon daitekeelako",
+      "description": "Nahi baduzu emaitzaren adibide bat gehitu dezakezu ikasleak testua sortu ondoren erakusteko. Adibidezko emaitza deitzen zaio emaitza zuzen bat baino gehiago egon daitekeelako.",
       "fields": [
         {
           "label": "Sarrera",
