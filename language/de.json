@@ -65,7 +65,7 @@
             "fields": [
               {
                 "label": "Punkte",
-                "description": "Punkte die die Lernenden erhalten, wenn sie das Schlagwort oder eine Variation verwenden."
+                "description": "Punkte, die Lernende erhalten, wenn sie das Schlagwort oder eine Variation verwenden."
               },
               {
                 "label": "Fundstellen",
@@ -155,11 +155,11 @@
       "fields": [
         {
           "label": "Minimale Zeichenzahl",
-          "description": "Gib die minimale Zeichenzahl an, die die Lernenden eingeben müssen."
+          "description": "Gib die minimale Zeichenzahl an, die Lernende eingeben müssen."
         },
         {
           "label": "Maximale Zeichenzahl",
-          "description": "Gib die maximale Zeichenzahl an, die die Lernenden eingeben dürfen."
+          "description": "Gib die maximale Zeichenzahl an, die Lernende eingeben dürfen."
         },
         {
           "label": "Größe des Eingabefelds",
