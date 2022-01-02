@@ -35,7 +35,7 @@
           "description": "Pēc iesniegšanas izglītojamais redzēs pogu \"Rādīt risinājumu\", ja šeit norādīsiet tekstu."
         }
       ],
-      "description": "Ja vēlaties variet pievienot risinājuma paraugu, kas tiks parādīts pēc tam, kad izglītojamais būs izveidojis tekstu. To sauc par risinājuma paraugu, jo, iespējams, uzdevumam nav tikai viens risinājums"
+      "description": "Ja vēlaties variet pievienot risinājuma paraugu, kas tiks parādīts pēc tam, kad izglītojamais būs izveidojis tekstu. To sauc par risinājuma paraugu, jo, iespējams, uzdevumam nav tikai viens risinājums."
     },
     {
       "label": "Atslēgvārdi",
