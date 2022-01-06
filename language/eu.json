@@ -13,7 +13,7 @@
       ]
     },
     {
-      "label": "Lanaren deskribapena",
+      "label": "Atazaren deskribapena",
       "description": "Deskribatu ezazu hemen zure lana. Lanaren deskribapena idazteko testu-eremuaren gainean agertuko da.",
       "placeholder": "Laburtu ezazu liburua 500 karaktereetan..."
     },
@@ -50,11 +50,11 @@
         "fields": [
           {
             "label": "Hitz-gakoa",
-            "description": "Keyword or phrase to look for. Use an asterisk '*' as a wildcard for one or more characters. Use a slash '/' at the beginning and the end to use a regular expression."
+            "description": "Bilatu beharreko hitz-gako edo esaldia. Izartxoa '*' erabili ezazu karaktere bat edo gehiagoren komodin gisa. Barra '/' erabili ezazu hasiera eta amaieran adierazpen erregular bat erabiltzeko."
           },
           {
             "label": "Aldakuntzak",
-            "description": "Add optional variations for this keyword. Example: For a 'city' add alternatives 'town', 'municipality' etc. Points will be awarded if the user includes any of the specified alternatives.",
+            "description": "Gehitu hitz-gako honentzako aukerazko bariazioak. Adibidez, 'hiria' gakoaren alternatibak 'herria', 'udalerria'... izan daitezke. Erabiltzaileak puntuak eskuratuko ditu zehaztutako alternatibaren bat idazten badu.",
             "entity": "aldakuntza",
             "field": {
               "label": "Aldakuntzaren hitz-gakoa"
@@ -65,14 +65,14 @@
             "fields": [
               {
                 "label": "Puntuak",
-                "description": "Points that the user will get if he/she includes this keyword or its alternatives in the answer."
+                "description": "Erabiltzaileak erantzunean hitz-gako hau edo alternatibaren bat idazten badu lortuko dituen puntuak."
               },
               {
                 "label": "Gertakariak",
                 "description": "Hitz-gakoa edo bere aldakuntzei puntuatu beharko diren gertakari kopurua definitzen du."
               },
               {
-                "label": "Case sensitive",
+                "label": "Bereizi maiuskulak eta minuskulak",
                 "description": "Erabiltzaileak idatzitakoa erantzunaren berdin-berdina dela ziurtatzen du."
               },
               {
@@ -81,15 +81,15 @@
               },
               {
                 "label": "Feedbacka hitz-gakoa badago",
-                "description": "This feedback will be displayed if the user includes this keyword or its alternatives in the answer."
+                "description": "Feedback hau erakutsiko da erabiltzaileak erantzunean hitz-gako hau edo bere alternatibak gehitzen baditu."
               },
               {
-                "label": "Feedback if keyword missing",
-                "description": "This feedback will be displayed if the user doesn’t include this keyword or its alternatives in the answer."
+                "label": "Feedbacka hitz-gakoa falta bada",
+                "description": "Feedback hau erakutsiko da erabiltzaileak erantzunean ez badu hitz-gako hau edo bere alternatibak sartzen."
               },
               {
-                "label": "Feedback word shown if keyword included",
-                "description": "This option allows you to specify which word should be shown in front of your feedback if a keyword was found in the text.",
+                "label": "Erakutsi beharrezko feedback-hitza hitz-gakoa badago",
+                "description": "Aukera honek hitz-gako bat testuan agertuz gero zure feedbackaren aurrean erakutsiko den hitza zehaztea ahalbidetzen du.",
                 "options": [
                   {
                     "label": "hitz-gakoa"
@@ -106,8 +106,8 @@
                 ]
               },
               {
-                "label": "Feedback word shown if keyword missing",
-                "description": "This option allows you to specify which word should be shown in front of your feedback if a keyword was not found in the text.",
+                "label": "Erakutsi beharrezko feedback-hitza hitz-gakoa ez badago",
+                "description": "Aukera honek hitz-gako bat testuan ez bada agertzen zure feedbackaren aurrean erakutsiko den hitza zehaztea ahalbidetzen du.",
                 "options": [
                   {
                     "label": "hitz-gakoa"
@@ -154,16 +154,16 @@
       "description": "Aukera hauek lanaren portaera kontrolatzea ahalbidetzen dizute.",
       "fields": [
         {
-          "label": "Minimum number of characters",
-          "description": "Specify the minimum number of characters that the user must enter."
+          "label": "Gutxienezko karaktere kopurua",
+          "description": "Zehaztu ezazu erabiltzaileak idatzi beharreko gutxieneko karaktere kopurua."
         },
         {
-          "label": "Maximum number of characters",
-          "description": "Specify the maximum number of characters that the user can enter."
+          "label": "Gehieneko karaktere kopurua",
+          "description": "Zehaztu ezazu erabiltzaileak idatzi dezakeen gehienezko karaktere kopurua."
         },
         {
-          "label": "Input field size",
-          "description": "The size of the input field in amount of lines it will cover",
+          "label": "Sarrera-eremuaren tamaina",
+          "description": "Sarrera-eremuaren tamaina (erakutsiko dituen errenkada kopurua)",
           "options": [
             {
               "label": "lerro 1"
@@ -181,24 +181,24 @@
           "description": "Markatuz gero, ikasleek lana berriz egiten saiatu ahalko dira."
         },
         {
-          "label": "Ignore scoring",
-          "description": "If checked, learners will only see the feedback that you provided for the keywords, but no score."
+          "label": "Alde batera utzi puntuazioa",
+          "description": "Markatuz gero, ikasleek emandako hitz-gakoentzako zuk emandako feedbacka ikusiko dute, baina puntuaziorik ez."
         },
         {
-          "label": "Points in host environment",
-          "description": "Used to award points in host environment merely for answering (not shown to learner)."
+          "label": "Harrera-inguruneko puntuak",
+          "description": "Harrera-ingurunean soilik erantzun izanagatik puntuak emateko erabilia (ez zaio ikasleari erakusten)."
         },
         {
           "label": "Gainditzeko ehunekoa",
-          "description": "Percentage that's necessary for passing"
+          "description": "Gainditzeko lortu beharreko ehunekoa"
         },
         {
-          "label": "Mastering percentage",
-          "description": "Percentage that's necessary for mastering. Setting the mastering percentage below 100 % will lower the maximum possible score accordingly. It's intended to give some leeway to students, not to \"graciously accept\" solutions that do not contain all keywords."
+          "label": "Domeinua erakusteko ehunekoa",
+          "description": "Domeinua erakusteko lortu beharreko ehunekoa. Domeinua erakusteko ehunekoa %100etik behera zehazteak gehienezko puntuazioa neurri berean jaitsiko du. Ikasleei tarte pixka bat emateko pentsatuta dago, eta ez hitz-gako guztiak ez dituzten emaitzak \"adeitasunez onartzeko\"."
         },
         {
-          "label": "Override case sensitive",
-          "description": "This option determines if the \"Case sensitive\" option will be activated for all keywords.",
+          "label": "Baliogabetu maiuskulak eta minuskulak bereiztea",
+          "description": "Aukera honek \"Bereizi maiuskulak eta minuskulak\" aukera hitz-gako guztientzako gaituko den zehazten du.",
           "options": [
             {
               "label": "Gaituta"
@@ -210,7 +210,7 @@
         },
         {
           "label": "Baliogabetu akatsak barkatzea",
-          "description": "This option determines if the \"Forgive mistakes\" option will be activated for all keywords.",
+          "description": "Aukera honek \"Barkatu akats txikiak\" aukera hitz-gako guztientzat gaituko den zehazten du.",
           "options": [
             {
               "label": "Gaituta"
@@ -239,37 +239,37 @@
       "default": "Erakutsi emaitza"
     },
     {
-      "label": "Header for panel containing feedback for included/missing keywords",
+      "label": "Gehitutako/falta diren hitz-gakoen feedbackaren panelarentzako goiburua",
       "default": "Feedbacka"
     },
     {
-      "label": "Label for solution",
-      "default": "Sample solution"
+      "label": "Emaitzarentzako etiketa",
+      "default": "Adibidezko emaitza"
     },
     {
-      "label": "Remaining characters",
-      "default": "Remaining characters: @chars",
-      "description": "Message for remaining characters. You can use @chars which will be replaced by the corresponding number."
+      "label": "Falta diren karaktereak",
+      "default": "Falta diren karaktereak: @chars",
+      "description": "Falta diren karaktereentzako mezua. Dagokion zenbakiarekin ordezkatuko den @chars aldagaia erabili dezakezu."
     },
     {
-      "label": "Not enough characters",
-      "default": "You must enter at least @chars characters!",
-      "description": "Message to indicate that the text doesn't contain enough characters. You can use @chars which will be replaced by the corresponding number."
+      "label": "Ez dago karaktere nahikorik",
+      "default": "Gutxienez @chars karaktere idatzi behar dituzu!",
+      "description": "Mezuak behar beste karaktere ez dituela adierazteko mezua. Dagokion zenbakiarekin ordezkatuko den @chars aldagaia erabili dezakezu."
     },
     {
       "label": "Gorde mezua",
-      "description": "Message indicating that the text has been saved",
+      "description": "Testua gorde dela adierazteko mezua",
       "default": "gordeta"
     },
     {
-      "label": "Your result (not displayed)",
-      "description": "Accessibility text used for readspeakers. @score will be replaced by the number of points. @total will be replaced by the maximum possible points.",
+      "label": "Zure emaitza (ez erakutsia)",
+      "description": "Irakurgailuetarako erabilerraztasun testua. @score lortutako puntuazioarekin ordezkatuko da. @total lortu daitezkeen gehienezko puntuekin ordezkatuko da.",
       "default": "@total puntutatik @score puntu lortu duzu"
     },
     {
-      "label": "Navigation message (not displayed)",
-      "description": "Accessibility text used for readspeakers",
-      "default": "Navigated to newly included sample solution after textarea."
+      "label": "Nabigazio-mezua (ez da erakusten)",
+      "description": "Irakurgailuetarako erabilerraztasun testua",
+      "default": "Testu-eremuaren ondoren duela gutxi gehitutako adibidezko erantzunera nabigatuta."
     },
     {
       "label": "\"Egiaztatu\" botoiaren laguntza-teknologientzako etiketa",
@@ -281,7 +281,7 @@
     },
     {
       "label": "\"Saiatu berriro\" botoiaren laguntza-teknologientzako etiketa",
-      "default": "Retry the task. You can improve your previous answer if the author allowed that."
+      "default": "Ataza berriz egiten saiatu. Egileak baimenduz gero zure aurreko erantzunaren emaitza hobetu dezakezu."
     }
   ]
 }
