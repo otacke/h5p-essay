@@ -1,5 +1,8 @@
 var H5P = H5P || {};
 
+/**
+ * TODO: This content type needs refactoring.
+ */
 H5P.Essay = function ($, Question) {
   'use strict';
 
