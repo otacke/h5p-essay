@@ -121,6 +121,11 @@ H5P.Essay = function ($, Question) {
       this.params.behaviour.percentagePassing * scoreMax / 100 || 0);
 
     this.solution = this.buildSolution();
+
+    // Re-create score
+    if (typeof this.previousState === 'object' && Object.keys(this.previousState).length) {
+      this.updateScore();
+    }
   }
 
   // Extends Question
@@ -297,8 +302,15 @@ H5P.Essay = function ($, Question) {
   Essay.prototype.getInput = function (linebreakReplacement) {
     linebreakReplacement = linebreakReplacement || ' ';
 
-    return this.inputField
-      .getText()
+    let userText = '';
+    if (this.inputField) {
+      userText = this.inputField.getText();
+    }
+    else if (this.previousState && this.previousState.inputField) {
+      userText = this.previousState.inputField;
+    }
+
+    return userText
       .replace(/(\r\n|\r|\n)/g, linebreakReplacement)
       .replace(/\s\s/g, ' ');
   };
