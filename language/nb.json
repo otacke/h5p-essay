@@ -1,19 +1,19 @@
 {
   "semantics": [
     {
-      "label": "Media",
+      "label": "Medieelement",
       "fields": [
         {
           "label": "Type",
-          "description": "Optional media to display above the question."
+          "description": "Valgfritt medieelement. Elementet vil bli plassert over spørsmålet."
         },
         {
-          "label": "Disable image zooming"
+          "label": "Deaktiver zoomingfunksjon."
         }
       ]
     },
     {
-      "label": "Task description",
+      "label": "Oppgavebeskrivelse",
       "description": "Describe your task here. The task description will appear above text input area.",
       "placeholder": "Summarize the book in 500 characters ..."
     },
