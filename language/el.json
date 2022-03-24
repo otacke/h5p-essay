@@ -24,7 +24,7 @@
     },
     {
       "label": "Ενδεικτική απάντηση",
-      "description": "Μπορείτε να προσθέσετε μια ενδεικτική απάντηση που θα εμφανίζεται στο χρήστη αφού γράψει το κείμενό του. It's called sample solution because there probably is not only one solution.",
+      "description": "Μπορείτε να προσθέσετε μια ενδεικτική απάντηση που θα εμφανίζεται στο χρήστη αφού γράψει το κείμενό του. Ονομάζεται ενδεικτική απάντηση γιατί μπορεί να μην είναι η μοναδική.",
       "fields": [
         {
           "label": "Εισαγωγή",
@@ -227,8 +227,8 @@
       "default": "Έλεγχος"
     },
     {
-      "label": "Text for \"Submit\" button",
-      "default": "Submit"
+      "label": "Ετικέτα κουμπιού υποβολής απάντησης",
+      "default": "Υποβολή"
     },
     {
       "label": "Ετικέτα κουμπιού νέας προσπάθειας",
@@ -272,16 +272,16 @@
       "default": "Πλοηγήθηκες στην πρόσφατα συμπεριληφθείσα ενδεικτική απάντηση."
     },
     {
-      "label": "Assistive technology description for \"Check\" button",
-      "default": "Check the answers."
+      "label": "Περιγραφή υποστηρικτικής τεχνολογίας για το κουμπί \"Έλεγχος\"",
+      "default": "Έλεγχος απαντήσεων."
     },
     {
-      "label": "Assistive technology description for \"Show Solution\" button",
-      "default": "Show the solution. You will be provided with a sample solution."
+      "label": "Περιγραφή υποστηρικτικής τεχνολογίας για το κουμπί \"Εμφάνιση Απάντησης\"",
+      "default": "Εμφάνιση απάντησης. Θα σας δοθεί μια ενδεικτική απάντηση"
     },
     {
-      "label": "Assistive technology description for \"Retry\" button",
-      "default": "Retry the task. You can improve your previous answer if the author allowed that."
+      "label": "Περιγραφή υποστηρικτικής τεχνολογίας για το κουμπί \"Επανάληψη\"",
+      "default": "Επανάληψη της εργασίας. Μπορείτε να βελτιώσετε την προηγούμενη απάντησή σας εάν επιτρέπεται."
     }
   ]
 }
