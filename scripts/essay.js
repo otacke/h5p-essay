@@ -1025,6 +1025,10 @@ H5P.Essay = function ($, Question) {
    * @return {Object} Current state.
    */
   Essay.prototype.getCurrentState = function () {
+    if (!this.inputField) {
+      return; // may not be attached to the DOM yet
+    }
+
     this.inputField.updateMessageSaved(this.params.messageSave);
 
     return {
