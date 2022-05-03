@@ -2,8 +2,8 @@
   "title": "Essay",
   "description": "Score a student's essay automatically",
   "majorVersion": 1,
-  "minorVersion": 4,
-  "patchVersion": 3,
+  "minorVersion": 5,
+  "patchVersion": 0,
   "runnable": 1,
   "embedTypes": [
     "iframe"
