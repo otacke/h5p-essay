@@ -251,7 +251,7 @@ H5P.Essay = function ($, Question) {
 
     // Retry button
     that.addButton('try-again', that.params.tryAgain, function () {
-      that.resetTask();
+      that.resetTask({ skipClear: true });
     }, false, {
       'aria-label': this.params.ariaRetry
     }, {});
@@ -404,7 +404,8 @@ H5P.Essay = function ($, Question) {
    * Reset task.
    * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-5}
    */
-  Essay.prototype.resetTask = function () {
+  Essay.prototype.resetTask = function (params) {
+    params = params || {};
     this.setViewState('task');
 
     this.setExplanation();
@@ -419,6 +420,9 @@ H5P.Essay = function ($, Question) {
       this.showButton('check-answer');
     }
 
+    if (!params.skipClear) {
+      this.inputField.setText('');
+    }
     this.inputField.enable();
     this.inputField.focus();
 
