@@ -161,17 +161,20 @@ var H5P = H5P || {};
 
   /**
    * Set the text for the InputField.
-   * @param {string|Object} previousState - Previous state that was saved.
+   * @param {string|Object} value - Previous state that was saved.
    */
-  Essay.InputField.prototype.setText = function (previousState) {
-    if (typeof previousState === 'undefined') {
+  Essay.InputField.prototype.setText = function (value) {
+    const type = (typeof value);
+
+    if (type === 'undefined') {
       return;
     }
-    if (typeof previousState === 'string') {
-      this.inputField.innerHTML = previousState;
+
+    if (type === 'string') {
+      this.inputField.value = value;
     }
-    if (typeof previousState === 'object' && !Array.isArray(previousState)) {
-      this.inputField.innerHTML = previousState.inputField || '';
+    else if (type === 'object' && !Array.isArray(value)) {
+      this.inputField.value = value.inputField || '';
     }
   };
 
