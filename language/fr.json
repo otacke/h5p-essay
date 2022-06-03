@@ -13,7 +13,7 @@
       ]
     },
     {
-      "label": "Description de l'activité",
+      "label": "Task description",
       "description": "Décrivez l'activité. Cette description apparaîtra au dessus de la zone de saisie de texte.",
       "placeholder": "Résumez ce livre dans un texte de 500 caractères maximum."
     },
@@ -150,7 +150,7 @@
       ]
     },
     {
-      "label": "Paramètres comportementaux",
+      "label": "Behavioural settings",
       "description": "Ces options permettent de contrôler le déroulement de l'activité.",
       "fields": [
         {
