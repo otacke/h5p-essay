@@ -227,8 +227,8 @@
       "default": "Preveri"
     },
     {
-      "label": "Text for \"Submit\" button",
-      "default": "Submit"
+      "label": "Besedilo za gumb \"Oddaj\"",
+      "default": "Oddaj"
     },
     {
       "label": "Besedilo za gumb \"Poskusi ponovno\"",
@@ -272,16 +272,16 @@
       "default": "Pomaknjeno do na novo vključenega vzorčnega primera."
     },
     {
-      "label": "Assistive technology description for \"Check\" button",
-      "default": "Check the answers."
+      "label": "Besedilo opisa gumba \"Preveri\" za bralnike zaslona",
+      "default": "Preveri odgovore."
     },
     {
-      "label": "Assistive technology description for \"Show Solution\" button",
-      "default": "Show the solution. You will be provided with a sample solution."
+      "label": "Besedilo opisa gumba \"Prikaži rešitev\" za bralnike zaslona",
+      "default": "Prikaže vzorčno rešitev naloge."
     },
     {
-      "label": "Assistive technology description for \"Retry\" button",
-      "default": "Retry the task. You can improve your previous answer if the author allowed that."
+      "label": "Besedilo opisa gumba \"Poskusi ponovno\" za bralnike zaslona",
+      "default": "Omogoči ponoven poskus in nadgradnjo odgovora."
     }
   ]
 }
