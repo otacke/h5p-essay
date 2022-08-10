@@ -163,11 +163,11 @@ H5P.Essay = function ($, Question) {
       }
     }
 
-    // Check whether status bar is needed
-    const statusBar = (
+    // Check whether status bar is needed, no "saved" message when subcontent
+    const statusBar = !!(
       this.params.behaviour.minimumLength ||
       this.params.behaviour.maximumLength ||
-      (H5PIntegration && H5PIntegration.saveFreq)
+      (H5PIntegration && H5PIntegration.saveFreq && this.isRoot())
     );
 
     // Create InputField
@@ -1033,7 +1033,10 @@ H5P.Essay = function ($, Question) {
       return; // may not be attached to the DOM yet
     }
 
-    this.inputField.updateMessageSaved(this.params.messageSave);
+    // No "saved" message when subcontent, requested by H5P core team
+    if (this.isRoot()) {
+      this.inputField.updateMessageSaved(this.params.messageSave);
+    }
 
     return {
       inputField: this.inputField.getText(),
