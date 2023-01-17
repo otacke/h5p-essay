@@ -276,12 +276,12 @@
       "label": "Pogas \"Pārbaudīt\" apraksts asistīvajām tehnoloģijām"
     },
     {
-      "label": "Pogas \"Rādīt risinājumu\" apraksts priekš asistīvajām tehnoloģijām",
+      "label": "Asistīvo tehnoloģiju apraksts pogai \"Rādīt risinājumu\"",
       "default": "Parādīt risinājumu. Jums tiks nodrošināts risinājuma paraugs."
     },
     {
       "default": "Mēģināt vēlreiz izpildīt uzdevumu. Jūs varat uzlabot savu iepriekšējo atbildi, ja autors to atļāvis.",
-      "label": "Pogas \"Mēģināt vēlreiz\" apraksts priekš asistīvajām tehnoloģijām"
+      "label": "Pogas \"Mēģināt vēlreiz\" apraksts asistīvajām tehnoloģijām"
     }
   ]
 }

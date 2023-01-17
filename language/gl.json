@@ -1,19 +1,19 @@
 {
   "semantics": [
     {
-      "label": "Medios",
+      "label": "Media",
       "fields": [
         {
-          "label": "Tipo",
-          "description": "Medios opcionais amosados enriba da pregunta."
+          "label": "Type",
+          "description": "Optional media to display above the question."
         },
         {
-          "label": "Desactivar zoom de imaxes"
+          "label": "Disable image zooming"
         }
       ]
     },
     {
-      "label": "Descrición da tarefa",
+      "label": "Task description",
       "description": "Describe aquí a túa tarefa. A descrición aparecerá enriba da área de entrada de texto.",
       "placeholder": "Resume o libro en 500 caracteres ..."
     },
@@ -150,7 +150,7 @@
       ]
     },
     {
-      "label": "Configuración de comportamento",
+      "label": "Behavioural settings",
       "description": "Estas opcións permitiranche controlar o comportamento da tarefa.",
       "fields": [
         {
@@ -223,8 +223,8 @@
       ]
     },
     {
-      "label": "Texto para o botón \"Comprobar\"",
-      "default": "Comprobar"
+      "label": "Text for \"Check\" button",
+      "default": "Check"
     },
     {
       "label": "Text for \"Submit\" button",
