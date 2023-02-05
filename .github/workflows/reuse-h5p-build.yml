@@ -1,0 +1,11 @@
+name: Build H5P content type
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    uses: otacke/github-action-h5p-build/.github/workflows/h5p-build.yml@v1
