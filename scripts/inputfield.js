@@ -49,8 +49,12 @@ var H5P = H5P || {};
     this.inputField = document.createElement('textarea');
     this.inputField.classList.add(INPUT_FIELD);
     this.inputField.setAttribute('rows', this.params.inputFieldSize);
-    this.inputField.setAttribute('maxlength', this.params.maximumLength);
-    this.inputField.setAttribute('placeholder', this.params.placeholderText);
+    if (this.params.maximumLength) {
+      this.inputField.setAttribute('maxlength', this.params.maximumLength);
+    }
+    if (this.params.placeholderText) {
+      this.inputField.setAttribute('placeholder', this.params.placeholderText);
+    }
     this.setText(this.previousState);
     this.oldValue = this.previousState;
 
