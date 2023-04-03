@@ -1,19 +1,19 @@
 {
   "semantics": [
     {
-      "label": "Media",
+      "label": "Medios",
       "fields": [
         {
-          "label": "Type",
-          "description": "Optional media to display above the question."
+          "label": "Tipo",
+          "description": "Medios opcionais amosados enriba das preguntas."
         },
         {
-          "label": "Disable image zooming"
+          "label": "Desactivar o zoom da imaxe"
         }
       ]
     },
     {
-      "label": "Task description",
+      "label": "Descrición da tarefa",
       "description": "Describe aquí a túa tarefa. A descrición aparecerá enriba da área de entrada de texto.",
       "placeholder": "Resume o libro en 500 caracteres ..."
     },
@@ -89,7 +89,7 @@
               },
               {
                 "label": "Palabra de retroalimentación amosada se se inclúe unha palabra chave",
-                "description": "Esta opción permite especificar que palabra debería amosarse diante da túa retroalimentación se se atopa unha plabra chave no texto.",
+                "description": "Esta opción permite especificar que palabra debería amosarse diante da túa retroalimentación se se atopa unha palabra chave no texto.",
                 "options": [
                   {
                     "label": "palabra chave"
@@ -150,7 +150,7 @@
       ]
     },
     {
-      "label": "Behavioural settings",
+      "label": "Configuración do comportamento",
       "description": "Estas opcións permitiranche controlar o comportamento da tarefa.",
       "fields": [
         {
@@ -178,7 +178,7 @@
         },
         {
           "label": "Activar \"Reintentar\"",
-          "description": "Os usuarios poderán reintentar a tarefa se se activa."
+          "description": "Os usuarios poderán tentar de novo a tarefa se se activa."
         },
         {
           "label": "Ignorar puntuación",
@@ -223,11 +223,11 @@
       ]
     },
     {
-      "label": "Text for \"Check\" button",
-      "default": "Check"
+      "label": "Texto para o botón \"Comprobar\"",
+      "default": "Comprobar"
     },
     {
-      "label": "Text for \"Submit\" button",
+      "label": "Texto para o botón \"Enviar\"",
       "default": "Submit"
     },
     {
