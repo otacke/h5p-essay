@@ -44,6 +44,7 @@ H5P.Essay = function ($, Question) {
           inputFieldSize: 10,
           enableCheckButton: true,
           enableRetry: true,
+          enableSolutionsButton: true,
           ignoreScoring: false,
           pointsHost: 1
         },
@@ -86,7 +87,12 @@ H5P.Essay = function ($, Question) {
      * contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-8} and
      * {@link https://h5p.org/documentation/developers/contracts#guides-header-9}
      */
-    this.params.behaviour.enableSolutionsButton = (typeof this.params.solution.sample !== 'undefined' && this.params.solution.sample !== '');
+    this.params.behaviour.enableSolutionsButton =
+      this.params.behaviour.enableSolutionsButton &&
+      (
+        typeof this.params.solution.sample !== 'undefined' &&
+        this.params.solution.sample !== ''
+      );
     this.params.behaviour.enableRetry = this.params.behaviour.enableRetry || false;
 
     // Determine the minimum number of characters that should be entered
