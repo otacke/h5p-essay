@@ -153,7 +153,9 @@ H5P.Essay = function ($, Question) {
           this.setImage(media.params.file.path, {
             disableImageZooming: this.params.media.disableImageZooming,
             alt: media.params.alt,
-            title: media.params.title
+            title: media.params.title,
+            expandImage: media.params.expandImage,
+            minimizeImage: media.params.minimizeImage
           });
         }
       }
