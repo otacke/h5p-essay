@@ -357,7 +357,9 @@ H5P.Essay = function ($, Question) {
    */
   Essay.prototype.getScore = function () {
     // Return value is rounded because reporting module for moodle's H5P plugin expects integers
-    return (this.params.behaviour.ignoreScoring) ? this.getMaxScore() : Math.round(this.score);
+    return (this.params.behaviour.ignoreScoring) ?
+      this.getMaxScore() :
+      this.score;
   };
 
   /**
@@ -367,7 +369,9 @@ H5P.Essay = function ($, Question) {
    */
   Essay.prototype.getMaxScore = function () {
     // Return value is rounded because reporting module for moodle's H5P plugin expects integers
-    return (this.params.behaviour.ignoreScoring) ? this.params.behaviour.pointsHost || 0 : Math.round(this.scoreMastering);
+    return (this.params.behaviour.ignoreScoring) ?
+      this.params.behaviour.pointsHost || 0 :
+      Math.max(1, this.scoreMastering);
   };
 
   /**
