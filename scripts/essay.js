@@ -370,7 +370,7 @@ H5P.Essay = function ($, Question) {
   Essay.prototype.getMaxScore = function () {
     // Return value is rounded because reporting module for moodle's H5P plugin expects integers
     return (this.params.behaviour.ignoreScoring) ?
-      this.params.behaviour.pointsHost || 0 :
+      this.params.behaviour.pointsHost || 1 : // moodle requires 1 for task completion
       Math.max(1, this.scoreMastering);
   };
 
