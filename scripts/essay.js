@@ -1,7 +1,7 @@
 var H5P = H5P || {};
 
 /**
- * TODO: This content type needs refactoring.
+ * TODO: This content type needs refactoring. Badly!
  */
 H5P.Essay = function ($, Question) {
   'use strict';
@@ -614,8 +614,6 @@ H5P.Essay = function ($, Question) {
       alternatives.forEach(function (alternative) {
         let inputTest = that.getInput();
 
-        // Check for case sensitivity
-        const caseSensitive = that.params.behaviour.overrideCaseSensitive === 'on' || options.caseSensitive;
         if (!caseSensitive) {
           alternative = alternative.toLowerCase();
           inputTest = inputTest.toLowerCase();
