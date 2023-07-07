@@ -622,7 +622,17 @@ H5P.Essay = function ($, Question) {
         // Build array of matches for each type of match
         const matchesExact = that.detectExactMatches(alternative, inputTest);
         const matchesWildcard = alternative.indexOf('*') !== -1 ? that.detectWildcardMatches(alternative, inputTest, caseSensitive) : [];
-        const matchesFuzzy = options.forgiveMistakes ? that.detectFuzzyMatches(alternative, inputTest) : [];
+
+        const forgiveMistakes =
+          (that.params.behaviour.overrideForgiveMistakes !== 'off') &&
+          (
+            that.params.behaviour.overrideForgiveMistakes === 'on' ||
+            options.forgiveMistakes
+          );
+
+        const matchesFuzzy = forgiveMistakes ?
+          that.detectFuzzyMatches(alternative, inputTest) :
+          [];
 
         // Merge matches without duplicates
         that.mergeMatches(matchesExact, matchesWildcard, matchesFuzzy).forEach(function (item) {
