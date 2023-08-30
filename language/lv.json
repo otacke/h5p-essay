@@ -1,6 +1,7 @@
 {
   "semantics": [
     {
+      "label": "Multivide",
       "fields": [
         {
           "label": "Tips",
@@ -9,8 +10,7 @@
         {
           "label": "Atspējot attēla tālummaiņu"
         }
-      ],
-      "label": "Multivide"
+      ]
     },
     {
       "label": "Uzdevuma apraksts",
@@ -19,11 +19,12 @@
     },
     {
       "label": "Palīdzības teksts",
-      "placeholder": "Šī grāmata ir par...",
-      "description": "Šim tekstam vajadzētu palīdzēt lietotājam sākt darbu."
+      "description": "Šim tekstam vajadzētu palīdzēt lietotājam sākt darbu.",
+      "placeholder": "Šī grāmata ir par..."
     },
     {
       "label": "Risinājuma paraugs",
+      "description": "Ja vēlaties variet pievienot risinājuma paraugu, kas tiks parādīts pēc tam, kad izglītojamais būs izveidojis tekstu. To sauc par risinājuma paraugu, jo, iespējams, uzdevumam nav tikai viens risinājums.",
       "fields": [
         {
           "label": "Ievads",
@@ -34,8 +35,7 @@
           "label": "Risinājuma parauga teksts",
           "description": "Pēc iesniegšanas izglītojamais redzēs pogu \"Rādīt risinājumu\", ja šeit norādīsiet tekstu."
         }
-      ],
-      "description": "Ja vēlaties variet pievienot risinājuma paraugu, kas tiks parādīts pēc tam, kad izglītojamais būs izveidojis tekstu. To sauc par risinājuma paraugu, jo, iespējams, uzdevumam nav tikai viens risinājums."
+      ]
     },
     {
       "label": "Atslēgvārdi",
@@ -53,12 +53,12 @@
             "description": "Atslēgvārds vai frāze, ko meklēt. Izmantojiet zvaigznīti '*' kā aizstājējzīmi vienai vai vairākām rakstzīmēm. Lai izmantotu regulāro izteiksmi, sākumā un beigās izmantojiet slīpsvītru '/'."
           },
           {
+            "label": "Variācijas",
+            "description": "Pievienojiet šim atslēgvārdam dažādus variantus. Piemērs: 'Lielpilsēta' pievienojiet alternatīvas 'pilsēta', 'valstspilsēta' utt. Punkti tiks piešķirti, ja lietotājs iekļauj kādu no norādītajām alternatīvām.",
             "entity": "variācija",
             "field": {
               "label": "Atslēgvārda variācija"
-            },
-            "label": "Variācijas",
-            "description": "Pievienojiet šim atslēgvārdam dažādus variantus. Piemērs: 'Lielpilsēta' pievienojiet alternatīvas 'pilsēta', 'valstspilsēta' utt. Punkti tiks piešķirti, ja lietotājs iekļauj kādu no norādītajām alternatīvām."
+            }
           },
           {
             "label": "Punkti, izvēles un atgriezeniskā saite",
@@ -107,6 +107,7 @@
               },
               {
                 "label": "Atgriezeniskās saites vārds ko rādīt, ja atslēgvārds nav iekļauts",
+                "description": "Šī opcija ļauj norādīt, kurš vārds ir jāparāda pirms atgriezeniskās saites, ja atslēgvārds tekstā netika atrasts.",
                 "options": [
                   {
                     "label": "atslēgvārds"
@@ -114,8 +115,7 @@
                   {
                     "label": "neviens"
                   }
-                ],
-                "description": "Šī opcija ļauj norādīt, kurš vārds ir jāparāda pirms atgriezeniskās saites, ja atslēgvārds tekstā netika atrasts."
+                ]
               }
             ]
           }
@@ -132,6 +132,7 @@
             }
           ],
           "label": "Iestatiet pielāgotu atgriezenisko saiti katram rezultātu intervālam",
+          "description": "Klikšķiniet pogu \"Pievienot diapazonu\", lai pievienotu tik diapazonus cik vēlaties. Piemēram, 0-20% Slikts rezultāts, 21-91% Viduvējs rezultāts, 91-100% Lielisks rezultāts!",
           "entity": "diapazons",
           "field": {
             "fields": [
@@ -144,12 +145,13 @@
                 "placeholder": "Aizpildiet atgriezenisko saiti"
               }
             ]
-          },
-          "description": "Klikšķiniet pogu \"Pievienot diapazonu\", lai pievienotu tik diapazonus cik vēlaties. Piemēram, 0-20% Slikts rezultāts, 21-91% Viduvējs rezultāts, 91-100% Lielisks rezultāts!"
+          }
         }
       ]
     },
     {
+      "label": "Uzvedības iestatījumi",
+      "description": "Šie iestatījumi ļaus jums kontrolēt uzdevuma uzvedību.",
       "fields": [
         {
           "label": "Minimālais rakstzīmju skaits",
@@ -160,6 +162,7 @@
           "description": "Norādiet maksimālo rakstzīmju skaitu, ko lietotājs var ievadīt."
         },
         {
+          "label": "Ievades lauka lielums",
           "description": "Ievades lauka lielums rindās",
           "options": [
             {
@@ -171,8 +174,7 @@
             {
               "label": "10 rindas"
             }
-          ],
-          "label": "Ievades lauka lielums"
+          ]
         },
         {
           "label": "Atļaut \"Mēģināt vēlreiz\"",
@@ -217,10 +219,20 @@
               "label": "Atspējots"
             }
           ]
+        },
+        {
+          "label": "Replacement for line breaks",
+          "description": "By default, line breaks will be replaced with a space character. If you want to check for line breaks, e.g. in regular expressions, you can set a different replacement here.",
+          "options": [
+            {
+              "label": "space"
+            },
+            {
+              "label": "line break (\\n)"
+            }
+          ]
         }
-      ],
-      "label": "Uzvedības iestatījumi",
-      "description": "Šie iestatījumi ļaus jums kontrolēt uzdevuma uzvedību."
+      ]
     },
     {
       "label": "Pogas \"Pārbaudīt\" teksts",
@@ -243,8 +255,8 @@
       "default": "Atgriezeniskā saite"
     },
     {
-      "default": "Risinājuma paraugs",
-      "label": "Risinājuma etiķete"
+      "label": "Risinājuma etiķete",
+      "default": "Risinājuma paraugs"
     },
     {
       "label": "Atlikušās rakstzīmes",
@@ -263,8 +275,8 @@
     },
     {
       "label": "Jūsu rezultāts (netiek parādīts)",
-      "default": "Jūs saņēmāt @score no @total punktiem",
-      "description": "Pieejamības teksts, ko izmanto asistīvās tehnoloģijas. @score tiks aizstāts ar punktu skaitu. @total tiks aizstāts ar maksimāli iespējamo punktu skaitu."
+      "description": "Pieejamības teksts, ko izmanto asistīvās tehnoloģijas. @score tiks aizstāts ar punktu skaitu. @total tiks aizstāts ar maksimāli iespējamo punktu skaitu.",
+      "default": "Jūs saņēmāt @score no @total punktiem"
     },
     {
       "label": "Navigācijas ziņojums (netiek parādīts)",
@@ -272,16 +284,16 @@
       "default": "Pāriets uz jaunveidoto parauga risinājumu pēc teksta apgabala."
     },
     {
-      "default": "Pārbaudīt atbildes.",
-      "label": "Pogas \"Pārbaudīt\" apraksts asistīvajām tehnoloģijām"
+      "label": "Pogas \"Pārbaudīt\" apraksts asistīvajām tehnoloģijām",
+      "default": "Pārbaudīt atbildes."
     },
     {
       "label": "Asistīvo tehnoloģiju apraksts pogai \"Rādīt risinājumu\"",
       "default": "Parādīt risinājumu. Jums tiks nodrošināts risinājuma paraugs."
     },
     {
-      "default": "Mēģināt vēlreiz izpildīt uzdevumu. Jūs varat uzlabot savu iepriekšējo atbildi, ja autors to atļāvis.",
-      "label": "Pogas \"Mēģināt vēlreiz\" apraksts asistīvajām tehnoloģijām"
+      "label": "Pogas \"Mēģināt vēlreiz\" apraksts asistīvajām tehnoloģijām",
+      "default": "Mēģināt vēlreiz izpildīt uzdevumu. Jūs varat uzlabot savu iepriekšējo atbildi, ja autors to atļāvis."
     }
   ]
 }

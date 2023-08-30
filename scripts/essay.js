@@ -46,7 +46,8 @@ H5P.Essay = function ($, Question) {
           enableRetry: true,
           enableSolutionsButton: true,
           ignoreScoring: false,
-          pointsHost: 1
+          pointsHost: 1,
+          linebreakReplacement: ' '
         },
         checkAnswer: 'Check',
         submitAnswer: 'Submit',
@@ -591,7 +592,11 @@ H5P.Essay = function ($, Question) {
        * This result computation might need a rewrite ...
        */
       const regularExpressionMatches = that
-        .getRegExpAlternatives(alternatives, that.getInput(), caseSensitive)
+        .getRegExpAlternatives(
+          alternatives,
+          that.getInput(that.params.behaviour.linebreakReplacement),
+          caseSensitive
+        )
         .map(function (match) {
           // Allow to differentiate from wildcard asterisk
           return match = match.replace(/\*/, Essay.REGULAR_EXPRESSION_ASTERISK);
@@ -612,7 +617,7 @@ H5P.Essay = function ($, Question) {
 
       // Detect all matches
       alternatives.forEach(function (alternative) {
-        let inputTest = that.getInput();
+        let inputTest = that.getInput(that.params.behaviour.linebreakReplacement);
 
         if (!caseSensitive) {
           alternative = alternative.toLowerCase();
