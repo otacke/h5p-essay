@@ -221,14 +221,14 @@
           ]
         },
         {
-          "label": "Replacement for line breaks",
-          "description": "By default, line breaks will be replaced with a space character. If you want to check for line breaks, e.g. in regular expressions, you can set a different replacement here.",
+          "label": "Substitución de saltos de liña",
+          "description": "Por defecto, os saltos de liña substituiranse por un espazo. Se quere comprobar se hai saltos de liña, p. ex. nas expresións regulares, pode establecer unha substitución diferente.",
           "options": [
             {
-              "label": "space"
+              "label": "espazo"
             },
             {
-              "label": "line break (\\n)"
+              "label": "salto de liña (\\n)"
             }
           ]
         }
