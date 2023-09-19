@@ -1064,9 +1064,12 @@ H5P.Essay = function ($, Question) {
     }
 
     const inputFieldText = this.inputField.getText();
+    if (!inputFieldText) {
+      return;
+    }
     return {
-      inputField: inputFieldText || null,
-      viewState: inputFieldText ? this.viewState : null
+      inputField: inputFieldText,
+      viewState: this.viewState
     };
   };
 
