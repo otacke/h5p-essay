@@ -1063,9 +1063,10 @@ H5P.Essay = function ($, Question) {
       this.inputField.updateMessageSaved(this.params.messageSave);
     }
 
+    const inputFieldText = this.inputField.getText();
     return {
-      inputField: this.inputField.getText(),
-      viewState: this.viewState
+      inputField: inputFieldText || null,
+      viewState: inputFieldText ? this.viewState : null
     };
   };
 
