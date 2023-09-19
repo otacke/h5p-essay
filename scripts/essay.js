@@ -1064,9 +1064,16 @@ H5P.Essay = function ($, Question) {
     }
 
     const inputFieldText = this.inputField.getText();
+    /*
+     * H5P integrations may (for instance) show a restart button if there is
+     * a previous state set, so here not storing the state if no answer has been
+     * given by the user and there's no order stored previously - preventing
+     * to show up that restart button without the need to.
+     */
     if (!inputFieldText) {
       return;
     }
+    
     return {
       inputField: inputFieldText,
       viewState: this.viewState
