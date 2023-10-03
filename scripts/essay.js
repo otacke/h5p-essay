@@ -418,28 +418,34 @@ H5P.Essay = function ($, Question) {
    * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-5}
    */
   Essay.prototype.resetTask = function (params) {
-    params = params || {};
-    this.setViewState('task');
+    // Always reset previousState
+    this.previousState = {};
 
-    this.setExplanation();
-    this.removeFeedback();
-    this.hideSolution();
-
-    this.hideButton('show-solution');
-    this.hideButton('try-again');
-
-    // QuestionSet can control check button despite not in Question Type contract
-    if (this.params.behaviour.enableCheckButton) {
-      this.showButton('check-answer');
+    // Reset DOM only if it has been loaded
+    if (this.isContentInitialized()) {
+      params = params || {};
+      this.setViewState('task');
+  
+      this.setExplanation();
+      this.removeFeedback();
+      this.hideSolution();
+  
+      this.hideButton('show-solution');
+      this.hideButton('try-again');
+  
+      // QuestionSet can control check button despite not in Question Type contract
+      if (this.params.behaviour.enableCheckButton) {
+        this.showButton('check-answer');
+      }
+  
+      if (!params.skipClear) {
+        this.inputField.setText('');
+      }
+      this.inputField.enable();
+      this.inputField.focus();
+  
+      this.isAnswered = false;
     }
-
-    if (!params.skipClear) {
-      this.inputField.setText('');
-    }
-    this.inputField.enable();
-    this.inputField.focus();
-
-    this.isAnswered = false;
   };
 
   /**
@@ -1090,6 +1096,14 @@ H5P.Essay = function ($, Question) {
     }
 
     this.viewState = state;
+  };
+
+  /**
+   * Checks if the content has been initialized or loaded into the DOM.
+   * @returns {boolean} True if the content has been initialized, false otherwise.
+   */
+  Essay.prototype.isContentInitialized = function() {
+    return !!this.inputField; // Check if inputField exists
   };
 
   /** @constant {string}
