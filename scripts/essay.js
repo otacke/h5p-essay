@@ -420,6 +420,7 @@ H5P.Essay = function ($, Question) {
   Essay.prototype.resetTask = function (params) {
     // Always reset previousState
     this.previousState = {};
+    this.isAnswered = false;
 
     // Reset DOM only if it has been loaded
     if (this.isContentInitialized()) {
@@ -443,8 +444,6 @@ H5P.Essay = function ($, Question) {
       }
       this.inputField.enable();
       this.inputField.focus();
-  
-      this.isAnswered = false;
     }
   };
 
@@ -1077,7 +1076,7 @@ H5P.Essay = function ($, Question) {
      * to show up that restart button without the need to.
      */
     if (!inputFieldText) {
-      return;
+      return {};
     }
     
     return {
