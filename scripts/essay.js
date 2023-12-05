@@ -46,7 +46,8 @@ H5P.Essay = function ($, Question) {
           enableRetry: true,
           enableSolutionsButton: true,
           ignoreScoring: false,
-          pointsHost: 1
+          pointsHost: 1,
+          linebreakReplacement: ' '
         },
         checkAnswer: 'Check',
         submitAnswer: 'Submit',
@@ -591,7 +592,11 @@ H5P.Essay = function ($, Question) {
        * This result computation might need a rewrite ...
        */
       const regularExpressionMatches = that
-        .getRegExpAlternatives(alternatives, that.getInput(), caseSensitive)
+        .getRegExpAlternatives(
+          alternatives,
+          that.getInput(that.params.behaviour.linebreakReplacement),
+          caseSensitive
+        )
         .map(function (match) {
           // Allow to differentiate from wildcard asterisk
           return match = match.replace(/\*/, Essay.REGULAR_EXPRESSION_ASTERISK);
@@ -612,7 +617,7 @@ H5P.Essay = function ($, Question) {
 
       // Detect all matches
       alternatives.forEach(function (alternative) {
-        let inputTest = that.getInput();
+        let inputTest = that.getInput(that.params.behaviour.linebreakReplacement);
 
         if (!caseSensitive) {
           alternative = alternative.toLowerCase();
@@ -1058,8 +1063,19 @@ H5P.Essay = function ($, Question) {
       this.inputField.updateMessageSaved(this.params.messageSave);
     }
 
+    const inputFieldText = this.inputField.getText();
+    /*
+     * H5P integrations may (for instance) show a restart button if there is
+     * a previous state set, so here not storing the state if no answer has been
+     * given by the user and there's no order stored previously - preventing
+     * to show up that restart button without the need to.
+     */
+    if (!inputFieldText) {
+      return;
+    }
+    
     return {
-      inputField: this.inputField.getText(),
+      inputField: inputFieldText,
       viewState: this.viewState
     };
   };

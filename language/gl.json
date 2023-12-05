@@ -219,6 +219,18 @@
               "label": "Desactivada"
             }
           ]
+        },
+        {
+          "label": "Substitución de saltos de liña",
+          "description": "Por defecto, os saltos de liña substituiranse por un espazo. Se quere comprobar se hai saltos de liña, p. ex. nas expresións regulares, pode establecer unha substitución diferente.",
+          "options": [
+            {
+              "label": "espazo"
+            },
+            {
+              "label": "salto de liña (\\n)"
+            }
+          ]
         }
       ]
     },

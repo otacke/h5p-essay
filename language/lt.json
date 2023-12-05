@@ -1,33 +1,33 @@
 {
   "semantics": [
     {
-      "label": "Media",
+      "label": "Medija",
       "fields": [
         {
-          "label": "Type",
-          "description": "Optional media to display above the question."
+          "label": "Tipas",
+          "description": "Pasirenkama medija, rodoma virš klausimo."
         },
         {
-          "label": "Disable image zooming"
+          "label": "Išjungti paveikslėlio mastelio keitimą"
         }
       ]
     },
     {
-      "label": "Task description",
-      "description": "Describe your task here. The task description will appear above text input area.",
-      "placeholder": "Summarize the book in 500 characters ..."
+      "label": "Užduoties aprašymas",
+      "description": "Čia aprašykite savo užduotį. Užduoties aprašymas bus rodomas virš teksto įvesties srities.",
+      "placeholder": "Apibendrinkite knygą į 500 simbolių..."
     },
     {
-      "label": "Help text",
-      "description": "This text should help the user to get started.",
-      "placeholder": "This book is about ..."
+      "label": "Pagalbos tekstas",
+      "description": "Šis tekstas turėtų padėti naudotojui pradėti.",
+      "placeholder": "Ši knyga yra apie..."
     },
     {
       "label": "Sample solution",
       "description": "You can optionally add a sample solution that's shown after the student created a text. It's called sample solution because there probably is not only one solution.",
       "fields": [
         {
-          "label": "Introduction",
+          "label": "Įvadas",
           "description": "You can optionally leave the students some explanations about your example. The explanations will only show up if you add an example, too.",
           "placeholder": "Please remember that you were not expected to come up with the exact same solution. It's just a good example."
         },
@@ -41,15 +41,15 @@
       "label": "Keywords",
       "widgets": [
         {
-          "label": "Default"
+          "label": "Numatytasis"
         }
       ],
-      "entity": "Keyword",
+      "entity": "Raktažodis",
       "field": {
-        "label": "Keyword",
+        "label": "Raktažodis",
         "fields": [
           {
-            "label": "Keyword",
+            "label": "Raktažodis",
             "description": "Keyword or phrase to look for. Use an asterisk '*' as a wildcard for one or more characters. Use a slash '/' at the beginning and the end to use a regular expression."
           },
           {
@@ -61,10 +61,10 @@
             }
           },
           {
-            "label": "Points, Options and Feedback",
+            "label": "Taškai, parinktys ir atsiliepimai",
             "fields": [
               {
-                "label": "Points",
+                "label": "Taškai",
                 "description": "Points that the user will get if he/she includes this keyword or its alternatives in the answer."
               },
               {
@@ -72,7 +72,7 @@
                 "description": "Define how many occurrences of the keyword or its variations should be awarded with points."
               },
               {
-                "label": "Case sensitive",
+                "label": "Svarbu didžiosios ir mažosios raidės",
                 "description": "Makes sure the user input has to be exactly the same as the answer."
               },
               {
@@ -123,7 +123,7 @@
       }
     },
     {
-      "label": "Overall Feedback",
+      "label": "Bendras atsiliepimas",
       "fields": [
         {
           "widgets": [
@@ -133,7 +133,7 @@
           ],
           "label": "Define custom feedback for any score range",
           "description": "Click the \"Add range\" button to add as many ranges as you need. Example: 0-20% Bad score, 21-91% Average Score, 91-100% Great Score!",
-          "entity": "range",
+          "entity": "diapazonas",
           "field": {
             "fields": [
               {
@@ -141,8 +141,8 @@
               },
               {},
               {
-                "label": "Feedback for defined score range",
-                "placeholder": "Fill in the feedback"
+                "label": "Atsiliepimas apibrėžtam balų diapazonui",
+                "placeholder": "Užpildykite atsiliepimą"
               }
             ]
           }
@@ -151,7 +151,7 @@
     },
     {
       "label": "Behavioural settings",
-      "description": "These options will let you control how the task behaves.",
+      "description": "Šios parinktys leis jums valdyti, kaip veikia užduotis.",
       "fields": [
         {
           "label": "Minimum number of characters",
@@ -222,7 +222,6 @@
         },
         {
           "label": "Replacement for line breaks",
-          "description": "By default, line breaks will be replaced with a space character. If you want to check for line breaks, e.g. in regular expressions, you can set a different replacement here.",
           "options": [
             {
               "label": "space"
@@ -230,25 +229,26 @@
             {
               "label": "line break (\\n)"
             }
-          ]
+          ],
+          "description": "By default, line breaks will be replaced with a space character. If you want to check for line breaks, e.g. in regular expressions, you can set a different replacement here."
         }
       ]
     },
     {
-      "label": "Text for \"Check\" button",
-      "default": "Check"
+      "label": "Tekstas mygtukui „Tikrinti“",
+      "default": "Tikrinti"
     },
     {
       "label": "Text for \"Submit\" button",
-      "default": "Submit"
+      "default": "Pateikti"
     },
     {
       "label": "Text for \"Retry\" button",
-      "default": "Retry"
+      "default": "Bandyti dar kartą"
     },
     {
-      "label": "Text for \"Show solution\" button",
-      "default": "Show solution"
+      "label": "Mygtuko „Rodyti sprendimą“ tekstas",
+      "default": "Rodyti sprendimą"
     },
     {
       "label": "Header for panel containing feedback for included/missing keywords",
@@ -271,7 +271,7 @@
     {
       "label": "Save message",
       "description": "Message indicating that the text has been saved",
-      "default": "saved"
+      "default": "išsaugota"
     },
     {
       "label": "Your result (not displayed)",
@@ -284,11 +284,11 @@
       "default": "Navigated to newly included sample solution after textarea."
     },
     {
-      "label": "Assistive technology description for \"Check\" button",
+      "label": "Mygtuko „Tikrinti“ pagalbinės technologijos aprašymas",
       "default": "Check the answers."
     },
     {
-      "label": "Assistive technology description for \"Show Solution\" button",
+      "label": "Mygtuko „Rodyti sprendimą“ pagalbinės technologijos aprašymas",
       "default": "Show the solution. You will be provided with a sample solution."
     },
     {

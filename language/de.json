@@ -219,6 +219,18 @@
               "label": "Deaktiviert"
             }
           ]
+        },
+        {
+          "label": "Ersatz für Zeilenumbrüche",
+          "description": "Standardmäßig werden Zeilenumbrüche durch ein Leerzeichen ersetzt. Falls du auf Zeilenumbrüche prüfen willst, etwa in regulären Ausdrücken, kannst du hier ein anderes Ersatzzeichen wählen.",
+          "options": [
+            {
+              "label": "Leerzeichen"
+            },
+            {
+              "label": "Zeilenumbruch (\\n)"
+            }
+          ]
         }
       ]
     },

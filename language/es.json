@@ -219,6 +219,18 @@
               "label": "Deshabilitada"
             }
           ]
+        },
+        {
+          "label": "Remplazo para saltos de línea",
+          "description": "De forma predeterminada, los saltos de línea serán remplazados con un caracter de espacio. Si quieres comprobar los saltos de línea; por ejemplo, en expresiones regulares, puedes configurar aquí un remplazo diferente.",
+          "options": [
+            {
+              "label": "espacio"
+            },
+            {
+              "label": "salto de línea (\\n)"
+            }
+          ]
         }
       ]
     },
