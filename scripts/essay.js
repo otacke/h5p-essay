@@ -784,7 +784,7 @@ H5P.Essay = function ($, Question) {
     // The H5P reporting module expects the "blanks" to be added to the description
     definition.description = {};
     // The below replaceAll makes sure we don't get any unwanted XAPI_PLACEHOLDERs in the questions and description
-    definition.description[this.languageTag] = this.params.taskDescription.replaceAll(/_{10,}/gi, '_________'); + Essay.FILL_IN_PLACEHOLDER;
+    definition.description[this.languageTag] = this.params.taskDescription.replaceAll(/_{10,}/gi, '_________') + Essay.FILL_IN_PLACEHOLDER;
     // Fallback for h5p-php-reporting, expects en-US
     definition.description['en-US'] = definition.description[this.languageTag];
     definition.type = 'http://id.tincanapi.com/activitytype/essay';
