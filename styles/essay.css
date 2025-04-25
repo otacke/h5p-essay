@@ -3,8 +3,6 @@
   to {opacity: 1;}
 }
 
-.h5p-essay {
-}
 .h5p-essay .h5p-essay-title {
   width: auto;
   overflow-y: auto;
@@ -54,6 +52,7 @@
   border-top: 2px solid #C7C7C7;
   font-size: 16px;
   font-family: Arial, sans-serif;
+  line-height: 1.5;
 }
 
 .h5p-essay .h5p-essay-input-field-textfield:focus {

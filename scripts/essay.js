@@ -133,6 +133,31 @@ H5P.Essay = function ($, Question) {
     if (typeof this.previousState === 'object' && Object.keys(this.previousState).length) {
       this.updateScore();
     }
+
+    // Check whether status bar is needed, no "saved" message when subcontent
+    const statusBar = !!(
+      this.params.behaviour.minimumLength ||
+      this.params.behaviour.maximumLength ||
+      (H5PIntegration && H5PIntegration.saveFreq && this.isRoot())
+    );
+
+    // Create InputField
+    this.inputField = new H5P.Essay.InputField({
+      taskDescription: this.params.taskDescription,
+      placeholderText: this.params.placeholderText,
+      maximumLength: this.params.behaviour.maximumLength,
+      remainingChars: this.params.remainingChars,
+      inputFieldSize: this.params.behaviour.inputFieldSize,
+      previousState: this.previousState,
+      statusBar: statusBar
+    }, {
+      onInteracted: ((params) => {
+        this.handleInteracted(params);
+      }),
+      onInput: (() => {
+        this.handleInput();
+      })
+    });
   }
 
   // Extends Question
@@ -171,31 +196,6 @@ H5P.Essay = function ($, Question) {
         }
       }
     }
-
-    // Check whether status bar is needed, no "saved" message when subcontent
-    const statusBar = !!(
-      this.params.behaviour.minimumLength ||
-      this.params.behaviour.maximumLength ||
-      (H5PIntegration && H5PIntegration.saveFreq && this.isRoot())
-    );
-
-    // Create InputField
-    this.inputField = new H5P.Essay.InputField({
-      taskDescription: this.params.taskDescription,
-      placeholderText: this.params.placeholderText,
-      maximumLength: this.params.behaviour.maximumLength,
-      remainingChars: this.params.remainingChars,
-      inputFieldSize: this.params.behaviour.inputFieldSize,
-      previousState: this.previousState,
-      statusBar: statusBar
-    }, {
-      onInteracted: (function (params) {
-        that.handleInteracted(params);
-      }),
-      onInput: (function () {
-        that.handleInput();
-      })
-    });
 
     this.setViewState(this.previousState && this.previousState.viewState || 'task');
     if (this.viewState === 'results') {
@@ -426,19 +426,19 @@ H5P.Essay = function ($, Question) {
     if (this.isContentInitialized()) {
       params = params || {};
       this.setViewState('task');
-  
+
       this.setExplanation();
       this.removeFeedback();
       this.hideSolution();
-  
+
       this.hideButton('show-solution');
       this.hideButton('try-again');
-  
+
       // QuestionSet can control check button despite not in Question Type contract
       if (this.params.behaviour.enableCheckButton) {
         this.showButton('check-answer');
       }
-  
+
       if (!params.skipClear) {
         this.inputField.setText('');
       }
@@ -784,7 +784,7 @@ H5P.Essay = function ($, Question) {
     // The H5P reporting module expects the "blanks" to be added to the description
     definition.description = {};
     // The below replaceAll makes sure we don't get any unwanted XAPI_PLACEHOLDERs in the questions and description
-    definition.description[this.languageTag] = this.params.taskDescription.replaceAll(/_{10,}/gi, '_________'); + Essay.FILL_IN_PLACEHOLDER;
+    definition.description[this.languageTag] = this.params.taskDescription.replaceAll(/_{10,}/gi, '_________') + Essay.FILL_IN_PLACEHOLDER;
     // Fallback for h5p-php-reporting, expects en-US
     definition.description['en-US'] = definition.description[this.languageTag];
     definition.type = 'http://id.tincanapi.com/activitytype/essay';
@@ -1079,7 +1079,7 @@ H5P.Essay = function ($, Question) {
     if (!inputFieldText) {
       return {};
     }
-    
+
     return {
       inputField: inputFieldText,
       viewState: this.viewState
