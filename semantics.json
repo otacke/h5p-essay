@@ -328,7 +328,7 @@
         "description": "Specify the minimum number of characters that the user must enter.",
         "importance": "low",
         "optional": true,
-        "min": "0"
+        "min": 0
       },
       {
         "name": "maximumLength",
@@ -337,7 +337,7 @@
         "description": "Specify the maximum number of characters that the user can enter.",
         "importance": "low",
         "optional": true,
-        "min": "0"
+        "min": 0
       },
       {
         "name": "inputFieldSize",
