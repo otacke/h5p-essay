@@ -1,0 +1,299 @@
+{
+  "semantics": [
+    {
+      "label": "Média",
+      "fields": [
+        {
+          "label": "Típus",
+          "description": "Opcionális média a kérdés fölött megjelenítve."
+        },
+        {
+          "label": "Kép nagyításának letiltása"
+        }
+      ]
+    },
+    {
+      "label": "Feladat leírása",
+      "description": "Itt adja meg a feladat leírását. A feladat leírása a szövegbeviteli terület felett jelenik meg.",
+      "placeholder": "Foglald össze a könyvet 500 karakterben ..."
+    },
+    {
+      "label": "Segítő szöveg",
+      "description": "Ez a szöveg segítheti a felhasználókat a kezdésnél.",
+      "placeholder": "Ez a könyv arról szól..."
+    },
+    {
+      "label": "Minta megoldás",
+      "description": "Opcionálisan hozzáadhat egy mintamegoldást, amely azután jelenik meg, hogy a tanuló beírt egy szöveget. Mintamegoldásnak hívják, mert valószínűleg nem csak egy megoldás létezik.",
+      "fields": [
+        {
+          "label": "Bevezetés",
+          "description": "Opcionálisan némi magyarázatot hagyhat a tanulóknak a példáról. A magyarázatok csak akkor jelennek meg, ha hozzáad egy példát is.",
+          "placeholder": "Ne feledje, nem azt várták el, hogy pontosan ugyanazzal a megoldással álljon elő! Ez csak egy jó példa."
+        },
+        {
+          "label": "Minta megoldás szövege",
+          "description": "A beküldés után a tanuló egy \"Megoldás megjelenítése\" gombot fog látni, ha itt megad valamilyen szöveget."
+        }
+      ]
+    },
+    {
+      "label": "Kulcsszavak",
+      "widgets": [
+        {
+          "label": "Alapértelmezett"
+        }
+      ],
+      "entity": "Kulcsszó",
+      "field": {
+        "label": "Kulcsszó",
+        "fields": [
+          {
+            "label": "Kulcsszó",
+            "description": "Keresendő kulcsszó vagy kifejezés. Használjon csillagot (*) helyettesítő karakterként egy vagy több karakterhez. Használjon perjelet (/) az elején és a végén a reguláris kifejezés használatához."
+          },
+          {
+            "label": "Variációk",
+            "description": "Adjon hozzá opcionális variációkat ehhez a kulcsszóhoz. Példa: „település” esetén adjon hozzá alternatívákat: „község”, „helység” stb. A felhasználó akkor kap pontokat, ha a megadott alternatívák bármelyikét alkalmazza.",
+            "entity": "variáció",
+            "field": {
+              "label": "Kulcsszó variáció"
+            }
+          },
+          {
+            "label": "Pontok, beállítások és visszajelzés",
+            "fields": [
+              {
+                "label": "Pontok",
+                "description": "A pont, amit a felhasználó kap, ha a válaszban feltünteti ezt a kulcsszót vagy annak alternatíváit."
+              },
+              {
+                "label": "Előfordulások",
+                "description": "Határozza meg, hogy a kulcsszó vagy variációinak hány előfordulása után jár pont."
+              },
+              {
+                "label": "Kis/nagybetű érzékenység",
+                "description": "Biztosítja, hogy a felhasználói bevitel pontosan ugyanaz legyen, mint a válasz."
+              },
+              {
+                "label": "Kisebb hibák elnézése",
+                "description": "A kisebb helyesírási hibák elfogadása (3-9 karakter: 1 hiba, több mint 9 karakter: 2 hiba)."
+              },
+              {
+                "label": "Visszajelzés, ha tartalmazza a kulcsszót",
+                "description": "Ez a visszajelzés akkor jelenik meg, ha a felhasználó a válaszban használja ezt a kulcsszót vagy annak alternatíváit."
+              },
+              {
+                "label": "Visszajelzés, ha hiányzik a kulcsszó",
+                "description": "Ez a visszajelzés akkor jelenik meg, ha a felhasználó a válaszban nem használja ezt a kulcsszót vagy annak alternatíváit."
+              },
+              {
+                "label": "Visszajelzett szó, ha tartalmazza a kulcsszót",
+                "description": "Ezzel a beállítással megadható, hogy milyen szó jelenjen meg a visszajelzés elején, ha a szövegben megtalálható a kulcsszó.",
+                "options": [
+                  {
+                    "label": "kulcsszó"
+                  },
+                  {
+                    "label": "a megtalált alternatíva"
+                  },
+                  {
+                    "label": "az adott válasz"
+                  },
+                  {
+                    "label": "semmi"
+                  }
+                ]
+              },
+              {
+                "label": "Visszajelzett szó, ha a kulcsszó hiányzik",
+                "description": "Ezzel a beállítással megadható, hogy milyen szó jelenjen meg a visszajelzés elején, ha a szövegben nem található meg a kulcsszó.",
+                "options": [
+                  {
+                    "label": "kulcsszó"
+                  },
+                  {
+                    "label": "semmi"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "label": "Globális visszajelzés",
+      "fields": [
+        {
+          "widgets": [
+            {
+              "label": "Alapértelmezett"
+            }
+          ],
+          "label": "Egyéni visszajelzés megadása tetszőleges eredmény intervallumokra",
+          "description": "Kattintson az \"Új intervallum\" gombra további intervallumok hozzáadásához. Például: 0-20% Rossz eredmény, 21-91% Átlagos eredmény, 91-100% Kimagasló eredmény!",
+          "entity": "intervallum",
+          "field": {
+            "fields": [
+              {
+                "label": "Eredmény intervallum"
+              },
+              {},
+              {
+                "label": "Visszajelzés az adott eredmény intervallumnál",
+                "placeholder": "Adja meg a visszajelzést"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "label": "Viselkedési beállítások",
+      "description": "Ezekkel a beállításokkal szabályozható a feladat viselkedése.",
+      "fields": [
+        {
+          "label": "Minimális karakterszám",
+          "description": "Adja meg a felhasználó által beírandó karakterek minimális számát!"
+        },
+        {
+          "label": "Karakterek maximális száma",
+          "description": "Adja meg a felhasználó által beírható karakterek maximális számát!"
+        },
+        {
+          "label": "Beviteli mező mérete",
+          "description": "A beviteli mező mérete a lefedett sorok számában",
+          "options": [
+            {
+              "label": "1 sor"
+            },
+            {
+              "label": "3 sor"
+            },
+            {
+              "label": "10 sor"
+            }
+          ]
+        },
+        {
+          "label": "\"Újra\" engedélyezve",
+          "description": "Bejelölése esetén a tanulók újra megpróbálhatják a feladatot."
+        },
+        {
+          "label": "Pontozás figyelmen kívül hagyása",
+          "description": "Bejelölése esetén a tanulók csak a kulcsszavakhoz megadott visszajelzést látják, de nincs pontszám."
+        },
+        {
+          "label": "Pontok a keretrendszerben",
+          "description": "A keretrendszerben járó pontok kiosztásához pusztán a válaszadásért (a tanulónak nem jelenik meg)."
+        },
+        {
+          "label": "Teljesítéshez szükséges százalék",
+          "description": "A teljesítéshez szükséges százalék"
+        },
+        {
+          "label": "Kiemelkedő százalék",
+          "description": "A kiemelkedő eredményhez szükséges százalék. Ha ez 100 % alatti, a maximális lehetséges pontszám ennek megfelelően csökken. Célja, hogy némi mozgásteret biztosítson a hallgatóknak, nem pedig az, hogy \"nagylelkűen elfogadjuk\" azokat a megoldásokat, amelyek nem tartalmaznak minden kulcsszót."
+        },
+        {
+          "label": "Kis/nagybetű érzékenység felülírása",
+          "description": "Ez a beállítás határozza meg, hogy a \"Kis/nagybetű érzékenység\" beállítás érvényes lesz-e az összes kulcsszóra.",
+          "options": [
+            {
+              "label": "Bekapcsolva"
+            },
+            {
+              "label": "Kikapcsolva"
+            }
+          ]
+        },
+        {
+          "label": "A kisebb hibák elnézésének felülírása",
+          "description": "Ez a beállítás határozza meg, hogy a \"Kisebb hibák elnézése\" beállítás érvényes lesz-e az összes kulcsszóra.",
+          "options": [
+            {
+              "label": "Bekapcsolva"
+            },
+            {
+              "label": "Kikapcsolva"
+            }
+          ]
+        },
+        {
+          "label": "Sortörések helyettesítése",
+          "description": "Alapértelmezés szerint a sortörések szóköz karakterre lesznek cserélve. Ha ellenőrizni szeretné a sortörések jelenlétét, pl. reguláris kifejezésekben, itt másik cserét állíthat be.",
+          "options": [
+            {
+              "label": "szóköz"
+            },
+            {
+              "label": "sortörés (\\n)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "\"Ellenőrzés\" gomb szövege",
+      "default": "Ellenőrzés"
+    },
+    {
+      "label": "\"Leadás\" gomb szövege",
+      "default": "Leadás"
+    },
+    {
+      "label": "\"Újra\" gomb szövege",
+      "default": "Újra"
+    },
+    {
+      "label": "\"Megoldás mutatása\" gomb felülírása",
+      "default": "Megoldás mutatása"
+    },
+    {
+      "label": "A használt/hiányzó kulcsszavakkal kapcsolatos visszajelzéseket tartalmazó panel fejléce",
+      "default": "Visszajelzés"
+    },
+    {
+      "label": "A megoldás felirata",
+      "default": "Minta megoldás"
+    },
+    {
+      "label": "Fennmaradó karakterek száma",
+      "default": "Fennmaradó karakterek: @chars",
+      "description": "Üzenet a fennmaradó karakterekhez. Használhatja a @chars kifejezést, melynek helyébe a megfelelő szám kerül."
+    },
+    {
+      "label": "Nincs elég karakter",
+      "default": "Legalább @chars karaktert meg kell adnia!",
+      "description": "Üzenet annak jelzésére, hogy a szöveg nem tartalmaz elég karaktert. Használhatja a @chars kifejezést, melynek helyébe a megfelelő szám kerül."
+    },
+    {
+      "label": "Mentés üzenet",
+      "description": "Üzenet a szöveg sikeres mentéséről",
+      "default": "mentve"
+    },
+    {
+      "label": "Az elért eredmény (nem jelenik meg)",
+      "description": "A szövegfelolvasók számára használt helyettesítő szöveg. A @score helyébe a pontok száma kerül. A @total helyébe a maximális pontszám kerül.",
+      "default": "Ön @score pontot kapott a(z) @total pontból"
+    },
+    {
+      "label": "Navigációs üzenet (nem jelenik meg)",
+      "description": "Szövegfelolvasók számára használt helyettesítő szöveg",
+      "default": "Átlépve a szövegbeviteli mező után újonnan megjelent minta megoldásra."
+    },
+    {
+      "label": "\"Ellenőrzés\" gomb leírása támogató-segítő eszközöknek",
+      "default": "Válaszok ellenőrzése."
+    },
+    {
+      "label": "\"Megoldás mutatása\" gomb leírása támogató-segítő eszközöknek",
+      "default": "Megoldás mutatása Egy minta megoldás fog megjelenni."
+    },
+    {
+      "label": "\"Újra\" gomb leírása támogató-segítő eszközöknek",
+      "default": "Feladat újrapróbálása. Javíthatja az előző válaszát, ha a készítő ezt engedélyezte."
+    }
+  ]
+}
