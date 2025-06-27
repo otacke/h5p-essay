@@ -3,7 +3,7 @@ var H5P = H5P || {};
 /**
  * TODO: This content type needs refactoring. Badly!
  */
-H5P.Essay = function ($, Question) {
+H5P.Essay = function (Question) {
   'use strict';
 
   // CSS Classes
@@ -1131,4 +1131,4 @@ H5P.Essay = function ($, Question) {
   Essay.VIEW_STATES = ['task', 'results', 'solutions'];
 
   return Essay;
-}(H5P.jQuery, H5P.Question);
+}(H5P.Question);
