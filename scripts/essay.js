@@ -29,7 +29,7 @@ H5P.Essay = function (Question) {
     }
 
     // Inheritance
-    Question.call(this, 'essay');
+    Question.call(this, 'essay', { theme: true });
 
     // Sanitize defaults
     this.params = Essay.extend(
@@ -246,7 +246,10 @@ H5P.Essay = function (Question) {
       that.internalShowSolutionsCall = false;
     }, false, {
       'aria-label': this.params.ariaShowSolution
-    }, {});
+    }, {
+      styleType: 'secondary',
+      icon: 'show-results'
+    });
 
     // Check answer button
     that.addButton('check-answer', that.params.checkAnswer, function () {
@@ -256,6 +259,7 @@ H5P.Essay = function (Question) {
     }, {
       contentData: this.extras,
       textIfSubmitting: this.params.submitAnswer,
+      icon: 'check'
     });
 
     // Retry button
@@ -263,7 +267,10 @@ H5P.Essay = function (Question) {
       that.resetTask({ skipClear: true });
     }, false, {
       'aria-label': this.params.ariaRetry
-    }, {});
+    }, {
+      styleType: 'secondary',
+      icon: 'retry'
+    });
   };
 
   /**
