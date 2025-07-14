@@ -1,11 +1,11 @@
 {
   "semantics": [
     {
-      "label": "Mediji",
+      "label": "Medijska vsebina",
       "fields": [
         {
           "label": "Tip",
-          "description": "Neobvezna nastavitev dodatnega medija za prikaz nad vprašanjem."
+          "description": "Neobvezna nastavitev dodatne medijska vsebine za prikaz nad vprašanjem."
         },
         {
           "label": "Onemogoči povečavo slike"
@@ -14,7 +14,7 @@
     },
     {
       "label": "Navodilo udeležencem",
-      "description": "Opis reševanja zadane naloge.",
+      "description": "Opis reševanja naloge.",
       "placeholder": "Povzemi knjigo v 500 znakih ..."
     },
     {
@@ -44,7 +44,7 @@
           "label": "Privzeto"
         }
       ],
-      "entity": "ključno besedo",
+      "entity": "ključna beseda",
       "field": {
         "label": "Ključna beseda",
         "fields": [
@@ -77,7 +77,7 @@
               },
               {
                 "label": "Toleriraj manjše napake",
-                "description": "Nastavitev tolerance in upoštevanje pravilnosti odgovora kljub manjšim napakam (npr. 1 napačen znak v besedah med 3 do 9 znaki, 2 napačna znaka v besedah dolgih nad 9 znakov)."
+                "description": "Nastavitev tolerance in upoštevanje pravilnosti odgovora kljub manjšim napakam (npr. en napačen znak pri besedah s 3 do 9 znaki, dva napačna znaka pri besedah, daljših od 9 znakov)."
               },
               {
                 "label": "Povratna informacija ob vnosu ključne besede",
@@ -221,14 +221,14 @@
           ]
         },
         {
-          "label": "Replacement for line breaks",
-          "description": "By default, line breaks will be replaced with a space character. If you want to check for line breaks, e.g. in regular expressions, you can set a different replacement here.",
+          "label": "Zamenjava prelomov vrstic",
+          "description": "Privzeto bodo prelomi vrstic zamenjani s presledkom. Če želite zaznavati prelome vrstic (npr. z uporabo regularnih izrazov), lahko določite drugačen nadomestni znak.",
           "options": [
             {
-              "label": "space"
+              "label": "presledek"
             },
             {
-              "label": "line break (\\n)"
+              "label": "prelom vrstice (\\n)"
             }
           ]
         }
