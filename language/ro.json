@@ -1,0 +1,299 @@
+{
+  "semantics": [
+    {
+      "label": "Media",
+      "fields": [
+        {
+          "label": "Tip",
+          "description": "Media opțională de afișat deasupra întrebării."
+        },
+        {
+          "label": "Dezactivează mărirea imaginii"
+        }
+      ]
+    },
+    {
+      "label": "Descrierea sarcinii",
+      "description": "Descrieți sarcina aici. Descrierea sarcinii va apărea deasupra zonei de introducere a textului.",
+      "placeholder": "Rezumă cartea în 500 de caractere..."
+    },
+    {
+      "label": "Text de ajutor",
+      "description": "Acest text ar trebui să ajute utilizatorul să înceapă.",
+      "placeholder": "Această carte este despre..."
+    },
+    {
+      "label": "Exemplu de soluție",
+      "description": "Opțional, puteți adăuga un exemplu de soluție care este afișat după ce studentul a creat un text. Se numește exemplu de soluție deoarece probabil nu există o singură soluție corectă.",
+      "fields": [
+        {
+          "label": "Introducere",
+          "description": "Opțional, puteți lăsa studenților câteva explicații despre exemplul dumneavoastră. Explicațiile vor apărea doar dacă adăugați și un exemplu.",
+          "placeholder": "Vă rugăm să rețineți că nu se aștepta să veniți cu exact aceeași soluție. Este doar un exemplu bun."
+        },
+        {
+          "label": "Text exemplu de soluție",
+          "description": "Studentul va vedea un buton „Arată soluția” după trimitere dacă furnizați un text aici."
+        }
+      ]
+    },
+    {
+      "label": "Cuvinte cheie",
+      "widgets": [
+        {
+          "label": "Implicit"
+        }
+      ],
+      "entity": "Cuvânt cheie",
+      "field": {
+        "label": "Cuvânt cheie",
+        "fields": [
+          {
+            "label": "Cuvânt cheie",
+            "description": "Cuvânt cheie sau frază de căutat. Folosiți un asterisc '*' ca metacaracter pentru unul sau mai multe caractere. Folosiți o bară oblică '/' la început și la sfârșit pentru a utiliza o expresie regulată."
+          },
+          {
+            "label": "Variații",
+            "description": "Adăugați variații opționale pentru acest cuvânt cheie. Exemplu: Pentru 'oraș' adăugați alternative 'localitate', 'municipiu' etc. Se vor acorda puncte dacă utilizatorul include oricare dintre alternativele specificate.",
+            "entity": "variație",
+            "field": {
+              "label": "Variație cuvânt cheie"
+            }
+          },
+          {
+            "label": "Puncte, Opțiuni și Feedback",
+            "fields": [
+              {
+                "label": "Puncte",
+                "description": "Puncte pe care utilizatorul le va obține dacă include acest cuvânt cheie sau alternativele sale în răspuns."
+              },
+              {
+                "label": "Apariții",
+                "description": "Definiți câte apariții ale cuvântului cheie sau ale variațiilor sale ar trebui să fie recompensate cu puncte."
+              },
+              {
+                "label": "Sensibil la majuscule",
+                "description": "Asigură că răspunsul utilizatorului trebuie să fie exact la fel cu răspunsul corect."
+              },
+              {
+                "label": "Iartă greșelile minore",
+                "description": "Aceasta va accepta greșeli minore de ortografie (3-9 caractere: 1 greșeală, mai mult de 9 caractere: 2 greșeli)."
+              },
+              {
+                "label": "Feedback dacă este inclus cuvântul cheie",
+                "description": "Acest feedback va fi afișat dacă utilizatorul include acest cuvânt cheie sau alternativele sale în răspuns."
+              },
+              {
+                "label": "Feedback dacă lipsește cuvântul cheie",
+                "description": "Acest feedback va fi afișat dacă utilizatorul nu include acest cuvânt cheie sau alternativele sale în răspuns."
+              },
+              {
+                "label": "Cuvânt de feedback afișat dacă este inclus cuvântul cheie",
+                "description": "Această opțiune vă permite să specificați ce cuvânt ar trebui să fie afișat în fața feedback-ului dumneavoastră dacă un cuvânt cheie a fost găsit în text.",
+                "options": [
+                  {
+                    "label": "cuvânt cheie"
+                  },
+                  {
+                    "label": "alternativă găsită"
+                  },
+                  {
+                    "label": "răspuns dat"
+                  },
+                  {
+                    "label": "niciunul"
+                  }
+                ]
+              },
+              {
+                "label": "Cuvânt de feedback afișat dacă lipsește cuvântul cheie",
+                "description": "Această opțiune vă permite să specificați ce cuvânt ar trebui să fie afișat în fața feedback-ului dumneavoastră dacă un cuvânt cheie nu a fost găsit în text.",
+                "options": [
+                  {
+                    "label": "cuvânt cheie"
+                  },
+                  {
+                    "label": "niciunul"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "label": "Feedback general",
+      "fields": [
+        {
+          "widgets": [
+            {
+              "label": "Implicit"
+            }
+          ],
+          "label": "Definiți feedback personalizat pentru orice interval de punctaj",
+          "description": "Apăsați butonul „Adaugă interval” pentru a adăuga câte intervale aveți nevoie. Exemplu: 0-20% Punctaj slab, 21-91% Punctaj mediu, 91-100% Punctaj excelent!",
+          "entity": "interval",
+          "field": {
+            "fields": [
+              {
+                "label": "Interval de punctaj"
+              },
+              {},
+              {
+                "label": "Feedback pentru intervalul de punctaj definit",
+                "placeholder": "Completați feedback-ul"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "label": "Setări de comportament",
+      "description": "Aceste opțiuni vă vor permite să controlați cum se comportă sarcina.",
+      "fields": [
+        {
+          "label": "Număr minim de caractere",
+          "description": "Specificați numărul minim de caractere pe care utilizatorul trebuie să le introducă."
+        },
+        {
+          "label": "Număr maxim de caractere",
+          "description": "Specificați numărul maxim de caractere pe care utilizatorul le poate introduce."
+        },
+        {
+          "label": "Dimensiunea câmpului de introducere",
+          "description": "Dimensiunea câmpului de introducere în număr de rânduri pe care le va acoperi",
+          "options": [
+            {
+              "label": "1 rând"
+            },
+            {
+              "label": "3 rânduri"
+            },
+            {
+              "label": "10 rânduri"
+            }
+          ]
+        },
+        {
+          "label": "Activează „Reîncearcă”",
+          "description": "Dacă este bifat, cursanții pot reîncerca sarcina."
+        },
+        {
+          "label": "Ignoră punctajul",
+          "description": "Dacă este bifat, cursanții vor vedea doar feedback-ul pe care l-ați furnizat pentru cuvintele cheie, dar nu și punctajul."
+        },
+        {
+          "label": "Puncte în mediul gazdă",
+          "description": "Folosit pentru a acorda puncte în mediul gazdă doar pentru răspuns (nu este afișat cursantului)."
+        },
+        {
+          "label": "Procent de promovare",
+          "description": "Procentul necesar pentru promovare"
+        },
+        {
+          "label": "Procent de stăpânire",
+          "description": "Procentul necesar pentru stăpânire. Setarea procentului de stăpânire sub 100% va reduce corespunzător punctajul maxim posibil. Este destinat să ofere o oarecare flexibilitate studenților, nu să „accepte cu grație” soluții care nu conțin toate cuvintele cheie."
+        },
+        {
+          "label": "Suprascrie sensibilitatea la majuscule",
+          "description": "Această opțiune determină dacă opțiunea „Sensibil la majuscule” va fi activată pentru toate cuvintele cheie.",
+          "options": [
+            {
+              "label": "Activat"
+            },
+            {
+              "label": "Dezactivat"
+            }
+          ]
+        },
+        {
+          "label": "Suprascrie iertarea greșelilor",
+          "description": "Această opțiune determină dacă opțiunea „Iartă greșelile” va fi activată pentru toate cuvintele cheie.",
+          "options": [
+            {
+              "label": "Activat"
+            },
+            {
+              "label": "Dezactivat"
+            }
+          ]
+        },
+        {
+          "label": "Înlocuitor pentru sfârșiturile de rând",
+          "description": "În mod implicit, sfârșiturile de rând vor fi înlocuite cu un spațiu. Dacă doriți să verificați sfârșiturile de rând, de exemplu în expresii regulate, puteți seta aici un înlocuitor diferit.",
+          "options": [
+            {
+              "label": "spațiu"
+            },
+            {
+              "label": "sfârșit de rând (\\n)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Text pentru butonul „Verifică”",
+      "default": "Verifică"
+    },
+    {
+      "label": "Text pentru butonul „Trimite”",
+      "default": "Trimite"
+    },
+    {
+      "label": "Text pentru butonul „Reîncearcă”",
+      "default": "Reîncearcă"
+    },
+    {
+      "label": "Text pentru butonul „Arată soluția”",
+      "default": "Arată soluția"
+    },
+    {
+      "label": "Antet pentru panoul care conține feedback pentru cuvintele cheie incluse/lipsă",
+      "default": "Feedback"
+    },
+    {
+      "label": "Etichetă pentru soluție",
+      "default": "Exemplu de soluție"
+    },
+    {
+      "label": "Caractere rămase",
+      "default": "Caractere rămase: @chars",
+      "description": "Mesaj pentru caracterele rămase. Puteți folosi @chars care va fi înlocuit cu numărul corespunzător."
+    },
+    {
+      "label": "Caractere insuficiente",
+      "default": "Trebuie să introduceți cel puțin @chars caractere!",
+      "description": "Mesaj care indică faptul că textul nu conține suficiente caractere. Puteți folosi @chars care va fi înlocuit cu numărul corespunzător."
+    },
+    {
+      "label": "Mesaj de salvare",
+      "description": "Mesaj care indică faptul că textul a fost salvat",
+      "default": "salvat"
+    },
+    {
+      "label": "Rezultatul tău (nu este afișat)",
+      "description": "Text de accesibilitate folosit pentru cititoarele de ecran. @score va fi înlocuit cu numărul de puncte. @total va fi înlocuit cu punctajul maxim posibil.",
+      "default": "Ai obținut @score din @total puncte"
+    },
+    {
+      "label": "Mesaj de navigare (nu este afișat)",
+      "description": "Text de accesibilitate folosit pentru cititoarele de ecran",
+      "default": "S-a navigat la exemplul de soluție nou inclus după zona de text."
+    },
+    {
+      "label": "Descriere pentru tehnologia asistivă a butonului „Verifică”",
+      "default": "Verifică răspunsurile."
+    },
+    {
+      "label": "Descriere pentru tehnologia asistivă a butonului „Arată soluția”",
+      "default": "Arată soluția. Vi se va oferi un exemplu de soluție."
+    },
+    {
+      "label": "Descriere pentru tehnologia asistivă a butonului „Reîncearcă”",
+      "default": "Reîncearcă sarcina. Puteți îmbunătăți răspunsul anterior dacă autorul a permis acest lucru."
+    }
+  ]
+}
