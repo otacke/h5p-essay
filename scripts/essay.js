@@ -248,7 +248,7 @@ H5P.Essay = function (Question) {
       'aria-label': this.params.ariaShowSolution
     }, {
       styleType: 'secondary',
-      icon: 'show-results'
+      icon: 'show-solutions'
     });
 
     // Check answer button
