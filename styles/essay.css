@@ -50,7 +50,8 @@
   padding: calc(var(--h5p-theme-spacing-xs) / 2) var(--h5p-theme-spacing-xs);
   width: 100%;
   box-sizing: border-box;
-  resize: none;
+  resize: vertical;
+  min-height: calc(var(--h5p-theme-font-size-m) * 3);
   font-size: var(--h5p-theme-font-size-m);
   font-family: var(--h5p-theme-font-family);
   line-height: 1.5;
