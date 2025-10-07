@@ -35,6 +35,7 @@ var H5P = H5P || {};
     // Callbacks
     this.callbacks = callbacks || {};
     this.callbacks.onInteracted = this.callbacks.onInteracted || (function () {});
+    this.callbacks.onResize = this.callbacks.onResize || (function () {});
 
     // Sanitization
     this.params.taskDescription = this.params.taskDescription || '';
@@ -81,6 +82,8 @@ var H5P = H5P || {};
       }
 
       that.containsText = that.getText().length > 0;
+
+      that.autoResize();
     });
 
     this.content = document.createElement('div');
@@ -105,6 +108,7 @@ var H5P = H5P || {};
         that.inputField.addEventListener(event, function () {
           that.updateMessageSaved('');
           that.updateMessageChars();
+          that.autoResize();
         });
       });
 
@@ -180,7 +184,48 @@ var H5P = H5P || {};
     else if (type === 'object' && !Array.isArray(value)) {
       this.inputField.value = value.inputField || '';
     }
+
+    window.requestAnimationFrame(() => {
+      this.autoResize();
+    });
   };
+
+  /**
+   * Auto resize the text area to fit content.
+   */
+  Essay.InputField.prototype.autoResize = function () {
+    if (!this.inputField) {
+      return;
+    }
+
+    this.textAreaStyle = this.textAreaStyle ?? window.getComputedStyle(this.inputField);
+    const currentHeight = parseFloat(this.textAreaStyle.height);
+    const newHeight = this.fitTextFieldHeightToContent();
+
+    if ((Math.round(currentHeight * 10) / 10) !== (Math.round(newHeight * 10) / 10)) {
+      this.callbacks.onResize();
+    }
+  };
+
+  /**
+   * Fit the text field height to its content.
+   * @return {number} New height of the text area.
+   */
+  Essay.InputField.prototype.fitTextFieldHeightToContent = function () {
+    this.inputField.style.height = 'auto';
+
+    const style = this.textAreaStyle;
+    const paddingBlock = parseFloat(style.paddingTop) + parseFloat(style.paddingBottom);
+    const borderBlock = parseFloat(style.borderTopWidth) + parseFloat(style.borderBottomWidth);
+    const lineHeight = parseFloat(style.lineHeight);
+
+    const minHeight = this.params.inputFieldSize * lineHeight + paddingBlock + borderBlock;
+    const newHeight = Math.max(this.inputField.scrollHeight + borderBlock, minHeight);
+
+    this.inputField.style.height = `${newHeight}px`;
+
+    return newHeight;
+  }
 
   /**
    * Compute the remaining number of characters.

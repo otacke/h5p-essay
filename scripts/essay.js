@@ -156,7 +156,18 @@ H5P.Essay = function (Question) {
       }),
       onInput: (() => {
         this.handleInput();
-      })
+      }),
+      onResize: (() => {
+        this.trigger('resize', 'H5PEssayInputField');
+      }),
+    });
+
+    this.on('resize', (event) => {
+      if (event.data === 'H5PEssayInputField') {
+        return;
+      }
+
+      this.inputField.autoResize();
     });
   }
 
