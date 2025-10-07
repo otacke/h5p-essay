@@ -849,7 +849,7 @@ H5P.Essay = function (Question) {
         result.push({'keyword': needle, 'match': needle, 'index': front + pos});
       }
       front += pos + needle.length;
-      haystack = haystack.substr(pos + needle.length);
+      haystack = haystack.substring(pos + needle.length);
     }
     return result;
   };
@@ -906,7 +906,7 @@ H5P.Essay = function (Question) {
     // Without looking at the surroundings we'd miss words that have additional or missing chars
     for (let size = -windowSize; size <= windowSize; size++) {
       for (let pos = 0; pos < haystack.length; pos++) {
-        const straw = haystack.substr(pos, needle.length + size);
+        const straw = haystack.substring(pos, pos + needle.length + size);
         if (H5P.TextUtilities.areSimilar(needle, straw) && H5P.TextUtilities.isIsolated(straw, haystack, {'index': pos})) {
           // This will only add the match if it's not a duplicate that we found already in the proximity of pos
           if (!this.contains(results, pos)) {
