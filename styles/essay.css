@@ -165,3 +165,17 @@
 .h5p-essay.h5p-theme .h5p-question-evaluation-container {
   margin-inline: var(--h5p-theme-spacing-m);
 }
+
+/* Custom styles to remove border if no toolbar is set. (VA-893)*/
+.h5p-no-frame > .h5p-essay.h5p-theme .h5p-essay-solution-container {
+  margin-inline: 0;
+}
+
+.h5p-no-frame > .h5p-essay.h5p-theme .h5p-question-explanation-container {
+  margin-inline: 0;
+}
+
+.h5p-no-frame > .h5p-essay.h5p-theme .h5p-question-evaluation-container {
+  margin-inline-end: 0;
+  padding-inline: var(--h5p-theme-spacing-m);
+}
