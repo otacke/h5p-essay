@@ -232,8 +232,8 @@ var H5P = H5P || {};
    * @return {number} Number of characters left.
    */
   Essay.InputField.prototype.computeRemainingChars = function () {
-    // Don't count line breaks, spaces, or tabs as characters
-    return this.params.maximumLength - this.inputField.value.replace(/\s/g, '').length;
+    // Don't count line breaks
+    return this.params.maximumLength - this.inputField.value.replace(/[\r\n]/g, '').length;
   };
 
   /**
