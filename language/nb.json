@@ -8,112 +8,112 @@
           "description": "Valgfritt medieelement. Elementet vil bli plassert over spørsmålet."
         },
         {
-          "label": "Deaktiver zoomingfunksjon."
+          "label": "Deaktiver zoom-funksjon."
         }
       ]
     },
     {
       "label": "Oppgavebeskrivelse",
-      "description": "Describe your task here. The task description will appear above text input area.",
-      "placeholder": "Summarize the book in 500 characters ..."
+      "description": "Beskriv oppgaven her. Beskrivelsen vil vises over skrivefeltet.",
+      "placeholder": "Oppsummer innholdet i boka. Bruk maks 500 tegn."
     },
     {
-      "label": "Help text",
-      "description": "This text should help the user to get started.",
-      "placeholder": "This book is about ..."
+      "label": "Hjelpetekst",
+      "description": "Denne teksten skal hjelpe brukeren å komme i gang.",
+      "placeholder": "Denne boka handler om ..."
     },
     {
-      "label": "Sample solution",
-      "description": "You can optionally add a sample solution that's shown after the student created a text. It's called sample solution because there probably is not only one solution.",
+      "label": "Løsningsforslag",
+      "description": "Du kan velge å legge til et løsningsforslag som vises etter at brukeren har skrevet en tekst. Det kalles “løsningsforslag” fordi det sannsynligvis finnes flere mulige løsninger.",
       "fields": [
         {
-          "label": "Introduction",
-          "description": "You can optionally leave the students some explanations about your example. The explanations will only show up if you add an example, too.",
-          "placeholder": "Please remember that you were not expected to come up with the exact same solution. It's just a good example."
+          "label": "Innledning",
+          "description": "Du kan velge å legge til løsningsforslaget ditt. Den blir bare vist dersom du også legger inn et løsningsforslag.",
+          "placeholder": "Husk: Dette eksemplet er bare et godt forslag. Du har kanskje funnet et annet godt svar."
         },
         {
-          "label": "Sample solution text",
-          "description": "The student will see a \"Show solution\" button after submitting if you provide some text here."
+          "label": "Tekst til løsningsforslag",
+          "description": "Dersom du skriver inn tekst her, dukker det opp en “Vis svar”-knapp når bruker har levert svaret sitt."
         }
       ]
     },
     {
-      "label": "Keywords",
+      "label": "Nøkkelord",
       "widgets": [
         {
           "label": "Standard"
         }
       ],
-      "entity": "Keyword",
+      "entity": "Nøkkelord",
       "field": {
-        "label": "Keyword",
+        "label": "Nøkkelord",
         "fields": [
           {
-            "label": "Keyword",
-            "description": "Keyword or phrase to look for. Use an asterisk '*' as a wildcard for one or more characters. Use a slash '/' at the beginning and the end to use a regular expression."
+            "label": "Nøkkelord",
+            "description": "Nøkkelord eller -frase som skal brukes i sjekk av tekst. Du kan bruke asterisk '*' som plassholder for en eller flere bokstaver. Du kan bruke skråstrek '/' for å markere start og slutt på en frase."
           },
           {
-            "label": "Variations",
-            "description": "Add optional variations for this keyword. Example: For a 'city' add alternatives 'town', 'municipality' etc. Points will be awarded if the user includes any of the specified alternatives.",
-            "entity": "variation",
+            "label": "Varianter",
+            "description": "Legg til valgfrie alternativer til et nøkkelord. Eksempel: Alternativer til by' kan være 'metropol', 'storby', 'småby', 'landsby'. Bruker får poeng også for alternativene.",
+            "entity": "Variant",
             "field": {
-              "label": "Keyword variation"
+              "label": "Nøkkelordvariant"
             }
           },
           {
-            "label": "Points, Options and Feedback",
+            "label": "Poeng, valg og tilbakemelding",
             "fields": [
               {
-                "label": "Points",
-                "description": "Points that the user will get if he/she includes this keyword or its alternatives in the answer."
+                "label": "Poeng",
+                "description": "Poeng som brukeren får dersom hen inkluderer dette nøkkelordet eller varianter av det i svaret sitt."
               },
               {
-                "label": "Occurrences",
-                "description": "Define how many occurrences of the keyword or its variations should be awarded with points."
+                "label": "Tilfeller",
+                "description": "Definer hvor mange forekomster av nøkkelordet eller av varianter av det som skal gi poeng."
               },
               {
-                "label": "Case sensitive",
-                "description": "Makes sure the user input has to be exactly the same as the answer."
+                "label": "Ta hensyn til stor og liten bokstav",
+                "description": "Sørge for at svaret må være nøyaktig likt fasit."
               },
               {
-                "label": "Forgive minor mistakes",
-                "description": "This will accept minor spelling mistakes (3-9 characters: 1 mistake, more than 9 characters: 2 mistakes)."
+                "label": "Se bort fra mindre feil",
+                "description": "Dersom dette er valgt, regnes svaret som riktig selv med mindre stavefeil (3–9 tegn: 1 feil, flere enn 9 tegn: 2 feil)."
               },
               {
-                "label": "Feedback if keyword included",
-                "description": "This feedback will be displayed if the user includes this keyword or its alternatives in the answer."
+                "label": "Tilbakemelding når nøkkelordet er brukt",
+                "description": "Denne tilbakemeldinga vises dersom brukeren har med nøkkelordet eller et alternativ til det i svaret sitt."
               },
               {
-                "label": "Feedback if keyword missing",
-                "description": "This feedback will be displayed if the user doesn’t include this keyword or its alternatives in the answer."
+                "label": "Tilbakemelding når nøkkelordet mangler",
+                "description": "Denne tilbakemeldinga vises dersom brukeren verken har med nøkkelordet eller et alternativ til det i svaret sitt."
               },
               {
-                "label": "Feedback word shown if keyword included",
-                "description": "This option allows you to specify which word should be shown in front of your feedback if a keyword was found in the text.",
+                "label": "Tilbakemelding dersom nøkkelordet er brukt",
+                "description": "Velg hvilket ord som skal bli vist foran tilbakemeldinga når et nøkkelord er funnet i teksten.",
                 "options": [
                   {
-                    "label": "keyword"
+                    "label": "nøkkelord"
                   },
                   {
-                    "label": "alternative found"
+                    "label": "alternativ til nøkkelord"
                   },
                   {
-                    "label": "answer given"
+                    "label": "avgitt svar"
                   },
                   {
-                    "label": "none"
+                    "label": "ikke noe"
                   }
                 ]
               },
               {
-                "label": "Feedback word shown if keyword missing",
-                "description": "This option allows you to specify which word should be shown in front of your feedback if a keyword was not found in the text.",
+                "label": "Tilbakemelding når nøkkelordet ikke er funnet",
+                "description": "Velg hvilket ord som skal bli vist foran tilbakemeldinga når et nøkkelord mangler.",
                 "options": [
                   {
-                    "label": "keyword"
+                    "label": "nøkkelord"
                   },
                   {
-                    "label": "none"
+                    "label": "ikke noe"
                   }
                 ]
               }
@@ -123,26 +123,26 @@
       }
     },
     {
-      "label": "Overall Feedback",
+      "label": "Tilbakemelding på hele oppgaven",
       "fields": [
         {
           "widgets": [
             {
-              "label": "Default"
+              "label": "Standardinnstilling"
             }
           ],
-          "label": "Define custom feedback for any score range",
-          "description": "Click the \"Add range\" button to add as many ranges as you need. Example: 0-20% Bad score, 21-91% Average Score, 91-100% Great Score!",
-          "entity": "range",
+          "label": "Opprett poengområder og legg inn tilbakemeldinger",
+          "description": "Velg \"legg til poengområde\" og legg til så mange poengområder du trenger. Eksempel: 0–40 % Svakt resultat, 41–80 % Gjennomsnittlig resultat, 81–100 % Flott resultat!",
+          "entity": "område",
           "field": {
             "fields": [
               {
-                "label": "Score Range"
+                "label": "Poengområde"
               },
               {},
               {
-                "label": "Feedback for defined score range",
-                "placeholder": "Fill in the feedback"
+                "label": "Tilbakemelding for definerte poengområder",
+                "placeholder": "Skriv inn tilbakemelding"
               }
             ]
           }
@@ -150,46 +150,46 @@
       ]
     },
     {
-      "label": "Behavioural settings",
-      "description": "These options will let you control how the task behaves.",
+      "label": "Oppgaveinnstillinger",
+      "description": "Disse innstillingene lar deg styre ulike funksjoner i oppgaven.",
       "fields": [
         {
-          "label": "Minimum number of characters",
-          "description": "Specify the minimum number of characters that the user must enter."
+          "label": "Minste antall tegn",
+          "description": "Bestem minste antall tegn brukeren må skrive."
         },
         {
-          "label": "Maximum number of characters",
-          "description": "Specify the maximum number of characters that the user can enter."
+          "label": "Høyeste antall tegn",
+          "description": "Bestem høyeste antall tegn brukeren kan skrive."
         },
         {
-          "label": "Input field size",
-          "description": "The size of the input field in amount of lines it will cover",
+          "label": "Størrelse på skrivefelt",
+          "description": "Skrivefeltstørrelse i antall linjer",
           "options": [
             {
-              "label": "1 line"
+              "label": "1 linje"
             },
             {
-              "label": "3 lines"
+              "label": "3 linjer"
             },
             {
-              "label": "10 lines"
+              "label": "10 linjer"
             }
           ]
         },
         {
-          "label": "Enable \"Retry\"",
-          "description": "If checked, learners can retry the task."
+          "label": "Aktiver \"Prøv igjen\"-knapp",
+          "description": "Velg dersom bruker skal kunne starte på nytt."
         },
         {
-          "label": "Ignore scoring",
-          "description": "If checked, learners will only see the feedback that you provided for the keywords, but no score."
+          "label": "Uten poeng",
+          "description": "Velg dersom brukeren bare skal få tilbakemeldingene på nøkkelordene som er med i svaret, ikke poeng."
         },
         {
-          "label": "Points in host environment",
-          "description": "Used to award points in host environment merely for answering (not shown to learner)."
+          "label": "Poeng i vertssystem",
+          "description": "Brukes for å tildele poeng i vertssystemet for at oppgaven er besvart (vises ikke for brukeren)."
         },
         {
-          "label": "Passing percentage",
+          "label": "Bestått-prosent",
           "description": "Percentage that's necessary for passing"
         },
         {
