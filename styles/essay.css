@@ -134,6 +134,11 @@
   float: left;
 }
 
+.h5p-essay .h5p-essay-input-field-message-char:focus-visible {
+  outline: 2px ridge var(--h5p-theme-contrast-cta-white);
+  outline-offset: -1px;
+}
+
 .h5p-essay .h5p-essay-input-field-message-char-important {
   font-weight: bold;
 }
