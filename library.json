@@ -2,8 +2,8 @@
   "title": "Essay",
   "description": "Score a student's essay automatically",
   "majorVersion": 1,
-  "minorVersion": 5,
-  "patchVersion": 13,
+  "minorVersion": 6,
+  "patchVersion": 0,
   "runnable": 1,
   "embedTypes": [
     "iframe"
@@ -13,7 +13,7 @@
   "machineName": "H5P.Essay",
   "coreApi": {
     "majorVersion": 1,
-    "minorVersion": 27
+    "minorVersion": 28
   },
   "preloadedJs": [
     {

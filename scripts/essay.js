@@ -3,7 +3,7 @@ var H5P = H5P || {};
 /**
  * TODO: This content type needs refactoring. Badly!
  */
-H5P.Essay = function ($, Question) {
+H5P.Essay = function (Question) {
   'use strict';
 
   // CSS Classes
@@ -29,7 +29,7 @@ H5P.Essay = function ($, Question) {
     }
 
     // Inheritance
-    Question.call(this, 'essay');
+    Question.call(this, 'essay', { theme: true });
 
     // Sanitize defaults
     this.params = Essay.extend(
@@ -156,7 +156,18 @@ H5P.Essay = function ($, Question) {
       }),
       onInput: (() => {
         this.handleInput();
-      })
+      }),
+      onResize: (() => {
+        this.trigger('resize', 'H5PEssayInputField');
+      }),
+    });
+
+    this.on('resize', (event) => {
+      if (event.data === 'H5PEssayInputField') {
+        return;
+      }
+
+      this.inputField.autoResize();
     });
   }
 
@@ -246,7 +257,10 @@ H5P.Essay = function ($, Question) {
       that.internalShowSolutionsCall = false;
     }, false, {
       'aria-label': this.params.ariaShowSolution
-    }, {});
+    }, {
+      styleType: 'secondary',
+      icon: 'show-solutions'
+    });
 
     // Check answer button
     that.addButton('check-answer', that.params.checkAnswer, function () {
@@ -256,6 +270,7 @@ H5P.Essay = function ($, Question) {
     }, {
       contentData: this.extras,
       textIfSubmitting: this.params.submitAnswer,
+      icon: 'check'
     });
 
     // Retry button
@@ -263,7 +278,10 @@ H5P.Essay = function ($, Question) {
       that.resetTask({ skipClear: true });
     }, false, {
       'aria-label': this.params.ariaRetry
-    }, {});
+    }, {
+      styleType: 'secondary',
+      icon: 'retry'
+    });
   };
 
   /**
@@ -831,7 +849,7 @@ H5P.Essay = function ($, Question) {
         result.push({'keyword': needle, 'match': needle, 'index': front + pos});
       }
       front += pos + needle.length;
-      haystack = haystack.substr(pos + needle.length);
+      haystack = haystack.substring(pos + needle.length);
     }
     return result;
   };
@@ -888,7 +906,7 @@ H5P.Essay = function ($, Question) {
     // Without looking at the surroundings we'd miss words that have additional or missing chars
     for (let size = -windowSize; size <= windowSize; size++) {
       for (let pos = 0; pos < haystack.length; pos++) {
-        const straw = haystack.substr(pos, needle.length + size);
+        const straw = haystack.substring(pos, pos + needle.length + size);
         if (H5P.TextUtilities.areSimilar(needle, straw) && H5P.TextUtilities.isIsolated(straw, haystack, {'index': pos})) {
           // This will only add the match if it's not a duplicate that we found already in the proximity of pos
           if (!this.contains(results, pos)) {
@@ -1131,4 +1149,4 @@ H5P.Essay = function ($, Question) {
   Essay.VIEW_STATES = ['task', 'results', 'solutions'];
 
   return Essay;
-}(H5P.jQuery, H5P.Question);
+}(H5P.Question);
