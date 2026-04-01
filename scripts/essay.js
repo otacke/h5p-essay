@@ -384,6 +384,14 @@ H5P.Essay = function ($, Question) {
 
     this.inputField.disable();
 
+    /*
+     * Checking the answer is NOT what the H5P Question Type Contract says `showSolutions()` should do,
+     * but QuestionSet seems to assume it anyway.
+     */
+    if (!this.internalShowSolutionsCall) {
+      this.handleCheckAnswer({ skipXAPI: true });
+    }
+
     if (typeof this.params.solution.sample !== 'undefined' && this.params.solution.sample !== '') {
       // We add the sample solution here to make cheating at least a little more difficult
       if (this.solution.getElementsByClassName(SOLUTION_SAMPLE)[0].children.length === 0) {
