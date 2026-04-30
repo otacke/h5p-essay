@@ -289,7 +289,7 @@
     },
     {
       "label": "Mygtuko „Rodyti sprendimą“ pagalbinės technologijos aprašymas",
-      "default": "Show the solution. You will be provided with a sample solution."
+      "default": "Rodyti sprendimą. You will be provided with a sample solution."
     },
     {
       "label": "Assistive technology description for \"Retry\" button",

@@ -289,7 +289,7 @@
     },
     {
       "label": "Beschreibung des \"Lösung anzeigen\"-Buttons (für Hilfsmittel zur Barrierefreiheit)",
-      "default": "Zeige die Lösung an. Du erhältst dann eine Musterlösung."
+      "default": "Lösung anzeigen. Du erhältst dann eine Musterlösung."
     },
     {
       "label": "Beschreibung des \"Wiederholen\"-Buttons (für Hilfsmittel zur Barrierefreiheit)",

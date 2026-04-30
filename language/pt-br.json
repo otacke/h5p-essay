@@ -289,7 +289,7 @@
     },
     {
       "label": "Descrição da tecnologia assistiva para o botão \"Mostrar Solução\"",
-      "default": "Mostrar a solução. Você receberá uma solução de exemplo."
+      "default": "Mostrar solução. Você receberá uma solução de exemplo."
     },
     {
       "label": "Descrição da tecnologia de assistência para o botão \"Tentar Novamente\"",

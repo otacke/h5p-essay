@@ -289,7 +289,7 @@
     },
     {
       "label": "Besedilo opisa gumba \"Prikaži rešitev\" za bralnike zaslona",
-      "default": "Prikaže vzorčno rešitev naloge."
+      "default": "Prikaži rešitev. Prikaže vzorčno rešitev naloge."
     },
     {
       "label": "Besedilo opisa gumba \"Poskusi ponovno\" za bralnike zaslona",

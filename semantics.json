@@ -596,7 +596,7 @@
     "label": "Assistive technology description for \"Show Solution\" button",
     "importance": "low",
     "common": true,
-    "default": "Show the solution. You will be provided with a sample solution."
+    "default": "Show solution. You will be provided with a sample solution."
   },
   {
     "name": "ariaRetry",

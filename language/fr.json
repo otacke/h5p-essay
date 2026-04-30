@@ -289,7 +289,7 @@
     },
     {
       "label": "Assistive technology description for \"Show Solution\" button",
-      "default": "Show the solution. You will be provided with a sample solution."
+      "default": "Montrer la solution. You will be provided with a sample solution."
     },
     {
       "label": "Assistive technology description for \"Retry\" button",
