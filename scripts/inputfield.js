@@ -41,13 +41,18 @@ var H5P = H5P || {};
     this.params.taskDescription = this.params.taskDescription || '';
     this.params.placeholderText = this.params.placeholderText || '';
 
+    const inputFieldUUID = H5P.createUUID();
+
     // Task description
     this.taskDescription = document.createElement('div');
     this.taskDescription.classList.add(INPUT_LABEL);
+    this.taskDescription.id = inputFieldUUID;
     this.taskDescription.innerHTML = this.params.taskDescription;
 
     // InputField
     this.inputField = document.createElement('textarea');
+    this.inputField.id = H5P.createUUID();
+    this.inputField.setAttribute('aria-labelledby', inputFieldUUID);
     this.inputField.classList.add(INPUT_FIELD);
     this.inputField.setAttribute('rows', this.params.inputFieldSize);
     if (this.params.maximumLength) {
