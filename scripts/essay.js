@@ -1132,6 +1132,14 @@ H5P.Essay = function (Question) {
     return !!this.inputField; // Check if inputField exists
   };
 
+  /**
+   * Workaround for H5P core mutating prototype to inject its isRoot, but ES6 inheritance here.
+   * @returns {boolean} True, if content type is root. Else false.
+   */
+  Essay.prototype.isRoot = function () {
+    return !!this.extras.standalone;
+  };
+
   /** @constant {string}
    * latin special chars: \u00C0-\u00D6\u00D8-\u00F6\u00F8-\u00FF
    * greek chars: \u0370-\u03FF
